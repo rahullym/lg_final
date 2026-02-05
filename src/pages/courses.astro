@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import CoursesHero from "../components/CoursesHero";
+import FeaturedCourse from "../components/FeaturedCourse";
+import ShortTermCourses from "../components/ShortTermCourses";
+---
+
+<Layout
+    title="Professional Courses | Logistics Gurukul"
+    description="Explore our specialized logistics and supply chain diplomas. From flagship 1-year programs to intensive 3-month specializations."
+>
+    <Navbar client:load />
+    <main>
+        <CoursesHero client:load />
+        <FeaturedCourse client:load />
+        <ShortTermCourses client:load />
+    </main>
+    <Footer client:visible />
+</Layout>

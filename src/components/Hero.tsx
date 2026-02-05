@@ -1,0 +1,173 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { ShieldCheckIcon, CheckCircleIcon, BookOpenIcon, BuildingOfficeIcon, CubeIcon, BriefcaseIcon } from '@heroicons/react/24/outline';
+
+const Hero = () => {
+    return (
+        <section className="relative min-h-screen w-full bg-[#050505] flex items-start overflow-hidden font-sans selection:bg-blue-500/30 pt-32 lg:pt-44">
+
+            {/* 1. Dynamic Background Image */}
+            <div className="absolute inset-0 z-0">
+                <img
+                    src="/port-img-scaled.jpg"
+                    alt="Container Port Background"
+                    className="w-full h-full object-cover opacity-70 select-none"
+                />
+                <div className="absolute inset-0 bg-blue-500/20 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#050505]" />
+            </div>
+
+            <div className="container mx-auto px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                {/* LEFT: Value Proposition */}
+                <div className="max-w-2xl relative z-20">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+                        className="inline-flex items-center space-x-2 bg-gradient-to-r from-brandBlue/30 to-brandBlue/10 border border-brandBlue/30 rounded-full px-4 py-1.5 mb-8"
+                    >
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandBlue opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-brandBlue"></span>
+                        </span>
+                        <span className="text-brandBlue text-xs font-bold tracking-widest uppercase">1 Year Diploma in Logistics & Supply Chain Management</span>
+                    </motion.div>
+
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                        className="text-[41px] lg:text-[65px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
+                    >
+                        Kerala's First <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Industry Integrated</span> <br />
+                        Logistics Diploma
+                    </motion.h1>
+
+                    <motion.div
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+                        className="mb-10 pl-6 border-l-2 border-blue-500"
+                    >
+                        <p className="text-gray-300 text-lg">
+                            The most advanced practical training program designed for global careers.
+                        </p>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+                        className="flex flex-wrap gap-4"
+                    >
+                        <button className="h-14 px-8 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-500 hover:scale-105 transition-all shadow-[0_0_40px_rgba(37,99,235,0.3)] flex items-center justify-center gap-2">
+                            Start Learning <ArrowRightIcon className="w-5 h-5" />
+                        </button>
+                        <button className="h-14 px-8 rounded-full bg-transparent text-white font-medium border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+                            <ShieldCheckIcon className="w-4 h-4 text-gray-400" /> Download Brochure
+                        </button>
+                    </motion.div>
+                </div>
+
+                {/* RIGHT: Generated HERO IMAGE */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8 }}
+                    className="relative h-[550px] w-full hidden lg:flex items-center justify-center"
+                >
+                    {/* The Generated Visual */}
+                    <div className="relative w-full h-[550px] flex items-center justify-center">
+                        <div className="absolute inset-0 bg-brandBlue/20 blur-[150px] rounded-full mix-blend-screen" />
+                        <img
+                            src="/hero-logistics.png"
+                            alt="Future of Logistics"
+                            className="relative z-10 max-w-full max-h-full w-auto h-auto object-contain mix-blend-screen [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_70%)] hover:scale-105 transition-transform duration-700"
+                        />
+                    </div>
+
+                    {/* Decorative Elements */}
+                    {/* Floating Info Cards around the globe */}
+
+                    {/* Floating Info Cards around the globe */}
+
+                    {/* Top Left - Classroom */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+                        className="absolute top-16 left-4 group"
+                    >
+                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-blue-400/40 shadow-[0_0_15px_rgba(96,165,250,0.3)] hover:shadow-[0_0_25px_rgba(96,165,250,0.5)] hover:border-blue-400/60 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-0.5">
+                                <BookOpenIcon className="w-4 h-4 text-white/70" />
+                                <div className="text-white/90 font-medium text-sm">4 Months</div>
+                            </div>
+                            <div className="text-white/50 text-xs">Classroom Training</div>
+                        </div>
+                    </motion.div>
+
+                    {/* Top Right - Internship */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+                        className="absolute top-28 -right-4 group"
+                    >
+                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-cyan-400/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] hover:border-cyan-400/60 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-0.5">
+                                <BuildingOfficeIcon className="w-4 h-4 text-white/70" />
+                                <div className="text-white/90 font-medium text-sm">1 Month</div>
+                            </div>
+                            <div className="text-white/50 text-xs">Internship</div>
+                        </div>
+                    </motion.div>
+
+                    {/* Bottom Left - Product Training */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
+                        className="absolute bottom-24 left-4 group"
+                    >
+                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-purple-400/40 shadow-[0_0_15px_rgba(192,132,252,0.3)] hover:shadow-[0_0_25px_rgba(192,132,252,0.5)] hover:border-purple-400/60 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-0.5">
+                                <CubeIcon className="w-4 h-4 text-white/70" />
+                                <div className="text-white/90 font-medium text-sm">1 Month</div>
+                            </div>
+                            <div className="text-white/50 text-xs">Product Training</div>
+                        </div>
+                    </motion.div>
+
+                    {/* Bottom Right - Paid Job */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
+                        className="absolute bottom-12 -right-4 group"
+                    >
+                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-green-400/40 shadow-[0_0_15px_rgba(74,222,128,0.3)] hover:shadow-[0_0_25px_rgba(74,222,128,0.5)] hover:border-green-400/60 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-0.5">
+                                <BriefcaseIcon className="w-4 h-4 text-white/70" />
+                                <div className="text-white/90 font-medium text-sm">6 Months</div>
+                            </div>
+                            <div className="text-white/50 text-xs">Paid On-Job Training</div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            </div>
+
+            {/* Scroll Down Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+            >
+                <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+                <div className="w-[22px] h-[36px] rounded-full border-2 border-white/10 flex justify-center p-1.5">
+                    <motion.div
+                        animate={{
+                            y: [0, 12, 0],
+                            opacity: [1, 0.2, 1]
+                        }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="w-1 h-2 bg-brandBlue rounded-full"
+                    />
+                </div>
+            </motion.div>
+        </section>
+    );
+};
+
+export default Hero;

@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import AboutHero from "../components/AboutHero";
+import AboutStory from "../components/AboutStory";
+import AboutVisionMission from "../components/AboutVisionMission";
+import CenterHeadMessage from "../components/CenterHeadMessage";
+---
+
+<Layout
+    title="About Us | Logistics Gurukul"
+    description="Discover the story, mission, and vision behind Logistics Gurukul – Kerala's leading logistics education provider."
+>
+    <Navbar client:load />
+    <main>
+        <AboutHero client:load />
+        <AboutStory client:load />
+        <AboutVisionMission client:load />
+        <CenterHeadMessage client:load />
+    </main>
+    <Footer client:visible />
+</Layout>

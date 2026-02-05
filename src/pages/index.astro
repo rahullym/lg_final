@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import AuthorityBar from "../components/AuthorityBar";
+import SkillGrid from "../components/SkillGrid";
+import CareerOpportunities from "../components/CareerOpportunities";
+import SpecialitySection from "../components/SpecialitySection";
+import CareerRoadmap from "../components/CareerRoadmap";
+import ContactCTA from "../components/ContactCTA";
+import Footer from "../components/Footer";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout
+	title="Alive Academy | Master Global Trade"
+	description="Join the #1 Logistics Institute in Kerala with 100% Placement Assurance and Simulation-Based Learning."
+>
+	<Navbar client:load />
+	<main>
+		<Hero client:load />
+		<AuthorityBar client:load />
+		<SkillGrid client:visible />
+		<CareerOpportunities client:visible />
+		<CareerRoadmap client:visible />
+		<SpecialitySection client:visible />
+		<ContactCTA client:visible />
+	</main>
+	<Footer client:visible />
+</Layout>

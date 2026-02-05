@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import BlogHero from "../components/BlogHero";
+import BlogGrid from "../components/BlogGrid";
+---
+
+<Layout
+    title="Blog & Insights | Logistics Gurukul"
+    description="Stay updated with the latest trends and insights in the logistics and supply chain industry from Logistics Gurukul."
+>
+    <Navbar client:load />
+    <main>
+        <BlogHero client:load />
+        <BlogGrid client:load />
+    </main>
+    <Footer client:visible />
+</Layout>
