@@ -143,27 +143,31 @@ const Hero = () => {
                 </motion.div>
             </div>
 
-            {/* Scroll Down Indicator */}
+            {/* Redesigned Scroll Down Indicator */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center group cursor-pointer"
+                onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
             >
-                <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
-                <div className="w-[22px] h-[36px] rounded-full border-2 border-white/10 flex justify-center p-1.5">
-                    <motion.div
-                        animate={{
-                            y: [0, 12, 0],
-                            opacity: [1, 0.2, 1]
-                        }}
-                        transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        className="w-1 h-2 bg-brandBlue rounded-full"
-                    />
+                <div className="relative flex flex-col items-center">
+                    <span className="text-white/40 text-[9px] font-bold uppercase tracking-[0.4em] mb-4 group-hover:text-white/70 transition-colors">
+                        Explore
+                    </span>
+                    <div className="w-[1px] h-12 bg-white/10 relative overflow-hidden">
+                        <motion.div
+                            animate={{
+                                y: ['-100%', '100%']
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "linear"
+                            }}
+                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"
+                        />
+                    </div>
                 </div>
             </motion.div>
         </section>
