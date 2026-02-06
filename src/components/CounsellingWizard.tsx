@@ -70,7 +70,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                     {/* Close Button */}
                     <button
                         onClick={onClose}
-                        className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
+                        className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
                     >
                         <XMarkIcon className="w-6 h-6 text-slate-400" />
                     </button>
@@ -78,7 +78,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                     {!isSubmitted ? (
                         <>
                             {/* Progress Header */}
-                            <div className="pt-10 px-10">
+                            <div className="pt-16 px-10">
                                 <div className="flex justify-between items-center mb-6">
                                     <div className="flex gap-2">
                                         {[1, 2, 3].map((s) => (
