@@ -14,10 +14,9 @@ export default function ContactCTA() {
 
                     {/* Left: Text & Contact Info */}
                     <div className="lg:w-1/2">
-                        <div className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold tracking-widest uppercase mb-8 border border-blue-100 shadow-sm">
-                            <ArrowRightIcon className="w-3.5 h-3.5" />
+                        <span className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold tracking-widest mb-4 uppercase">
                             Get Started
-                        </div>
+                        </span>
                         <h2 className="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight text-slate-900">
                             Ready to Launch Your <br />
                             <span className="text-blue-600">Logistics Career?</span>

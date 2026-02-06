@@ -37,10 +37,9 @@ export default function CareerRoadmap() {
 
                     {/* Left Sticky Header */}
                     <div className="lg:w-1/3 lg:sticky lg:top-32 h-fit mb-12 lg:mb-0">
-                        <div className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold tracking-widest uppercase mb-8 border border-blue-100 shadow-sm">
-                            <RocketLaunchIcon className="w-3.5 h-3.5" />
+                        <span className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold tracking-widest mb-4 uppercase">
                             Career Roadmap
-                        </div>
+                        </span>
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading mb-6 leading-tight">
                             Your Path to <br />
                             <span className="text-blue-600">Success</span>
