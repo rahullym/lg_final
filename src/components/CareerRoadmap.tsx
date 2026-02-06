@@ -54,7 +54,7 @@ export default function CareerRoadmap() {
                     </div>
 
                     {/* Right Scrolling Steps */}
-                    <div className="lg:w-2/3 grid grid-cols-2 lg:flex lg:flex-col gap-3 md:gap-8">
+                    <div className="lg:w-2/3 flex flex-col gap-8">
                         {steps.map((step, idx) => (
                             <motion.div
                                 key={idx}
@@ -62,28 +62,28 @@ export default function CareerRoadmap() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                className="group flex flex-col md:grid md:grid-cols-[auto_1fr] gap-4 md:gap-8 bg-white p-4 md:p-8 rounded-2xl md:rounded-3xl border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                                className="group flex flex-col md:flex-row gap-8 bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                             >
                                 {/* Step Number Node */}
                                 <div className="shrink-0 relative">
-                                    <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-base md:text-2xl font-bold shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                    <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold shadow-sm group-hover:scale-110 transition-transform duration-300">
                                         {step.id}
                                     </div>
-                                    {/* Connector Line (except last) - Only visible on Desktop vertical layout */}
+                                    {/* Connector Line (except last) */}
                                     {idx < steps.length - 1 && (
-                                        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-0.5 h-16 bg-slate-100 -mb-8 hidden lg:block" />
+                                        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-0.5 h-16 bg-slate-100 -mb-8 hidden md:block" />
                                     )}
                                 </div>
 
                                 {/* Content */}
-                                <div className="flex flex-col justify-center">
-                                    <div className="flex flex-col md:flex-row md:items-center gap-2 mb-2">
-                                        <div className="w-fit p-1.5 rounded-lg bg-slate-50 text-slate-500 group-hover:text-blue-600 transition-colors">
-                                            {React.cloneElement(step.icon as React.ReactElement, { className: "w-5 h-5 md:w-6 md:h-6" })}
+                                <div>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500 group-hover:text-blue-600 transition-colors">
+                                            {step.icon}
                                         </div>
-                                        <h3 className="text-sm md:text-xl font-bold text-slate-900 leading-tight">{step.title}</h3>
+                                        <h3 className="text-xl font-bold text-slate-900">{step.title}</h3>
                                     </div>
-                                    <p className="text-slate-500 text-xs md:text-base leading-relaxed line-clamp-4 md:line-clamp-none">
+                                    <p className="text-slate-500 leading-relaxed">
                                         {step.desc}
                                     </p>
                                 </div>
