@@ -37,7 +37,7 @@ export default function CareerRoadmap() {
 
                     {/* Left Sticky Header */}
                     <div className="lg:w-1/3 lg:sticky lg:top-32 h-fit mb-12 lg:mb-0">
-                        <span className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-100 text-brandBlue text-xs font-bold tracking-widest mb-4">
+                        <span className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-100 text-brand-blue text-xs font-bold tracking-widest mb-4">
                             CAREER ROADMAP
                         </span>
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading mb-6 leading-tight">

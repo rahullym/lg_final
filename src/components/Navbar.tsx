@@ -92,8 +92,8 @@ export default function Navbar() {
 
                     {/* CTA Button */}
                     <div className="hidden md:block">
-                        <button className="px-7 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-full transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 hover:-translate-y-0.5 active:translate-y-0">
-                            Apply Now
+                        <button className="px-7 py-3 bg-brand-blue hover:opacity-90 text-white text-sm font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center">
+                            Book Free Counselling Session
                         </button>
                     </div>
 
@@ -143,8 +143,8 @@ export default function Navbar() {
                             </a>
                         </div>
 
-                        <button className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-blue-700 to-blue-600 text-white font-bold rounded-lg shadow-lg">
-                            Apply Now
+                        <button className="mt-4 w-full px-6 py-3 bg-brand-blue text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity">
+                            Book Free Counselling Session
                         </button>
                     </nav>
                 </div>

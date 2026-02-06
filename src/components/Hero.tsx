@@ -24,13 +24,13 @@ const Hero = () => {
                 <div className="max-w-2xl relative z-20">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-                        className="inline-flex items-center space-x-2 bg-gradient-to-r from-brandBlue/30 to-brandBlue/10 border border-brandBlue/30 rounded-full px-4 py-1.5 mb-8"
+                        className="inline-flex items-center space-x-2 bg-gradient-to-r from-brand-blue/30 to-brand-blue/10 border border-brand-blue/30 rounded-full px-4 py-1.5 mb-8"
                     >
                         <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandBlue opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-brandBlue"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-blue"></span>
                         </span>
-                        <span className="text-brandBlue text-xs font-bold tracking-widest uppercase">1 Year Diploma in Logistics & Supply Chain Management</span>
+                        <span className="text-brand-blue text-xs font-bold tracking-widest uppercase">1 Year Diploma in Logistics & Supply Chain Management</span>
                     </motion.div>
 
                     <motion.h1
@@ -54,8 +54,8 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
                         className="flex flex-wrap gap-4"
                     >
-                        <button className="h-14 px-8 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-500 hover:scale-105 transition-all shadow-[0_0_40px_rgba(37,99,235,0.3)] flex items-center justify-center gap-2">
-                            Start Learning <ArrowRightIcon className="w-5 h-5" />
+                        <button className="h-14 px-8 rounded-full bg-brand-blue text-white font-bold text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2">
+                            Book Free Counselling Session <ArrowRightIcon className="w-5 h-5" />
                         </button>
                         <button className="h-14 px-8 rounded-full bg-transparent text-white font-medium border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
                             <ShieldCheckIcon className="w-4 h-4 text-gray-400" /> Download Brochure
@@ -72,7 +72,7 @@ const Hero = () => {
                 >
                     {/* The Generated Visual */}
                     <div className="relative w-full h-[550px] flex items-center justify-center">
-                        <div className="absolute inset-0 bg-brandBlue/20 blur-[150px] rounded-full mix-blend-screen" />
+                        <div className="absolute inset-0 bg-brand-blue/20 blur-[150px] rounded-full mix-blend-screen" />
                         <img
                             src="/hero-logistics.png"
                             alt="Future of Logistics"

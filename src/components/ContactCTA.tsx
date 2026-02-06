@@ -14,7 +14,7 @@ export default function ContactCTA() {
 
                     {/* Left: Text & Contact Info */}
                     <div className="lg:w-1/2">
-                        <span className="inline-block py-1 px-3 rounded-full bg-blue-100 border border-blue-200 text-brandBlue text-xs font-bold tracking-widest mb-6">
+                        <span className="inline-block py-1 px-3 rounded-full bg-blue-100 border border-blue-200 text-brand-blue text-xs font-bold tracking-widest mb-6">
                             GET STARTED
                         </span>
                         <h2 className="text-4xl md:text-5xl font-bold font-heading mb-6 leading-tight text-slate-900">
@@ -27,7 +27,7 @@ export default function ContactCTA() {
 
                         <div className="flex flex-col gap-6">
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brandBlue shadow-sm">
+                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
                                     <PhoneIcon className="w-5 h-5" />
                                 </div>
                                 <div>
@@ -36,7 +36,7 @@ export default function ContactCTA() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brandBlue shadow-sm">
+                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
                                     <EnvelopeIcon className="w-5 h-5" />
                                 </div>
                                 <div>
