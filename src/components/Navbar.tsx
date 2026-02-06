@@ -27,7 +27,7 @@ export default function Navbar() {
 
             {/* Top Bar - Address & Social Links */}
             {/* Dark background for contrast */}
-            <div className={`bg-slate-900 text-white transition-all duration-300 ${scrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'}`}>
+            <div className={`hidden lg:block bg-slate-900 text-white transition-all duration-300 ${scrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'}`}>
                 <div className="container mx-auto px-6 py-2">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm">
 
@@ -138,6 +138,28 @@ export default function Navbar() {
                                 {link}
                             </a>
                         ))}
+
+                        {/* Mobile Contact Info */}
+                        <div className="flex flex-col gap-3 py-4 border-t border-gray-100">
+                            <a href="tel:+917994446019" className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
+                                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                                    <Phone className="w-4 h-4" />
+                                </div>
+                                <span className="font-medium text-sm">+91 79944 46019</span>
+                            </a>
+                            <a href="mailto:info@logisticsgurukul.com" className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
+                                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                                    <Mail className="w-4 h-4" />
+                                </div>
+                                <span className="font-medium text-sm">info@logisticsgurukul.com</span>
+                            </a>
+                            <div className="flex items-center gap-3 text-slate-600">
+                                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                                    <MapPin className="w-4 h-4" />
+                                </div>
+                                <span className="font-medium text-sm">Profnet Plaza, Edappally, Kochi</span>
+                            </div>
+                        </div>
 
                         {/* Mobile Social Links */}
                         <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100">
