@@ -105,7 +105,11 @@ export default function ContactCTA() {
                                     </div>
                                 </div>
 
-                                <button type="button" className="mt-4 bg-blue-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/30 group active:scale-95">
+                                <button
+                                    type="button"
+                                    onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                                    className="mt-4 bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
+                                >
                                     <span>Submit Request</span>
                                     <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </button>
