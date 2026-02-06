@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
-import { ShieldCheckIcon, CheckCircleIcon, BookOpenIcon, BuildingOfficeIcon, CubeIcon, BriefcaseIcon } from '@heroicons/react/24/outline';
+import { ShieldCheckIcon, CheckCircleIcon, BookOpenIcon, BuildingOfficeIcon, CubeIcon, BriefcaseIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
 
 const Hero = () => {
     return (
-        <section className="relative min-h-screen w-full bg-[#050505] flex items-start overflow-hidden font-sans selection:bg-blue-500/30 pt-32 lg:pt-44">
+        <section className="relative min-h-screen w-full bg-[#050505] flex items-start overflow-hidden font-sans selection:bg-blue-500/30 pt-56 md:pt-32 lg:pt-44">
 
             {/* 1. Dynamic Background Image */}
             <div className="absolute inset-0 z-0">
@@ -52,16 +52,16 @@ const Hero = () => {
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                        className="flex flex-wrap gap-4"
+                        className="flex flex-col lg:flex-row flex-wrap gap-4 w-full lg:w-auto"
                     >
                         <button
                             onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
-                            className="h-14 px-8 rounded-full bg-brand-blue text-white font-bold text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2"
+                            className="h-14 w-full lg:w-auto px-8 rounded-full bg-brand-blue text-white font-bold text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2"
                         >
                             Talk to an expert <ArrowRightIcon className="w-5 h-5" />
                         </button>
-                        <button className="h-14 px-8 rounded-full bg-transparent text-white font-medium border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
-                            <ShieldCheckIcon className="w-4 h-4 text-gray-400" /> Download Brochure
+                        <button className="h-14 w-full lg:w-auto px-8 rounded-full bg-slate-900 border border-slate-800 text-white font-medium hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+                            <ArrowDownOnSquareIcon className="w-5 h-5 text-gray-400" /> Download Brochure
                         </button>
                     </motion.div>
                 </div>

@@ -32,7 +32,7 @@ export default function ContactCTA() {
                                 </div>
                                 <div>
                                     <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Call Us</p>
-                                    <p className="text-lg font-bold text-slate-900">+91 98765 43210</p>
+                                    <p className="text-lg font-bold text-slate-900">+91 79944 46019</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
@@ -41,7 +41,16 @@ export default function ContactCTA() {
                                 </div>
                                 <div>
                                     <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Email Us</p>
-                                    <p className="text-lg font-bold text-slate-900">admissions@lguru.edu</p>
+                                    <p className="text-lg font-bold text-slate-900">info@logisticsgurukul.com</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
+                                    <MapPinIcon className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Visit Us</p>
+                                    <p className="text-lg font-bold text-slate-900">Profnet Plaza, Edappally, Kochi</p>
                                 </div>
                             </div>
                         </div>
