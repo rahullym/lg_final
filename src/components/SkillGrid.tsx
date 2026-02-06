@@ -70,7 +70,7 @@ export default function SkillGrid() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="flex overflow-x-auto snap-x snap-mandatory lg:grid lg:grid-cols-4 gap-4 px-6 lg:px-0 -mx-6 lg:mx-0 pb-8 lg:pb-0 scrollbar-hide">
                     {skills.map((skill, idx) => (
                         <motion.div
                             key={idx}
@@ -78,7 +78,7 @@ export default function SkillGrid() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1, duration: 0.5 }}
-                            className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 group flex flex-col"
+                            className="min-w-[280px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 group flex flex-col"
                         >
                             {/* Image Container */}
                             <div className="h-48 overflow-hidden relative">
@@ -112,7 +112,7 @@ export default function SkillGrid() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.7, duration: 0.5 }}
-                        className="bg-slate-900 rounded-2xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
+                        className="min-w-[280px] snap-center bg-slate-900 rounded-2xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute bottom-0 left-0 w-32 h-32 bg-indigo-600/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
