@@ -5,7 +5,7 @@ import { ShieldCheckIcon, CheckCircleIcon, BookOpenIcon, BuildingOfficeIcon, Cub
 
 const Hero = () => {
     return (
-        <section className="relative min-h-screen w-full bg-[#050505] flex items-start overflow-hidden font-sans selection:bg-blue-500/30 pt-56 md:pt-40 lg:pt-44">
+        <section className="relative min-h-screen w-full bg-[#050505] flex items-start overflow-hidden font-sans selection:bg-blue-500/30 pt-32 md:pt-40 lg:pt-44">
 
             {/* 1. Dynamic Background Image */}
             <div className="absolute inset-0 z-0">

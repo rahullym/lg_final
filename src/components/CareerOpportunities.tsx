@@ -159,10 +159,10 @@ export default function CareerOpportunities() {
                                 }
                             }
                         }}
-                        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-slate-900/40 border border-slate-700/50 text-white backdrop-blur-md hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg opacity-0 group-hover/carousel:opacity-100 md:opacity-100 hidden md:flex items-center justify-center hover:scale-110"
+                        className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-4 rounded-full bg-slate-900/40 border border-slate-700/50 text-white backdrop-blur-md hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg flex items-center justify-center hover:scale-110"
                         aria-label="Scroll Left"
                     >
-                        <ChevronLeft className="w-6 h-6" />
+                        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
                     </button>
 
                     <button
@@ -175,10 +175,10 @@ export default function CareerOpportunities() {
                                 }
                             }
                         }}
-                        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-slate-900/40 border border-slate-700/50 text-white backdrop-blur-md hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg opacity-0 group-hover/carousel:opacity-100 md:opacity-100 hidden md:flex items-center justify-center hover:scale-110"
+                        className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-4 rounded-full bg-slate-900/40 border border-slate-700/50 text-white backdrop-blur-md hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg flex items-center justify-center hover:scale-110"
                         aria-label="Scroll Right"
                     >
-                        <ChevronRight className="w-6 h-6" />
+                        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
                     </button>
 
                     {/* Carousel Container */}
@@ -188,7 +188,7 @@ export default function CareerOpportunities() {
                         onMouseEnter={() => setIsPaused(true)}
                         onMouseLeave={() => setIsPaused(false)}
                         onTouchStart={() => setIsPaused(true)}
-                        className="flex overflow-x-auto gap-4 md:gap-6 pb-12 scrollbar-hide px-[calc(50%-140px)] md:px-[calc(50%-175px)] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]"
+                        className="flex overflow-x-auto gap-4 md:gap-6 pb-12 scrollbar-hide snap-x snap-mandatory px-[calc(50%-42.5vw)] md:px-[calc(50%-175px)] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {careers.map((career, idx) => {
@@ -202,7 +202,7 @@ export default function CareerOpportunities() {
                                         borderColor: isCardActive ? 'rgba(59, 130, 246, 0.5)' : 'rgba(30, 41, 59, 1)'
                                     }}
                                     transition={{ duration: 0.4 }}
-                                    className={`flex-none w-[280px] md:w-[350px] h-[400px] md:h-[500px] relative rounded-3xl overflow-hidden group border border-slate-800 transition-all duration-500 cursor-pointer ${isCardActive ? 'shadow-2xl shadow-blue-900/20 z-10' : 'z-0 grayscale-[50%]'}`}
+                                    className={`flex-none w-[85vw] md:w-[350px] h-[400px] md:h-[500px] snap-center relative rounded-3xl overflow-hidden group border border-slate-800 transition-all duration-500 cursor-pointer ${isCardActive ? 'shadow-2xl shadow-blue-900/20 z-10' : 'z-0 grayscale-[50%]'}`}
                                     onClick={() => {
                                         if (scrollRef.current) {
                                             const container = scrollRef.current;
