@@ -70,7 +70,7 @@ export default function SkillGrid() {
                     </p>
                 </div>
 
-                <div className="flex overflow-x-auto snap-x snap-mandatory lg:grid lg:grid-cols-4 gap-4 px-6 lg:px-0 -mx-6 lg:mx-0 pb-8 lg:pb-0 scrollbar-hide">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 px-0">
                     {skills.map((skill, idx) => (
                         <motion.div
                             key={idx}
@@ -78,28 +78,28 @@ export default function SkillGrid() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1, duration: 0.5 }}
-                            className="min-w-[280px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 group flex flex-col"
+                            className="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 group flex flex-col"
                         >
                             {/* Image Container */}
-                            <div className="h-48 overflow-hidden relative">
+                            <div className="h-32 md:h-48 overflow-hidden relative">
                                 <img
                                     src={skill.image}
                                     alt={skill.title}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
-                                <div className="absolute top-3 left-3">
-                                    <span className="px-2 py-1 bg-white/90 backdrop-blur rounded text-[10px] font-bold uppercase tracking-wider text-slate-700 shadow-sm">
+                                <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                                    <span className="px-1.5 py-0.5 md:px-2 md:py-1 bg-white/90 backdrop-blur rounded text-[8px] md:text-[10px] font-bold uppercase tracking-wider text-slate-700 shadow-sm">
                                         {skill.category}
                                     </span>
                                 </div>
                             </div>
 
                             {/* Content */}
-                            <div className="p-6 flex flex-col flex-1">
-                                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            <div className="p-4 md:p-6 flex flex-col flex-1">
+                                <h3 className="text-sm md:text-lg font-bold text-slate-900 mb-1 md:mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
                                     {skill.title}
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-1">
+                                <p className="text-slate-500 text-xs md:text-sm leading-relaxed mb-0 md:mb-4 flex-1 line-clamp-3 md:line-clamp-none">
                                     {skill.desc}
                                 </p>
                             </div>
@@ -112,7 +112,7 @@ export default function SkillGrid() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.7, duration: 0.5 }}
-                        className="min-w-[280px] snap-center bg-slate-900 rounded-2xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
+                        className="bg-slate-900 rounded-2xl p-4 md:p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute bottom-0 left-0 w-32 h-32 bg-indigo-600/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
