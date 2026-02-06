@@ -81,7 +81,7 @@ export default function Navbar() {
                     </a>
 
                     {/* Desktop Links */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden lg:flex items-center gap-8">
                         {['Home', 'About', 'Courses', 'Blogs'].map((link) => (
                             <a
                                 key={link}
@@ -100,7 +100,7 @@ export default function Navbar() {
                     </nav>
 
                     {/* CTA Button */}
-                    <div className="hidden md:block">
+                    <div className="hidden lg:block">
                         <button
                             onClick={() => setIsWizardOpen(true)}
                             className="px-7 py-3 bg-brand-blue hover:opacity-90 text-white text-sm font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center"
@@ -109,9 +109,9 @@ export default function Navbar() {
                         </button>
                     </div>
 
-                    {/* Mobile Toggle */}
+                    {/* Mobile/Tablet Toggle */}
                     <button
-                        className="md:hidden text-slate-900 p-2"
+                        className="lg:hidden text-slate-900 p-2"
                         onClick={() => setIsOpen(!isOpen)}
                     >
                         {isOpen ? <X /> : <Menu />}
@@ -121,7 +121,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 shadow-xl animate-fade-in-up">
+                <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 shadow-xl animate-fade-in-up">
                     <nav className="flex flex-col gap-4">
                         {['Home', 'About', 'Courses', 'Blogs'].map((link) => (
                             <a
