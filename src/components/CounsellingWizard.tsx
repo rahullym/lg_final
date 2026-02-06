@@ -70,38 +70,35 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                     {/* Close Button */}
                     <button
                         onClick={onClose}
-                        className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
+                        className="absolute top-6 right-6 p-2.5 rounded-full hover:bg-slate-100 transition-colors z-10 bg-white/50 backdrop-blur-sm border border-slate-100"
                     >
-                        <XMarkIcon className="w-6 h-6 text-slate-400" />
+                        <XMarkIcon className="w-5 h-5 text-slate-500" />
                     </button>
 
                     {!isSubmitted ? (
                         <>
                             {/* Progress Header */}
-                            <div className="pt-16 px-10">
-                                <div className="flex justify-between items-center mb-6">
-                                    <div className="flex gap-2">
-                                        {[1, 2, 3].map((s) => (
-                                            <div
-                                                key={s}
-                                                className={`h-1.5 rounded-full transition-all duration-500 ${step >= s ? 'w-8 bg-brand-blue' : 'w-4 bg-slate-100'}`}
-                                            />
-                                        ))}
+                            <div className="pt-12 px-10">
+                                <div className="flex flex-col gap-4 mb-8">
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex gap-1.5">
+                                            {[1, 2, 3].map((s) => (
+                                                <div
+                                                    key={s}
+                                                    className={`h-1 rounded-full transition-all duration-500 ${step >= s ? 'w-6 bg-brand-blue' : 'w-2 bg-slate-100'}`}
+                                                />
+                                            ))}
+                                        </div>
+                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">
+                                            Step {step} of {totalSteps}
+                                        </span>
                                     </div>
-                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                                        Step {step} of {totalSteps}
-                                    </span>
+                                    <h2 className="text-3xl font-black text-slate-900 font-heading tracking-tight">
+                                        {step === 1 && "Let's get started"}
+                                        {step === 2 && "Education"}
+                                        {step === 3 && "Timing"}
+                                    </h2>
                                 </div>
-                                <h2 className="text-3xl font-bold text-slate-900 font-heading tracking-tight mb-2">
-                                    {step === 1 && "Let's get started"}
-                                    {step === 2 && "Educational Background"}
-                                    {step === 3 && "Final Details"}
-                                </h2>
-                                <p className="text-slate-500 text-sm">
-                                    {step === 1 && "Basic contact information to reach you."}
-                                    {step === 2 && "Tell us a bit about your journey so far."}
-                                    {step === 3 && "When would you like our expert to call?"}
-                                </p>
                             </div>
 
                             {/* Wizard Content */}
