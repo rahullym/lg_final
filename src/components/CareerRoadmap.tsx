@@ -54,7 +54,7 @@ export default function CareerRoadmap() {
                     </div>
 
                     {/* Right Scrolling Steps */}
-                    <div className="lg:w-2/3 flex flex-col gap-8">
+                    <div className="lg:w-2/3 flex overflow-x-auto snap-x snap-mandatory lg:block gap-4 lg:gap-8 pb-8 lg:pb-0 scrollbar-hide -mx-6 px-6 lg:mx-0 lg:px-0">
                         {steps.map((step, idx) => (
                             <motion.div
                                 key={idx}
@@ -62,7 +62,7 @@ export default function CareerRoadmap() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                className="group grid grid-cols-[auto_1fr] gap-6 md:gap-8 bg-white p-6 md:p-8 rounded-3xl border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                                className="min-w-[85vw] md:min-w-[320px] lg:min-w-0 snap-center lg:mb-8 group grid grid-cols-[auto_1fr] gap-6 md:gap-8 bg-white p-6 md:p-8 rounded-3xl border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                             >
                                 {/* Step Number Node */}
                                 <div className="shrink-0 relative">
@@ -71,7 +71,7 @@ export default function CareerRoadmap() {
                                     </div>
                                     {/* Connector Line (except last) - Hidden on mobile */}
                                     {idx < steps.length - 1 && (
-                                        <div className="absolute top-12 md:top-16 left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-100 -mb-6 md:-mb-8 hidden md:block" />
+                                        <div className="absolute top-12 md:top-16 left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-100 -mb-6 md:-mb-8 hidden lg:block" />
                                     )}
                                 </div>
 
