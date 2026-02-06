@@ -55,7 +55,7 @@ const Hero = () => {
                         className="flex flex-wrap gap-4"
                     >
                         <button className="h-14 px-8 rounded-full bg-brand-blue text-white font-bold text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2">
-                            Book Free Counselling Session <ArrowRightIcon className="w-5 h-5" />
+                            Talk to an expert <ArrowRightIcon className="w-5 h-5" />
                         </button>
                         <button className="h-14 px-8 rounded-full bg-transparent text-white font-medium border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
                             <ShieldCheckIcon className="w-4 h-4 text-gray-400" /> Download Brochure
