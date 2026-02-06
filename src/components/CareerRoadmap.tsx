@@ -62,28 +62,28 @@ export default function CareerRoadmap() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                className="group flex flex-col md:flex-row gap-8 bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                                className="group grid grid-cols-[auto_1fr] gap-6 md:gap-8 bg-white p-6 md:p-8 rounded-3xl border border-slate-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                             >
                                 {/* Step Number Node */}
                                 <div className="shrink-0 relative">
-                                    <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg md:text-2xl font-bold shadow-sm group-hover:scale-110 transition-transform duration-300">
                                         {step.id}
                                     </div>
-                                    {/* Connector Line (except last) */}
+                                    {/* Connector Line (except last) - Hidden on mobile */}
                                     {idx < steps.length - 1 && (
-                                        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-0.5 h-16 bg-slate-100 -mb-8 hidden md:block" />
+                                        <div className="absolute top-12 md:top-16 left-1/2 -translate-x-1/2 w-0.5 h-full bg-slate-100 -mb-6 md:-mb-8 hidden md:block" />
                                     )}
                                 </div>
 
                                 {/* Content */}
-                                <div>
+                                <div className="flex flex-col justify-center">
                                     <div className="flex items-center gap-2 mb-2">
                                         <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500 group-hover:text-blue-600 transition-colors">
-                                            {step.icon}
+                                            {React.cloneElement(step.icon as React.ReactElement, { className: "w-5 h-5 md:w-6 md:h-6" })}
                                         </div>
-                                        <h3 className="text-xl font-bold text-slate-900">{step.title}</h3>
+                                        <h3 className="text-lg md:text-xl font-bold text-slate-900">{step.title}</h3>
                                     </div>
-                                    <p className="text-slate-500 leading-relaxed">
+                                    <p className="text-slate-500 text-sm md:text-base leading-relaxed">
                                         {step.desc}
                                     </p>
                                 </div>
