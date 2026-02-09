@@ -77,7 +77,7 @@ export default function CenterHeadMessage() {
                                 <p className="text-lg md:text-xl font-medium text-slate-800 italic mb-2">
                                     "We believe every student has the potential to rise. Our mission is to transform that potential into power through practical learning, preparing you for a future of growth, confidence, and purpose."
                                 </p>
-                                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">— Leadership Philosophy</p>
+
                             </div>
 
                         </motion.div>
