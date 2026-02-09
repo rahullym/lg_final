@@ -7,7 +7,7 @@ export default function TutorsPage() {
     return (
         <section className="bg-slate-50 min-h-screen">
             {/* Hero Section for Faculty */}
-            <div className="pt-32 pb-20 bg-slate-900 border-b border-slate-800">
+            <div className="pt-32 pb-20 lg:pt-56 lg:pb-40 bg-slate-900 border-b border-slate-800">
                 <div className="container mx-auto px-6 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
