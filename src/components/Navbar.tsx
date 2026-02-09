@@ -91,6 +91,7 @@ export default function Navbar() {
                                             link === 'Blogs' ? '/blog' :
                                                 link === 'Home' ? '/' : `/#${link.toLowerCase()}`
                                 }
+                                target="_self"
                                 className="group relative px-4 py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-all duration-300"
                             >
                                 {link}
@@ -132,6 +133,7 @@ export default function Navbar() {
                                             link === 'Blogs' ? '/blog' :
                                                 link === 'Home' ? '/' : `/#${link.toLowerCase()}`
                                 }
+                                target="_self"
                                 className="text-lg font-medium text-slate-700 hover:text-blue-600"
                                 onClick={() => setIsOpen(false)}
                             >
