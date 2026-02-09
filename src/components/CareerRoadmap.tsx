@@ -37,7 +37,7 @@ const RoadmapStep = ({ step, index }: { step: any, index: number }) => {
     });
 
     // Transform opacity and scale based on scroll position to create a focus effect
-    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.3]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 1, 0.1]);
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
     const x = useTransform(scrollYProgress, [0, 0.5, 1], [-20, 0, -20]);
 
