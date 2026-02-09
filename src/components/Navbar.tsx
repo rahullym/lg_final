@@ -82,14 +82,15 @@ export default function Navbar() {
 
                     {/* Desktop Links */}
                     <nav className="hidden lg:flex items-center gap-8">
-                        {['Home', 'About', 'Courses', 'Blogs'].map((link) => (
+                        {['Home', 'About', 'Courses', 'Certification', 'Blogs'].map((link) => (
                             <a
                                 key={link}
                                 href={
                                     link === 'About' ? '/about' :
                                         link === 'Courses' ? '/courses' :
                                             link === 'Blogs' ? '/blog' :
-                                                link === 'Home' ? '/' : `/#${link.toLowerCase()}`
+                                                link === 'Certification' ? '/certification' :
+                                                    link === 'Home' ? '/' : `/#${link.toLowerCase()}`
                                 }
                                 target="_self"
                                 className="group relative px-4 py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-all duration-300"
@@ -124,14 +125,15 @@ export default function Navbar() {
             {isOpen && (
                 <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 shadow-xl animate-fade-in-up">
                     <nav className="flex flex-col gap-4">
-                        {['Home', 'About', 'Courses', 'Blogs'].map((link) => (
+                        {['Home', 'About', 'Courses', 'Certification', 'Blogs'].map((link) => (
                             <a
                                 key={link}
                                 href={
                                     link === 'About' ? '/about' :
                                         link === 'Courses' ? '/courses' :
                                             link === 'Blogs' ? '/blog' :
-                                                link === 'Home' ? '/' : `/#${link.toLowerCase()}`
+                                                link === 'Certification' ? '/certification' :
+                                                    link === 'Home' ? '/' : `/#${link.toLowerCase()}`
                                 }
                                 target="_self"
                                 className="text-lg font-medium text-slate-700 hover:text-blue-600"

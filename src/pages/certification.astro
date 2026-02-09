@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import CertificationHero from "../components/CertificationHero";
+import CertificationContent from "../components/CertificationContent";
+---
+
+<Layout
+    title="Global Certification | Logistics Gurukul"
+    description="Earn a government-recognized, globally valid STED certification in Logistics & Supply Chain Management."
+>
+    <Navbar client:load />
+    <main>
+        <CertificationHero client:load />
+        <CertificationContent client:load />
+    </main>
+    <Footer client:visible />
+</Layout>
