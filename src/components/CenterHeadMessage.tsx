@@ -50,19 +50,76 @@ export default function CenterHeadMessage() {
                                     <div className="h-1 w-20 bg-blue-600 rounded-full" />
                                 </div>
 
-                                <div className="space-y-6 text-slate-700 leading-relaxed text-lg">
-                                    <p className="text-2xl font-bold text-slate-900 font-heading leading-tight mb-8">
-                                        "We believe every student has the potential to rise, lead, and make a mark in the logistics industry."
-                                    </p>
+                                <div className="space-y-8 text-slate-700 leading-relaxed text-base">
+                                    {/* Intro */}
                                     <p>
-                                        Our mission is to transform that potential into power — through practical learning and real-world exposure. We prepare you not just for a job, but for a future of growth, confidence, and purpose.
+                                        Vineetha Kadangot is an accomplished academic leader, trainer, and mentor with over a decade of
+                                        experience in education, training, and curriculum development. As the Center Head of Logistics
+                                        Gurukul, she plays a pivotal role in driving academic excellence, student success, and institutional
+                                        growth. Known for her passion for teaching and people development, Vineetha brings a unique blend of
+                                        academic depth, industry-aligned training expertise, and strong leadership skills. Her exposure to
+                                        diverse learning environments in India and abroad enables her to create inclusive, engaging, and
+                                        outcome-driven learning experiences.
                                     </p>
-                                    <p className="font-medium">
-                                        Together, let’s move forward — building careers that move the world.
-                                    </p>
-                                    <p className="text-slate-500 text-base">
-                                        Every learner at Logistics Gurukul follows a clear career path — from classroom learning to internships and on-the-job training, leading to assured placements.
-                                    </p>
+
+                                    {/* Professional Journey */}
+                                    <div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Professional Journey</h3>
+                                        <p>
+                                            Vineetha has served as Academic Head and Senior Communicative English Trainer at reputed
+                                            institutions, where she was responsible for designing innovative curricula, managing academic teams,
+                                            and delivering high-impact training programs for students and working professionals. She has
+                                            successfully led and mentored teams of trainers, ensuring quality delivery and consistent learner
+                                            outcomes. Her experience also extends to corporate training, faculty development programmes, content
+                                            creation, and academic video presentations, making her a strong advocate of modern, blended
+                                            learning methodologies.
+                                        </p>
+                                    </div>
+
+                                    {/* Expertise */}
+                                    <div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Academic & Training Expertise</h3>
+                                        <ul className="list-disc pl-5 space-y-1 marker:text-blue-600">
+                                            <li>Over 10 years of experience in teaching and training non-native English speakers</li>
+                                            <li>Certified TEFL Trainer</li>
+                                            <li>IELTS Masterclass – Train the Trainer (TTT) certification approved by Cambridge University</li>
+                                            <li>Extensive experience in curriculum design, interview readiness, personality development, and communication skills</li>
+                                            <li>Trainer for leading educational publishers, contributing to educator upskilling initiatives</li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Leadership Philosophy */}
+                                    <div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Leadership Philosophy</h3>
+                                        <p className="mb-2">As a Center Head, Vineetha believes that education must go beyond textbooks. She emphasizes:</p>
+                                        <ul className="list-disc pl-5 space-y-1 marker:text-blue-600 mb-2">
+                                            <li>Practical skill development</li>
+                                            <li>Confidence building and employability</li>
+                                            <li>Student-centric learning approaches</li>
+                                            <li>Continuous academic improvement aligned with industry expectations</li>
+                                        </ul>
+                                        <p>
+                                            Her leadership style is collaborative and empathetic, fostering a culture of accountability, respect, and
+                                            continuous learning within the institution.
+                                        </p>
+                                    </div>
+
+                                    {/* At Logistics Gurukul */}
+                                    <div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2">At Logistics Gurukul</h3>
+                                        <p className="mb-2">At Logistics Gurukul, Vineetha leads academic operations with a clear focus on:</p>
+                                        <ul className="list-disc pl-5 space-y-1 marker:text-blue-600 mb-2">
+                                            <li>Delivering industry-relevant training</li>
+                                            <li>Ensuring quality teaching standards</li>
+                                            <li>Mentoring students for career readiness</li>
+                                            <li>Supporting faculty growth and institutional excellence</li>
+                                        </ul>
+                                        <p>
+                                            Her vision aligns strongly with Logistics Gurukul’s mission of creating job-ready logistics
+                                            professionals equipped with the right skills, mindset, and confidence to succeed in the global supply
+                                            chain industry.
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div className="mt-12 pt-8 border-t border-slate-200">
