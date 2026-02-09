@@ -105,7 +105,7 @@ export default function Navbar() {
                                         >
                                             <div className="py-1">
                                                 <a href="/about" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
-                                                    About Us
+                                                    Our Story
                                                 </a>
                                                 <a href="/tutors" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
                                                     Faculty Team
@@ -165,7 +165,7 @@ export default function Navbar() {
                                     <div key={link} className="flex flex-col gap-2">
                                         <span className="text-lg font-medium text-slate-700 border-b border-gray-100 pb-1">About</span>
                                         <a href="/about" className="pl-4 text-base font-medium text-slate-600 hover:text-blue-600" onClick={() => setIsOpen(false)}>
-                                            About Us
+                                            Our Story
                                         </a>
                                         <a href="/tutors" className="pl-4 text-base font-medium text-slate-600 hover:text-blue-600" onClick={() => setIsOpen(false)}>
                                             Faculty Team
