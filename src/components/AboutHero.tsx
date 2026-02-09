@@ -61,6 +61,16 @@ export default function AboutHero() {
                                 <span className="font-semibold text-sm">Real-World Exposure</span>
                             </div>
                         </div>
+
+                        {/* Quick Jump Links */}
+                        <div className="flex flex-wrap gap-4 justify-center mt-12">
+                            <a href="#center-head" className="px-6 py-3 rounded-full border border-blue-500 text-blue-400 hover:bg-blue-500/10 hover:text-white transition-colors text-sm font-bold uppercase tracking-wider">
+                                Meet Center Head
+                            </a>
+                            <a href="#faculty" className="px-6 py-3 rounded-full border border-slate-700 text-slate-400 hover:border-slate-500 hover:text-white transition-colors text-sm font-bold uppercase tracking-wider">
+                                Meet Faculty Team
+                            </a>
+                        </div>
                     </motion.div>
                 </div>
             </div>

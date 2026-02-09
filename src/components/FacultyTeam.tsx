@@ -55,7 +55,7 @@ const tutors = [
 
 export default function FacultyTeam() {
     return (
-        <section className="py-24 bg-slate-50 border-t border-slate-200">
+        <section id="faculty" className="py-24 bg-slate-50 border-t border-slate-200">
             <div className="container mx-auto px-6">
 
                 <div className="text-center mb-20">
@@ -88,9 +88,10 @@ export default function FacultyTeam() {
                                                 alt={tutor.name}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => {
-                                                    // Fallback to initial if image fails
                                                     e.currentTarget.style.display = 'none';
-                                                    e.currentTarget.parentElement.innerHTML = `<span class="text-6xl font-black opacity-20">${tutor.name.charAt(0)}</span>`;
+                                                    if (e.currentTarget.parentElement) {
+                                                        e.currentTarget.parentElement.innerHTML = `<span class="text-6xl font-black opacity-20">${tutor.name.charAt(0)}</span>`;
+                                                    }
                                                 }}
                                             />
                                         </div>
