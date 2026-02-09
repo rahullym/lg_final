@@ -40,7 +40,7 @@ export default function BlogHero() {
             </div>
 
             {/* Soft bottom edge transition */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent" />
+
         </section>
     );
 }
