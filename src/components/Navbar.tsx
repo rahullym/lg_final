@@ -101,17 +101,14 @@ export default function Navbar() {
 
                                         {/* Dropdown Menu */}
                                         <div
-                                            className={`absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden transform transition-all duration-200 origin-top-left ${aboutDropdownOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}`}
+                                            className={`absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-100 overflow-hidden transform transition-all duration-200 origin-top-left ${aboutDropdownOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}`}
                                         >
-                                            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-500" />
-                                            <div className="py-2">
-                                                <a href="/about" className="block px-4 py-3 hover:bg-slate-50 transition-colors">
-                                                    <span className="block text-sm font-bold text-slate-900">About Us</span>
-                                                    <span className="block text-xs text-slate-500">Our Story & Mission</span>
+                                            <div className="py-1">
+                                                <a href="/about" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
+                                                    About Us
                                                 </a>
-                                                <a href="/tutors" className="block px-4 py-3 hover:bg-slate-50 transition-colors">
-                                                    <span className="block text-sm font-bold text-slate-900">Faculty Team</span>
-                                                    <span className="block text-xs text-slate-500">Meet our Expert Mentors</span>
+                                                <a href="/tutors" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
+                                                    Faculty Team
                                                 </a>
                                             </div>
                                         </div>
