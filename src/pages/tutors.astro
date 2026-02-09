@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import TutorsPage from "../components/TutorsPage";
+---
+
+<Layout
+    title="Our Mentors | Logistics Gurukul"
+    description="Meet the expert faculty team at Logistics Gurukul, led by Center Head Vineetha Kadangot."
+>
+    <Navbar client:load />
+    <main>
+        <TutorsPage client:load />
+    </main>
+    <Footer client:visible />
+</Layout>
