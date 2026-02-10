@@ -37,8 +37,8 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                         className="text-[41px] lg:text-[65px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
                     >
-                        Kerala's First <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Industry Integrated</span> <br />
-                        Logistics Diploma
+                        Kerala’s First <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Paid On-the-Job</span> <br />
+                        Diploma in International Logistics
                     </motion.h1>
 
                     <motion.div

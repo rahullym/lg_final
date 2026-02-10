@@ -50,13 +50,13 @@ export default function DiplomaLogistics() {
                     <span className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-bold tracking-widest uppercase mb-6">
                         Flagship Program
                     </span>
-                    <h1 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight max-w-4xl">
-                        Kerala’s First 6-Month Paid On-the-Job Training Integrated Diploma in <br />
+                    <h1 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight max-w-3xl">
+                        Diploma in International <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                            International Logistics & Freight Management
+                            Logistics & Freight Management
                         </span>
                     </h1>
-                    <p className="text-lg text-slate-300 max-w-2xl leading-relaxed mb-8">
+                    <p className="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed mb-10">
                         Launch your global career with our comprehensive 1-year program. Designed for graduates and post-graduates seeking excellence in supply chain and logistics.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-start">
