@@ -63,14 +63,23 @@ export default function FeaturedCourse() {
                                     ))}
                                 </div>
 
-                                <button
-                                    type="button"
-                                    onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
-                                    className="mt-4 px-10 py-5 bg-brand-blue text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
-                                >
-                                    <span>Book Your Session</span>
-                                    <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                                    <button
+                                        type="button"
+                                        onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                                        className="px-8 py-4 bg-brand-blue text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
+                                    >
+                                        <span>Book Your Session</span>
+                                        <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                    <a
+                                        href="/diploma-international-logistics"
+                                        className="px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-50 border border-slate-200 transition-all shadow-sm active:scale-95 group"
+                                    >
+                                        <span>Learn More</span>
+                                        <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform text-slate-400 group-hover:text-blue-600" />
+                                    </a>
+                                </div>
                             </div>
 
                             {/* Right Image/Design Column */}
