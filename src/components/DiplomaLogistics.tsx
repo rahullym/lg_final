@@ -36,7 +36,7 @@ export default function DiplomaLogistics() {
         <section className="bg-white">
             {/* Hero Section */}
             {/* Hero Section */}
-            <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+            <div className="relative pt-28 pb-12 lg:pt-40 lg:pb-24 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/diploma-hero-bg.png"
