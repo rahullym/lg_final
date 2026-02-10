@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import DiplomaLogistics from "../components/DiplomaLogistics";
+---
+
+<Layout
+    title="Diploma in International Logistics & Freight Management | Logistics Gurukul"
+    description="A 1-year flagship diploma program offering globally recognized STED Council certification, 100% placement assistance, and comprehensive training in logistics management."
+>
+    <Navbar client:load />
+    <main>
+        <DiplomaLogistics client:load />
+    </main>
+    <Footer client:visible />
+</Layout>
