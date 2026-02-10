@@ -112,14 +112,15 @@ export default function SkillGrid() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.7, duration: 0.5 }}
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                         className="bg-slate-900 rounded-2xl p-4 md:p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute bottom-0 left-0 w-32 h-32 bg-indigo-600/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
                         <div className="relative z-10">
-                            <h3 className="text-xl font-bold text-white mb-2">Ready to Start?</h3>
-                            <p className="text-slate-400 text-sm mb-6">Get the full syllabus in your inbox.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">Have Questions?</h3>
+                            <p className="text-slate-400 text-sm mb-6">Talk to an expert now.</p>
                             <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white group-hover:scale-110 transition-transform shadow-lg shadow-blue-900/50">
                                 <ArrowRightIcon className="w-6 h-6" />
                             </span>
