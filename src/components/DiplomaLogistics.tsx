@@ -12,8 +12,8 @@ import {
     CpuChipIcon,
     ComputerDesktopIcon,
     BuildingOffice2Icon
-} from '@heroicons/react/24/outline'; // Importing outline icons for features
-import { CheckCircleIcon } from '@heroicons/react/24/solid'; // Solid icon for checklist
+} from '@heroicons/react/24/outline';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
 const features = [
     { name: "Globally Recognized Certification (STED Council)", icon: GlobeAltIcon },
@@ -23,147 +23,171 @@ const features = [
 
 const modules = [
     { name: "Interview Skills Training & Mock Interview", icon: ClipboardDocumentCheckIcon },
-    { name: "Language Training (Hindi & English)", icon: LanguageIcon }, // Should use LanguageIcon if available or similar
+    { name: "Language Training (Hindi & English)", icon: LanguageIcon },
     { name: "Cargo Packaging", icon: CubeIcon },
     { name: "Artificial Intelligence in Logistics", icon: CpuChipIcon },
     { name: "IT Training (Basic Excel, Word)", icon: ComputerDesktopIcon },
-    { name: "Warehousing Management", icon: BuildingOffice2Icon }, // Using BuildingOffice
-    { name: "Dangerous Goods Cargo Handling", icon: CubeIcon }, // Reusing Cube or finding specific hazard icon
+    { name: "Warehousing Management", icon: BuildingOffice2Icon },
+    { name: "Dangerous Goods Cargo Handling", icon: CubeIcon },
 ];
 
 export default function DiplomaLogistics() {
     return (
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
-            {/* Decorative Background Elements */}
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 -skew-x-12 z-0 translate-x-1/4" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-50/50 rounded-full blur-3xl -ml-24 -mb-24 z-0" />
+        <section className="bg-white">
+            {/* Hero Section */}
+            <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/career_shipping_port.png"
+                        alt="Background"
+                        className="w-full h-full object-cover opacity-20"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
+                </div>
 
-
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-6xl mx-auto">
-
-                    {/* Header Section */}
-                    <div className="text-center mb-16">
-                        <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-600 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm border border-blue-200">
+                <div className="container mx-auto px-6 relative z-10 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-widest uppercase mb-6 border border-blue-100">
                             Flagship Program
                         </span>
-                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 font-heading leading-tight">
+                        <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 font-heading leading-tight tracking-tight">
                             Diploma in International <br />
-                            <span className="text-blue-600">Logistics & Freight Management</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                                Logistics & Freight Management
+                            </span>
                         </h1>
-                        <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">
-                            A comprehensive 1-year program designed to launch your global career in supply chain and logistics.
+                        <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
+                            Launch your global career with our comprehensive 1-year program. Designed for graduates and post-graduates seeking excellence in supply chain and logistics.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button
+                                onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                                className="px-8 py-4 bg-brand-blue text-white font-bold rounded-full shadow-xl shadow-blue-500/20 hover:-translate-y-1 transition-transform flex items-center justify-center gap-2"
+                            >
+                                Apply Now <ArrowRightIcon className="w-5 h-5" />
+                            </button>
+                            <button
+                                onClick={() => document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="px-8 py-4 bg-white text-slate-700 font-bold rounded-full shadow-lg shadow-slate-200/50 hover:-translate-y-1 transition-transform border border-slate-100"
+                            >
+                                View Curriculum
+                            </button>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Highlights Section */}
+            <div className="py-20 bg-slate-50 relative">
+                <div className="container mx-auto px-6">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <div className="order-2 lg:order-1 relative">
+                            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl opacity-10 blur-xl transform rotate-3"></div>
+                            <img
+                                src="/man-logistics.jpg"
+                                alt="Student Learning"
+                                className="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]"
+                            />
+                            {/* Floating Qualification Card */}
+                            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl border border-slate-100 max-w-xs hidden md:block">
+                                <div className="flex items-center gap-4 mb-2">
+                                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                        <CheckCircleIcon className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-slate-900">Eligibility</p>
+                                        <p className="text-xs text-slate-500">Graduation / Post-Graduation</p>
+                                    </div>
+                                </div>
+                                <p className="text-sm text-slate-600 leading-snug">Open to candidates from any stream looking to switch to a high-growth career.</p>
+                            </div>
+                        </div>
+
+                        <div className="order-1 lg:order-2 space-y-8">
+                            <div>
+                                <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose This Diploma?</h2>
+                                <p className="text-slate-500 text-lg">
+                                    Our program is meticulously crafted to bridge the gap between academic knowledge and industry requirements, ensuring you are job-ready from day one.
+                                </p>
+                            </div>
+
+                            <div className="space-y-6">
+                                {features.map((feature, i) => (
+                                    <div key={i} className="flex gap-4 p-4 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                            <feature.icon className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-slate-900 text-lg">{feature.name}</h3>
+                                            <p className="text-slate-500 text-sm">Industry standard curriculum.</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Curriculum Grid */}
+            <div id="curriculum" className="py-24 bg-white">
+                <div className="container mx-auto px-6">
+                    <div className="text-center mb-16 max-w-3xl mx-auto">
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6">Value-Added Curriculum</h2>
+                        <p className="text-lg text-slate-500">
+                            Beyond the core logistics modules, we equip you with essential skills that employers value most.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-                        {/* Highlights Column (Left) */}
-                        <div className="lg:col-span-2 space-y-8">
-
-                            {/* Key Highlights Card */}
-                            <div className="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200/50 border border-slate-100 relative group overflow-hidden">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-transparent rounded-bl-full" />
-
-                                <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
-                                        <CheckBadgeIcon className="w-6 h-6" />
-                                    </div>
-                                    Key Highlights
-                                </h3>
-
-                                <div className="grid sm:grid-cols-2 gap-6">
-                                    {features.map((feature, i) => (
-                                        <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100/50 hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-300">
-                                            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm shrink-0">
-                                                <feature.icon className="w-5 h-5" />
-                                            </div>
-                                            <p className="text-slate-700 font-bold text-sm leading-snug pt-2">{feature.name}</p>
-                                        </div>
-                                    ))}
-                                    <div className="flex items-start gap-4 p-4 rounded-2xl bg-indigo-50 border border-indigo-100/50">
-                                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-indigo-600 shadow-sm shrink-0">
-                                            <AcademicCapIcon className="w-5 h-5" />
-                                        </div>
-                                        <div>
-                                            <p className="text-indigo-900 font-bold text-xs uppercase tracking-wider mb-1">Eligibility</p>
-                                            <p className="text-slate-700 font-bold text-sm leading-snug">Graduation / Post-Graduation (Any Industry)</p>
-                                        </div>
-                                    </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {modules.map((module, i) => (
+                            <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all group">
+                                <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:scale-110 transition-all mb-4">
+                                    <module.icon className="w-6 h-6" />
                                 </div>
+                                <h3 className="font-bold text-slate-900 text-lg leading-tight mb-2">{module.name}</h3>
                             </div>
-
-                            {/* Curriculum / Add-ons Card */}
-                            <div className="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200/50 border border-slate-100">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Value-Added Curriculum</h3>
-                                <p className="text-slate-500 mb-8 max-w-2xl">Delivering industry-aligned training course designed to strengthen capabilities and support organizational excellence.</p>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    {modules.map((module, i) => (
-                                        <div key={i} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/item">
-                                            <CheckCircleIcon className="w-5 h-5 text-green-500 shrink-0 group-hover/item:scale-110 transition-transform" />
-                                            <span className="text-slate-700 font-medium">{module.name}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                        </div>
-
-                        {/* Sidebar / CTA Column (Right) */}
-                        <div className="lg:col-span-1 space-y-6">
-
-                            {/* CTA Card */}
-                            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl -mr-32 -mt-32" />
-                                <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -ml-32 -mb-32" />
-
-                                <h3 className="text-2xl font-bold mb-4 relative z-10">Ready to Start?</h3>
-                                <p className="text-slate-300 mb-8 relative z-10 font-medium">
-                                    Admissions are open for the next intake. Secure your spot in the Global Logistics industry today.
-                                </p>
-
-                                <button
-                                    onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
-                                    className="w-full py-4 bg-white text-slate-900 font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-blue-50 transition-all shadow-lg active:scale-95 group relative z-10"
-                                >
-                                    <span>Apply Now</span>
-                                    <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
-
-                                <div className="mt-8 pt-8 border-t border-white/10 relative z-10">
-                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Course Details</p>
-                                    <div className="space-y-3 text-sm">
-                                        <div className="flex justify-between">
-                                            <span className="text-slate-400">Duration</span>
-                                            <span className="font-bold">1 Year</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span className="text-slate-400">Mode</span>
-                                            <span className="font-bold">Offline / Campus</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span className="text-slate-400">Certif.</span>
-                                            <span className="font-bold text-blue-400">STED Council</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Contact Helper */}
-                            <div className="bg-blue-50 rounded-3xl p-6 border border-blue-100 flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm shrink-0">
-                                    <BriefcaseIcon className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <p className="text-blue-900 font-bold text-sm">Need Help?</p>
-                                    <p className="text-blue-700 text-xs">Contact our career counselors for course guidance.</p>
-                                </div>
-                            </div>
-
+                        ))}
+                        {/* Last card as CTA to fill grid */}
+                        <div className="p-6 rounded-2xl bg-brand-blue text-white flex flex-col justify-center items-center text-center">
+                            <h3 className="font-bold text-xl mb-2">And much more...</h3>
+                            <button
+                                onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                                className="text-sm font-semibold underline underline-offset-4 hover:opacity-80"
+                            >
+                                Download Brochure
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            {/* Bottom CTA */}
+            <div className="py-20 bg-slate-900 relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+
+                <div className="container mx-auto px-6 relative z-10 text-center">
+                    <h2 className="text-3xl md:text-5xl font-black text-white mb-8">Ready to Shape Global Trade?</h2>
+                    <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
+                        Join the next intake of future logistics leaders. Limited seats available for the upcoming batch.
+                    </p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-6 items-center">
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                            className="px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full transition-colors shadow-lg shadow-blue-600/30"
+                        >
+                            Book Free Counselling
+                        </button>
+                        <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                            <CheckCircleIcon className="w-5 h-5 text-green-500" />
+                            <span>Admissions Open</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
