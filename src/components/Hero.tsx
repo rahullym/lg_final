@@ -60,9 +60,9 @@ const Hero = () => {
                         >
                             Talk to an expert <ArrowRightIcon className="w-5 h-5" />
                         </button>
-                        <button className="h-14 w-full lg:w-auto px-8 rounded-full bg-slate-900 border border-slate-800 text-white font-medium hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
-                            <ArrowDownOnSquareIcon className="w-5 h-5 text-gray-400" /> Download Brochure
-                        </button>
+                        <a href="/diploma-international-logistics" className="h-14 w-full lg:w-auto px-8 rounded-full bg-slate-900 border border-slate-800 text-white font-medium hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+                            Learn More <ArrowRightIcon className="w-5 h-5 text-gray-400" />
+                        </a>
                     </motion.div>
                 </div>
 
