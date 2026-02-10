@@ -50,15 +50,9 @@ export default function DiplomaLogistics() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <button
                             onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
-                            className="px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center gap-2"
+                            className="px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center gap-2 shadow-sm"
                         >
                             Apply Now <ArrowRightIcon className="w-5 h-5" />
-                        </button>
-                        <button
-                            onClick={() => document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="px-8 py-3 bg-white text-slate-700 font-semibold rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors"
-                        >
-                            View Curriculum
                         </button>
                     </div>
                 </div>
