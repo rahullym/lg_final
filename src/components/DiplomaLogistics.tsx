@@ -88,7 +88,7 @@ export default function DiplomaLogistics() {
                         <div className="order-2 lg:order-1 relative">
                             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl opacity-10 blur-xl transform rotate-3"></div>
                             <img
-                                src="/man-logistics.jpg"
+                                src="/student-hero-clean.png"
                                 alt="Student Learning"
                                 className="relative rounded-2xl shadow-2xl w-full object-cover h-[500px]"
                             />
