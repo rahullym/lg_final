@@ -46,7 +46,7 @@ const Hero = () => {
                         className="mb-10 pl-6 border-l-2 border-blue-500"
                     >
                         <p className="text-gray-300 text-lg">
-                            The most advanced practical training program designed for global careers.
+                            A structured 6-month diploma program combining classroom learning with paid workplace training in freight management.
                         </p>
                     </motion.div>
 
