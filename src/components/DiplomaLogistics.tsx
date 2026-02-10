@@ -64,7 +64,7 @@ export default function DiplomaLogistics() {
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div className="order-2 lg:order-1">
                             <img
-                                src="/student-hero-clean.png"
+                                src="/logistics_diploma_student.png"
                                 alt="Student Learning"
                                 className="rounded-xl shadow-lg w-full object-cover h-[400px]"
                             />
