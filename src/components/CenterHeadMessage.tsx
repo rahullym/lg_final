@@ -19,7 +19,7 @@ export default function CenterHeadMessage() {
                         >
                             <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
                                 <img
-                                    src="/1000268920-4.jpg"
+                                    src="/faculty images/vineetha-maam.png"
                                     alt="Vineetha Kandangot"
                                     className="w-full h-full object-cover"
                                 />
