@@ -42,12 +42,7 @@ export default function FeaturedCourse() {
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col justify-center">
-                                        <div className="flex items-center gap-2 text-blue-600 bg-blue-50/50 px-4 py-2 rounded-xl border border-blue-100">
-                                            <BriefcaseIcon className="w-5 h-5" />
-                                            <span className="font-bold text-xs uppercase tracking-wider">100% Placement Assistance</span>
-                                        </div>
-                                    </div>
+
                                 </div>
 
                                 <div className="space-y-4 mb-12">
