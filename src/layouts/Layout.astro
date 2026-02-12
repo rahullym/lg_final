@@ -10,6 +10,8 @@ const {
 	title,
 	description = "Logistics Gurukul - The #1 Logistics Institute in Kerala.",
 } = Astro.props;
+
+import WhatsAppFloater from "../components/WhatsAppFloater";
 ---
 
 <!doctype html>
@@ -26,5 +28,6 @@ const {
 		class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-orange-500 selection:text-white"
 	>
 		<slot />
+		<WhatsAppFloater client:load />
 	</body>
 </html>

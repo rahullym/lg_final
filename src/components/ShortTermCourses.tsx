@@ -4,36 +4,36 @@ import { ClockIcon, AcademicCapIcon, ArrowRightIcon } from '@heroicons/react/24/
 
 const ShortCourses = [
     {
-        title: "Diploma in Procurement & Management",
-        description: "Master the art of storing, managing, and operating modern warehouses.",
+        title: "Diploma in Procurement and Inventory Management",
+        description: "A short-term, skill-focused program designed to build strong fundamentals in procurement, purchasing, and inventory control. The course covers supplier selection, purchase documentation, stock planning, cost control, and warehousing basics. Students gain practical knowledge to reduce costs, avoid stock shortages, and support smooth business operations. Ideal for students and professionals seeking quick employability in supply chain functions.",
         image: "/career_smart_warehouse.png",
         duration: "3 Months",
         eligibility: "Bachelor Degree"
     },
     {
-        title: "Diploma in Export-Import Management",
-        description: "Build strong foundations in international trade, documentation, and compliance.",
+        title: "Diploma in Export and Import Management",
+        description: "A short-term course that introduces students to the basics of international trade. Learners will understand export–import procedures, trade documents, customs clearance, logistics, and payment methods. The program focuses on practical knowledge required to handle real export and import transactions. Ideal for students looking for quick skill development and job opportunities in global trade.",
         image: "/career_export_specialist.png",
         duration: "3 Months",
         eligibility: "Bachelor Degree"
     },
     {
-        title: "Diploma in Shipping Management",
-        description: "Get practical knowledge of handling cargo, shipping lines, and port operations.",
+        title: "Diploma in Shipping Documentation",
+        description: "A practical course focused on export–import and shipping documents. Learn to prepare commercial invoices, packing lists, bills of lading, and customs documents. Covers shipping procedures, Incoterms, and coordination with logistics partners. Ideal for students aiming for quick jobs in shipping and logistics offices.",
         image: "/career_shipping_port.png",
         duration: "3 Months",
         eligibility: "Bachelor Degree"
     },
     {
         title: "Diploma in Air Cargo Management",
-        description: "Master the complexities of air freight, storage, and specialized cargo handling.",
+        description: "Learn the basics of air freight and airport cargo operations. Covers airway bills, cargo & customs basics. Focus on practical skills for air cargo handling and documentation. Ideal for students aiming for jobs in airports and air logistics.",
         image: "/career_air_cargo.png",
         duration: "3 Months",
         eligibility: "Bachelor Degree"
     },
     {
-        title: "Diploma in Hazardous Substance Management",
-        description: "Practical knowledge of handling DG (Dangerous Goods) and hazardous materials safely.",
+        title: "Diploma in Hazardous Goods Management",
+        description: "Learn the safe handling and transport of hazardous materials. Covers hazard classification, labels, packing, and safety rules. Ideal for students aiming for safety-focused logistics careers.",
         image: "/skill_hazardous_materials.png",
         duration: "3 Months",
         eligibility: "Bachelor Degree"
@@ -51,8 +51,8 @@ export default function ShortTermCourses() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {ShortCourses.map((course, i) => (
-                        <div key={i} className="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-blue-200 hover:-translate-y-2">
-                            <div className="relative h-48 overflow-hidden">
+                        <div key={i} className="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-blue-200 hover:-translate-y-2 flex flex-col h-full">
+                            <div className="relative h-48 overflow-hidden shrink-0">
                                 <img
                                     src={course.image}
                                     alt={course.title}
@@ -63,15 +63,15 @@ export default function ShortTermCourses() {
                                 </div>
                             </div>
 
-                            <div className="p-8">
+                            <div className="p-8 flex flex-col flex-grow">
                                 <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
                                     {course.title}
                                 </h3>
-                                <p className="text-sm text-slate-500 mb-6 leading-relaxed line-clamp-2">
+                                <p className="text-sm text-slate-500 mb-6 leading-relaxed flex-grow">
                                     {course.description}
                                 </p>
 
-                                <div className="flex flex-col gap-2 mb-8 pt-6 border-t border-slate-50">
+                                <div className="flex flex-col gap-2 pt-6 border-t border-slate-50 mt-auto">
                                     <div className="flex items-center gap-2 text-slate-400">
                                         <ClockIcon className="w-4 h-4" />
                                         <span className="text-xs font-bold uppercase tracking-wider">{course.duration}</span>
@@ -81,11 +81,6 @@ export default function ShortTermCourses() {
                                         <span className="text-xs font-bold uppercase tracking-wider">{course.eligibility}</span>
                                     </div>
                                 </div>
-
-                                <button className="flex items-center gap-2 text-blue-600 font-bold group-hover:gap-4 transition-all uppercase tracking-widest text-xs">
-                                    Discover Program
-                                    <ArrowRightIcon className="w-4 h-4" />
-                                </button>
                             </div>
                         </div>
                     ))}

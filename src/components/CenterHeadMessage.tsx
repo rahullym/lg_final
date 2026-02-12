@@ -58,10 +58,10 @@ export default function CenterHeadMessage() {
                                     {[
                                         "10+ Years in Education & Training",
                                         "Certified TEFL Trainer",
-                                        "Cambridge Approved IELTS Trainer",
+                                        "Cambridge Accredited IELTS Trainer",
                                         "Curriculum Development Expert",
                                         "Faculty Development Mentor",
-                                        "Corporate Training Specialist"
+                                        "Corporate Communication Training Specialist"
                                     ].map((item, i) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />

@@ -30,15 +30,15 @@ const Hero = () => {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-400"></span>
                         </span>
-                        <span className="text-blue-400 text-xs font-bold tracking-widest uppercase">6-Month Program • Paid Training</span>
+                        <span className="text-blue-400 text-xs font-bold tracking-widest uppercase">1-Year Program • 6-Month Paid Training</span>
                     </motion.div>
 
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                        className="text-[41px] lg:text-[65px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
+                        className="text-[42px] md:text-[54px] lg:text-[68px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
                     >
-                        Kerala’s First <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Paid On-the-Job</span> <br />
-                        Diploma in International Logistics
+                        Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white whitespace-nowrap">First-of-Its-Kind</span> <br />
+                        Immersive Logistics Training Program
                     </motion.h1>
 
                     <motion.div
@@ -46,7 +46,7 @@ const Hero = () => {
                         className="mb-10 pl-6 border-l-2 border-blue-500"
                     >
                         <p className="text-gray-300 text-lg">
-                            A structured 6-month diploma program combining classroom learning with paid workplace training in freight management.
+                            Less Theory. More Practice. Paid On-the-Job Training.
                         </p>
                     </motion.div>
 
@@ -93,12 +93,12 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
                         className="absolute top-16 left-4 group"
                     >
-                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-blue-400/40 shadow-[0_0_15px_rgba(96,165,250,0.3)] hover:shadow-[0_0_25px_rgba(96,165,250,0.5)] hover:border-blue-400/60 transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-0.5">
-                                <BookOpenIcon className="w-4 h-4 text-white/70" />
-                                <div className="text-white/90 font-medium text-sm">4 Months</div>
+                        <div className="px-4 py-3 bg-slate-900/90 backdrop-blur-xl rounded-xl border border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:border-blue-400 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-1">
+                                <BookOpenIcon className="w-4 h-4 text-blue-400" />
+                                <div className="text-white font-bold text-sm">4 Months</div>
                             </div>
-                            <div className="text-white/50 text-xs">Classroom Training</div>
+                            <div className="text-blue-100/90 text-xs font-medium">Classroom Training</div>
                         </div>
                     </motion.div>
 
@@ -107,12 +107,12 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
                         className="absolute top-28 -right-4 group"
                     >
-                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-cyan-400/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] hover:border-cyan-400/60 transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-0.5">
-                                <BuildingOfficeIcon className="w-4 h-4 text-white/70" />
-                                <div className="text-white/90 font-medium text-sm">1 Month</div>
+                        <div className="px-4 py-3 bg-slate-900/90 backdrop-blur-xl rounded-xl border border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] hover:border-cyan-400 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-1">
+                                <BuildingOfficeIcon className="w-4 h-4 text-cyan-400" />
+                                <div className="text-white font-bold text-sm">1 Month</div>
                             </div>
-                            <div className="text-white/50 text-xs">Internship</div>
+                            <div className="text-cyan-100/90 text-xs font-medium">Internship</div>
                         </div>
                     </motion.div>
 
@@ -121,12 +121,12 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
                         className="absolute bottom-24 left-4 group"
                     >
-                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-purple-400/40 shadow-[0_0_15px_rgba(192,132,252,0.3)] hover:shadow-[0_0_25px_rgba(192,132,252,0.5)] hover:border-purple-400/60 transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-0.5">
-                                <CubeIcon className="w-4 h-4 text-white/70" />
-                                <div className="text-white/90 font-medium text-sm">1 Month</div>
+                        <div className="px-4 py-3 bg-slate-900/90 backdrop-blur-xl rounded-xl border border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:border-purple-400 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-1">
+                                <CubeIcon className="w-4 h-4 text-purple-400" />
+                                <div className="text-white font-bold text-sm">1 Month</div>
                             </div>
-                            <div className="text-white/50 text-xs">Product Training</div>
+                            <div className="text-purple-100/90 text-xs font-medium">Product Training</div>
                         </div>
                     </motion.div>
 
@@ -135,12 +135,12 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
                         className="absolute bottom-12 -right-4 group"
                     >
-                        <div className="px-4 py-3 bg-slate-900/40 backdrop-blur-xl rounded-xl border border-green-400/40 shadow-[0_0_15px_rgba(74,222,128,0.3)] hover:shadow-[0_0_25px_rgba(74,222,128,0.5)] hover:border-green-400/60 transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-0.5">
-                                <BriefcaseIcon className="w-4 h-4 text-white/70" />
-                                <div className="text-white/90 font-medium text-sm">6 Months</div>
+                        <div className="px-4 py-3 bg-slate-900/90 backdrop-blur-xl rounded-xl border border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.6)] hover:border-green-400 transition-all duration-300">
+                            <div className="flex items-center gap-2 mb-1">
+                                <BriefcaseIcon className="w-4 h-4 text-green-400" />
+                                <div className="text-white font-bold text-sm">6 Months</div>
                             </div>
-                            <div className="text-white/50 text-xs">Paid On-Job Training</div>
+                            <div className="text-green-100/90 text-xs font-medium">Paid On-Job Training</div>
                         </div>
                     </motion.div>
                 </motion.div>

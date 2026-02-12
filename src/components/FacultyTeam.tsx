@@ -6,13 +6,27 @@ const tutors = [
     {
         name: "Sreeji Pillai",
         role: "Lead Mentor & Industry Specialist",
-        subRole: "Ex-CEO Aiyer Logistics Pvt LTD",
+        subRole: "Former CEO of Aiyer Logistics Pvt LTD",
         image: "/faculty images/sreeji.png", // Updated image
         bio: [
             "Sreeji Pillai is a seasoned logistics industry leader and mentor with over a decade of extensive experience across freight forwarding, shipping, and end-to-end supply chain operations. As the Industry Specialist and Lead Mentor, he brings invaluable real-world expertise and strategic insight to logistics education.",
             "He is widely recognized for his leadership capabilities and deep understanding of logistics business operations, having held senior management and executive roles across reputed logistics organizations in India."
         ],
-        journey: "Sreeji has built a distinguished career through progressive leadership roles, serving as Former CEO of Aiyer Logistics Pvt. Ltd., where he drove business strategy and organizational growth. Prior to this, he held senior positions such as VP and GM in leading logistics firms, gaining comprehensive exposure to customs clearance, transport management, and large-scale operations.",
+        journey: (
+            <>
+                <p className="mb-4">
+                    Mr. Pillai is a seasoned logistics professional with over a decade of progressive leadership roles across prominent logistics organizations. He most recently served as Chief Executive Officer at Aiyer Logistics Pvt Ltd — where he oversaw strategic operations, business development, and integrated logistics service delivery.
+                </p>
+                <p className="mb-2 font-medium">Before taking on the CEO position, he held senior leadership roles including:</p>
+                <ul className="list-disc pl-5 mt-2 space-y-1">
+                    <li>Vice President – Navio Shipping</li>
+                    <li>Vice President – Shiftco Shipping & Logistics India Pvt Ltd</li>
+                    <li>General Manager – Global Logistics Solutions</li>
+                    <li>Deputy General Manager – Global Logistics Solutions</li>
+                    <li>Assistant General Manager at LavinStar Logistics Pvt Ltd</li>
+                </ul>
+            </>
+        ),
         expertise: [
             "Executive leadership in logistics",
             "Strategic planning & business development",
@@ -31,15 +45,15 @@ const tutors = [
     {
         name: "Isabella Davis",
         role: "Logistics Faculty & Trainer",
-        subRole: "Operations & Administrative Specialist",
+        subRole: "Operations and Supply Chain Management",
         image: "/faculty images/isabella-maam.png", // Updated image
         bio: [
-            "Isabella Davis is a committed logistics professional and faculty member with hands-on experience in logistics operations, coordination, and administrative support functions. As a logistics trainer, she brings practical clarity and structured learning to students preparing to enter the supply chain industry.",
-            "With a strong understanding of operational workflows and documentation processes, Isabella focuses on helping learners grasp the fundamentals of logistics in a clear and systematic manner."
+            "Isabella Davis is a committed logistics professional and faculty member with strong expertise in logistics operations, coordination, and administrative support functions. As a logistics trainer, she brings practical clarity and structured learning approaches to students preparing to enter the supply chain industry.",
+            "Her focus is on delivering concept-driven, industry-relevant knowledge that equips learners with the confidence and competence required in modern logistics environments."
         ],
         expertise: [
-            "Practical logistics operations & workflows",
-            "Documentation & coordination specialist",
+            "Academic Training & Structured Learning Delivery",
+            "Logistics Operations & Coordination",
             "Operational accuracy & process efficiency",
             "Guiding students for entry-level roles"
         ],

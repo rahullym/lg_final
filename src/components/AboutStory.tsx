@@ -34,15 +34,15 @@ export default function AboutStory() {
                                 Logistics Gurukul is where learning meets the real world of logistics. Founded and guided by industry professionals, we focus on preparing the next generation of leaders.
                             </p>
                             <p>
-                                Every learner at Logistics Gurukul follows a clear career path — from classroom learning to internships and on-the-job training, leading to assured placements with reputed logistics firms.
+                                Every learner at Logistics Gurukul follows a clear career path from classroom learning to internships and on-the-job training, leading to assured placements with reputed logistics firms. Our curriculum is further strengthened by our collaboration with Alive Academy. They have been Successfully training students for more than a decade in various sectors and we are proud to have them as our official certification partner to provide industry-recognized credentials.
                             </p>
                             <p>
-                                We believe logistics isn’t just a subject — it’s the heartbeat of global trade. That’s why our programs are built around real operations, live projects, and simulation-based training.
+                                We believe logistics isn’t just a subject it’s the heartbeat of global trade. That’s why our programs are built around real operations, live projects, and simulation-based training.
                             </p>
                             <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 font-medium text-slate-800 shadow-sm relative group overflow-hidden">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-[4rem] -z-0 transition-all group-hover:scale-110" />
-                                <p className="relative z-10 leading-relaxed">
-                                    "More than just education, we offer transformation — helping students grow into confident, job-ready professionals who can lead in the ever-evolving logistics industry."
+                                <p className="relative z-10 leading-relaxed italic">
+                                    "More than just education, we offer transformation helping students grow into confident, job-ready professionals who can lead in the ever-evolving logistics industry."
                                 </p>
                             </div>
                         </div>

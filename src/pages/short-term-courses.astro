@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ShortTermCourses from "../components/ShortTermCourses";
+---
+
+<Layout
+    title="Short-Term Logistics Courses | Logistics Gurukul"
+    description="Fast-track your career with our specialized 3-month diploma programs in Warehouse, Shipping, Air Cargo, and Export-Import Management."
+>
+    <Navbar client:load />
+    <main>
+        <div class="pt-20">
+            {/* Add padding top to account for fixed navbar */}
+            <ShortTermCourses />
+        </div>
+    </main>
+    <Footer client:visible />
+</Layout>

@@ -185,9 +185,6 @@ export default function CareerOpportunities() {
                     <div
                         ref={scrollRef}
                         onScroll={handleScroll}
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
-                        onTouchStart={() => setIsPaused(true)}
                         className="flex overflow-x-auto gap-4 md:gap-6 pb-12 scrollbar-hide snap-x snap-mandatory px-[calc(50%-42.5vw)] md:px-[calc(50%-175px)] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
@@ -244,38 +241,7 @@ export default function CareerOpportunities() {
                     </div>
                 </div>
 
-                {/* Placement Partners Marquee */}
-                <div className="mt-16 pt-8 border-t border-slate-800">
-                    <p className="text-center text-slate-500 text-xs font-bold uppercase tracking-widest mb-8">
-                        Our Alumni Work At Top Global Brands
-                    </p>
 
-                    <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
-                        <motion.div
-                            className="flex gap-16 w-max items-center"
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{
-                                repeat: Infinity,
-                                ease: "linear",
-                                duration: 30
-                            }}
-                        >
-                            {[...Array(2)].map((_, i) => (
-                                <React.Fragment key={i}>
-                                    <span className="text-2xl font-bold text-slate-500">FedEx</span>
-                                    <span className="text-2xl font-bold text-slate-500">MAERSK</span>
-                                    <span className="text-2xl font-bold text-slate-500 italic">DHL</span>
-                                    <span className="text-2xl font-bold text-slate-500">BlueDart</span>
-                                    <span className="text-2xl font-bold text-slate-500">Kuehne+Nagel</span>
-                                    <span className="text-2xl font-bold text-slate-500">DP WORLD</span>
-                                    <span className="text-2xl font-bold text-slate-500">amazon</span>
-                                    <span className="text-2xl font-bold text-slate-500">Flipkart</span>
-                                    <span className="text-2xl font-bold text-slate-500">GATI</span>
-                                </React.Fragment>
-                            ))}
-                        </motion.div>
-                    </div>
-                </div>
 
             </div>
         </section>

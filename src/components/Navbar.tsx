@@ -6,7 +6,7 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [isWizardOpen, setIsWizardOpen] = useState(false);
-    const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,19 +23,56 @@ export default function Navbar() {
         };
     }, []);
 
+    const navItems = [
+        { label: 'Home', href: '/' },
+        {
+            label: 'About',
+            href: '/about',
+            children: [
+                { label: 'Our Story', href: '/about' },
+                { label: 'Faculty Team', href: '/tutors' },
+                { label: 'Certification', href: '/certification' }
+            ]
+        },
+        {
+            label: 'Courses',
+            href: '/courses',
+            children: [
+                { label: 'Diploma', href: '/diploma-international-logistics' },
+                { label: 'Short Term Courses', href: '/short-term-courses' }
+            ]
+        },
+        {
+            label: 'Life @ Gurukul',
+            href: '#',
+            children: [
+                { label: 'Infrastructure', href: '#' },
+                { label: 'Celebration', href: '#' },
+                { label: 'Seminars', href: '#' }
+            ]
+        },
+        {
+            label: 'Journal',
+            href: '#',
+            children: [
+                { label: 'Blogs', href: '/blog' },
+                { label: 'Newsletter', href: '#' }
+            ]
+        }
+    ];
+
     return (
         <header className="fixed w-full top-0 start-0 z-50 font-sans">
-
             {/* Top Bar - Address & Social Links */}
-            <div className={`hidden lg:block bg-slate-900 text-white transition-all duration-300 ${scrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100'}`}>
+            <div className={`hidden lg:block bg-slate-900 text-white transition-all duration-300 h-auto opacity-100`}>
                 <div className="container mx-auto px-6 py-2">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm">
 
                         {/* Contact Info */}
                         <div className="flex flex-wrap items-center gap-4 md:gap-6 text-slate-300">
-                            <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-white transition-colors">
+                            <a href="tel:+917994446019" className="flex items-center gap-2 hover:text-white transition-colors">
                                 <Phone className="w-3.5 h-3.5" />
-                                <span>+91 98765 43210</span>
+                                <span>+91 79944 46019</span>
                             </a>
                             <a href="mailto:info@logisticsgurukul.com" className="flex items-center gap-2 hover:text-white transition-colors">
                                 <Mail className="w-3.5 h-3.5" />
@@ -50,16 +87,16 @@ export default function Navbar() {
                         {/* Social Links */}
                         <div className="flex items-center gap-3">
                             <span className="text-slate-400 text-xs mr-2 hidden md:inline">Follow Us:</span>
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors">
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-slate-400 transition-colors">
                                 <Facebook className="w-4 h-4" />
                             </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-pink-500 transition-colors">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:text-slate-400 transition-colors">
                                 <Instagram className="w-4 h-4" />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400 transition-colors">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-slate-400 transition-colors">
                                 <Linkedin className="w-4 h-4" />
                             </a>
-                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-red-500 transition-colors">
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-slate-400 transition-colors">
                                 <Youtube className="w-4 h-4" />
                             </a>
                         </div>
@@ -81,35 +118,38 @@ export default function Navbar() {
                     </a>
 
                     {/* Desktop Links */}
-                    <nav className="hidden lg:flex items-center gap-8">
-                        {['Home', 'About', 'Courses', 'Certification', 'Blogs'].map((link) => {
-                            if (link === 'About') {
+                    <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+                        {navItems.map((item) => {
+                            if (item.children) {
                                 return (
                                     <div
-                                        key={link}
+                                        key={item.label}
                                         className="relative group h-full flex items-center"
-                                        onMouseEnter={() => setAboutDropdownOpen(true)}
-                                        onMouseLeave={() => setAboutDropdownOpen(false)}
+                                        onMouseEnter={() => setActiveDropdown(item.label)}
+                                        onMouseLeave={() => setActiveDropdown(null)}
                                     >
                                         <button
-                                            className="flex items-center gap-1 px-4 py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-all duration-300 focus:outline-none"
-                                            onClick={() => window.location.href = '/about'}
+                                            className="flex items-center gap-1 px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-slate-700 hover:text-blue-600 transition-all duration-300 focus:outline-none whitespace-nowrap"
+                                            onClick={() => window.location.href = item.href}
                                         >
-                                            About
-                                            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${aboutDropdownOpen ? 'rotate-180 text-blue-600' : ''}`} />
+                                            {item.label}
+                                            <ChevronDown className={`w-3 h-3 xl:w-4 xl:h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180 text-blue-600' : ''}`} />
                                         </button>
 
                                         {/* Dropdown Menu */}
                                         <div
-                                            className={`absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-100 overflow-hidden transform transition-all duration-200 origin-top-left ${aboutDropdownOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}`}
+                                            className={`absolute top-full left-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-slate-100 overflow-hidden transform transition-all duration-200 origin-top-left ${activeDropdown === item.label ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}`}
                                         >
                                             <div className="py-1">
-                                                <a href="/about" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
-                                                    Our Story
-                                                </a>
-                                                <a href="/tutors" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
-                                                    Faculty Team
-                                                </a>
+                                                {item.children.map((child) => (
+                                                    <a
+                                                        key={child.label}
+                                                        href={child.href}
+                                                        className="block px-4 py-2.5 text-xs xl:text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors whitespace-nowrap"
+                                                    >
+                                                        {child.label}
+                                                    </a>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
@@ -118,17 +158,11 @@ export default function Navbar() {
 
                             return (
                                 <a
-                                    key={link}
-                                    href={
-                                        link === 'Courses' ? '/courses' :
-                                            link === 'Blogs' ? '/blog' :
-                                                link === 'Certification' ? '/certification' :
-                                                    link === 'Home' ? '/' : `/#${link.toLowerCase()}`
-                                    }
-                                    target="_self"
-                                    className="group relative px-4 py-2 text-base font-medium text-slate-700 hover:text-blue-600 transition-all duration-300"
+                                    key={item.label}
+                                    href={item.href}
+                                    className="group relative px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-slate-700 hover:text-blue-600 transition-all duration-300 whitespace-nowrap"
                                 >
-                                    {link}
+                                    {item.label}
                                     <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                                 </a>
                             );
@@ -139,9 +173,9 @@ export default function Navbar() {
                     <div className="hidden lg:block">
                         <button
                             onClick={() => setIsWizardOpen(true)}
-                            className="px-7 py-3 bg-brand-blue hover:opacity-90 text-white text-sm font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center"
+                            className="px-6 xl:px-8 py-3 xl:py-3.5 bg-brand-blue hover:opacity-90 text-white text-sm xl:text-base font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center whitespace-nowrap"
                         >
-                            Book Free Counselling Session
+                            Contact Us
                         </button>
                     </div>
 
@@ -159,35 +193,33 @@ export default function Navbar() {
             {isOpen && (
                 <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 shadow-xl animate-fade-in-up">
                     <nav className="flex flex-col gap-4">
-                        {['Home', 'About', 'Courses', 'Certification', 'Blogs'].map((link) => {
-                            if (link === 'About') {
+                        {navItems.map((item) => {
+                            if (item.children) {
                                 return (
-                                    <div key={link} className="flex flex-col gap-2">
-                                        <span className="text-lg font-medium text-slate-700 border-b border-gray-100 pb-1">About</span>
-                                        <a href="/about" className="pl-4 text-base font-medium text-slate-600 hover:text-blue-600" onClick={() => setIsOpen(false)}>
-                                            Our Story
-                                        </a>
-                                        <a href="/tutors" className="pl-4 text-base font-medium text-slate-600 hover:text-blue-600" onClick={() => setIsOpen(false)}>
-                                            Faculty Team
-                                        </a>
+                                    <div key={item.label} className="flex flex-col gap-2">
+                                        <span className="text-lg font-medium text-slate-700 border-b border-gray-100 pb-1">{item.label}</span>
+                                        {item.children.map(child => (
+                                            <a
+                                                key={child.label}
+                                                href={child.href}
+                                                className="pl-4 text-base font-medium text-slate-600 hover:text-blue-600"
+                                                onClick={() => setIsOpen(false)}
+                                            >
+                                                {child.label}
+                                            </a>
+                                        ))}
                                     </div>
                                 );
                             }
 
                             return (
                                 <a
-                                    key={link}
-                                    href={
-                                        link === 'Courses' ? '/courses' :
-                                            link === 'Blogs' ? '/blog' :
-                                                link === 'Certification' ? '/certification' :
-                                                    link === 'Home' ? '/' : `/#${link.toLowerCase()}`
-                                    }
-                                    target="_self"
+                                    key={item.label}
+                                    href={item.href}
                                     className="text-lg font-medium text-slate-700 hover:text-blue-600"
                                     onClick={() => setIsOpen(false)}
                                 >
-                                    {link}
+                                    {item.label}
                                 </a>
                             );
                         })}
@@ -196,7 +228,7 @@ export default function Navbar() {
                             onClick={() => setIsWizardOpen(true)}
                             className="mt-4 w-full px-6 py-3 bg-brand-blue text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity"
                         >
-                            Book Free Counselling Session
+                            Contact Us
                         </button>
                     </nav>
 

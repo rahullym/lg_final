@@ -17,12 +17,18 @@ const steps = [
     },
     {
         id: "03",
+        title: "Product Training",
+        desc: "Master specific cargo types and handling procedures through specialized on-the-job training modules.",
+        icon: <BriefcaseIcon className="w-6 h-6" />
+    },
+    {
+        id: "04",
         title: "Global Certification",
         desc: "Earn credentials recognized in 150+ countries, validating your expertise.",
         icon: <TrophyIcon className="w-6 h-6" />
     },
     {
-        id: "04",
+        id: "05",
         title: "Get Hired",
         desc: "Secure high-paying roles with top MNCs and logistics giants worldwide.",
         icon: <RocketLaunchIcon className="w-6 h-6" />
