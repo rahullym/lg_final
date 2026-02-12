@@ -30,8 +30,12 @@ export default function CertificationHero() {
 
                     <div className="w-24 h-1.5 bg-yellow-500 mx-auto mb-10 rounded-full shadow-[0_0_20px_rgba(234,179,8,0.5)]" />
 
-                    <p className="text-slate-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium">
+                    <p className="text-slate-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium mb-8">
                         Your passport to a global career. Earn credentials recognized by the Government of India and accredited in 150+ countries.
+                    </p>
+
+                    <p className="text-slate-500 text-sm font-semibold tracking-wide mt-6">
+                        * In association with <span className="text-white">Alive Academy</span>
                     </p>
                 </motion.div>
             </div>

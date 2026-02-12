@@ -71,16 +71,7 @@ export default function ShortTermCourses() {
                                     {course.description}
                                 </p>
 
-                                <div className="flex flex-col gap-2 pt-6 border-t border-slate-50 mt-auto">
-                                    <div className="flex items-center gap-2 text-slate-400">
-                                        <ClockIcon className="w-4 h-4" />
-                                        <span className="text-xs font-bold uppercase tracking-wider">{course.duration}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-slate-400">
-                                        <AcademicCapIcon className="w-4 h-4" />
-                                        <span className="text-xs font-bold uppercase tracking-wider">{course.eligibility}</span>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     ))}

@@ -52,24 +52,9 @@ export default function CertificationContent() {
 
     return (
         <section className="py-24 bg-slate-50">
-            {/* Hero Section */}
-            <div className="container mx-auto px-6 mb-20 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-6 uppercase">
-                        Official Certification
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 font-heading">
-                        Globally Recognized <span className="text-blue-600">Excellence</span>
-                    </h1>
-                    <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                        Earn a prestigious qualification from the <strong>STED Council</strong> — a National Autonomous Body and Resource NGO to the Govt. of India, ensuring your skills are respected worldwide.
-                    </p>
-                </motion.div>
-            </div>
+
+
+
 
             {/* Key Benefits Grid */}
             <div className="container mx-auto px-6 mb-24">

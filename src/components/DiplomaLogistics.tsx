@@ -85,8 +85,11 @@ export default function DiplomaLogistics() {
                         <div className="order-1 lg:order-2 space-y-8">
                             <div>
                                 <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Choose This Diploma?</h2>
-                                <p className="text-slate-600 text-lg">
+                                <p className="text-slate-600 text-lg mb-4">
                                     Our program is meticulously crafted to bridge the gap between academic knowledge and industry requirements, ensuring you are job-ready from day one.
+                                </p>
+                                <p className="text-sm font-semibold text-blue-600 bg-blue-50 px-4 py-2 rounded-lg inline-block border border-blue-100">
+                                    * In association with Alive Academy (Official Certification Partner)
                                 </p>
                             </div>
 
