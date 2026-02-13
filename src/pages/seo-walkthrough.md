@@ -1,3 +1,11 @@
+---
+layout: ../layouts/Layout.astro
+title: SEO Implementation Walkthrough
+description: Documentation of the SEO strategies and architecture implemented in the Logistics Gurukul project.
+---
+
+<div class="max-w-4xl mx-auto px-6 py-24 blog-content">
+
 # SEO Implementation Walkthrough
 
 This document outlines the SEO architecture and implementation strategies used in the Logistics Gurukul project to ensure maximum visibility and optimized search engine performance.
@@ -59,3 +67,5 @@ A `public/robots.txt` file is included to guide search engine crawlers on which 
 3. Provide a concise (under 160 chars) `description` prop.
 4. Ensure at least one `<h1>` tag exists and describes the primary topic.
 5. Ensure all images have `alt` text.
+
+</div>
