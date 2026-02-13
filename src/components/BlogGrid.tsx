@@ -2,40 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CalendarIcon, UserIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
-const BlogPosts = [
-    {
-        title: "The Future of Logistics: AI & Automation in 2026",
-        excerpt: "Artificial intelligence is no longer just a trend. Discover how it's actively reshaping the efficiency of global supply chains.",
-        image: "/career_smart_warehouse.png",
-        author: "Admin",
-        date: "Feb 05, 2026",
-        category: "Technology"
-    },
-    {
-        title: "Sustainability: The Rise of Green Logistics",
-        excerpt: "Exploring the massive shift towards eco-friendly transportation and how new green regulations affect global trade.",
-        image: "/career_shipping_port.png",
-        author: "Industry Expert",
-        date: "Jan 28, 2026",
-        category: "Industry Trends"
-    },
-    {
-        title: "Optimizing Modern Warehouse Management",
-        excerpt: "Mastering the storage and operations of modern logistics hubs through proven efficiency strategies.",
-        image: "/skill_logistics_lab.png",
-        author: "Operations Lead",
-        date: "Jan 15, 2026",
-        category: "Operations"
-    },
-    {
-        title: "Air Cargo Trends in the E-commerce Age",
-        excerpt: "How the surge in online shopping is putting air freight in the fast lane and what professionals need to know.",
-        image: "/career_air_cargo.png",
-        author: "Logistics Lead",
-        date: "Jan 10, 2026",
-        category: "Air Freight"
-    }
-];
+import { BlogPosts } from '../data/blogPosts';
 
 export default function BlogGrid() {
     return (
@@ -43,8 +10,9 @@ export default function BlogGrid() {
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     {BlogPosts.map((post, i) => (
-                        <motion.div
+                        <motion.a
                             key={i}
+                            href={`/blog/${post.slug}`}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -86,7 +54,7 @@ export default function BlogGrid() {
                                 Read Article
                                 <ArrowRightIcon className="w-4 h-4" />
                             </div>
-                        </motion.div>
+                        </motion.a>
                     ))}
                 </div>
             </div>

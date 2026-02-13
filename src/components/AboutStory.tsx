@@ -31,13 +31,16 @@ export default function AboutStory() {
 
                         <div className="space-y-6 text-slate-600 leading-relaxed text-lg">
                             <p className="font-semibold text-slate-900 border-l-4 border-blue-600 pl-6 py-1">
-                                Logistics Gurukul is where learning meets the real world of logistics. Founded and guided by industry professionals, we focus on preparing the next generation of leaders.
+                                Logistics Gurukul is where academic learning meets the real world of International Logistics & Supply Chain Management. Based in Kerala, we focus on preparing the next generation of professionals through practical, experience-driven education.
                             </p>
                             <p>
-                                Every learner at Logistics Gurukul follows a clear career path from classroom learning to internships and on-the-job training, leading to assured placements with reputed logistics firms. Our curriculum is further strengthened by our collaboration with Alive Academy. They have been Successfully training students for more than a decade in various sectors and we are proud to have them as our official certification partner to provide industry-recognized credentials.
+                                Every student follows a strategic career path: from classroom theory to live internships and our exclusive paid on-the-job training, leading to assured placements with top global logistics firms.
                             </p>
                             <p>
-                                We believe logistics isn’t just a subject it’s the heartbeat of global trade. That’s why our programs are built around real operations, live projects, and simulation-based training.
+                                Our curriculum is empowered by our collaboration with Alive Academy, a pioneer in skill development for over a decade. As our official certification partner, they ensure your Diploma carries value across the international shipping industry.
+                            </p>
+                            <p>
+                                We believe Logistics is the heartbeat of global trade. That’s why our job-oriented courses are built around real operations, live projects, and simulation-based training.
                             </p>
                             <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 font-medium text-slate-800 shadow-sm relative group overflow-hidden">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-[4rem] -z-0 transition-all group-hover:scale-110" />

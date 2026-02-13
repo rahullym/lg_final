@@ -38,7 +38,7 @@ const Hero = () => {
                         className="text-[42px] md:text-[54px] lg:text-[68px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
                     >
                         Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white whitespace-nowrap">First-of-Its-Kind</span> <br />
-                        Immersive Logistics Training Program
+                        Immersive Logistics Diploma
                     </motion.h1>
 
                     <motion.div

@@ -38,12 +38,12 @@ export default function AboutHero() {
 
                         <div className="relative py-4 border-y border-blue-600/30 mb-10 max-w-2xl mx-auto text-center">
                             <p className="text-2xl md:text-3xl font-bold text-slate-100 leading-tight">
-                                We provide <span className="text-blue-400">Best Education</span> for logistics.
+                                Delivering Kerala’s <span className="text-blue-400">Best Education</span> in International Logistics & Supply Chain
                             </p>
                         </div>
 
                         <p className="text-slate-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-12 mx-auto text-center">
-                            Logistics Gurukul is where learning meets the real world of logistics. Founded and guided by industry professionals, we focus on preparing the next generation of leaders through practical, experience-driven education.
+                            Logistics Gurukul is where academic learning meets the real world of International Logistics & Supply Chain Management. Founded and guided by seasoned industry professionals in Kochi, we focus on preparing the next generation of Freight Management leaders through practical, experience-driven education that goes beyond textbooks.
                         </p>
 
                         <div className="flex flex-wrap gap-8 items-center justify-center text-slate-300">

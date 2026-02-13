@@ -77,6 +77,24 @@ export default function ShortTermCourses() {
                     ))}
                 </div>
             </div>
+
+            {/* Bottom CTA */}
+            <div className="py-20 mt-16 bg-white border-t border-slate-100">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Ready to Start Your Career?</h2>
+                    <p className="text-slate-600 text-lg max-w-2xl mx-auto mb-8">
+                        Admissions are open. Secure your spot in the Global Logistics industry today.
+                    </p>
+                    <div className="flex justify-center">
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                            className="px-10 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-md"
+                        >
+                            Book Free Counselling
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 }

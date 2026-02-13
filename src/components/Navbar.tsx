@@ -36,7 +36,7 @@ export default function Navbar() {
         },
         {
             label: 'Courses',
-            href: '/courses',
+            href: '#',
             children: [
                 { label: 'Diploma', href: '/diploma-international-logistics' },
                 { label: 'Short Term Courses', href: '/short-term-courses' }

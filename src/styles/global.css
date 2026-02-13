@@ -101,3 +101,32 @@ h6 {
 .animate-ken-burns {
     animation: ken-burns 20s ease-out forwards;
 }
+
+/* Blog Content Typography */
+.blog-content h2 {
+    @apply text-3xl font-bold text-slate-900 mt-12 mb-6;
+}
+
+.blog-content h3 {
+    @apply text-2xl font-bold text-slate-900 mt-10 mb-4;
+}
+
+.blog-content p {
+    @apply text-lg text-slate-600 leading-relaxed mb-6;
+}
+
+.blog-content ul {
+    @apply list-disc list-inside mb-8 space-y-3;
+}
+
+.blog-content li {
+    @apply text-lg text-slate-600;
+}
+
+.blog-content blockquote {
+    @apply border-l-4 border-blue-600 bg-slate-50 p-8 rounded-3xl italic text-xl text-slate-800 my-10;
+}
+
+.blog-content img {
+    @apply rounded-3xl my-12 shadow-xl;
+}

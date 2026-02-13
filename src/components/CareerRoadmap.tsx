@@ -109,7 +109,10 @@ export default function CareerRoadmap() {
                                 We don't just teach modules; we architect careers. Follow our proven 4-step framework to go from novice to pro.
                             </p>
 
-                            <button className="hidden lg:inline-flex items-center justify-center px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            <button
+                                onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                                className="hidden lg:inline-flex items-center justify-center px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                            >
                                 Start Application
                             </button>
                         </div>

@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import BlogPost from "../../components/BlogPost";
+import { BlogPosts } from "../../data/blogPosts";
+
+export async function getStaticPaths() {
+    return BlogPosts.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout
+    title={`${post.title} | Logistics Gurukul Blog`}
+    description={post.excerpt}
+>
+    <Navbar client:load />
+    <main>
+        <BlogPost post={post} client:load />
+    </main>
+    <Footer client:visible />
+</Layout>

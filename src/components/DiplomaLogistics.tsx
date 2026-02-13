@@ -57,7 +57,7 @@ export default function DiplomaLogistics() {
                         </span>
                     </h1>
                     <p className="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed mb-10">
-                        Launch your global career with our comprehensive 1-year program. Designed for graduates and post-graduates seeking excellence in supply chain and logistics.
+                        Launch your global career with Kerala’s only 1-Year Diploma featuring 6 Months of Paid On-Job Training. Designed for graduates and working professionals, this course bridges the gap between theory and the real world of International Logistics & Supply Chain Management.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-start">
                         <button
@@ -112,6 +112,59 @@ export default function DiplomaLogistics() {
                                         <h3 className="font-semibold text-slate-900 text-base">Eligibility: Graduation / Post-Graduation</h3>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="pb-20 bg-white">
+                <div className="container mx-auto px-6">
+                    {/* Course Roadmap Journey - Connected Card Flow */}
+                    <div className="bg-slate-900 rounded-3xl p-10 md:p-20 relative overflow-hidden">
+
+                        <div className="relative z-10 text-center mb-16">
+                            <span className="text-blue-500 font-bold tracking-widest text-xs uppercase mb-2 block">The Journey</span>
+                            <h2 className="text-3xl md:text-5xl font-bold text-white font-heading">Course Timeline</h2>
+                        </div>
+
+                        <div className="relative z-10 max-w-7xl mx-auto">
+
+                            {/* Connecting Line (Desktop) */}
+                            <div className="hidden md:block absolute top-[50%] left-4 right-4 h-0.5 bg-slate-800 -translate-y-[50%] z-0">
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600 opacity-30"></div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+                                {[
+                                    { step: "01", period: "Months 1-4", title: "Classroom", sub: "Theory & Basics" },
+                                    { step: "02", period: "Month 5", title: "Internship", sub: "Live Projects" },
+                                    { step: "03", period: "Month 6", title: "Product Training", sub: "Specialization" },
+                                    { step: "04", period: "Month 7-12", title: "Job Training", sub: "Paid Role" },
+                                ].map((item, idx) => (
+                                    <div key={idx} className="group relative bg-slate-900 border border-slate-700 p-6 rounded-2xl hover:border-blue-500/50 hover:bg-slate-800 transition-all duration-300 flex flex-col items-center text-center shadow-lg hover:shadow-blue-900/20 hover:-translate-y-2">
+
+                                        {/* Period Badge - Floating Top */}
+                                        <div className="mb-6 -mt-10 bg-slate-800 border border-slate-600 text-blue-400 text-xs font-bold px-4 py-2 rounded-full shadow-lg group-hover:border-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                            {item.period}
+                                        </div>
+
+                                        {/* Icon/Circle */}
+                                        <div className="w-12 h-12 rounded-full bg-slate-800 border-4 border-slate-900 text-slate-400 flex items-center justify-center font-bold text-lg mb-4 group-hover:text-white group-hover:bg-blue-600 group-hover:border-slate-800 transition-colors duration-300 shadow-xl relative z-20">
+                                            {item.step}
+                                        </div>
+
+                                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-200 transition-colors">{item.title}</h3>
+                                        <p className="text-slate-500 text-sm group-hover:text-slate-400 transition-colors">{item.sub}</p>
+
+                                        {/* Mobile Connector */}
+                                        {idx !== 3 && (
+                                            <div className="md:hidden absolute -bottom-6 left-1/2 -translate-x-1/2 text-slate-700">
+                                                <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -187,54 +240,6 @@ export default function DiplomaLogistics() {
                         ))}
                     </div>
 
-                    {/* Course Roadmap Journey - Connected Card Flow */}
-                    <div className="mt-28 bg-slate-900 rounded-3xl p-10 md:p-20 relative overflow-hidden">
-
-                        <div className="relative z-10 text-center mb-16">
-                            <span className="text-blue-500 font-bold tracking-widest text-xs uppercase mb-2 block">The Journey</span>
-                            <h2 className="text-3xl md:text-5xl font-bold text-white font-heading">Course Timeline</h2>
-                        </div>
-
-                        <div className="relative z-10 max-w-7xl mx-auto">
-
-                            {/* Connecting Line (Desktop) */}
-                            <div className="hidden md:block absolute top-[50%] left-4 right-4 h-0.5 bg-slate-800 -translate-y-[50%] z-0">
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600 opacity-30"></div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
-                                {[
-                                    { step: "01", period: "Months 1-4", title: "Classroom", sub: "Theory & Basics" },
-                                    { step: "02", period: "Month 5", title: "Internship", sub: "Live Projects" },
-                                    { step: "03", period: "Month 6", title: "Product Training", sub: "Specialization" },
-                                    { step: "04", period: "Month 7+", title: "Job Training", sub: "Paid Role" },
-                                ].map((item, idx) => (
-                                    <div key={idx} className="group relative bg-slate-900 border border-slate-700 p-6 rounded-2xl hover:border-blue-500/50 hover:bg-slate-800 transition-all duration-300 flex flex-col items-center text-center shadow-lg hover:shadow-blue-900/20 hover:-translate-y-2">
-
-                                        {/* Period Badge - Floating Top */}
-                                        <div className="mb-6 -mt-10 bg-slate-800 border border-slate-600 text-blue-400 text-xs font-bold px-4 py-2 rounded-full shadow-lg group-hover:border-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                                            {item.period}
-                                        </div>
-
-                                        {/* Icon/Circle */}
-                                        <div className="w-12 h-12 rounded-full bg-slate-800 border-4 border-slate-900 text-slate-400 flex items-center justify-center font-bold text-lg mb-4 group-hover:text-white group-hover:bg-blue-600 group-hover:border-slate-800 transition-colors duration-300 shadow-xl relative z-20">
-                                            {item.step}
-                                        </div>
-
-                                        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-200 transition-colors">{item.title}</h3>
-                                        <p className="text-slate-500 text-sm group-hover:text-slate-400 transition-colors">{item.sub}</p>
-
-                                        {/* Mobile Connector */}
-                                        {idx !== 3 && (
-                                            <div className="md:hidden absolute -bottom-6 left-1/2 -translate-x-1/2 text-slate-700">
-                                                <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>

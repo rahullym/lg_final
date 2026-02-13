@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { XMarkIcon, ChevronRightIcon, ChevronLeftIcon, CheckCircleIcon, UserIcon, PhoneIcon, AcademicCapIcon, CalendarIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, ChevronRightIcon, ChevronLeftIcon, CheckCircleIcon, UserIcon, PhoneIcon, AcademicCapIcon, CalendarIcon, BriefcaseIcon } from '@heroicons/react/24/outline';
 
 interface WizardProps {
     isOpen: boolean;
@@ -169,24 +169,28 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                                             <option value="Degree">Degree / PG</option>
                                                             <option value="Diploma">Diploma</option>
                                                             <option value="Plus Two">+2 / HSE</option>
-                                                            <option value="Working">Working Professional</option>
                                                         </select>
                                                         <ChevronRightIcon className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 rotate-90" />
                                                     </div>
                                                 </div>
                                                 <div className="relative">
                                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1 mb-2 block">Current Status</label>
-                                                    <div className="grid grid-cols-2 gap-3">
-                                                        {['Student', 'Employed'].map((status) => (
-                                                            <button
-                                                                key={status}
-                                                                type="button"
-                                                                onClick={() => updateData('currentStatus', status)}
-                                                                className={`py-3 rounded-xl border-2 transition-all font-bold text-sm ${formData.currentStatus === status ? 'border-brand-blue bg-brand-blue/5 text-brand-blue' : 'border-slate-100 bg-slate-50 text-slate-500 hover:border-slate-200'}`}
-                                                            >
-                                                                {status}
-                                                            </button>
-                                                        ))}
+                                                    <div className="relative">
+                                                        <BriefcaseIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                                        <select
+                                                            required
+                                                            value={formData.currentStatus}
+                                                            onChange={(e) => updateData('currentStatus', e.target.value)}
+                                                            className="w-full pl-12 pr-10 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-brand-blue appearance-none transition-all font-medium"
+                                                        >
+                                                            <option value="">Select Status</option>
+                                                            <option value="Student">Student (Pursuing Degree)</option>
+                                                            <option value="Fresher">Degree Holder / Fresher</option>
+                                                            <option value="Professional">Working Professional</option>
+                                                            <option value="PlusTwoExp">Plus Two (with Work Experience)</option>
+                                                            <option value="Break">On Career Break / Seeking Job</option>
+                                                        </select>
+                                                        <ChevronRightIcon className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 rotate-90" />
                                                     </div>
                                                 </div>
                                             </motion.div>

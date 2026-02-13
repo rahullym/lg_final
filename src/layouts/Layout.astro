@@ -12,17 +12,13 @@ const {
 } = Astro.props;
 
 import WhatsAppFloater from "../components/WhatsAppFloater";
+import SEO from "../components/SEO.astro";
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<title>{title}</title>
+		<SEO title={title} description={description} />
 	</head>
 	<body
 		class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-orange-500 selection:text-white"

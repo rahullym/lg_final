@@ -26,7 +26,7 @@ export default function Footer() {
                                 'Warehouse Operations'
                             ].map((course) => (
                                 <li key={course} className="text-slate-300 text-sm hover:text-white transition-colors cursor-pointer">
-                                    <a href="/courses">{course}</a>
+                                    <a href="#">{course}</a>
                                 </li>
                             ))}
                         </ul>
