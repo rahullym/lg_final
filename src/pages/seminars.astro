@@ -1,0 +1,375 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ContactCTA from "../components/ContactCTA";
+
+// Component Data
+const seminars = [
+    {
+        id: "seminar-sn-college-2024",
+        title: "Seminar at SN College",
+        year: "2026",
+        cover: "/images/Seminar SN College/Semianr SN college (1).PNG",
+        gallery: [
+            "/images/Seminar SN College/Semianr SN college (1).PNG",
+            "/images/Seminar SN College/Semianr SN college (2).PNG",
+            "/images/Seminar SN College/Semianr SN college (3).PNG",
+            "/images/Seminar SN College/Semianr SN college (4).PNG",
+            "/images/Seminar SN College/Semianr SN college (5).PNG",
+            "/images/Seminar SN College/Semianr SN college (6).PNG",
+            "/images/Seminar SN College/Semianr SN college (7).PNG",
+            "/images/Seminar SN College/Semianr SN college (8).PNG",
+            "/images/Seminar SN College/Semianr SN college (9).PNG",
+            "/images/Seminar SN College/Semianr SN college (10).PNG",
+            "/images/Seminar SN College/Semianr SN college (11).PNG",
+            "/images/Seminar SN College/Semianr SN college (12).PNG",
+            "/images/Seminar SN College/Semianr SN college (13).PNG",
+            "/images/Seminar SN College/Semianr SN college (14).PNG",
+            "/images/Seminar SN College/Semianr SN college (15).PNG",
+        ],
+    },
+];
+---
+
+<Layout
+    title="Seminars & Workshops | Logistics Gurukul"
+    description="Join our expert-led seminars and workshops on logistics, supply chain management, and industry trends."
+>
+    <Navbar client:load />
+
+    <main>
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-[50vh] flex items-center justify-center bg-[#050505] overflow-hidden pt-20"
+        >
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <!-- CLIENT_IMAGE_HERO_BG -->
+                <img
+                    src="/hero-bg-premium.png"
+                    alt="Seminars Background"
+                    class="w-full h-full object-cover opacity-60"
+                />
+                <div class="absolute inset-0 bg-blue-900/20 mix-blend-overlay">
+                </div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#050505]"
+                >
+                </div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-bold tracking-widest mb-6 uppercase backdrop-blur-sm"
+                >
+                    Life @ Gurukul
+                </span>
+                <h1
+                    class="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 font-heading tracking-tight"
+                >
+                    Seminars & <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white"
+                        >Workshops</span
+                    >
+                </h1>
+                <p
+                    class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+                >
+                    Expert-led sessions designed to keep you ahead of industry
+                    trends and technological advancements in logistics.
+                </p>
+            </div>
+        </section>
+
+        <!-- Seminars Grid -->
+        <section class="py-20 lg:pb-24 bg-slate-50 min-h-[60vh]">
+            <div class="container mx-auto px-6">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                    {
+                        seminars.map((event) => (
+                            <article
+                                class="group relative bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 event-card"
+                                data-id={event.id}
+                            >
+                                <div class="aspect-[4/3] overflow-hidden">
+                                    <img
+                                        src={event.cover}
+                                        alt={event.title}
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    />
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+
+                                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/10 rounded-full text-white text-xs font-bold mb-3">
+                                        {event.year}
+                                    </span>
+                                    <h3 class="text-2xl font-bold text-white font-heading leading-tight group-hover:text-blue-200 transition-colors">
+                                        {event.title}
+                                    </h3>
+                                    <div class="h-1 w-12 bg-blue-500 mt-4 rounded-full group-hover:w-full transition-all duration-500" />
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Gallery Modal (Hidden by default) -->
+        <div
+            id="gallery-modal"
+            class="fixed inset-0 z-[100] hidden items-center justify-center"
+            aria-hidden="true"
+        >
+            <!-- Backdrop -->
+            <div
+                id="modal-backdrop"
+                class="absolute inset-0 bg-black/95 backdrop-blur-xl opacity-0 transition-opacity duration-300"
+            >
+            </div>
+
+            <!-- Modal Content Container -->
+            <div
+                class="relative z-[110] w-full h-full flex flex-col items-center justify-center p-4"
+            >
+                <!-- Top Controls -->
+                <div
+                    class="absolute top-0 w-full p-4 flex justify-between items-center"
+                >
+                    <div
+                        id="image-counter"
+                        class="text-white/70 font-mono text-sm px-4 py-2 rounded-full border border-white/10 bg-black/40"
+                    >
+                        1 / 1
+                    </div>
+                    <button
+                        id="close-modal"
+                        class="p-2 text-white/70 hover:text-white transition-colors hover:rotate-90 duration-300 rounded-full bg-white/5 hover:bg-white/10"
+                        aria-label="Close Gallery"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-8 h-8"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Navigation (Left) -->
+                <button
+                    id="prev-btn"
+                    class="absolute left-2 md:left-8 p-3 rounded-full bg-white/5 hover:bg-white/20 text-white transition-all backdrop-blur-sm group border border-white/5 hover:border-white/20 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="w-6 h-6 group-hover:-translate-x-1 transition-transform"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+                    </svg>
+                </button>
+
+                <!-- Main Image -->
+                <div
+                    id="modal-image-container"
+                    class="relative max-w-7xl max-h-[80vh] w-full flex items-center justify-center opacity-0 scale-95 transition-all duration-300"
+                >
+                    <img
+                        id="modal-img"
+                        src=""
+                        alt="Event Gallery"
+                        class="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
+                    />
+                </div>
+
+                <!-- Navigation (Right) -->
+                <button
+                    id="next-btn"
+                    class="absolute right-2 md:right-8 p-3 rounded-full bg-white/5 hover:bg-white/20 text-white transition-all backdrop-blur-sm group border border-white/5 hover:border-white/20 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="w-6 h-6 group-hover:translate-x-1 transition-transform"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                    </svg>
+                </button>
+
+                <!-- Captions/Title -->
+                <div class="absolute bottom-8 text-center px-4 w-full">
+                    <h2
+                        id="modal-title"
+                        class="text-xl md:text-2xl font-bold text-white mb-1 font-heading tracking-tight opacity-0 translate-y-4 transition-all duration-500 delay-100"
+                    >
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-white border-t border-slate-100">
+            <ContactCTA client:visible />
+        </div>
+    </main>
+
+    <Footer client:visible />
+</Layout>
+
+<!-- Client-Side Gallery Logic -->
+<script define:vars={{ seminars }}>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Elements
+        const modal = document.getElementById("gallery-modal");
+        const modalBackdrop = document.getElementById("modal-backdrop");
+        const modalImg = document.getElementById("modal-img");
+        const modalImgContainer = document.getElementById(
+            "modal-image-container",
+        );
+        const modalTitle = document.getElementById("modal-title");
+        const counter = document.getElementById("image-counter");
+        const closeBtn = document.getElementById("close-modal");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        // State
+        let currentGallery = [];
+        let currentTitle = "";
+        let currentIndex = 0;
+        let isTransitioning = false;
+
+        // --- Functions ---
+
+        function openModal(eventData) {
+            currentGallery = eventData.gallery;
+            currentTitle = eventData.title;
+            currentIndex = 0;
+
+            if (!currentGallery || currentGallery.length === 0) return;
+
+            // Prevent scrolling on body
+            document.body.style.overflow = "hidden";
+
+            // Update Content
+            updateImage();
+
+            // Show Modal
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+
+            // Animate In (Next Frame)
+            setTimeout(() => {
+                modalBackdrop.classList.remove("opacity-0");
+                modalImgContainer.classList.remove("opacity-0", "scale-95");
+                modalTitle.classList.remove("opacity-0", "translate-y-4");
+                modalTitle.textContent = currentTitle;
+            }, 10);
+        }
+
+        function closeModal() {
+            // Animate Out
+            modalBackdrop.classList.add("opacity-0");
+            modalImgContainer.classList.add("opacity-0", "scale-95");
+            modalTitle.classList.add("opacity-0", "translate-y-4");
+
+            setTimeout(() => {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+                document.body.style.overflow = ""; // Restore scroll
+                modalImg.src = ""; // Clear src
+            }, 300); // Match CSS transition duration
+        }
+
+        function updateImage() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            // Fade slightly
+            modalImg.style.opacity = "0.7";
+
+            setTimeout(() => {
+                modalImg.src = currentGallery[currentIndex];
+                counter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+                modalImg.style.opacity = "1";
+                isTransitioning = false;
+            }, 200);
+        }
+
+        function nextImage() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            updateImage();
+        }
+
+        function prevImage() {
+            if (!currentGallery.length) return;
+            currentIndex =
+                (currentIndex - 1 + currentGallery.length) %
+                currentGallery.length;
+            updateImage();
+        }
+
+        // --- Event Listeners ---
+
+        // 1. Card Clicks
+        const eventCards = document.querySelectorAll(".event-card");
+        eventCards.forEach((card) => {
+            card.addEventListener("click", () => {
+                const id = card.getAttribute("data-id");
+                const eventData = seminars.find((c) => c.id === id);
+                if (eventData) openModal(eventData);
+            });
+        });
+
+        // 2. Modal Controls
+        closeBtn.addEventListener("click", closeModal);
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            nextImage();
+        });
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            prevImage();
+        });
+
+        // 3. Close on Backdrop Click
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal || e.target === modalBackdrop) {
+                closeModal();
+            }
+        });
+
+        // 4. Keyboard Navigation
+        document.addEventListener("keydown", (e) => {
+            if (modal.classList.contains("hidden")) return;
+
+            if (e.key === "Escape") closeModal();
+            if (e.key === "ArrowRight") nextImage();
+            if (e.key === "ArrowLeft") prevImage();
+        });
+    });
+</script>

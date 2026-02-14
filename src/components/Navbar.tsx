@@ -46,9 +46,9 @@ export default function Navbar() {
             label: 'Life @ Gurukul',
             href: '#',
             children: [
-                { label: 'Infrastructure', href: '#' },
-                { label: 'Celebration', href: '#' },
-                { label: 'Seminars', href: '#' }
+                { label: 'Infrastructure', href: '/infrastructure' },
+                { label: 'Celebration', href: '/celebrations' },
+                { label: 'Seminars', href: '/seminars' }
             ]
         },
         {
