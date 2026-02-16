@@ -102,8 +102,8 @@ export default function CareerRoadmap() {
                                 Career Roadmap
                             </span>
                             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading mb-6 leading-tight">
-                                Your Roadmap to <br />
-                                <span className="text-blue-600">Success</span>
+                                Your Roadmap <br />
+                                to <span className="text-blue-600">Success</span>
                             </h2>
                             <p className="text-slate-500 text-lg leading-relaxed mb-8">
                                 We don't just teach modules; we architect careers. Follow our proven 4-step framework to go from novice to pro.

@@ -44,10 +44,13 @@ export default function CenterHeadMessage() {
 
                             <div className="prose prose-lg text-slate-600 mb-10 max-w-none">
                                 <p className="mb-6">
-                                    Vineetha Kadangot is an accomplished academic leader, trainer, and mentor with over a decade of experience in education, training, and curriculum development. As the Center Head of Logistics Gurukul, she plays a pivotal role in driving academic excellence and student success.
+                                    Vineetha Kandangot is an accomplished academic leader, trainer, and mentor with over a decade of experience in education, training, and curriculum development. As the Center Head of Logistics Gurukul, she plays a pivotal role in driving academic excellence and student success.
+                                </p>
+                                <p className="mb-6">
+                                    Beginning her journey as a Communicative English Trainer, Vineetha has evolved into a strategic leader who designs innovative curricula and manages high-impact training programs. Her unique blend of academic depth and industry-aligned expertise ensures that every student receives an inclusive and outcome-driven learning experience.
                                 </p>
                                 <p>
-                                    Beginning her journey as a Communicative English Trainer, Vineetha has evolved into a strategic leader who designs innovative curricula and manages high-impact training programs. Her unique blend of academic depth and industry-aligned expertise ensures that every student receives an inclusive and outcome-driven learning experience.
+                                    Her experience collaborating with diverse international learners and professionals has given her deep insight into varied communication styles, cultural expectations, and global workplace requirements. This cross-cultural understanding enables her to tailor programs that are globally relevant, and aligned with the real-world demands of international careers.
                                 </p>
                             </div>
 
