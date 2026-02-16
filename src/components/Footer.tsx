@@ -9,7 +9,7 @@ export default function Footer() {
 
                     {/* Logo & Brief */}
                     <div className="space-y-6">
-                        <img src="/logo.png" alt="Logistics Gurukul" className="h-10 w-auto object-contain" />
+                        <img src="/lgfooter.png" alt="Logistics Gurukul" className="h-10 w-auto object-contain" />
                         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
                             Empowering the next generation of logistics and supply chain professionals with industry-leading expertise.
                         </p>
