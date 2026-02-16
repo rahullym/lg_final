@@ -108,9 +108,14 @@ export default function CertificationContent() {
 
                             <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200">
                                 <p className="text-sm font-bold text-slate-500 uppercase mb-2">Verification Links</p>
-                                <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-2 mb-4">
                                     <a href="https://www.stedcouncil.com/STED/home.php#hm" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">Official STED Council Home</a>
                                     <a href="https://www.stedcouncil.com/STED/accredition.php#acradtn" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">View Accreditations</a>
+                                </div>
+                                <div className="pt-4 border-t border-slate-200">
+                                    <p className="text-slate-500 text-[10px] md:text-xs font-semibold leading-relaxed">
+                                        * In association with <span className="text-slate-900 font-bold">Alive Academy</span> (Official Certification Partner)
+                                    </p>
                                 </div>
                             </div>
                         </div>

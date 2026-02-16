@@ -34,9 +34,7 @@ export default function CertificationHero() {
                         Your passport to a global career. Earn credentials recognized by the Government of India and accredited in 150+ countries.
                     </p>
 
-                    <p className="text-slate-500 text-sm font-semibold tracking-wide mt-6">
-                        * In association with <span className="text-white">Alive Academy</span>
-                    </p>
+
                 </motion.div>
             </div>
 
