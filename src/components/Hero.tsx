@@ -5,7 +5,7 @@ import { ShieldCheckIcon, CheckCircleIcon, BookOpenIcon, BuildingOfficeIcon, Cub
 
 const Hero = () => {
     return (
-        <section className="relative min-h-screen w-full bg-[#050505] flex items-start overflow-hidden font-sans selection:bg-blue-500/30 pt-32 md:pt-40 lg:pt-44">
+        <section className="relative min-h-screen w-full bg-[#050505] flex items-start lg:items-center overflow-hidden font-sans selection:bg-blue-500/30 pt-28 pb-20 md:pt-40 lg:pt-0 lg:pb-0">
 
             {/* 1. Dynamic Background Image */}
             <div className="absolute inset-0 z-0">
@@ -35,9 +35,9 @@ const Hero = () => {
 
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                        className="text-[42px] md:text-[54px] lg:text-[68px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
+                        className="text-[28px] xs:text-[32px] md:text-[54px] lg:text-[68px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
                     >
-                        Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white whitespace-nowrap">First-of-Its-Kind</span> <br />
+                        Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">First-of-Its-Kind</span> <br />
                         Immersive Logistics Diploma
                     </motion.h1>
 
@@ -52,15 +52,15 @@ const Hero = () => {
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-                        className="flex flex-col lg:flex-row flex-wrap gap-4 w-full lg:w-auto"
+                        className="flex flex-col lg:flex-row flex-wrap gap-3 w-full max-w-xs lg:max-w-none lg:w-auto mb-8 lg:mb-0"
                     >
                         <button
                             onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
-                            className="h-14 w-full lg:w-auto px-8 rounded-full bg-brand-blue text-white font-bold text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2"
+                            className="h-auto py-4 w-full lg:w-auto px-8 rounded-full bg-brand-blue text-white font-bold text-base md:text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2"
                         >
-                            Talk to an expert <ArrowRightIcon className="w-5 h-5" />
+                            Talk to an expert <ArrowRightIcon className="w-5 h-5 flex-shrink-0" />
                         </button>
-                        <a href="/diploma-international-logistics" className="h-14 w-full lg:w-auto px-8 rounded-full border border-slate-700 text-white font-medium hover:bg-white/10 transition-colors flex items-center justify-center">
+                        <a href="/diploma-international-logistics" className="h-auto py-4 w-full lg:w-auto px-8 rounded-full border border-slate-700 text-white font-medium text-base hover:bg-white/10 transition-colors flex items-center justify-center">
                             Learn More
                         </a>
                     </motion.div>
@@ -151,7 +151,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center group cursor-pointer"
+                className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center group cursor-pointer"
                 onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
             >
                 <div className="relative flex flex-col items-center">
