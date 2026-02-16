@@ -112,7 +112,12 @@ export default function SkillGrid() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.7, duration: 0.5 }}
-                        onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                        onClick={() => {
+                            const element = document.getElementById('contact-form');
+                            if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
                         className="bg-slate-900 rounded-2xl p-4 md:p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />

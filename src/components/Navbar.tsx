@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Youtube, ChevronDown } from 'lucide-react';
-import CounsellingWizard from './CounsellingWizard';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [isWizardOpen, setIsWizardOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
     useEffect(() => {
@@ -13,15 +11,17 @@ export default function Navbar() {
             setScrolled(window.scrollY > 50);
         };
 
-        const handleOpenWizard = () => setIsWizardOpen(true);
         window.addEventListener('scroll', handleScroll);
-        window.addEventListener('open-counselling-wizard', handleOpenWizard);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('open-counselling-wizard', handleOpenWizard);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleScrollToForm = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, targetId: string) => {
+        const element = document.getElementById(targetId);
+        if (element) {
+            e.preventDefault();
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     const navItems = [
         { label: 'Home', href: '/' },
@@ -130,7 +130,9 @@ export default function Navbar() {
                                     >
                                         <button
                                             className="flex items-center gap-1 px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-slate-700 hover:text-blue-600 transition-all duration-300 focus:outline-none whitespace-nowrap"
-                                            onClick={() => window.location.href = item.href}
+                                            onClick={() => {
+                                                if (item.href !== '#') window.location.href = item.href;
+                                            }}
                                         >
                                             {item.label}
                                             <ChevronDown className={`w-3 h-3 xl:w-4 xl:h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180 text-blue-600' : ''}`} />
@@ -171,12 +173,13 @@ export default function Navbar() {
 
                     {/* CTA Button */}
                     <div className="hidden lg:block">
-                        <button
-                            onClick={() => setIsWizardOpen(true)}
-                            className="px-6 xl:px-8 py-3 xl:py-3.5 bg-brand-blue hover:opacity-90 text-white text-sm xl:text-base font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center whitespace-nowrap"
+                        <a
+                            href="#contact-form"
+                            onClick={(e) => handleScrollToForm(e, 'contact-form')}
+                            className="px-6 xl:px-8 py-3 xl:py-3.5 bg-brand-blue hover:opacity-90 text-white text-sm xl:text-base font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center whitespace-nowrap block"
                         >
                             Contact Us
-                        </button>
+                        </a>
                     </div>
 
                     {/* Mobile/Tablet Toggle */}
@@ -224,12 +227,16 @@ export default function Navbar() {
                             );
                         })}
 
-                        <button
-                            onClick={() => setIsWizardOpen(true)}
-                            className="mt-4 w-full px-6 py-3 bg-brand-blue text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity"
+                        <a
+                            href="#contact-form"
+                            onClick={(e) => {
+                                setIsOpen(false);
+                                handleScrollToForm(e, 'contact-form');
+                            }}
+                            className="mt-4 w-full px-6 py-3 bg-brand-blue text-center text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity"
                         >
                             Contact Us
-                        </button>
+                        </a>
                     </nav>
 
                     {/* Mobile Contact Info */}
@@ -260,7 +267,7 @@ export default function Navbar() {
                             <Facebook className="w-5 h-5" />
                         </a>
                         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-pink-500">
-                            <Instagram className="w-5 h-5" />
+                            <Instagram className="w-4 h-4" />
                         </a>
                         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400">
                             <Linkedin className="w-5 h-5" />
@@ -271,7 +278,6 @@ export default function Navbar() {
                     </div>
                 </div>
             )}
-            <CounsellingWizard isOpen={isWizardOpen} onClose={() => setIsWizardOpen(false)} />
         </header>
     );
 }

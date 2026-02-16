@@ -61,12 +61,12 @@ export default function DiplomaLogistics() {
                             Launch your global career with Kerala’s only 1-Year Diploma featuring 6 Months of Paid On-Job Training. Designed for graduates and working professionals, this course bridges the gap between theory and the real world of International Logistics & Supply Chain Management.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-start">
-                            <button
-                                onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                            <a
+                                href="#contact-form"
                                 className="px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30"
                             >
                                 Apply Now <ArrowRightIcon className="w-5 h-5" />
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -255,12 +255,12 @@ export default function DiplomaLogistics() {
                         Admissions are open. Secure your spot in the Global Logistics industry today.
                     </p>
                     <div className="flex justify-center">
-                        <button
-                            onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                        <a
+                            href="#contact-form"
                             className="px-10 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-md"
                         >
                             Book Free Counselling
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRightIcon, PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 export default function ContactCTA() {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitted(true);
+        // In a real app, you'd send data to an API here
+    };
+
     return (
-        <section className="py-24 bg-slate-50 text-slate-900 relative overflow-hidden">
+        <section id="contact-form" className="py-24 bg-slate-50 text-slate-900 relative overflow-hidden scroll-mt-24">
             {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100 rounded-full blur-[100px] pointer-events-none opacity-50" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-100 rounded-full blur-[80px] pointer-events-none opacity-50" />
@@ -64,69 +72,89 @@ export default function ContactCTA() {
                             viewport={{ once: true }}
                             className="bg-white border border-slate-100 rounded-3xl p-8 md:p-10 shadow-xl relative"
                         >
-                            {/* Form Header */}
-                            <div className="mb-8">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Book Free Counseling</h3>
-                                <p className="text-slate-500 text-sm">We usually respond within 2 hours.</p>
-                            </div>
-
-                            <form className="flex flex-col gap-5">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">First Name</label>
-                                        <input
-                                            type="text"
-                                            placeholder="John"
-                                            className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
-                                        />
+                            {isSubmitted ? (
+                                <div className="text-center py-12">
+                                    <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <ArrowRightIcon className="w-10 h-10" />
                                     </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Last Name</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Doe"
-                                            className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
-                                        />
+                                    <h3 className="text-3xl font-bold text-slate-900 mb-4">Request Received!</h3>
+                                    <p className="text-slate-500 text-lg">Thank you for your interest. Our academic counselor will contact you within 2 hours.</p>
+                                    <button
+                                        onClick={() => setIsSubmitted(false)}
+                                        className="mt-8 text-blue-600 font-bold hover:underline"
+                                    >
+                                        Send another request
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Form Header */}
+                                    <div className="mb-8">
+                                        <h3 className="text-2xl font-bold text-slate-900 mb-2">Book Free Counseling</h3>
+                                        <p className="text-slate-500 text-sm">We usually respond within 2 hours.</p>
                                     </div>
-                                </div>
 
-                                <div className="flex flex-col gap-2">
-                                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        placeholder="+91 00000 00000"
-                                        className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
-                                    />
-                                </div>
-
-                                <div className="flex flex-col gap-2">
-                                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Interest</label>
-                                    <div className="relative">
-                                        <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none font-medium">
-                                            <option>Diploma in Logistics</option>
-                                            <option>Supply Chain Management</option>
-                                            <option>Warehouse Operations</option>
-                                            <option>Other</option>
-                                        </select>
-                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                                            <ArrowRightIcon className="w-4 h-4 text-slate-400 rotate-90" />
+                                    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                            <div className="flex flex-col gap-2">
+                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">First Name</label>
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    placeholder="John"
+                                                    className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Last Name</label>
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    placeholder="Doe"
+                                                    className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <button
-                                    type="button"
-                                    onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
-                                    className="mt-4 bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
-                                >
-                                    <span>Submit Request</span>
-                                    <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Phone Number</label>
+                                            <input
+                                                required
+                                                type="tel"
+                                                placeholder="+91 00000 00000"
+                                                className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
+                                            />
+                                        </div>
 
-                                <p className="text-center text-slate-400 text-xs mt-2">
-                                    By submitting, you agree to our Terms & Privacy Policy.
-                                </p>
-                            </form>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Interest</label>
+                                            <div className="relative">
+                                                <select required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none font-medium">
+                                                    <option>Diploma in Logistics</option>
+                                                    <option>Supply Chain Management</option>
+                                                    <option>Warehouse Operations</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                                                    <ArrowRightIcon className="w-4 h-4 text-slate-400 rotate-90" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            className="mt-4 bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
+                                        >
+                                            <span>Submit Request</span>
+                                            <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                        </button>
+
+                                        <p className="text-center text-slate-400 text-xs mt-2">
+                                            By submitting, you agree to our Terms & Privacy Policy.
+                                        </p>
+                                    </form>
+                                </>
+                            )}
                         </motion.div>
                     </div>
 

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import AboutHero from "../components/AboutHero";
 import AboutStory from "../components/AboutStory";
 import AboutVisionMission from "../components/AboutVisionMission";
+import ContactCTA from "../components/ContactCTA";
 ---
 
 <Layout
@@ -16,6 +17,7 @@ import AboutVisionMission from "../components/AboutVisionMission";
         <AboutHero client:load />
         <AboutStory client:load />
         <AboutVisionMission client:load />
+        <ContactCTA client:visible />
     </main>
     <Footer client:visible />
 </Layout>

@@ -59,14 +59,13 @@ export default function FeaturedCourse() {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                                    <button
-                                        type="button"
-                                        onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                                    <a
+                                        href="#contact-form"
                                         className="px-8 py-4 bg-brand-blue text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
                                     >
                                         <span>Book Your Session</span>
                                         <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                    </button>
+                                    </a>
                                     <a
                                         href="/diploma-international-logistics"
                                         className="px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-50 border border-slate-200 transition-all shadow-sm active:scale-95 group"

@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DiplomaLogistics from "../components/DiplomaLogistics";
+import ContactCTA from "../components/ContactCTA";
 ---
 
 <Layout
@@ -12,6 +13,7 @@ import DiplomaLogistics from "../components/DiplomaLogistics";
     <Navbar client:load />
     <main>
         <DiplomaLogistics client:load />
+        <ContactCTA client:visible />
     </main>
     <Footer client:visible />
 </Layout>

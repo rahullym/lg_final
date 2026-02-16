@@ -88,12 +88,12 @@ export default function ShortTermCourses() {
                         Admissions are open. Secure your spot in the Global Logistics industry today.
                     </p>
                     <div className="flex justify-center">
-                        <button
-                            onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
+                        <a
+                            href="#contact-form"
                             className="px-10 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-md"
                         >
                             Book Free Counselling
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
