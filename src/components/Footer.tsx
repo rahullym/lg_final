@@ -100,7 +100,7 @@ export default function Footer() {
 
                 <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center gap-4">
                     <p className="text-slate-500 text-[10px] font-bold tracking-widest">* in association with Alive Academy (official certificate partner)</p>
-                    <p className="text-slate-500 text-[10px] font-bold tracking-widest"># eligibility: +2</p>
+                    <p className="text-slate-500 text-[10px] font-bold tracking-widest"># t&c apply</p>
                     <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest">&copy; {new Date().getFullYear()} EDIFY LOGIWISE SOLUTIONS PVT LTD. All rights reserved.</p>
                 </div>
             </div>
