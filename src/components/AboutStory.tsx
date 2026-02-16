@@ -45,7 +45,7 @@ export default function AboutStory() {
                             <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 font-medium text-slate-800 shadow-sm relative group overflow-hidden">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-[4rem] -z-0 transition-all group-hover:scale-110" />
                                 <p className="relative z-10 leading-relaxed italic">
-                                    "More than just education, we offer transformation helping students grow into confident, job-ready professionals who can lead in the ever-evolving logistics industry."
+                                    "More than education—we offer transformation for the ever-evolving logistics industry."
                                 </p>
                             </div>
                         </div>
