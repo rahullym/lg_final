@@ -42,44 +42,46 @@ const ShortCourses = [
 
 export default function ShortTermCourses() {
     return (
-        <section className="py-24 bg-slate-50">
-            <div className="container mx-auto px-6">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-heading">Short-Term Programs</h2>
-                    <p className="text-slate-500 max-w-2xl mx-auto font-medium">Fast-track your expertise with our intensive 3-month specialization diplomas.</p>
-                </div>
+        <>
+            <section className="pt-24 bg-slate-50">
+                <div className="container mx-auto px-6 pb-24">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-heading">Short-Term Programs</h2>
+                        <p className="text-slate-500 max-w-2xl mx-auto font-medium">Fast-track your expertise with our intensive 3-month specialization diplomas.</p>
+                    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                    {ShortCourses.map((course, i) => (
-                        <div key={i} className="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-blue-200 hover:-translate-y-2 flex flex-col h-full">
-                            <div className="relative h-48 overflow-hidden shrink-0">
-                                <img
-                                    src={course.image}
-                                    alt={course.title}
-                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                />
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-blue-600 shadow-lg border border-white uppercase">
-                                    3 Months
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                        {ShortCourses.map((course, i) => (
+                            <div key={i} className="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm transition-all duration-500 hover:shadow-2xl hover:border-blue-200 hover:-translate-y-2 flex flex-col h-full">
+                                <div className="relative h-48 overflow-hidden shrink-0">
+                                    <img
+                                        src={course.image}
+                                        alt={course.title}
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                    />
+                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-blue-600 shadow-lg border border-white uppercase">
+                                        3 Months
+                                    </div>
+                                </div>
+
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                                        {course.title}
+                                    </h3>
+                                    <p className="text-sm text-slate-500 mb-6 leading-relaxed flex-grow">
+                                        {course.description}
+                                    </p>
+
+
                                 </div>
                             </div>
-
-                            <div className="p-8 flex flex-col flex-grow">
-                                <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
-                                    {course.title}
-                                </h3>
-                                <p className="text-sm text-slate-500 mb-6 leading-relaxed flex-grow">
-                                    {course.description}
-                                </p>
-
-
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </section>
 
             {/* Bottom CTA */}
-            <div className="py-20 mt-16 bg-white border-t border-slate-100">
+            <div className="pt-20 pb-10 bg-white border-t border-slate-100">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl font-bold text-slate-900 mb-6">Ready to Start Your Career?</h2>
                     <p className="text-slate-600 text-lg max-w-2xl mx-auto mb-8">
@@ -95,6 +97,6 @@ export default function ShortTermCourses() {
                     </div>
                 </div>
             </div>
-        </section>
+        </>
     );
 }

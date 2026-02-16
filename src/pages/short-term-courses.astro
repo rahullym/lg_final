@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ShortTermCourses from "../components/ShortTermCourses";
+import ShortTermCoursesComponent from "../components/ShortTermCourses";
 ---
 
 <Layout
@@ -13,7 +13,7 @@ import ShortTermCourses from "../components/ShortTermCourses";
     <main>
         <div class="pt-20">
             {/* Add padding top to account for fixed navbar */}
-            <ShortTermCourses />
+            <ShortTermCoursesComponent client:load />
         </div>
     </main>
     <Footer client:visible />
