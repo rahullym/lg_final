@@ -7,7 +7,7 @@ const tutors = [
         name: "Sreeji Pillai",
         role: "Lead Mentor & Industry Specialist",
         subRole: "Former CEO of Aiyer Logistics Pvt LTD",
-        image: "/faculty images/sreeji.png", // Updated image
+        image: "/faculty-images/sreeji.png", // Updated image
         bio: [
             "Sreeji Pillai is a seasoned logistics industry leader and mentor with over a decade of extensive experience across freight forwarding, shipping, and end-to-end supply chain operations. As the Industry Specialist and Lead Mentor, he brings invaluable real-world expertise and strategic insight to logistics education.",
             "He is widely recognized for his leadership capabilities and deep understanding of logistics business operations, having held senior management and executive roles across reputed logistics organizations in India."
@@ -46,7 +46,7 @@ const tutors = [
         name: "Isabella Davis",
         role: "Logistics Faculty & Trainer",
         subRole: "Operations and Supply Chain Management",
-        image: "/faculty images/isabella-maam.png", // Updated image
+        image: "/faculty-images/isabella-maam.png", // Updated image
         bio: [
             "Isabella Davis is a committed logistics professional and faculty member with strong expertise in logistics operations, coordination, and administrative support functions. As a logistics trainer, she brings practical clarity and structured learning approaches to students preparing to enter the supply chain industry.",
             "Her focus is on delivering concept-driven, industry-relevant knowledge that equips learners with the confidence and competence required in modern logistics environments."
