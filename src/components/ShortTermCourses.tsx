@@ -89,6 +89,7 @@ export default function ShortTermCourses() {
                     </p>
                     <div className="flex justify-center">
                         <button
+                            id="short-term-footer-cta-book-counselling"
                             onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                             className="px-10 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-md"
                         >

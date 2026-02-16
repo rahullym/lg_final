@@ -109,8 +109,8 @@ export default function CertificationContent() {
                             <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200">
                                 <p className="text-sm font-bold text-slate-500 uppercase mb-2">Verification Links</p>
                                 <div className="flex flex-col gap-2 mb-4">
-                                    <a href="https://www.stedcouncil.com/STED/home.php#hm" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">Official STED Council Home</a>
-                                    <a href="https://www.stedcouncil.com/STED/accredition.php#acradtn" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">View Accreditations</a>
+                                    <a id="cert-sted-home-link" href="https://www.stedcouncil.com/STED/home.php#hm" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">Official STED Council Home</a>
+                                    <a id="cert-view-accreditations-link" href="https://www.stedcouncil.com/STED/accredition.php#acradtn" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">View Accreditations</a>
                                 </div>
                                 <div className="pt-4 border-t border-slate-200">
                                     <p className="text-slate-500 text-[10px] font-semibold italic">
@@ -151,6 +151,7 @@ export default function CertificationContent() {
                         {faqs.map((faq, index) => (
                             <div key={index} className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
                                 <button
+                                    id={`cert-faq-toggle-${index}`}
                                     onClick={() => toggleFaq(index)}
                                     className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors"
                                 >

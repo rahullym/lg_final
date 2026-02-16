@@ -4,6 +4,7 @@ import { MessageCircle } from 'lucide-react'; // Using lucide-react as a valid i
 export default function WhatsAppFloater() {
     return (
         <a
+            id="whatsapp-floater-link"
             href="https://wa.me/917994446019"
             target="_blank"
             rel="noopener noreferrer"

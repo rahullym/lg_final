@@ -108,6 +108,7 @@ export default function SkillGrid() {
 
                     {/* 8th 'Join Us' Card */}
                     <motion.div
+                        id="skill-grid-cta-talk-expert"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}

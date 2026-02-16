@@ -69,6 +69,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                 >
                     {/* Close Button */}
                     <button
+                        id="wizard-close-button"
                         onClick={onClose}
                         className="absolute top-6 right-6 md:top-8 md:right-8 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
                     >
@@ -224,6 +225,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                                             {['Morning', 'Afternoon', 'Evening'].map((time) => (
                                                                 <button
                                                                     key={time}
+                                                                    id={`wizard-time-select-${time.toLowerCase()}`}
                                                                     type="button"
                                                                     onClick={() => updateData('preferredTime', time)}
                                                                     className={`py-2 px-1 rounded-lg border text-[10px] font-bold uppercase tracking-wider transition-all ${formData.preferredTime === time ? 'bg-brand-blue border-brand-blue text-white shadow-lg shadow-brand-blue/20' : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-200'}`}
@@ -242,6 +244,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                     <div className="mt-8 flex gap-3">
                                         {step > 1 && (
                                             <button
+                                                id="wizard-back-button"
                                                 type="button"
                                                 onClick={handleBack}
                                                 className="flex-1 py-4 px-6 border border-slate-100 text-slate-500 font-bold rounded-2xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
@@ -251,6 +254,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                         )}
                                         {step < totalSteps ? (
                                             <button
+                                                id="wizard-next-button"
                                                 type="button"
                                                 disabled={step === 1 ? (!formData.name || !formData.phone) : step === 2 ? !formData.qualification : false}
                                                 onClick={handleNext}
@@ -260,6 +264,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                             </button>
                                         ) : (
                                             <button
+                                                id="wizard-submit-button"
                                                 type="submit"
                                                 className="flex-[2] py-4 px-6 bg-brand-blue text-white font-bold rounded-2xl hover:opacity-90 transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
                                             >
@@ -287,6 +292,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                 Thank you, <span className="text-brand-blue font-bold">{formData.name.split(' ')[0]}</span>. One of our senior career experts will call you during the <span className="font-bold text-slate-900 text-lowercase">{formData.preferredTime}</span> to guide you.
                             </p>
                             <button
+                                id="wizard-success-close"
                                 onClick={onClose}
                                 className="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-lg"
                             >

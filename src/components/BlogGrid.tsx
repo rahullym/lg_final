@@ -12,6 +12,7 @@ export default function BlogGrid() {
                     {BlogPosts.map((post, i) => (
                         <motion.a
                             key={i}
+                            id={`blog-post-card-${post.slug}`}
                             href={`/blog/${post.slug}`}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}

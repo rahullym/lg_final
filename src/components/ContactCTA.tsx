@@ -35,30 +35,36 @@ export default function ContactCTA() {
 
                         <div className="flex flex-col gap-6">
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
-                                    <PhoneIcon className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Call Us</p>
-                                    <p className="text-lg font-bold text-slate-900">+91 79944 46019</p>
-                                </div>
+                                <a id="contact-info-phone" href="tel:+917994446019" className="flex items-center gap-4 group">
+                                    <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm group-hover:border-blue-500 transition-colors">
+                                        <PhoneIcon className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Call Us</p>
+                                        <p className="text-lg font-bold text-slate-900">+91 79944 46019</p>
+                                    </div>
+                                </a>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
-                                    <EnvelopeIcon className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Email Us</p>
-                                    <p className="text-lg font-bold text-slate-900">info@logisticsgurukul.com</p>
-                                </div>
+                                <a id="contact-info-email" href="mailto:info@logisticsgurukul.com" className="flex items-center gap-4 group">
+                                    <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm group-hover:border-blue-500 transition-colors">
+                                        <EnvelopeIcon className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Email Us</p>
+                                        <p className="text-lg font-bold text-slate-900">info@logisticsgurukul.com</p>
+                                    </div>
+                                </a>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
-                                    <MapPinIcon className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Visit Us</p>
-                                    <p className="text-lg font-bold text-slate-900">Profnet Plaza, Edappally, Kochi</p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm">
+                                        <MapPinIcon className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Visit Us</p>
+                                        <p className="text-lg font-bold text-slate-900">Profnet Plaza, Edappally, Kochi</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -80,6 +86,7 @@ export default function ContactCTA() {
                                     <h3 className="text-3xl font-bold text-slate-900 mb-4">Request Received!</h3>
                                     <p className="text-slate-500 text-lg">Thank you for your interest. Our academic counselor will contact you within 2 hours.</p>
                                     <button
+                                        id="contact-cta-reset"
                                         onClick={() => setIsSubmitted(false)}
                                         className="mt-8 text-blue-600 font-bold hover:underline"
                                     >
@@ -142,6 +149,7 @@ export default function ContactCTA() {
                                         </div>
 
                                         <button
+                                            id="contact-cta-submit"
                                             type="submit"
                                             className="mt-4 bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
                                         >

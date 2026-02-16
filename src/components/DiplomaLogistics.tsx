@@ -58,6 +58,7 @@ const SkillCard = ({ module }: { module: any }) => {
                         {module.desc}
                     </p>
                     <button
+                        id={`skill-card-toggle-${module.title.toLowerCase().replace(/\s+/g, '-')}`}
                         onClick={() => setIsExpanded(!isExpanded)}
                         className="mt-4 text-blue-600 font-bold text-[10px] uppercase tracking-widest hover:text-blue-700 transition-colors flex items-center gap-1"
                     >
@@ -104,6 +105,7 @@ export default function DiplomaLogistics() {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-start">
                             <button
+                                id="diploma-hero-cta-apply"
                                 onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                                 className="px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30"
                             >
@@ -146,7 +148,7 @@ export default function DiplomaLogistics() {
                                         </div>
                                     ))}
                                     <div className="flex gap-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
-                                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-green-600 shrink-0 border border-slate-200">
+                                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shrink-0 border border-slate-200">
                                             <CheckCircleIcon className="w-5 h-5" />
                                         </div>
                                         <div>
@@ -289,6 +291,7 @@ export default function DiplomaLogistics() {
                     </p>
                     <div className="flex justify-center">
                         <button
+                            id="diploma-footer-cta-book-counselling"
                             onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                             className="px-10 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-md"
                         >

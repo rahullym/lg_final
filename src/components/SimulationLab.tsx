@@ -19,7 +19,7 @@ export default function SimulationLab() {
                                 className="w-full object-cover transform group-hover:scale-105 transition duration-700"
                             />
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
-                                <button className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/50 hover:scale-110 transition-all">
+                                <button id="simulation-cta-play-video" className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/50 hover:scale-110 transition-all">
                                     <PlayCircle className="w-10 h-10 fill-current" />
                                 </button>
                             </div>
@@ -69,7 +69,7 @@ export default function SimulationLab() {
                             ))}
                         </ul>
 
-                        <button className="mt-4 px-8 py-4 bg-white text-navy-900 font-bold rounded-xl hover:bg-slate-100 transition-colors shadow-lg shadow-white/10">
+                        <button id="simulation-cta-book-demo" className="mt-4 px-8 py-4 bg-white text-navy-900 font-bold rounded-xl hover:bg-slate-100 transition-colors shadow-lg shadow-white/10">
                             Book a Demo Session
                         </button>
                     </div>

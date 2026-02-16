@@ -55,12 +55,13 @@ const Hero = () => {
                         className="flex flex-col lg:flex-row flex-wrap gap-3 w-full max-w-xs lg:max-w-none lg:w-auto mb-8 lg:mb-0"
                     >
                         <button
+                            id="hero-cta-expert"
                             onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                             className="h-auto py-4 w-full lg:w-auto px-8 rounded-full bg-brand-blue text-white font-bold text-base md:text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2"
                         >
                             Talk to an expert <ArrowRightIcon className="w-5 h-5 flex-shrink-0" />
                         </button>
-                        <a href="/diploma-international-logistics" className="h-auto py-4 w-full lg:w-auto px-8 rounded-full border border-slate-700 text-white font-medium text-base hover:bg-white/10 transition-colors flex items-center justify-center">
+                        <a id="hero-cta-learn-more" href="/diploma-international-logistics" className="h-auto py-4 w-full lg:w-auto px-8 rounded-full border border-slate-700 text-white font-medium text-base hover:bg-white/10 transition-colors flex items-center justify-center">
                             Learn More
                         </a>
                     </motion.div>
@@ -148,6 +149,7 @@ const Hero = () => {
 
             {/* Redesigned Scroll Down Indicator */}
             <motion.div
+                id="hero-explore-scroll"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 1 }}

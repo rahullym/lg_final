@@ -34,11 +34,11 @@ export default function FeaturedCourse() {
                                             </div>
                                             <span className="text-sm font-bold text-slate-700">Duration: 1 Year</span>
                                         </div>
-                                        <div className="flex items-center gap-3 text-slate-500">
-                                            <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white">
                                                 <AcademicCapIcon className="w-3 h-3" />
                                             </div>
-                                            <span className="text-sm font-medium">Eligibility: +2 (t&c apply)</span>
+                                            <span className="text-sm font-bold text-slate-700">Eligibility: +2 (t&c apply)</span>
                                         </div>
                                     </div>
 
@@ -60,6 +60,7 @@ export default function FeaturedCourse() {
 
                                 <div className="flex flex-col sm:flex-row gap-4 mt-8">
                                     <button
+                                        id="featured-cta-book-session"
                                         onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                                         className="px-8 py-4 bg-brand-blue text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
                                     >
@@ -67,6 +68,7 @@ export default function FeaturedCourse() {
                                         <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                     </button>
                                     <a
+                                        id="featured-cta-learn-more"
                                         href="/diploma-international-logistics"
                                         className="px-8 py-4 bg-white text-slate-700 font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-50 border border-slate-200 transition-all shadow-sm active:scale-95 group"
                                     >
