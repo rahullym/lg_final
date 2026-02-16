@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Youtube, ChevronDown } from 'lucide-react';
+import CounsellingWizard from './CounsellingWizard';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isWizardOpen, setIsWizardOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -11,8 +13,14 @@ export default function Navbar() {
             setScrolled(window.scrollY > 50);
         };
 
+        const handleOpenWizard = () => setIsWizardOpen(true);
+        window.addEventListener('open-counselling-wizard', handleOpenWizard);
+
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('open-counselling-wizard', handleOpenWizard);
+        };
     }, []);
 
     const handleScrollToForm = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, targetId: string) => {
@@ -173,13 +181,12 @@ export default function Navbar() {
 
                     {/* CTA Button */}
                     <div className="hidden lg:block">
-                        <a
-                            href="#contact-form"
-                            onClick={(e) => handleScrollToForm(e, 'contact-form')}
+                        <button
+                            onClick={() => setIsWizardOpen(true)}
                             className="px-6 xl:px-8 py-3 xl:py-3.5 bg-brand-blue hover:opacity-90 text-white text-sm xl:text-base font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center whitespace-nowrap block"
                         >
                             Contact Us
-                        </a>
+                        </button>
                     </div>
 
                     {/* Mobile/Tablet Toggle */}
@@ -227,16 +234,15 @@ export default function Navbar() {
                             );
                         })}
 
-                        <a
-                            href="#contact-form"
-                            onClick={(e) => {
+                        <button
+                            onClick={() => {
                                 setIsOpen(false);
-                                handleScrollToForm(e, 'contact-form');
+                                setIsWizardOpen(true);
                             }}
                             className="mt-4 w-full px-6 py-3 bg-brand-blue text-center text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity"
                         >
                             Contact Us
-                        </a>
+                        </button>
                     </nav>
 
                     {/* Mobile Contact Info */}
@@ -278,6 +284,8 @@ export default function Navbar() {
                     </div>
                 </div>
             )}
+
+            <CounsellingWizard isOpen={isWizardOpen} onClose={() => setIsWizardOpen(false)} />
         </header>
     );
 }

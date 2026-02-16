@@ -54,12 +54,12 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
                         className="flex flex-col lg:flex-row flex-wrap gap-4 w-full lg:w-auto"
                     >
-                        <a
-                            href="#contact-form"
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('open-counselling-wizard'))}
                             className="h-14 w-full lg:w-auto px-8 rounded-full bg-brand-blue text-white font-bold text-lg hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,74,173,0.3)] flex items-center justify-center gap-2"
                         >
                             Talk to an expert <ArrowRightIcon className="w-5 h-5" />
-                        </a>
+                        </button>
                         <a href="/diploma-international-logistics" className="h-14 w-full lg:w-auto px-8 rounded-full border border-slate-700 text-white font-medium hover:bg-white/10 transition-colors flex items-center justify-center">
                             Learn More
                         </a>
