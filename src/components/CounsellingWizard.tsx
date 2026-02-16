@@ -263,7 +263,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                                 type="submit"
                                                 className="flex-[2] py-4 px-6 bg-brand-blue text-white font-bold rounded-2xl hover:opacity-90 transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
                                             >
-                                                Submit Request
+                                                Book Free Session
                                             </button>
                                         )}
                                     </div>

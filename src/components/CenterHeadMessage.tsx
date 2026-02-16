@@ -17,7 +17,7 @@ export default function CenterHeadMessage() {
                             transition={{ duration: 0.8 }}
                             className="relative"
                         >
-                            <div className="aspect-[4/5] md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100">
+                            <div className="aspect-square md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100 max-h-[400px] md:max-h-none mx-auto">
                                 <img
                                     src="/faculty-images/vineetha-maam.png"
                                     alt="Vineetha Kandangot"

@@ -94,7 +94,7 @@ export default function FacultyTeam() {
                                     transition={{ duration: 0.8 }}
                                     className="relative"
                                 >
-                                    <div className="aspect-[4/5] md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100">
+                                    <div className="aspect-square md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100 max-h-[350px] md:max-h-none mx-auto">
                                         {/* Placeholder for images if file not found, creating a fallback visual */}
                                         <div className="w-full h-full bg-slate-50 flex items-center justify-center text-slate-400">
                                             <img
