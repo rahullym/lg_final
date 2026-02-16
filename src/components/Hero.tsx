@@ -37,7 +37,7 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                         className="text-[28px] xs:text-[32px] md:text-[54px] lg:text-[68px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
                     >
-                        Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">First-of-Its-Kind</span> <br />
+                        Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white whitespace-nowrap">First-of-Its-Kind</span> <br />
                         Immersive Logistics Diploma
                     </motion.h1>
 
