@@ -111,7 +111,6 @@ export default function DiplomaLogistics() {
                                             <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 / Graduation / Post-Graduation</h3>
                                         </div>
                                     </div>
-                                    <p className="text-[10px] text-slate-400 font-medium pl-14 mt-2">* Eligibility for STED Certification: +2</p>
                                 </div>
                             </div>
                         </div>
