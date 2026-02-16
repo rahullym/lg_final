@@ -89,9 +89,7 @@ export default function DiplomaLogistics() {
                                     <p className="text-slate-600 text-lg mb-4">
                                         Our program is meticulously crafted to bridge the gap between academic knowledge and industry requirements, ensuring you are job-ready from day one.
                                     </p>
-                                    <p className="text-sm font-semibold text-blue-600 bg-blue-50 px-4 py-2 rounded-lg inline-block border border-blue-100">
-                                        * In association with Alive Academy (Official Certification Partner)
-                                    </p>
+
                                 </div>
 
                                 <div className="space-y-4">
@@ -110,7 +108,7 @@ export default function DiplomaLogistics() {
                                             <CheckCircleIcon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-slate-900 text-base">Eligibility: Graduation / Post-Graduation</h3>
+                                            <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 / Graduation / Post-Graduation (T&C Apply)</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -151,9 +149,7 @@ export default function DiplomaLogistics() {
                                             </div>
 
                                             {/* Icon/Circle */}
-                                            <div className="w-12 h-12 rounded-full bg-slate-800 border-4 border-slate-900 text-slate-400 flex items-center justify-center font-bold text-lg mb-4 group-hover:text-white group-hover:bg-blue-600 group-hover:border-slate-800 transition-colors duration-300 shadow-xl relative z-20">
-                                                {item.step}
-                                            </div>
+
 
                                             <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-200 transition-colors">{item.title}</h3>
                                             <p className="text-slate-500 text-sm group-hover:text-slate-400 transition-colors">{item.sub}</p>
@@ -187,54 +183,73 @@ export default function DiplomaLogistics() {
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-8 mb-24">
+                        <div className="grid md:grid-cols-3 gap-8 mb-24">
                             {[
                                 {
                                     title: "Interview Skills & Mock Interview Training",
                                     desc: "Gain the confidence to face real interviews with expert-guided interview skills training and mock sessions. Improve communication, body language, and responses to stand out and get job-ready faster. Our program includes professional interview training and mock interviews to prepare students for real hiring situations. Build confidence, sharpen communication skills, and step into interviews with a winning edge.",
-                                    icon: ClipboardDocumentCheckIcon
+                                    icon: ClipboardDocumentCheckIcon,
+                                    image: "/interview-skills.png"
                                 },
                                 {
                                     title: "Language Training (English & Hindi)",
                                     desc: "As a value addition, our diploma program includes Language Training in English and Hindi to strengthen students’ professional communication skills. The training focuses on workplace vocabulary, customer interaction, documentation-related communication, and confidence building, enabling students to communicate clearly with clients, colleagues, and industry partners. This support enhances employability and workplace effectiveness in the logistics and supply chain sector.",
-                                    icon: LanguageIcon
+                                    icon: LanguageIcon,
+                                    image: "/language-training.png"
                                 },
                                 {
                                     title: "IT Training (Basic Excel & Word)",
                                     desc: "Our Logistics diploma program includes IT training in Basic Excel and MS Word to equip students with essential digital skills required in logistics and supply chain operations. The training focuses on data entry, basic formulas, report preparation, documentation, and record management, enabling students to work efficiently in offices, warehouses, and logistics firms. This skill enhancement significantly improves accuracy, productivity, and job readiness.",
-                                    icon: ComputerDesktopIcon
+                                    icon: ComputerDesktopIcon,
+                                    image: "/it-training.png"
                                 },
                                 {
                                     title: "Cargo Packaging",
                                     desc: "As a value addition, our logistics diploma program includes Cargo Packaging training to help students understand the importance of safe, secure, and compliant packaging in transportation and storage. The training covers types of packaging materials, packing methods for different cargo, labelling, palletization, and damage prevention, ensuring goods reach their destination safely. This practical knowledge plays a key role in reducing losses, improving efficiency, and meeting logistics standards.",
-                                    icon: CubeIcon
+                                    icon: CubeIcon,
+                                    image: "/cargo-packaging.png"
                                 },
                                 {
                                     title: "Artificial Intelligence (AI)",
                                     desc: "AI training introduces students to smart logistics tools and data-driven decision-making. Step into the future of logistics with Artificial Intelligence basics. It prepares learners for technology-enabled supply chain environments. Learn how smart technology is transforming supply chains and gain a competitive edge in modern logistics careers.",
-                                    icon: CpuChipIcon
+                                    icon: CpuChipIcon,
+                                    image: "/ai-logistics.png"
                                 },
                                 {
                                     title: "Warehousing",
                                     desc: "Warehousing training helps students understand storage, stock handling, and inventory flow. It prepares learners for practical roles in warehouses and distribution centres. Power the backbone of logistics with hands-on warehousing skills. Learn how smart storage and inventory management drive faster and efficient supply chains.",
-                                    icon: BuildingOffice2Icon
+                                    icon: BuildingOffice2Icon,
+                                    image: "/warehousing.png"
                                 },
                                 {
                                     title: "Dangerous Goods Cargo Handling",
                                     desc: "As a value addition, our diploma program includes Dangerous Goods Cargo Handling training to familiarize students with the safe handling, storage, labelling, and movement of hazardous materials. This training builds strong awareness of risk management, safety responsibility, and operational discipline in logistics operations. Gain practical exposure to dangerous goods cargo handling and stand out in safety-critical logistics careers.",
-                                    icon: CubeIcon
+                                    icon: CubeIcon,
+                                    image: "/dangerous-goods.png"
                                 }
                             ].map((module, i) => (
-                                <div key={i} className="group p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-300">
-                                    <div className="flex items-start gap-6">
-                                        <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                            <module.icon className="w-7 h-7" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{module.title}</h3>
-                                            <p className="text-slate-600 leading-relaxed text-sm">
-                                                {module.desc}
-                                            </p>
+                                <div key={i} className="group rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-300 overflow-hidden flex flex-col">
+                                    <div className="h-48 overflow-hidden relative">
+                                        <img
+                                            src={module.image}
+                                            alt={module.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                                    </div>
+                                    <div className="p-8 flex-grow">
+                                        <div className="flex items-start gap-6">
+                                            <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                                <module.icon className="w-6 h-6" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors leading-tight">
+                                                    {module.title}
+                                                </h3>
+                                                <p className="text-slate-600 leading-relaxed text-sm">
+                                                    {module.desc}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
