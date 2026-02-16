@@ -11,7 +11,8 @@ import {
     CubeIcon,
     CpuChipIcon,
     ComputerDesktopIcon,
-    BuildingOffice2Icon
+    BuildingOffice2Icon,
+    IdentificationIcon
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
@@ -149,7 +150,7 @@ export default function DiplomaLogistics() {
                                     ))}
                                     <div className="flex gap-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
                                         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shrink-0 border border-slate-200">
-                                            <CheckCircleIcon className="w-5 h-5" />
+                                            <IdentificationIcon className="w-5 h-5" />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 (t&c apply)/ Graduation / Post-Graduation</h3>

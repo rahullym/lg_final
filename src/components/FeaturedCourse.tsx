@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckBadgeIcon, AcademicCapIcon, BriefcaseIcon, StarIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
+import { IdentificationIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 export default function FeaturedCourse() {
     return (
@@ -35,8 +36,8 @@ export default function FeaturedCourse() {
                                             <span className="text-sm font-bold text-slate-700">Duration: 1 Year</span>
                                         </div>
                                         <div className="flex items-center gap-3">
-                                            <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white">
-                                                <AcademicCapIcon className="w-3 h-3" />
+                                            <div className="w-5 h-5 flex items-center justify-center text-blue-600">
+                                                <IdentificationIcon className="w-5 h-5" />
                                             </div>
                                             <span className="text-sm font-bold text-slate-700">Eligibility: +2 (t&c apply)</span>
                                         </div>
