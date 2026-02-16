@@ -56,7 +56,7 @@ export default function Navbar() {
             children: [
                 { label: 'Infrastructure', href: '/infrastructure' },
                 { label: 'Celebration', href: '/celebrations' },
-                { label: 'Seminars', href: '/seminars' }
+                { label: 'Seminars & Events', href: '/seminars' }
             ]
         },
         {
