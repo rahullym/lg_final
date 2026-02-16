@@ -38,7 +38,7 @@ export default function FeaturedCourse() {
                                             <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center">
                                                 <AcademicCapIcon className="w-3 h-3" />
                                             </div>
-                                            <span className="text-sm font-medium">Any Graduation / PG Eligibility</span>
+                                            <span className="text-sm font-medium">Eligibility: +2 *</span>
                                         </div>
                                     </div>
 

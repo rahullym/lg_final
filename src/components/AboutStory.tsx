@@ -37,10 +37,13 @@ export default function AboutStory() {
                                 Every student follows a strategic career path: from classroom theory to live internships and our exclusive paid on-the-job training, leading to assured placements with top global logistics firms.
                             </p>
                             <p>
-                                Our curriculum is empowered by our collaboration with Alive Academy, a pioneer in skill development for over a decade. As our official certification partner, they ensure your Diploma carries value across the international shipping industry.
+                                Through our strategic partnership with Alive Academy, who has over a decade of expertise in training
+                                students successfully, we offer internationally valid diplomas that are widely recognized across the
+                                world
                             </p>
                             <p>
-                                We believe Logistics is the heartbeat of global trade. That’s why our job-oriented courses are built around real operations, live projects, and simulation-based training.
+                                Logistics is the heartbeat of global trade. Our job-oriented courses combine real operations, live
+                                projects, and simulation-based training to create confident, job-ready professionals.
                             </p>
                             <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 font-medium text-slate-800 shadow-sm relative group overflow-hidden">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-[4rem] -z-0 transition-all group-hover:scale-110" />

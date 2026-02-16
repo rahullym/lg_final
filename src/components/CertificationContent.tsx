@@ -114,11 +114,12 @@ export default function CertificationContent() {
                                 </div>
                                 <div className="pt-4 border-t border-slate-200">
                                     <p className="text-slate-500 text-[10px] md:text-xs font-semibold leading-relaxed">
-                                        * In association with <span className="text-slate-900 font-bold">Alive Academy</span> (Official Certification Partner)
+                                        * Eligibility: +2
                                     </p>
                                 </div>
                             </div>
                         </div>
+
 
                         <div className="lg:w-1/2 relative">
                             <div className="absolute inset-0 bg-blue-600/5 rounded-3xl transform rotate-3 scale-95" />
@@ -179,6 +180,6 @@ export default function CertificationContent() {
                 </div>
             </div>
 
-        </section>
+        </section >
     );
 }

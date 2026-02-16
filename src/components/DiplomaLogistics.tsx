@@ -16,7 +16,7 @@ import {
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
 const features = [
-    { name: "Globally Recognized Certification (STED Council)", icon: GlobeAltIcon },
+    { name: "Globally Recognized Certification (STED Council) *", icon: GlobeAltIcon },
     { name: "100% Placement Assistance", icon: BriefcaseIcon },
     { name: "Comprehensive Career Support", icon: CheckBadgeIcon },
 ];
@@ -108,9 +108,10 @@ export default function DiplomaLogistics() {
                                             <CheckCircleIcon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 / Graduation / Post-Graduation (T&C Apply)</h3>
+                                            <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 / Graduation / Post-Graduation</h3>
                                         </div>
                                     </div>
+                                    <p className="text-[10px] text-slate-400 font-medium pl-14 mt-2">* Eligibility for STED Certification: +2</p>
                                 </div>
                             </div>
                         </div>
