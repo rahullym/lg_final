@@ -31,6 +31,48 @@ const modules = [
     { name: "Dangerous Goods Cargo Handling", icon: CubeIcon },
 ];
 
+const SkillCard = ({ module }: { module: any }) => {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
+    return (
+        <div className="group rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-300 overflow-hidden flex flex-col h-full">
+            <div className="h-48 overflow-hidden relative">
+                <img
+                    src={module.image}
+                    alt={module.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            </div>
+            <div className="p-8 flex-grow flex flex-col">
+                <div className="flex items-start gap-6 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <module.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-tight">
+                        {module.title}
+                    </h3>
+                </div>
+                <div className="relative flex-grow">
+                    <p className={`text-slate-600 leading-relaxed text-sm ${!isExpanded ? 'line-clamp-3' : ''}`}>
+                        {module.desc}
+                    </p>
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="mt-4 text-blue-600 font-bold text-[10px] uppercase tracking-widest hover:text-blue-700 transition-colors flex items-center gap-1"
+                    >
+                        {isExpanded ? (
+                            <>Show Less <svg className="w-3 h-3 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7"></path></svg></>
+                        ) : (
+                            <>View More <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7"></path></svg></>
+                        )}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function DiplomaLogistics() {
     return (
         <>
@@ -228,31 +270,7 @@ export default function DiplomaLogistics() {
                                     image: "/dangerous-goods.png"
                                 }
                             ].map((module, i) => (
-                                <div key={i} className="group rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-300 overflow-hidden flex flex-col">
-                                    <div className="h-48 overflow-hidden relative">
-                                        <img
-                                            src={module.image}
-                                            alt={module.title}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                                    </div>
-                                    <div className="p-8 flex-grow">
-                                        <div className="flex items-start gap-6">
-                                            <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                                <module.icon className="w-6 h-6" />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors leading-tight">
-                                                    {module.title}
-                                                </h3>
-                                                <p className="text-slate-600 leading-relaxed text-sm">
-                                                    {module.desc}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <SkillCard key={i} module={module} />
                             ))}
                         </div>
 
