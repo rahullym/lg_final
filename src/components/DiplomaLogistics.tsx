@@ -108,7 +108,7 @@ export default function DiplomaLogistics() {
                                             <CheckCircleIcon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 # / Graduation / Post-Graduation</h3>
+                                            <h3 className="font-semibold text-slate-900 text-base">Eligibility: +2 (t&c apply)/ Graduation / Post-Graduation</h3>
                                         </div>
                                     </div>
                                 </div>
