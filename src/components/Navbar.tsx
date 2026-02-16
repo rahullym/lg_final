@@ -95,7 +95,7 @@ export default function Navbar() {
                         {/* Social Links */}
                         <div className="flex items-center gap-3">
                             <span className="text-slate-400 text-xs mr-2 hidden md:inline">Follow Us:</span>
-                            <a href="https://www.facebook.com/profile.php?id=61584701315259" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-slate-400 transition-colors">
+                            <a href="https://www.facebook.com/logisticsgurukulkochi/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-slate-400 transition-colors">
                                 <Facebook className="w-4 h-4" />
                             </a>
                             <a href="https://www.instagram.com/logisticsgurukul" target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:text-slate-400 transition-colors">
@@ -104,7 +104,7 @@ export default function Navbar() {
                             <a href="https://www.linkedin.com/company/logisticsgurukul/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-slate-400 transition-colors">
                                 <Linkedin className="w-4 h-4" />
                             </a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-slate-400 transition-colors">
+                            <a href="https://www.youtube.com/@LogisticsGurukul2025" target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-slate-400 transition-colors">
                                 <Youtube className="w-4 h-4" />
                             </a>
                         </div>
@@ -269,7 +269,7 @@ export default function Navbar() {
 
                     {/* Mobile Social Links */}
                     <div className="flex items-center gap-4 mt-4 pt-4 border-t border-gray-100">
-                        <a href="https://www.facebook.com/profile.php?id=61584701315259" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-500">
+                        <a href="https://www.facebook.com/logisticsgurukulkochi/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-500">
                             <Facebook className="w-5 h-5" />
                         </a>
                         <a href="https://www.instagram.com/logisticsgurukul" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-pink-500">
@@ -278,7 +278,7 @@ export default function Navbar() {
                         <a href="https://www.linkedin.com/company/logisticsgurukul/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400">
                             <Linkedin className="w-5 h-5" />
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-red-500">
+                        <a href="https://www.youtube.com/@LogisticsGurukul2025" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-red-500">
                             <Youtube className="w-5 h-5" />
                         </a>
                     </div>

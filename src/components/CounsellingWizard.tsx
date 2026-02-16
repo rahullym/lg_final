@@ -65,12 +65,12 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                    className="relative w-full max-w-xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden"
+                    className="relative w-full max-w-xl bg-white rounded-3xl md:rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
                 >
                     {/* Close Button */}
                     <button
                         onClick={onClose}
-                        className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
+                        className="absolute top-6 right-6 md:top-8 md:right-8 p-2 rounded-full hover:bg-slate-100 transition-colors z-10"
                     >
                         <XMarkIcon className="w-6 h-6 text-slate-400" />
                     </button>
@@ -78,7 +78,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                     {!isSubmitted ? (
                         <>
                             {/* Progress Header */}
-                            <div className="pt-16 px-10">
+                            <div className="pt-12 md:pt-16 px-6 md:px-10">
                                 <div className="flex justify-between items-center mb-6">
                                     <div className="flex gap-2">
                                         {[1, 2, 3].map((s) => (
@@ -92,7 +92,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                         Step {step} of {totalSteps}
                                     </span>
                                 </div>
-                                <h2 className="text-3xl font-bold text-slate-900 font-heading tracking-tight mb-2">
+                                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 font-heading tracking-tight mb-2">
                                     {step === 1 && "Let's get started"}
                                     {step === 2 && "Educational Background"}
                                     {step === 3 && "Final Details"}
@@ -105,7 +105,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                             </div>
 
                             {/* Wizard Content */}
-                            <div className="p-10">
+                            <div className="p-6 md:p-10">
                                 <form onSubmit={handleSubmit}>
                                     <AnimatePresence mode="wait">
                                         {step === 1 && (

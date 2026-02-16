@@ -69,7 +69,7 @@ const tutors = [
 
 export default function FacultyTeam() {
     return (
-        <section id="faculty" className="py-24 bg-slate-50 border-t border-slate-200">
+        <section id="faculty" className="py-16 md:py-24 bg-slate-50 border-t border-slate-200 scroll-mt-32">
             <div className="container mx-auto px-6">
 
                 <div className="text-center mb-20">
@@ -86,7 +86,7 @@ export default function FacultyTeam() {
                         <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 items-start`}>
 
                             {/* Image Column */}
-                            <div className="w-full lg:w-1/3 flex-shrink-0 sticky top-32">
+                            <div className="w-full lg:w-1/3 flex-shrink-0 lg:sticky lg:top-40">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
@@ -94,13 +94,13 @@ export default function FacultyTeam() {
                                     transition={{ duration: 0.8 }}
                                     className="relative"
                                 >
-                                    <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-white">
+                                    <div className="aspect-[4/5] md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100">
                                         {/* Placeholder for images if file not found, creating a fallback visual */}
-                                        <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
+                                        <div className="w-full h-full bg-slate-50 flex items-center justify-center text-slate-400">
                                             <img
                                                 src={tutor.image}
                                                 alt={tutor.name}
-                                                className="w-full h-full object-cover"
+                                                className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                                                 onError={(e) => {
                                                     e.currentTarget.style.display = 'none';
                                                     if (e.currentTarget.parentElement) {
@@ -124,9 +124,9 @@ export default function FacultyTeam() {
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.8 }}
                                 >
-                                    <h4 className="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2">{tutor.role}</h4>
-                                    <h2 className="text-4xl font-bold text-slate-900 mb-2 font-heading">{tutor.name}</h2>
-                                    <p className="text-lg text-slate-500 mb-8 font-medium">{tutor.subRole}</p>
+                                    <h4 className="text-blue-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-3">{tutor.role}</h4>
+                                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 font-heading leading-tight">{tutor.name}</h2>
+                                    <p className="text-lg text-slate-500 mb-8 font-medium leading-relaxed">{tutor.subRole}</p>
 
                                     <div className="prose prose-lg text-slate-600 mb-10 max-w-none">
                                         {tutor.bio.map((paragraph, pIdx) => (
@@ -134,10 +134,10 @@ export default function FacultyTeam() {
                                         ))}
                                         {tutor.journey && (
                                             <div className="mt-6 p-6 bg-white rounded-xl border border-slate-100 shadow-sm">
-                                                <h5 className="flex items-center gap-2 font-bold text-slate-900 mb-2">
+                                                <h5 className="flex items-center gap-2 font-bold text-slate-900 mb-3">
                                                     <Briefcase className="w-5 h-5 text-blue-500" /> Professional Journey
                                                 </h5>
-                                                <p className="text-base text-slate-600 mb-0">{tutor.journey}</p>
+                                                <div className="text-sm md:text-base text-slate-600 space-y-2">{tutor.journey}</div>
                                             </div>
                                         )}
                                     </div>
