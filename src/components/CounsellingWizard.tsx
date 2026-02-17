@@ -10,6 +10,8 @@ interface WizardProps {
 export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
     const [step, setStep] = useState(1);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -33,13 +35,29 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
     const handleNext = () => setStep(s => Math.min(s + 1, totalSteps));
     const handleBack = () => setStep(s => Math.max(s - 1, 1));
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitted(true);
-        // Simulate API call
-        setTimeout(() => {
-            // onClose();
-        }, 3000);
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch('/api/counseling', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setIsSubmitted(true);
+            } else {
+                throw new Error('Failed to send request');
+            }
+        } catch (err) {
+            setError('Something went wrong. Please try again or call us directly.');
+            console.error(err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const updateData = (field: string, value: string) => {
@@ -241,35 +259,43 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
                                     </AnimatePresence>
 
                                     {/* Navigation Buttons */}
-                                    <div className="mt-8 flex gap-3">
-                                        {step > 1 && (
-                                            <button
-                                                id="wizard-back-button"
-                                                type="button"
-                                                onClick={handleBack}
-                                                className="flex-1 py-4 px-6 border border-slate-100 text-slate-500 font-bold rounded-2xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
-                                            >
-                                                <ChevronLeftIcon className="w-4 h-4" /> Back
-                                            </button>
-                                        )}
-                                        {step < totalSteps ? (
-                                            <button
-                                                id="wizard-next-button"
-                                                type="button"
-                                                disabled={step === 1 ? (!formData.name || !formData.phone) : step === 2 ? !formData.qualification : false}
-                                                onClick={handleNext}
-                                                className="flex-[2] py-4 px-6 bg-brand-blue text-white font-bold rounded-2xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
-                                            >
-                                                Continue <ChevronRightIcon className="w-4 h-4 font-black" />
-                                            </button>
-                                        ) : (
-                                            <button
-                                                id="wizard-submit-button"
-                                                type="submit"
-                                                className="flex-[2] py-4 px-6 bg-brand-blue text-white font-bold rounded-2xl hover:opacity-90 transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
-                                            >
-                                                Book Free Session
-                                            </button>
+                                    <div className="mt-8 flex flex-col gap-4">
+                                        <div className="flex gap-3">
+                                            {step > 1 && (
+                                                <button
+                                                    id="wizard-back-button"
+                                                    type="button"
+                                                    onClick={handleBack}
+                                                    className="flex-1 py-4 px-6 border border-slate-100 text-slate-500 font-bold rounded-2xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+                                                >
+                                                    <ChevronLeftIcon className="w-4 h-4" /> Back
+                                                </button>
+                                            )}
+                                            {step < totalSteps ? (
+                                                <button
+                                                    id="wizard-next-button"
+                                                    type="button"
+                                                    disabled={step === 1 ? (!formData.name || !formData.phone) : step === 2 ? !formData.qualification : false}
+                                                    onClick={handleNext}
+                                                    className="flex-[2] py-4 px-6 bg-brand-blue text-white font-bold rounded-2xl hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2"
+                                                >
+                                                    Continue <ChevronRightIcon className="w-4 h-4 font-black" />
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    id="wizard-submit-button"
+                                                    type="submit"
+                                                    disabled={isLoading}
+                                                    className="flex-[2] py-4 px-6 bg-brand-blue text-white font-bold rounded-2xl hover:opacity-90 transition-all shadow-xl shadow-brand-blue/20 flex items-center justify-center gap-2 disabled:opacity-50"
+                                                >
+                                                    {isLoading ? 'Sending...' : 'Book Free Session'}
+                                                </button>
+                                            )}
+                                        </div>
+                                        {error && (
+                                            <p className="text-center text-red-500 text-xs font-bold italic">
+                                                {error}
+                                            </p>
                                         )}
                                     </div>
                                 </form>

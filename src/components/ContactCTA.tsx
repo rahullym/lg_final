@@ -5,10 +5,38 @@ import { ArrowRightIcon, PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/
 export default function ContactCTA() {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        phone: '',
+        interest: 'Diploma in Logistics'
+    });
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitted(true);
-        // In a real app, you'd send data to an API here
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...formData, source: 'Contact Form' }),
+            });
+
+            if (response.ok) {
+                setIsSubmitted(true);
+            } else {
+                throw new Error('Failed to send request');
+            }
+        } catch (err) {
+            setError('Something went wrong. Please try again or call us directly.');
+            console.error(err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -109,6 +137,8 @@ export default function ContactCTA() {
                                                     required
                                                     type="text"
                                                     placeholder="John"
+                                                    value={formData.firstName}
+                                                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                                                     className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
                                                 />
                                             </div>
@@ -118,6 +148,8 @@ export default function ContactCTA() {
                                                     required
                                                     type="text"
                                                     placeholder="Doe"
+                                                    value={formData.lastName}
+                                                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                                                     className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
                                                 />
                                             </div>
@@ -129,6 +161,8 @@ export default function ContactCTA() {
                                                 required
                                                 type="tel"
                                                 placeholder="+91 00000 00000"
+                                                value={formData.phone}
+                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                                 className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
                                             />
                                         </div>
@@ -136,7 +170,12 @@ export default function ContactCTA() {
                                         <div className="flex flex-col gap-2">
                                             <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Interest</label>
                                             <div className="relative">
-                                                <select required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none font-medium">
+                                                <select
+                                                    required
+                                                    value={formData.interest}
+                                                    onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
+                                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none font-medium"
+                                                >
                                                     <option>Diploma in Logistics</option>
                                                     <option>Supply Chain Management</option>
                                                     <option>Warehouse Operations</option>
@@ -151,11 +190,18 @@ export default function ContactCTA() {
                                         <button
                                             id="contact-cta-submit"
                                             type="submit"
-                                            className="mt-4 bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95"
+                                            disabled={isLoading}
+                                            className="mt-4 bg-brand-blue text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-blue/30 group active:scale-95 disabled:opacity-50"
                                         >
-                                            <span>Submit Request</span>
-                                            <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                            <span>{isLoading ? 'Sending...' : 'Submit Request'}</span>
+                                            {!isLoading && <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
                                         </button>
+
+                                        {error && (
+                                            <p className="text-center text-red-500 text-xs mt-2 font-bold italic">
+                                                {error}
+                                            </p>
+                                        )}
 
                                         <p className="text-center text-slate-400 text-xs mt-2">
                                             By submitting, you agree to our Terms & Privacy Policy.
