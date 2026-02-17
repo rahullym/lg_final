@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://logisticsgurukul.com
+Host: https://www.logisticsgurukul.com
 
 # Sitemaps
-Sitemap: https://logisticsgurukul.com/sitemap-index.xml
+Sitemap: https://www.logisticsgurukul.com/sitemap-index.xml
