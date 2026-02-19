@@ -15,6 +15,7 @@ import {
     IdentificationIcon
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import CareerOpportunities from './CareerOpportunities';
 
 const features = [
     { name: "Globally Recognized Certification (STED Council) *", icon: GlobeAltIcon },
@@ -282,6 +283,8 @@ export default function DiplomaLogistics() {
                 </div>
 
             </section>
+
+            <CareerOpportunities />
 
             {/* Bottom CTA */}
             <div className="pt-16 pb-8 bg-white border-t border-slate-100">

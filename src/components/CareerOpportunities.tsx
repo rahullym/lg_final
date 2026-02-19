@@ -1,247 +1,246 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Briefcase, TrendingUp, Globe, Star, ArrowUpRight, ChevronRight, MapPin } from 'lucide-react';
 
-const originalCareers = [
+const careerLevels = [
     {
-        role: "Supply Chain Manager",
-        desc: "Oversee global trade and logistics strategy.",
-        image: "/career_supply_chain.png",
-        salary: "High Growth"
+        id: "junior",
+        label: "Junior Roles",
+        sub: "Entry Level",
+        color: "from-blue-500 to-cyan-400",
+        image: "/career_bg_junior.png",
+        roles: [
+            {
+                role: "Business Development Executive",
+                image: "/career_business_meeting.png",
+                description: "Drive growth through strategic client partnerships."
+            },
+            {
+                role: "Operation Executive",
+                image: "/career_logistics_ops.png",
+                description: "Coordinate smooth daily logistics workflows."
+            },
+            {
+                role: "Customer Service Executive",
+                image: "/career_customer_service.png",
+                description: "Resolve client queries with efficiency."
+            }
+        ]
     },
     {
-        role: "Air Cargo Operations",
-        desc: "Coordinate urgent shipments at major airports.",
-        image: "/career_air_cargo.png",
-        salary: "Global Travel"
-    },
-    {
-        role: "Port Logistics Lead",
-        desc: "Manage massive sea freight operations.",
-        image: "/career_shipping_port.png",
-        salary: "Stable Career"
-    },
-    {
-        role: "Smart Warehousing",
-        desc: "Lead automated storage and distribution hubs.",
+        id: "mid",
+        label: "Mid-Senior",
+        sub: "Managerial",
+        color: "from-emerald-500 to-teal-400",
         image: "/career_smart_warehouse.png",
-        salary: "Tech Driven"
+        roles: [
+            {
+                role: "Warehouse Manager",
+                image: "/career_smart_warehouse.png",
+                description: "Optimize inventory and storage operations."
+            },
+            {
+                role: "Business Development Manager",
+                image: "/career_business_meeting.png",
+                description: "Lead regional sales and market expansion."
+            }
+        ]
     },
     {
-        role: "Export Specialist",
-        desc: "Navigate international trade laws and deals.",
-        image: "/career_export_specialist.png",
-        salary: "Corporate"
+        id: "senior",
+        label: "Senior Level",
+        sub: "Strategic",
+        color: "from-purple-500 to-pink-400",
+        image: "/career_air_cargo.png",
+        roles: [
+            {
+                role: "Commercial Head",
+                image: "/career_shipping_port.png",
+                description: "Drive revenue strategies and market share."
+            },
+            {
+                role: "Regional Head (Operations)",
+                image: "/career_air_cargo.png",
+                description: "Oversee multi-site operational excellence."
+            }
+        ]
+    },
+    {
+        id: "leadership",
+        label: "Leadership",
+        sub: "Executive",
+        color: "from-amber-500 to-orange-400",
+        image: "/career_shipping_port.png",
+        roles: [
+            {
+                role: "Entrepreneur",
+                image: "/career_logistics_ops.png",
+                description: "Launch and scale your logistics venture."
+            },
+            {
+                role: "CEO",
+                image: "/career_business_meeting.png",
+                description: "Visionary leadership for global impact."
+            },
+            {
+                role: "COO",
+                image: "/career_smart_warehouse.png",
+                description: "Execute streamlined operational strategies."
+            },
+            {
+                role: "Director",
+                image: "/career_shipping_port.png",
+                description: "Strategic governance and high-level decision making."
+            }
+        ]
     }
 ];
 
-// Tripled array for infinite loop illusion
-const careers = [...originalCareers, ...originalCareers, ...originalCareers];
-
 export default function CareerOpportunities() {
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [activeIndex, setActiveIndex] = useState(originalCareers.length); // Start at middle set logic
-    const [isPaused, setIsPaused] = useState(false);
-    const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
+    const [activeId, setActiveId] = useState("junior");
 
-    // Initial Scroll to Center Set with Retry
     useEffect(() => {
-        const jumpToMiddle = () => {
-            if (scrollRef.current) {
-                const container = scrollRef.current;
-                if (container.children.length > 0) {
-                    const firstCard = container.children[0] as HTMLElement;
-                    const cardWidth = firstCard.clientWidth + 24;
-                    // Jump to start of middle set
-                    container.scrollLeft = cardWidth * originalCareers.length;
-                    setActiveIndex(originalCareers.length);
-                }
-            }
-        };
-
-        // Try immediately, then after a short delay to ensure layout is ready
-        jumpToMiddle();
-        const timer = setTimeout(jumpToMiddle, 100);
-        return () => clearTimeout(timer);
-    }, []);
-
-    // Auto-Scroll Logic
-    useEffect(() => {
-        if (isPaused) return;
-
         const interval = setInterval(() => {
-            if (scrollRef.current) {
-                const container = scrollRef.current;
-                if (container.children.length === 0) return;
-
-                const firstCard = container.children[0] as HTMLElement;
-                const cardWidth = firstCard.clientWidth + 24;
-
-                // Smooth scroll to next
-                container.scrollTo({
-                    left: container.scrollLeft + cardWidth,
-                    behavior: 'smooth'
-                });
-            }
-        }, 3000);
+            const currentIndex = careerLevels.findIndex(l => l.id === activeId);
+            const nextIndex = (currentIndex + 1) % careerLevels.length;
+            setActiveId(careerLevels[nextIndex].id);
+        }, 4000);
 
         return () => clearInterval(interval);
-    }, [isPaused]);
-
-    // Handle Scroll for Infinite Loop Reset
-    const handleScroll = () => {
-        if (!scrollRef.current) return;
-        const container = scrollRef.current;
-        if (container.children.length === 0) return;
-
-        const firstCard = container.children[0] as HTMLElement;
-        const cardWidth = firstCard.clientWidth + 24;
-
-        // Correct Logic: Due to padding centering, scrollLeft directly maps to index
-        // scrollLeft = 0 means Index 0 is centered.
-        const rawIndex = Math.round(container.scrollLeft / cardWidth);
-        setActiveIndex(rawIndex);
-
-        // Infinite Loop Reset Logic
-        if (!isProgrammaticScroll) {
-            const singleSetWidth = originalCareers.length * cardWidth;
-
-            // If we've scrolled past the second set into the third set...
-            if (container.scrollLeft >= singleSetWidth * 2) {
-                setIsProgrammaticScroll(true);
-                container.scrollLeft = container.scrollLeft - singleSetWidth;
-                setTimeout(() => setIsProgrammaticScroll(false), 50);
-            }
-            // If we've scrolled back into the first set...
-            else if (container.scrollLeft < singleSetWidth - 50) {
-                setIsProgrammaticScroll(true);
-                container.scrollLeft = container.scrollLeft + singleSetWidth;
-                setTimeout(() => setIsProgrammaticScroll(false), 50);
-            }
-        }
-    };
+    }, [activeId]);
 
     return (
-        <section className="py-24 bg-slate-950 relative overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600/10 rounded-full blur-[100px]" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px]" />
-            </div>
+        <section className="py-24 bg-slate-950 relative overflow-hidden min-h-screen flex flex-col justify-center">
+            {/* Ambient Background */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
 
-            <div className="container mx-auto px-6 relative z-10 w-full overflow-hidden">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-                    <div>
-                        <span className="inline-block py-1 px-3 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-bold tracking-widest mb-4">
-                            CAREER PATHWAYS
-                        </span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white font-heading">
-                            Where our Courses <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Take You</span>
-                        </h2>
-                    </div>
+            <div className="container mx-auto px-6 relative z-10 h-full flex flex-col">
 
-                    <p className="text-slate-400 max-w-sm text-sm md:text-base leading-relaxed mb-2 text-left">
-                        Unlock high-paying roles in the world's most dynamic industries.
-                    </p>
+                {/* Header */}
+                <div className="text-center max-w-3xl mx-auto mb-12 shrink-0">
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="inline-block py-1 px-3 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-bold tracking-widest uppercase mb-4"
+                    >
+                        Success Roadmap
+                    </motion.span>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="text-4xl md:text-6xl font-black text-white font-heading leading-tight mb-4"
+                    >
+                        Where our Courses <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Take You</span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto"
+                    >
+                        From entry-level roles to executive leadership, explore your future in logistics.
+                    </motion.p>
                 </div>
 
-                {/* Carousel Wrapper with Navigation */}
-                <div className="relative group/carousel">
-                    {/* Navigation Buttons */}
-                    <button
-                        onClick={() => {
-                            if (scrollRef.current) {
-                                const container = scrollRef.current;
-                                if (container.children.length > 0) {
-                                    const cardWidth = (container.children[0] as HTMLElement).clientWidth + 24;
-                                    container.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-                                }
-                            }
-                        }}
-                        className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-4 rounded-full bg-slate-900/40 border border-slate-700/50 text-white backdrop-blur-md hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg flex items-center justify-center hover:scale-110"
-                        aria-label="Scroll Left"
-                    >
-                        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-                    </button>
+                {/* Expandable Deck - The Focus */}
+                <div className="flex flex-col lg:flex-row gap-4 h-[500px] w-full max-w-7xl mx-auto">
+                    {careerLevels.map((level) => {
+                        const isActive = activeId === level.id;
 
-                    <button
-                        onClick={() => {
-                            if (scrollRef.current) {
-                                const container = scrollRef.current;
-                                if (container.children.length > 0) {
-                                    const cardWidth = (container.children[0] as HTMLElement).clientWidth + 24;
-                                    container.scrollBy({ left: cardWidth, behavior: 'smooth' });
-                                }
-                            }
-                        }}
-                        className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-4 rounded-full bg-slate-900/40 border border-slate-700/50 text-white backdrop-blur-md hover:bg-blue-600 hover:border-blue-500 transition-all shadow-lg flex items-center justify-center hover:scale-110"
-                        aria-label="Scroll Right"
-                    >
-                        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-                    </button>
-
-                    {/* Carousel Container */}
-                    <div
-                        ref={scrollRef}
-                        onScroll={handleScroll}
-                        className="flex overflow-x-auto gap-4 md:gap-6 pb-12 scrollbar-hide snap-x snap-mandatory px-[calc(50%-42.5vw)] md:px-[calc(50%-175px)] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]"
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                    >
-                        {careers.map((career, idx) => {
-                            const isCardActive = idx === activeIndex;
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    animate={{
-                                        scale: isCardActive ? 1 : 0.9,
-                                        opacity: isCardActive ? 1 : 0.4,
-                                        borderColor: isCardActive ? 'rgba(59, 130, 246, 0.5)' : 'rgba(30, 41, 59, 1)'
-                                    }}
-                                    transition={{ duration: 0.4 }}
-                                    className={`flex-none w-[85vw] md:w-[350px] h-[400px] md:h-[500px] snap-center relative rounded-3xl overflow-hidden group border border-slate-800 transition-all duration-500 cursor-pointer ${isCardActive ? 'shadow-2xl shadow-blue-900/20 z-10' : 'z-0 grayscale-[50%]'}`}
-                                    onClick={() => {
-                                        if (scrollRef.current) {
-                                            const container = scrollRef.current;
-                                            const firstCard = container.children[0] as HTMLElement;
-                                            const cardWidth = firstCard.clientWidth + 24;
-                                            // Scroll so this item is 0-aligned (which is visually centered)
-                                            container.scrollTo({
-                                                left: idx * cardWidth,
-                                                behavior: 'smooth'
-                                            });
-                                        }
-                                    }}
-                                >
-                                    {/* Image Background */}
-                                    <img
-                                        src={career.image}
-                                        alt={career.role}
-                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        return (
+                            <motion.div
+                                key={level.id}
+                                onClick={() => setActiveId(level.id)}
+                                onHoverStart={() => setActiveId(level.id)}
+                                className={`relative rounded-3xl overflow-hidden cursor-pointer border border-slate-800 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group ${isActive ? 'lg:flex-[3] flex-[3] shadow-2xl shadow-blue-900/20' : 'lg:flex-[1] flex-[1]'}`}
+                            >
+                                {/* Progress Loader */}
+                                {isActive && (
+                                    <motion.div
+                                        className="absolute top-0 left-0 h-1 bg-gradient-to-r from-blue-400 to-cyan-300 z-50 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                                        initial={{ width: "0%" }}
+                                        animate={{ width: "100%" }}
+                                        transition={{ duration: 4, ease: "linear" }}
                                     />
+                                )}
 
-                                    {/* Gradient Overlay */}
-                                    <div className={`absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent transition-opacity duration-300 ${isCardActive ? 'opacity-90' : 'opacity-80'}`} />
+                                {/* Background Image with Overlay */}
+                                <div className="absolute inset-0 z-0">
+                                    <img
+                                        src={level.image}
+                                        alt={level.label}
+                                        className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'scale-110' : 'scale-100'}`}
+                                    />
+                                    <div className={`absolute inset-0 bg-slate-950/80 transition-opacity duration-300 ${isActive ? 'opacity-80' : 'opacity-60'}`} />
+                                    <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950 ${isActive ? 'opacity-100' : 'opacity-80'}`} />
+                                </div>
 
-                                    {/* Content */}
-                                    <div className={`absolute bottom-0 left-0 w-full p-8 transition-transform duration-500 ${isCardActive ? 'translate-y-0' : 'translate-y-4'}`}>
-                                        <span className={`inline-block px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-[10px] font-bold uppercase tracking-wider mb-4 transition-all ${isCardActive ? 'bg-blue-600/20 border-blue-500/30 text-blue-200' : ''}`}>
-                                            {career.salary}
-                                        </span>
-                                        <h3 className={`text-2xl font-bold text-white mb-2 leading-tight transition-colors ${isCardActive ? 'text-white' : 'text-slate-400'}`}>
-                                            {career.role}
-                                        </h3>
-                                        <p className={`text-slate-300 text-sm leading-relaxed max-w-[90%] transition-opacity duration-300 ${isCardActive ? 'opacity-100' : 'opacity-0'}`}>
-                                            {career.desc}
-                                        </p>
+                                {/* Content Container */}
+                                <div className={`relative z-10 w-full h-full p-6 lg:p-8 flex flex-col justify-end`}>
+
+                                    {/* Level Title (Always Visible but styled diff) */}
+                                    <div className={`flex items-center gap-4 mb-4 transition-all duration-300 ${isActive ? 'translate-y-0' : 'lg:translate-y-0 translate-y-0'}`}>
+
+                                        <div className={`${!isActive && 'lg:opacity-0 lg:w-0 overflow-hidden'} transition-all duration-300`}>
+                                            <h3 className="text-2xl font-bold text-white whitespace-nowrap">{level.label}</h3>
+                                            <p className="text-slate-400 text-sm font-medium uppercase tracking-wider">{level.sub}</p>
+                                        </div>
                                     </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
+
+                                    {/* Expanded Content (Only visible when active) */}
+                                    <div className={`space-y-4 overflow-hidden transition-all duration-500 ${isActive ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0'}`}>
+                                        <div className="h-px w-full bg-slate-700/50 mb-4" />
+
+                                        <div className="grid gap-3">
+                                            {level.roles.map((role, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    initial={{ opacity: 0, x: -10 }}
+                                                    animate={isActive ? { opacity: 1, x: 0 } : {}}
+                                                    transition={{ delay: 0.1 + (idx * 0.05) }}
+                                                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm group/item"
+                                                >
+                                                    {/* Small Circle Image */}
+                                                    <div className="w-10 h-10 rounded-full border border-white/20 overflow-hidden shrink-0 transition-colors">
+                                                        <img
+                                                            src={role.image}
+                                                            alt={role.role}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
+
+                                                    <div className="flex-grow min-w-0">
+                                                        <h4 className="text-white font-bold text-sm truncate transition-colors">
+                                                            {role.role}
+                                                        </h4>
+                                                        <p className="text-slate-400 text-xs">
+                                                            {role.description}
+                                                        </p>
+                                                    </div>
+
+
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Vertical Text for Inactive State (Desktop) */}
+                                    {!isActive && (
+                                        <div className="hidden lg:flex absolute inset-0 items-center justify-center">
+                                            <h3 className="text-2xl font-bold text-slate-500 -rotate-90 whitespace-nowrap tracking-widest uppercase">
+                                                {level.label}
+                                            </h3>
+                                        </div>
+                                    )}
+
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
-
-
 
             </div>
         </section>
