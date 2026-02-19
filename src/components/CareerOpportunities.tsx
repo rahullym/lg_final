@@ -155,7 +155,7 @@ export default function CareerOpportunities() {
                                 key={level.id}
                                 onClick={() => setActiveId(level.id)}
                                 onHoverStart={() => setActiveId(level.id)}
-                                className={`relative rounded-3xl overflow-hidden cursor-pointer border border-slate-800 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group ${isActive ? 'lg:flex-[3] h-auto shadow-2xl shadow-blue-900/20' : 'lg:flex-[1] h-20'}`}
+                                className={`relative rounded-3xl overflow-hidden cursor-pointer border border-slate-800 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group ${isActive ? 'lg:flex-[3] h-auto lg:h-full shadow-2xl shadow-blue-900/20' : 'lg:flex-[1] h-20 lg:h-full'}`}
                             >
                                 {/* Progress Loader */}
                                 {isActive && (
