@@ -146,7 +146,7 @@ export default function CareerOpportunities() {
                 </div>
 
                 {/* Expandable Deck - The Focus */}
-                <div className="flex flex-col lg:flex-row gap-4 h-[500px] w-full max-w-7xl mx-auto">
+                <div className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[500px] w-full max-w-7xl mx-auto">
                     {careerLevels.map((level) => {
                         const isActive = activeId === level.id;
 
@@ -155,7 +155,7 @@ export default function CareerOpportunities() {
                                 key={level.id}
                                 onClick={() => setActiveId(level.id)}
                                 onHoverStart={() => setActiveId(level.id)}
-                                className={`relative rounded-3xl overflow-hidden cursor-pointer border border-slate-800 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group ${isActive ? 'lg:flex-[3] flex-[3] shadow-2xl shadow-blue-900/20' : 'lg:flex-[1] flex-[1]'}`}
+                                className={`relative rounded-3xl overflow-hidden cursor-pointer border border-slate-800 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group ${isActive ? 'lg:flex-[3] h-auto shadow-2xl shadow-blue-900/20' : 'lg:flex-[1] h-20'}`}
                             >
                                 {/* Progress Loader */}
                                 {isActive && (
@@ -179,7 +179,7 @@ export default function CareerOpportunities() {
                                 </div>
 
                                 {/* Content Container */}
-                                <div className={`relative z-10 w-full h-full p-6 lg:p-8 flex flex-col justify-end`}>
+                                <div className={`relative z-10 w-full h-full p-4 lg:p-8 flex flex-col ${isActive ? 'justify-end' : 'justify-center'}`}>
 
                                     {/* Level Title (Always Visible but styled diff) */}
                                     <div className={`flex items-center gap-4 mb-4 transition-all duration-300 ${isActive ? 'translate-y-0' : 'lg:translate-y-0 translate-y-0'}`}>
