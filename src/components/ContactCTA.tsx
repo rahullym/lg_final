@@ -6,8 +6,7 @@ export default function ContactCTA() {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         phone: '',
         interest: 'Diploma in Logistics'
     });
@@ -74,13 +73,13 @@ export default function ContactCTA() {
                                 </a>
                             </div>
                             <div className="flex items-center gap-4">
-                                <a id="contact-info-email" href="mailto:info@logisticsgurukul.com" className="flex items-center gap-4 group">
+                                <a id="contact-info-email" href="mailto:enquiry@logisticsgurukul.com" className="flex items-center gap-4 group">
                                     <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-brand-blue shadow-sm group-hover:border-blue-500 transition-colors">
                                         <EnvelopeIcon className="w-5 h-5" />
                                     </div>
                                     <div>
                                         <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">Email Us</p>
-                                        <p className="text-lg font-bold text-slate-900">info@logisticsgurukul.com</p>
+                                        <p className="text-lg font-bold text-slate-900">enquiry@logisticsgurukul.com</p>
                                     </div>
                                 </a>
                             </div>
@@ -130,29 +129,16 @@ export default function ContactCTA() {
                                     </div>
 
                                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                            <div className="flex flex-col gap-2">
-                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">First Name</label>
-                                                <input
-                                                    required
-                                                    type="text"
-                                                    placeholder="John"
-                                                    value={formData.firstName}
-                                                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                                    className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
-                                                />
-                                            </div>
-                                            <div className="flex flex-col gap-2">
-                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Last Name</label>
-                                                <input
-                                                    required
-                                                    type="text"
-                                                    placeholder="Doe"
-                                                    value={formData.lastName}
-                                                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                                                    className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
-                                                />
-                                            </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name</label>
+                                            <input
+                                                required
+                                                type="text"
+                                                placeholder="John Doe"
+                                                value={formData.fullName}
+                                                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                                                className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all font-medium"
+                                            />
                                         </div>
 
                                         <div className="flex flex-col gap-2">

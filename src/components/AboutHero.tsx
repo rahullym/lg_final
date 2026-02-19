@@ -43,7 +43,7 @@ export default function AboutHero() {
                         </div>
 
                         <p className="text-slate-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-12 mx-auto text-center">
-                            Logistics Gurukul is where academic learning meets the real world of International Logistics & Supply Chain Management. Founded and guided by seasoned industry professionals in Kochi, we focus on preparing the next generation of Freight Management leaders through practical, experience-driven education that goes beyond textbooks.
+                            Logistics Gurukul is where academic learning meets the real world of International Logistics & Supply Chain Management in association with Alive Academy. Founded and guided by seasoned industry professionals in Kochi, we focus on preparing the next generation of Freight Management leaders through practical, experience-driven education that goes beyond textbooks.
                         </p>
 
                         <div className="flex flex-wrap gap-8 items-center justify-center text-slate-300">

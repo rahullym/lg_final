@@ -113,7 +113,7 @@ export default function CertificationContent() {
                                     <a id="cert-view-accreditations-link" href="https://www.stedcouncil.com/STED/accredition.php#acradtn" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">View Accreditations</a>
                                 </div>
                                 <div className="pt-4 border-t border-slate-200">
-                                    <p className="text-slate-500 text-[10px] font-semibold italic">
+                                    <p className="text-slate-500 text-sm font-semibold italic">
                                         * in association with Alive Academy (official certificate partner)
                                     </p>
                                 </div>

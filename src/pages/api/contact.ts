@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 export const POST: import('astro').APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
-        const { firstName, lastName, phone, interest, source } = data;
+        const { fullName, phone, interest, source } = data;
 
         // Create a transporter using SMTP or other transport mechanism
         // For production, use environment variables for credentials
@@ -19,11 +19,11 @@ export const POST: import('astro').APIRoute = async ({ request }) => {
 
         const mailOptions = {
             from: `"Logistics Gurukul Website" <${import.meta.env.SMTP_USER}>`,
-            to: import.meta.env.CONTACT_EMAIL || 'info@logisticsgurukul.com',
-            subject: `New Lead from Website: ${firstName} ${lastName}`,
+            to: import.meta.env.CONTACT_EMAIL || 'enquiry@logisticsgurukul.com',
+            subject: `New Lead from Website: ${fullName}`,
             text: `
         New Lead Details:
-        Name: ${firstName} ${lastName}
+        Name: ${fullName}
         Phone: ${phone}
         Interest: ${interest}
         Source: ${source || 'Contact Form'}
@@ -31,7 +31,7 @@ export const POST: import('astro').APIRoute = async ({ request }) => {
             html: `
         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
           <h2 style="color: #2563eb;">New Lead Notification</h2>
-          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+          <p><strong>Name:</strong> ${fullName}</p>
           <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Interest:</strong> ${interest}</p>
           <p><strong>Source:</strong> ${source || 'Contact Form'}</p>

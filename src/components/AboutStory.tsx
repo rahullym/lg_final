@@ -64,8 +64,8 @@ export default function AboutStory() {
                     >
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl z-10">
                             <img
-                                src="/skill_logistics_lab.png"
-                                alt="Practical Logistics Training"
+                                src="/our success.png"
+                                alt="Indian Logistics Professional at Port Office"
                                 className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />

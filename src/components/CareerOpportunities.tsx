@@ -136,13 +136,13 @@ export default function CareerOpportunities() {
                             CAREER PATHWAYS
                         </span>
                         <h2 className="text-3xl md:text-5xl font-bold text-white font-heading">
-                            Where This Diploma <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Takes You</span>
+                            Where our Courses <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Take You</span>
                         </h2>
                     </div>
 
                     <p className="text-slate-400 max-w-sm text-sm md:text-base leading-relaxed mb-2 text-left">
-                        Unlock high-paying roles in the world's most dynamic industries. Drag to explore your potential future.
+                        Unlock high-paying roles in the world's most dynamic industries.
                     </p>
                 </div>
 

@@ -20,7 +20,7 @@ export default function CenterHeadMessage() {
                             <div className="aspect-square md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100 max-h-[400px] md:max-h-none mx-auto">
                                 <img
                                     src="/faculty-images/vineetha-maam.png"
-                                    alt="Vineetha Kandangot"
+                                    alt="Vineetha Kadangot"
                                     className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                                 />
                             </div>
@@ -39,12 +39,12 @@ export default function CenterHeadMessage() {
                             transition={{ duration: 0.8 }}
                         >
                             <h4 className="text-blue-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-3">Center Head</h4>
-                            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 font-heading leading-tight">Vineetha Kandangot</h2>
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 font-heading leading-tight">Vineetha Kadangot</h2>
                             <p className="text-lg md:text-xl text-slate-500 mb-8 font-medium leading-relaxed">Leading Academic Excellence & Institutional Growth</p>
 
                             <div className="prose prose-lg text-slate-600 mb-10 max-w-none">
                                 <p className="mb-6">
-                                    Vineetha Kandangot is an accomplished academic leader, trainer, and mentor with over a decade of experience in education, training, and curriculum development. As the Center Head of Logistics Gurukul, she plays a pivotal role in driving academic excellence and student success.
+                                    Vineetha Kadangot is an accomplished academic leader, trainer, and mentor with over a decade of experience in education, training, and curriculum development. As the Center Head of Logistics Gurukul, she plays a pivotal role in driving academic excellence and student success.
                                 </p>
                                 <p className="mb-6">
                                     Beginning her journey as a Communicative English Trainer, Vineetha has evolved into a strategic leader who designs innovative curricula and manages high-impact training programs. Her unique blend of academic depth and industry-aligned expertise ensures that every student receives an inclusive and outcome-driven learning experience.

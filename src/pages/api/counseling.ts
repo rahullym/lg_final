@@ -17,7 +17,7 @@ export const POST: import('astro').APIRoute = async ({ request }) => {
 
         const mailOptions = {
             from: `"Logistics Gurukul Wizard" <${import.meta.env.SMTP_USER}>`,
-            to: import.meta.env.CONTACT_EMAIL || 'info@logisticsgurukul.com',
+            to: import.meta.env.CONTACT_EMAIL || 'enquiry@logisticsgurukul.com',
             subject: `New Counseling Request: ${name}`,
             text: `
         New Counseling Request Details:

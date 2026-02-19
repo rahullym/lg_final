@@ -82,9 +82,9 @@ export default function Navbar() {
                                 <Phone className="w-3.5 h-3.5" />
                                 <span>+91 79944 46019</span>
                             </a>
-                            <a id="nav-contact-email" href="mailto:info@logisticsgurukul.com" className="flex items-center gap-2 hover:text-white transition-colors">
+                            <a id="nav-contact-email" href="mailto:enquiry@logisticsgurukul.com" className="flex items-center gap-2 hover:text-white transition-colors">
                                 <Mail className="w-3.5 h-3.5" />
-                                <span className="hidden sm:inline">info@logisticsgurukul.com</span>
+                                <span className="hidden sm:inline">enquiry@logisticsgurukul.com</span>
                             </a>
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-3.5 h-3.5" />
@@ -264,11 +264,11 @@ export default function Navbar() {
                             </div>
                             <span className="font-medium text-sm">+91 79944 46019</span>
                         </a>
-                        <a id="mobile-nav-contact-email" href="mailto:info@logisticsgurukul.com" className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
+                        <a id="mobile-nav-contact-email" href="mailto:enquiry@logisticsgurukul.com" className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-colors">
                             <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
                                 <Mail className="w-4 h-4" />
                             </div>
-                            <span className="font-medium text-sm">info@logisticsgurukul.com</span>
+                            <span className="font-medium text-sm">enquiry@logisticsgurukul.com</span>
                         </a>
                         <div className="flex items-center gap-3 text-slate-600">
                             <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
