@@ -57,7 +57,7 @@ const seminars = [
     <main>
         <!-- Hero Section -->
         <section
-            class="relative min-h-[50vh] flex items-center justify-center bg-[#050505] overflow-hidden pt-20"
+            class="relative min-h-[50vh] flex items-center justify-center bg-[#050505] overflow-hidden pt-32"
         >
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
@@ -98,40 +98,63 @@ const seminars = [
             </div>
         </section>
 
-        <!-- Seminars Grid -->
+        <!-- Seminars Gallery -->
         <section class="py-20 lg:pb-24 bg-slate-50 min-h-[60vh]">
-            <div class="container mx-auto px-6">
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                    {
-                        seminars.map((event) => (
-                            <article
-                                class="group relative bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 event-card"
-                                data-id={event.id}
-                            >
-                                <div class="aspect-[4/3] overflow-hidden">
-                                    <img
-                                        src={event.cover}
-                                        alt={event.title}
-                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                                    />
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+            <div class="container mx-auto px-6 space-y-20">
+                {
+                    seminars.map((event) => (
+                        <div
+                            id={event.id}
+                            class="flex flex-col lg:flex-row gap-10"
+                        >
+                            {/* Left: Title Block */}
+                            <div class="lg:w-64 flex-shrink-0">
+                                <span class="inline-block px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-full mb-4">
+                                    {event.year}
+                                </span>
+                                <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 font-heading leading-tight mb-3">
+                                    {event.title}
+                                </h2>
+                                <div class="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" />
+                                <p class="text-slate-500 text-sm mt-4">
+                                    {event.gallery.length} photos
+                                </p>
+                            </div>
 
-                                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
-                                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/10 rounded-full text-white text-xs font-bold mb-3">
-                                        {event.year}
-                                    </span>
-                                    <h3 class="text-2xl font-bold text-white font-heading leading-tight group-hover:text-blue-200 transition-colors">
-                                        {event.title}
-                                    </h3>
-                                    <div class="h-1 w-12 bg-blue-500 mt-4 rounded-full group-hover:w-full transition-all duration-500" />
-                                </div>
-                            </article>
-                        ))
-                    }
-                </div>
+                            {/* Right: Photo Grid */}
+                            <div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-3">
+                                {event.gallery.map((photo, index) => (
+                                    <div
+                                        class="photo-thumb group relative aspect-square overflow-hidden rounded-xl cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+                                        data-event-id={event.id}
+                                        data-index={index}
+                                    >
+                                        <img
+                                            src={photo}
+                                            alt={`${event.title} – photo ${index + 1}`}
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                                            <svg
+                                                class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                stroke-width="1.5"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </section>
 
@@ -280,10 +303,10 @@ const seminars = [
 
         // --- Functions ---
 
-        function openModal(eventData) {
+        function openModal(eventData, startIndex = 0) {
             currentGallery = eventData.gallery;
             currentTitle = eventData.title;
-            currentIndex = 0;
+            currentIndex = startIndex;
 
             if (!currentGallery || currentGallery.length === 0) return;
 
@@ -351,13 +374,14 @@ const seminars = [
 
         // --- Event Listeners ---
 
-        // 1. Card Clicks
-        const eventCards = document.querySelectorAll(".event-card");
-        eventCards.forEach((card) => {
-            card.addEventListener("click", () => {
-                const id = card.getAttribute("data-id");
+        // 1. Photo thumbnail clicks (open modal at specific index)
+        const thumbs = document.querySelectorAll(".photo-thumb");
+        thumbs.forEach((thumb) => {
+            thumb.addEventListener("click", () => {
+                const id = thumb.getAttribute("data-event-id");
+                const index = parseInt(thumb.getAttribute("data-index"), 10);
                 const eventData = seminars.find((c) => c.id === id);
-                if (eventData) openModal(eventData);
+                if (eventData) openModal(eventData, index);
             });
         });
 
