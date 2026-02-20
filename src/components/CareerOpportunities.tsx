@@ -124,7 +124,7 @@ export default function CareerOpportunities() {
                         whileInView={{ opacity: 1, y: 0 }}
                         className="inline-block py-1 px-3 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-bold tracking-widest uppercase mb-4"
                     >
-                        Success Roadmap
+                        Career Pathways
                     </motion.span>
                     <motion.h2
                         initial={{ opacity: 0, y: 10 }}
