@@ -18,6 +18,9 @@ export default {
         sans: ['Inter', 'sans-serif'],
         heading: ['Outfit', 'sans-serif'],
       },
+      screens: {
+        xs: '480px',
+      },
     },
   },
   plugins: [],

@@ -34,8 +34,9 @@ const Hero = () => {
                     </motion.div>
 
                     <motion.h1
+                        id="hero-heading"
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                        className="text-[28px] xs:text-[32px] md:text-[54px] lg:text-[68px] font-extrabold text-white leading-[1.1] tracking-tight mb-6"
+                        className="font-extrabold text-white leading-[1.1] tracking-tight mb-6"
                     >
                         Kerala’s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white whitespace-nowrap">First-of-Its-Kind</span> <br />
                         Immersive Logistics Diploma
@@ -64,6 +65,45 @@ const Hero = () => {
                         <a id="hero-cta-learn-more" href="/diploma-international-logistics" className="h-auto py-4 w-full lg:w-auto px-8 rounded-full border border-slate-700 text-white font-medium text-base hover:bg-white/10 transition-colors flex items-center justify-center">
                             Learn More
                         </a>
+                    </motion.div>
+
+                    {/* Mobile-only: Program Stage Cards (2x2 grid) */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+                        className="grid grid-cols-1 gap-3 w-full mt-8 lg:hidden"
+                    >
+                        {/* Classroom Training */}
+                        <div className="px-4 py-3 bg-slate-900/50 backdrop-blur-xl rounded-xl border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                            <div className="flex items-center gap-2 mb-1">
+                                <BookOpenIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                                <div className="text-white font-bold text-sm">4 Months</div>
+                            </div>
+                            <div className="text-blue-100/90 text-xs font-medium">Classroom Training</div>
+                        </div>
+                        {/* Internship */}
+                        <div className="px-4 py-3 bg-slate-900/50 backdrop-blur-xl rounded-xl border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                            <div className="flex items-center gap-2 mb-1">
+                                <BuildingOfficeIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                                <div className="text-white font-bold text-sm">1 Month</div>
+                            </div>
+                            <div className="text-cyan-100/90 text-xs font-medium">Internship</div>
+                        </div>
+                        {/* Product Training */}
+                        <div className="px-4 py-3 bg-slate-900/50 backdrop-blur-xl rounded-xl border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                            <div className="flex items-center gap-2 mb-1">
+                                <CubeIcon className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                                <div className="text-white font-bold text-sm">1 Month</div>
+                            </div>
+                            <div className="text-purple-100/90 text-xs font-medium">Product Training</div>
+                        </div>
+                        {/* Paid On-Job Training */}
+                        <div className="px-4 py-3 bg-slate-900/50 backdrop-blur-xl rounded-xl border border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                            <div className="flex items-center gap-2 mb-1">
+                                <BriefcaseIcon className="w-4 h-4 text-green-400 flex-shrink-0" />
+                                <div className="text-white font-bold text-sm">6 Months</div>
+                            </div>
+                            <div className="text-green-100/90 text-xs font-medium">Paid On-Job Training</div>
+                        </div>
                     </motion.div>
                 </div>
 
@@ -153,7 +193,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center group cursor-pointer"
+                className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center group cursor-pointer"
                 onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
             >
                 <div className="relative flex flex-col items-center">

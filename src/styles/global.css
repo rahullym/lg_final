@@ -10,11 +10,43 @@
     --color-brand-blue: #004aad;
     --color-brand-red: #e8291b;
     --color-brand-dark: #141413;
+
+    --breakpoint-xs: 480px;
 }
 
 body {
     font-family: var(--font-sans);
     @apply bg-slate-50 text-slate-900;
+}
+
+/* Hero heading mobile font size override */
+#hero-heading {
+    font-size: 2.25rem;
+    /* 36px on mobile */
+}
+
+@media (min-width: 480px) {
+    #hero-heading {
+        font-size: 2.75rem;
+    }
+
+    /* 44px on xs */
+}
+
+@media (min-width: 768px) {
+    #hero-heading {
+        font-size: 3.375rem;
+    }
+
+    /* 54px on md */
+}
+
+@media (min-width: 1024px) {
+    #hero-heading {
+        font-size: 4.25rem;
+    }
+
+    /* 68px on lg */
 }
 
 h1,
