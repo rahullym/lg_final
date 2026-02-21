@@ -1,8 +1,7 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
 export const POST: import('astro').APIRoute = async ({ request }) => {
+    const resend = new Resend(import.meta.env.RESEND_API_KEY);
     try {
         const data = await request.json();
         const { name, phone, email, qualification, currentStatus, interest, preferredTime } = data;
