@@ -19,7 +19,7 @@ export default function ContactCTA() {
         setError(null);
 
         try {
-            const response = await fetch('/api/contact', {
+            const response = await fetch(`https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_ID || 'mjkgpoyw'}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...formData, source: 'Contact Form' }),
