@@ -41,7 +41,7 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
         setError(null);
 
         try {
-            const response = await fetch(`https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_ID || 'mjkgpoyw'}`, {
+            const response = await fetch('/api/counseling', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
