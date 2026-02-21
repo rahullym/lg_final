@@ -19,11 +19,19 @@ export default function ContactCTA() {
         setError(null);
 
         try {
-            const response = await fetch('/api/contact', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, source: 'Contact Form' }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY,
+                    ...formData,
+                    source: 'Contact Form'
+                }),
             });
+            const result = await response.json();
 
             if (response.ok) {
                 setIsSubmitted(true);

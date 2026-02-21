@@ -41,11 +41,18 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
         setError(null);
 
         try {
-            const response = await fetch('/api/counseling', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY,
+                    ...formData
+                }),
             });
+            const result = await response.json();
 
             if (response.ok) {
                 setIsSubmitted(true);
