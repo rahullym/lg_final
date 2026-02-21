@@ -26,7 +26,7 @@ export default function ContactCTA() {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    access_key: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY,
+                    access_key: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '23b0535d-f54e-492e-9967-b0e2ac5fadfe',
                     ...formData,
                     source: 'Contact Form'
                 }),
