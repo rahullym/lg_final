@@ -1,22 +1,14 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: import('astro').APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
         const { name, phone, email, qualification, currentStatus, interest, preferredTime } = data;
 
-        const transporter = nodemailer.createTransport({
-            host: import.meta.env.SMTP_HOST || 'smtp.gmail.com',
-            port: parseInt(import.meta.env.SMTP_PORT || '465'),
-            secure: true,
-            auth: {
-                user: import.meta.env.SMTP_USER,
-                pass: import.meta.env.SMTP_PASS,
-            },
-        });
-
-        const mailOptions = {
-            from: `"Logistics Gurukul Wizard" <${import.meta.env.SMTP_USER}>`,
+        const { error } = await resend.emails.send({
+            from: import.meta.env.FROM_EMAIL || 'onboarding@resend.dev',
             to: import.meta.env.CONTACT_EMAIL || 'enquiry@logisticsgurukul.com',
             subject: `New Counseling Request: ${name}`,
             text: `
@@ -41,9 +33,11 @@ export const POST: import('astro').APIRoute = async ({ request }) => {
           <p><strong>Preferred Call Time:</strong> ${preferredTime}</p>
         </div>
       `,
-        };
+        });
 
-        await transporter.sendMail(mailOptions);
+        if (error) {
+            throw error;
+        }
 
         return new Response(JSON.stringify({ message: 'Email sent successfully' }), {
             status: 200,

@@ -1,24 +1,14 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: import('astro').APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
         const { fullName, phone, interest, source } = data;
 
-        // Create a transporter using SMTP or other transport mechanism
-        // For production, use environment variables for credentials
-        const transporter = nodemailer.createTransport({
-            host: import.meta.env.SMTP_HOST || 'smtp.gmail.com',
-            port: parseInt(import.meta.env.SMTP_PORT || '465'),
-            secure: true, // true for 465, false for other ports
-            auth: {
-                user: import.meta.env.SMTP_USER,
-                pass: import.meta.env.SMTP_PASS,
-            },
-        });
-
-        const mailOptions = {
-            from: `"Logistics Gurukul Website" <${import.meta.env.SMTP_USER}>`,
+        const { error } = await resend.emails.send({
+            from: import.meta.env.FROM_EMAIL || 'onboarding@resend.dev',
             to: import.meta.env.CONTACT_EMAIL || 'enquiry@logisticsgurukul.com',
             subject: `New Lead from Website: ${fullName}`,
             text: `
@@ -37,9 +27,11 @@ export const POST: import('astro').APIRoute = async ({ request }) => {
           <p><strong>Source:</strong> ${source || 'Contact Form'}</p>
         </div>
       `,
-        };
+        });
 
-        await transporter.sendMail(mailOptions);
+        if (error) {
+            throw error;
+        }
 
         return new Response(JSON.stringify({ message: 'Email sent successfully' }), {
             status: 200,
