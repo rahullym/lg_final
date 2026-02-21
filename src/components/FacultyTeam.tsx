@@ -7,7 +7,7 @@ const tutors = [
         name: "Sreeji Pillai",
         role: "Lead Mentor & Industry Specialist",
         subRole: "Former CEO of Aiyer Logistics Pvt LTD",
-        image: "/faculty-images/sreeji.png", // Updated image
+        image: "/faculty-images/Sreeji.jpeg", // Updated image
         bio: [
             "Sreeji Pillai is a seasoned logistics industry leader and mentor with over a decade of extensive experience across freight forwarding, shipping, and end-to-end supply chain operations. As the Industry Specialist and Lead Mentor, he brings invaluable real-world expertise and strategic insight to logistics education.",
             "He is widely recognized for his leadership capabilities and deep understanding of logistics business operations, having held senior management and executive roles across reputed logistics organizations in India."
