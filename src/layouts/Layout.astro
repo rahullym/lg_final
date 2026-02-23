@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
 	title: string;
 	description?: string;
+	schema?: any;
 }
 
 const {
 	title,
 	description = "Logistics Gurukul - The #1 Logistics Institute in Kerala.",
+	schema,
 } = Astro.props;
 
 import WhatsAppFloater from "../components/WhatsAppFloater";
@@ -18,7 +20,7 @@ import SEO from "../components/SEO.astro";
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
-		<SEO title={title} description={description} />
+		<SEO title={title} description={description} schema={schema} />
 		<!-- Google Tag Manager -->
 		<script is:inline>
 			(function (w, d, s, l, i) {

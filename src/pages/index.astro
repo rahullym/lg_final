@@ -10,13 +10,24 @@ import CareerRoadmap from "../components/CareerRoadmap";
 import ContactCTA from "../components/ContactCTA";
 import Footer from "../components/Footer";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	url: "https://www.logisticsgurukul.com/",
+	name: "Logistics Gurukul",
+	description:
+		"The #1 Logistics Institute in Kerala offering specialized diplomas in International Logistics with 100% placement assurance.",
+	publisher: {
+		"@type": "EducationalOrganization",
+		name: "Logistics Gurukul",
+	},
+};
 ---
 
 <Layout
 	title="Logistics Course in Kerala | Diploma with Paid Internship"
 	description="Join Logistics Gurukul in Kochi for a 1-Year Diploma in International Logistics. Includes 6 Months Paid On-Job Training & 100% Placement Support."
+	schema={websiteSchema}
 >
 	<Navbar client:load />
 	<main>

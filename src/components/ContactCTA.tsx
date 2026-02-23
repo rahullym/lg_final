@@ -35,6 +35,15 @@ export default function ContactCTA() {
 
             if (response.ok) {
                 setIsSubmitted(true);
+
+                // Track successful submission in Google Tag Manager
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                        event: 'form_submission_success',
+                        form_name: 'contact_form',
+                        course_interest: formData.interest
+                    });
+                }
             } else {
                 throw new Error('Failed to send request');
             }

@@ -6,11 +6,27 @@ import AboutHero from "../components/AboutHero";
 import AboutStory from "../components/AboutStory";
 import AboutVisionMission from "../components/AboutVisionMission";
 import ContactCTA from "../components/ContactCTA";
+
+const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: "Logistics Gurukul",
+    description:
+        "Logistics Gurukul offers practical supply chain training in Ernakulam, delivering job-oriented courses with 6 months paid training.",
+    url: "https://www.logisticsgurukul.com/about",
+    address: {
+        "@type": "PostalAddress",
+        addressLocality: "Kochi",
+        addressRegion: "Kerala",
+        addressCountry: "India",
+    },
+};
 ---
 
 <Layout
     title="About Us | Best Logistics Institute in Kochi, Kerala"
     description="Logistics Gurukul offers practical supply chain training in Ernakulam. Our mission: delivering job-oriented courses with 6 months paid training."
+    schema={aboutSchema}
 >
     <Navbar client:load />
     <main>

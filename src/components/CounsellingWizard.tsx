@@ -56,6 +56,18 @@ export default function CounsellingWizard({ isOpen, onClose }: WizardProps) {
 
             if (response.ok) {
                 setIsSubmitted(true);
+
+                // Track successful submission in Google Tag Manager
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                        event: 'form_submission_success',
+                        form_name: 'counselling_wizard',
+                        course_interest: formData.interest,
+                        qualification: formData.qualification,
+                        current_status: formData.currentStatus,
+                        preferred_time: formData.preferredTime
+                    });
+                }
             } else {
                 throw new Error('Failed to send request');
             }
