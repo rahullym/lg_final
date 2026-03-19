@@ -1,39 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { shortTermItemListSchema, shortTermBreadcrumbSchema } from '../schemas/shortTermCourses.js';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ShortTermCoursesComponent from "../components/ShortTermCourses";
-const coursesListSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Short-Term Logistics Courses",
-    description:
-        "3-month specialized diplomas in Warehouse, Shipping, Air Cargo, and Export-Import Management.",
-    itemListElement: [
-        {
-            "@type": "ListItem",
-            position: 1,
-            name: "Warehouse Operations Management",
-        },
-        {
-            "@type": "ListItem",
-            position: 2,
-            name: "Shipping & Freight Forwarding",
-        },
-        {
-            "@type": "ListItem",
-            position: 3,
-            name: "Air Cargo Management",
-        },
-    ],
-};
 ---
 
 <Layout
-    title="Short-Term Logistics Courses | 3-Month Fast Track Programs"
+    title="Short-Term Logistics Courses in Kochi Kerala | 3-Month Diploma Programs"
     description="Accelerate your career with 3-month specialized diplomas in Warehouse, Shipping, Air Cargo, and Export-Import Management."
-    schema={coursesListSchema}
 >
+    <Fragment slot="head">
+        <script type="application/ld+json" set:html={JSON.stringify(shortTermItemListSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(shortTermBreadcrumbSchema)} />
+    </Fragment>
     <Navbar client:load />
     <main>
         <div class="pt-20">

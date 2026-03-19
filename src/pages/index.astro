@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { organizationSchema, localBusinessSchema, homeBreadcrumbSchema } from '../schemas/organization.js';
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import AuthorityBar from "../components/AuthorityBar";
@@ -9,26 +10,17 @@ import SpecialitySection from "../components/SpecialitySection";
 import CareerRoadmap from "../components/CareerRoadmap";
 import ContactCTA from "../components/ContactCTA";
 import Footer from "../components/Footer";
-
-const websiteSchema = {
-	"@context": "https://schema.org",
-	"@type": "WebSite",
-	url: "https://www.logisticsgurukul.com/",
-	name: "Logistics Gurukul",
-	description:
-		"The #1 Logistics Institute in Kerala offering specialized diplomas in International Logistics with 100% placement assurance.",
-	publisher: {
-		"@type": "EducationalOrganization",
-		name: "Logistics Gurukul",
-	},
-};
 ---
 
 <Layout
-	title="Logistics Course in Kerala | Diploma with Paid Internship"
+	title="Best Logistics Course in Kerala with Paid Internship | Logistics Gurukul"
 	description="Join Logistics Gurukul in Kochi for a 1-Year Diploma in International Logistics. Includes 6 Months Paid On-Job Training & 100% Placement Support."
-	schema={websiteSchema}
 >
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(homeBreadcrumbSchema)} />
+	</Fragment>
 	<Navbar client:load />
 	<main>
 		<Hero client:load />

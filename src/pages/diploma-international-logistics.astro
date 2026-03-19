@@ -1,33 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { courseSchema, diplomaBreadcrumbSchema } from '../schemas/diploma.js';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DiplomaLogistics from "../components/DiplomaLogistics";
-const courseSchema = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Diploma in International Logistics & Freight Management",
-    description:
-        "Join the only 1-Year Diploma in Logistics & Freight Management in Kerala with 6 Months Paid On-Job Training. STED Council certified & 100% placement support.",
-    provider: {
-        "@type": "EducationalOrganization",
-        name: "Logistics Gurukul",
-        sameAs: "https://www.logisticsgurukul.com",
-    },
-    courseCode: "DILFM",
-    hasCourseInstance: {
-        "@type": "CourseInstance",
-        courseMode: "Full-time",
-        location: "Kochi, Kerala",
-    },
-};
 ---
 
 <Layout
-    title="International Logistics & Freight Management Course Kerala"
+    title="1-Year Diploma in International Logistics | 6-Month Paid Training | Kochi"
     description="Join the only 1-Year Diploma in Logistics & Freight Management in Kerala with 6 Months Paid On-Job Training. STED Council certified & 100% placement support."
-    schema={courseSchema}
 >
+    <Fragment slot="head">
+        <script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(diplomaBreadcrumbSchema)} />
+    </Fragment>
     <Navbar client:load />
     <main>
         <DiplomaLogistics client:load />

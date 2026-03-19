@@ -1,33 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { aboutPageSchema, thrissurLocalBusinessSchema, aboutBreadcrumbSchema } from '../schemas/about.js';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AboutHero from "../components/AboutHero";
 import AboutStory from "../components/AboutStory";
 import AboutVisionMission from "../components/AboutVisionMission";
 import ContactCTA from "../components/ContactCTA";
-
-const aboutSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    name: "Logistics Gurukul",
-    description:
-        "Logistics Gurukul offers practical supply chain training in Ernakulam, delivering job-oriented courses with 6 months paid training.",
-    url: "https://www.logisticsgurukul.com/about",
-    address: {
-        "@type": "PostalAddress",
-        addressLocality: "Kochi",
-        addressRegion: "Kerala",
-        addressCountry: "India",
-    },
-};
 ---
 
 <Layout
-    title="About Us | Best Logistics Institute in Kochi, Kerala"
+    title="About Logistics Gurukul | Best Logistics Institute Kochi Kerala"
     description="Logistics Gurukul offers practical supply chain training in Ernakulam. Our mission: delivering job-oriented courses with 6 months paid training."
-    schema={aboutSchema}
 >
+    <Fragment slot="head">
+        <script type="application/ld+json" set:html={JSON.stringify(aboutPageSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(thrissurLocalBusinessSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(aboutBreadcrumbSchema)} />
+    </Fragment>
     <Navbar client:load />
     <main>
         <AboutHero client:load />

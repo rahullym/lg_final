@@ -21,6 +21,7 @@ import SEO from "../components/SEO.astro";
 <html lang="en" class="scroll-smooth">
 	<head>
 		<SEO title={title} description={description} schema={schema} />
+		<slot name="head" />
 		<!-- Google Tag Manager -->
 		<script is:inline>
 			(function (w, d, s, l, i) {
