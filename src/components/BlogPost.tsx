@@ -4,14 +4,13 @@ import { CalendarIcon, UserIcon, ArrowLeftIcon, ShareIcon } from '@heroicons/rea
 
 interface Post {
     title: string;
-    content: string;
-    image: string;
-    author: string;
-    date: string;
-    category: string;
+    image?: string;
+    author?: string;
+    date?: string;
+    category?: string;
 }
 
-export default function BlogPost({ post }: { post: Post }) {
+export default function BlogPost({ post, children }: { post: Post, children: React.ReactNode }) {
     if (!post) return null;
 
     return (
@@ -83,9 +82,16 @@ export default function BlogPost({ post }: { post: Post }) {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="blog-content max-w-none"
-                        dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
+                        className="blog-content max-w-none text-slate-700 leading-relaxed font-body
+                            [&>p]:mb-6 [&>p]:text-lg
+                            [&>h3]:text-2xl [&>h3]:font-bold [&>h3]:text-slate-900 [&>h3]:mb-4 [&>h3]:mt-8 [&>h3]:font-heading
+                            [&>h4]:text-xl [&>h4]:font-bold [&>h4]:text-slate-900 [&>h4]:mb-4 [&>h4]:mt-6 [&>h4]:font-heading
+                            [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul>li]:mb-2
+                            [&_a]:text-blue-600 [&_a]:underline hover:[&_a]:text-blue-800
+                            [&_strong]:text-slate-900 [&_strong]:font-bold"
+                    >
+                        {children}
+                    </motion.div>
 
                     {/* Author & Tags Section (Optional) */}
                     <div className="mt-20 pt-12 border-t border-slate-100">

@@ -2,14 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CalendarIcon, UserIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
-import { BlogPosts } from '../data/blogPosts';
+interface BlogPost {
+    slug: string;
+    title: string;
+    excerpt?: string;
+    image?: string;
+    category?: string;
+    date?: string;
+    author?: string;
+}
 
-export default function BlogGrid() {
+export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
     return (
         <section className="py-20 bg-white">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    {BlogPosts.map((post, i) => (
+                    {posts.map((post, i) => (
                         <motion.a
                             key={i}
                             id={`blog-post-card-${post.slug}`}
