@@ -1,0 +1,72 @@
+backend:
+  name: github
+  repo: Lymdata-Labs-Private-Limited/lguru
+  branch: main
+  base_url: https://decap-oauth-proxy.rahul-06a.workers.dev
+  auth_endpoint: /auth
+
+# Enables local testing — only activates on localhost, ignored in production
+local_backend: true
+
+# Where uploaded images are stored on disk (relative to repo root)
+media_folder: public/images/uploads
+# How those images are referenced in content
+public_folder: /images/uploads
+
+collections:
+  - name: blog
+    label: Blog Posts
+    folder: src/content/posts
+    create: true
+    slug: "{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    fields:
+      - label: Permalink
+        name: permalink
+        widget: string
+        required: true
+
+      - label: Title
+        name: title
+        widget: string
+        required: true
+
+      - label: Excerpt
+        name: excerpt
+        widget: text
+        required: true
+        hint: "A short summary for SEO and post previews."
+
+      - label: Cover Image
+        name: image
+        widget: image
+        required: false
+        allow_multiple: false
+
+      - label: Author
+        name: author
+        widget: string
+        default: "Admin"
+
+      - label: Publish Date
+        name: date
+        widget: string
+        required: true
+        hint: "Format: Month DD, YYYY (e.g. March 30, 2026)"
+
+      - label: Category
+        name: category
+        widget: string
+        required: true
+
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        required: false
+        hint: "Toggle ON to save without publishing."
+
+      - label: Content
+        name: body
+        widget: markdown

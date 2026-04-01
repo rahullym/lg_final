@@ -56,35 +56,35 @@ category: "Career"
 <p>That gap between theory and on-the-job confidence is where most fresh graduates struggle. The ones who close it early are the ones who build careers quickly.</p>
 
 <div class="cta-box" style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
-    <h3 style="margin-top: 0;">Ready to Build Your Career in Logistics?</h3>
-    <p><strong>Diploma in International Logistics and Freight Management</strong><br>
-    1-Year Diploma with 6 Months of Paid On-the-Job Training<br>
-    Offered by Logistics Gurukul, Edappally, Kochi</p>
+<h3 style="margin-top: 0;">Ready to Build Your Career in Logistics?</h3>
+<p><strong>Diploma in International Logistics and Freight Management</strong><br>
+1-Year Diploma with 6 Months of Paid On-the-Job Training<br>
+Offered by Logistics Gurukul, Edappally, Kochi</p>
 
-    <p><strong>What the programme covers:</strong></p>
-    <ul>
-        <li>Months 1 to 4: Classroom Training covering freight theory, trade documentation, incoterms and operations</li>
-        <li>Month 5: Live Internship with real projects at active logistics companies</li>
-        <li>Month 6: Product and Specialisation Training</li>
-        <li>Months 7 to 12: Paid On-the-Job Training in a live logistics role</li>
-    </ul>
+<p><strong>What the programme covers:</strong></p>
+<ul>
+<li>Months 1 to 4: Classroom Training covering freight theory, trade documentation, incoterms and operations</li>
+<li>Month 5: Live Internship with real projects at active logistics companies</li>
+<li>Month 6: Product and Specialisation Training</li>
+<li>Months 7 to 12: Paid On-the-Job Training in a live logistics role</li>
+</ul>
 
-    <p><strong>Value-added skills included in the programme:</strong></p>
-    <ul>
-        <li>AI in Logistics</li>
-        <li>Warehousing Operations</li>
-        <li>Dangerous Goods Handling and Cargo Packaging</li>
-        <li>Interview Coaching and Mock Interview Sessions</li>
-        <li>Business English and Hindi Communication</li>
-        <li>MS Excel and Word for Logistics Professionals</li>
-    </ul>
+<p><strong>Value-added skills included in the programme:</strong></p>
+<ul>
+<li>AI in Logistics</li>
+<li>Warehousing Operations</li>
+<li>Dangerous Goods Handling and Cargo Packaging</li>
+<li>Interview Coaching and Mock Interview Sessions</li>
+<li>Business English and Hindi Communication</li>
+<li>MS Excel and Word for Logistics Professionals</li>
+</ul>
 
-    <p>The programme is globally recognised through STED Council certification and comes with 100% placement assistance and access to worldwide career opportunities.</p>
+<p>The programme is globally recognised through STED Council certification and comes with 100% placement assistance and access to worldwide career opportunities.</p>
 
-    <p><strong>To enquire or book a free counselling session:</strong><br>
-    Phone: <a href="tel:+917994446019" style="color: inherit; text-decoration: underline;">+91 79944 46019</a><br>
-    Email: <a href="mailto:enquiry@logisticsgurukul.com" style="color: inherit; text-decoration: underline;">enquiry@logisticsgurukul.com</a><br>
-    Website: <a href="https://www.logisticsgurukul.com/diploma-international-logistics" style="color: inherit; text-decoration: underline;">www.logisticsgurukul.com/diploma-international-logistics</a></p>
+<p><strong>To enquire or book a free counselling session:</strong><br>
+Phone: <a href="tel:+917994446019" style="color: inherit; text-decoration: underline;">+91 79944 46019</a><br>
+Email: <a href="mailto:enquiry@logisticsgurukul.com" style="color: inherit; text-decoration: underline;">enquiry@logisticsgurukul.com</a><br>
+Website: <a href="https://www.logisticsgurukul.com/diploma-international-logistics" style="color: inherit; text-decoration: underline;">www.logisticsgurukul.com/diploma-international-logistics</a></p>
 </div>
 
 <h3>The Best Time to Start Is Right Now</h3>

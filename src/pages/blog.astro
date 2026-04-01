@@ -6,16 +6,21 @@ import Footer from "../components/Footer";
 import BlogHero from "../components/BlogHero";
 import BlogGrid from "../components/BlogGrid";
 
-const posts = await getCollection('posts');
-const serializedPosts = JSON.parse(JSON.stringify(posts.map(post => ({
+// Fetch posts (which are now directly managed by the CMS) and exclude drafts
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+
+const serializedPosts = allPosts.map(post => ({
   slug: post.slug,
   title: post.data.title,
-  excerpt: post.data.excerpt,
-  image: post.data.image,
+  excerpt: post.data.excerpt ?? '',
+  image: post.data.image ?? '',
   author: post.data.author,
-  date: post.data.date,
-  category: post.data.category
-}))));
+  date: post.data.date ?? '',
+  category: post.data.category ?? '',
+  _ts: post.data.date ? new Date(post.data.date).getTime() : 0,
+}))
+.sort((a, b) => b._ts - a._ts)
+.map(({ _ts, ...rest }) => rest);
 ---
 
 <Layout

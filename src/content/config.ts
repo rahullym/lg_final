@@ -10,6 +10,7 @@ const postsCollection = defineCollection({
     author: z.string().default('Admin'),
     date: z.string().optional(),
     category: z.string().optional(),
+    draft: z.boolean().default(false),
   }),
 });
 

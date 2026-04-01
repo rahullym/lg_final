@@ -31,16 +31,16 @@ category: "Career Guidance"
 <p>If you are a graduate looking for a <strong>logistics institute in Kochi</strong> that bridges the gap between academic knowledge and real industry requirements, <strong>Logistics Gurukul</strong> deserves serious consideration. Founded and guided by seasoned industry professionals, the institute operates in association with Alive Academy, bringing over a decade of expertise in training students successfully. Their approach is rooted in practical, experience-driven education that goes well beyond textbooks.</p>
 
 <div class="cta-box" style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
-    <h3 style="margin-top: 0;">Diploma in International Logistics and Freight Management</h3>
-    <p>This is the institute’s flagship programme. It is a one-year diploma and it is Kerala’s only programme that features <strong>six months of paid on-the-job training</strong>. It is designed for graduates and working professionals who want to enter the logistics and supply chain management industry with practical, job-ready skills.</p>
-    
-    <h4>Course Timeline</h4>
-    <ul>
-        <li><strong>Months 1 to 4:</strong> Classroom learning (Theory & Fundamentals)</li>
-        <li><strong>Month 5:</strong> Internship with live projects</li>
-        <li><strong>Month 6:</strong> Product training and specialization</li>
-        <li><strong>Months 7 to 12:</strong> Paid on-the-job training (Earn while you learn)</li>
-    </ul>
+<h3 style="margin-top: 0;">Diploma in International Logistics and Freight Management</h3>
+<p>This is the institute’s flagship programme. It is a one-year diploma and it is Kerala’s only programme that features <strong>six months of paid on-the-job training</strong>. It is designed for graduates and working professionals who want to enter the logistics and supply chain management industry with practical, job-ready skills.</p>
+
+<h4>Course Timeline</h4>
+<ul>
+<li><strong>Months 1 to 4:</strong> Classroom learning (Theory & Fundamentals)</li>
+<li><strong>Month 5:</strong> Internship with live projects</li>
+<li><strong>Month 6:</strong> Product training and specialization</li>
+<li><strong>Months 7 to 12:</strong> Paid on-the-job training (Earn while you learn)</li>
+</ul>
 </div>
 
 <h3>Key Programme Highlights & Value-Added Curriculum</h3>
@@ -61,11 +61,11 @@ category: "Career Guidance"
 <p>If you have a degree but no clarity on your career direction, spending one year on a focused, practical logistics course could be the most valuable decision you make. India’s logistics sector is undergoing a transformation. New ports are being built. Massive logistics parks are coming up. E-commerce volumes are surging. AI and automation are being integrated into supply chain operations. And all of this requires trained, capable people to manage it.</p>
 
 <div class="cta-box" style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
-    <h3 style="margin-top: 0;">Take the First Step with Logistics Gurukul</h3>
-    <p>Located in <strong>Edappally, Kochi</strong>, Logistics Gurukul offers one of the most comprehensive training programmes in Kerala. Admissions are now open for the upcoming batch.</p>
-    <p><strong>Ready to Start Your Career?</strong><br>
-    Phone: <a href="tel:+917994446019" style="color: inherit; text-decoration: underline;">+91 79944 46019</a><br>
-    Email: <a href="mailto:enquiry@logisticsgurukul.com" style="color: inherit; text-decoration: underline;">enquiry@logisticsgurukul.com</a><br>
-    Location: 1st Floor, Profnet Plaza, Edappally, Mamangalam, Ernakulam, Kerala<br>
-    Website: <a href="https://www.logisticsgurukul.com" style="color: inherit; text-decoration: underline;">www.logisticsgurukul.com</a></p>
+<h3 style="margin-top: 0;">Take the First Step with Logistics Gurukul</h3>
+<p>Located in <strong>Edappally, Kochi</strong>, Logistics Gurukul offers one of the most comprehensive training programmes in Kerala. Admissions are now open for the upcoming batch.</p>
+<p><strong>Ready to Start Your Career?</strong><br>
+Phone: <a href="tel:+917994446019" style="color: inherit; text-decoration: underline;">+91 79944 46019</a><br>
+Email: <a href="mailto:enquiry@logisticsgurukul.com" style="color: inherit; text-decoration: underline;">enquiry@logisticsgurukul.com</a><br>
+Location: 1st Floor, Profnet Plaza, Edappally, Mamangalam, Ernakulam, Kerala<br>
+Website: <a href="https://www.logisticsgurukul.com" style="color: inherit; text-decoration: underline;">www.logisticsgurukul.com</a></p>
 </div>

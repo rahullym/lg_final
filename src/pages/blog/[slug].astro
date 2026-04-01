@@ -4,30 +4,33 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import BlogPost from "../../components/BlogPost";
-
 import type { CollectionEntry } from 'astro:content';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-    const posts = await getCollection('posts');
+    const posts = await getCollection('posts', ({ data }) => !data.draft);
+
     return posts.map((post) => ({
         params: { slug: post.slug },
         props: { post },
     }));
 }
 
-interface Props {
-    post: CollectionEntry<'posts'>;
-}
+type Props = { post: CollectionEntry<'posts'> };
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const { title, excerpt, image, date } = post.data;
+const description = excerpt ?? '';
+const heroImage = image ?? null;
+const formattedDate = date ?? '';
 ---
 
 <Layout
-    title={`${post.data.title} | Logistics Gurukul Blog`}
-    description={post.data.excerpt || ""}
+    title={`${title} | Logistics Gurukul Blog`}
+    description={description}
 >
     <Navbar client:load />
     <main>
