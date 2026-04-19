@@ -1,43 +1,36 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
 import ImageGallery from "../components/ImageGallery";
 
-// Component Data
-const features = [
-  {
-    title: "Classrooms Built for Focused, Professional Learning",
-    description: "Our classrooms are designed to deliver structured, distraction-free training that reflects real corporate learning environments. Each space is optimized for clear visibility, comfortable seating, and effective trainer-student interaction, enabling better concentration and deeper understanding of logistics concepts.add",
-    points: ["Ergonomic seating with individual desks","Digital display screens & whiteboards","Bright, well-ventilated classrooms","Lecture & discussion-friendly layout"],
-    align: "left", // Text on Left, Image Right
-    theme: "light",
-    image: "/images/smart-classroom.jpeg",
-    placeholderId: "SMART_CLASSROOMS" // For Client Comment
-  },
-  {
-    title: "IT Lab for Simulation-Based Logistics Training",
-    description: "Our IT Lab is built to provide hands-on, simulation-based training that mirrors real logistics office environments. Students practice documentation, software usage, and operational workflows in a controlled setting before entering the workplace.",
-    points: ["Individual computer workstation for each student","High-speed internet & power backup","Industry-relevant software tools","Guided practice with real documentation formats"],
-    align: "right", // Image on Left, Text Right
-    theme: "dark",
-    image: "/images/it-lab-simulation.png",
-    placeholderId: "SIMULATION_LAB"
-  },
+const featureEntries = await getCollection(
+  "infrastructure-features",
+  ({ data }) => !data.draft,
+);
+const features = featureEntries
+  .map((entry) => ({
+    title: entry.data.title,
+    description: entry.data.description,
+    points: entry.data.points,
+    align: entry.data.align,
+    theme: entry.data.theme,
+    image: entry.data.image,
+    order: entry.data.order,
+  }))
+  .sort((a, b) => a.order - b.order);
 
-];
-
-const galleryImages = [
-  { id: 2, src: "/images/campus02.jpeg", alt: "Campus Facility 2" },
-  { id: 3, src: "/images/campus03.jpeg", alt: "Campus Facility 3" },
-  { id: 4, src: "/images/campus04.jpeg", alt: "Campus Facility 4" },
-  { id: 6, src: "/images/campus06.jpeg", alt: "Campus Facility 6" },
-  { id: 7, src: "/images/campus07.jpeg", alt: "Campus Facility 7" },
-  { id: 9, src: "/images/campus09.jpeg", alt: "Campus Facility 9" },
-  { id: 10, src: "/images/campus10.jpeg", alt: "Campus Facility 10" },
-  { id: 11, src: "/images/campus11.jpg", alt: "Campus Facility 11" }
-];
+const galleryEntries = await getCollection("infrastructure-gallery");
+const galleryImages = galleryEntries
+  .map((entry) => ({
+    id: entry.slug,
+    src: entry.data.image,
+    alt: entry.data.alt,
+    order: entry.data.order,
+  }))
+  .sort((a, b) => a.order - b.order);
 ---
 
 <Layout

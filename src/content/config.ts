@@ -14,6 +14,57 @@ const postsCollection = defineCollection({
   }),
 });
 
+const celebrationsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    year: z.string(),
+    cover: z.string(),
+    gallery: z.array(z.string()).default([]),
+    order: z.number().default(0),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const seminarsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    year: z.string(),
+    cover: z.string(),
+    gallery: z.array(z.string()).default([]),
+    order: z.number().default(0),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const infrastructureFeaturesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    image: z.string().optional(),
+    align: z.enum(['left', 'right']).default('left'),
+    theme: z.enum(['light', 'dark']).default('light'),
+    points: z.array(z.string()).default([]),
+    order: z.number().default(0),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const infrastructureGalleryCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    alt: z.string(),
+    image: z.string(),
+    order: z.number().default(0),
+  }),
+});
+
 export const collections = {
   'posts': postsCollection,
+  'celebrations': celebrationsCollection,
+  'seminars': seminarsCollection,
+  'infrastructure-features': infrastructureFeaturesCollection,
+  'infrastructure-gallery': infrastructureGalleryCollection,
 };

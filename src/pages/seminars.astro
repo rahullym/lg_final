@@ -1,66 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
 
-// Component Data
-const seminars = [
-    {
-        id: "transport-logistics-india",
-        title: "Transport Logistics India",
-        year: "2026",
-        cover: "/images/transport-logistics-india/1.jpg",
-        gallery: [
-            "/images/transport-logistics-india/1.jpg",
-            "/images/transport-logistics-india/2.jpg",
-            "/images/transport-logistics-india/3.jpg",
-            "/images/transport-logistics-india/4.jpg",
-            "/images/transport-logistics-india/5.jpg",
-            "/images/transport-logistics-india/6.jpg",
-            "/images/transport-logistics-india/7.jpg",
-        ],
-    },
-    {
-        id: "mock-interview-2025",
-        title: "Mock Interview Sessions",
-        year: "2025",
-        cover: "/images/mock-interview/mockinterview (1).PNG",
-        gallery: [
-            "/images/mock-interview/mockinterview (1).PNG",
-            "/images/mock-interview/mockinterview (2).PNG",
-            "/images/mock-interview/mockinterview (3).PNG",
-            "/images/mock-interview/mockinterview (4).PNG",
-            "/images/mock-interview/mockinterview (5).PNG",
-            "/images/mock-interview/mockinterview (6).PNG",
-            "/images/mock-interview/mockinterview (7).PNG",
-            "/images/mock-interview/mockinterview (8).PNG",
-        ],
-    },
-    {
-        id: "seminar-sn-college-2024",
-        title: "Seminar at SN College",
-        year: "2026",
-        cover: "/images/seminar-sn-college/Semianr SN college (1).PNG",
-        gallery: [
-            "/images/seminar-sn-college/Semianr SN college (1).PNG",
-            "/images/seminar-sn-college/Semianr SN college (2).PNG",
-            "/images/seminar-sn-college/Semianr SN college (3).PNG",
-            "/images/seminar-sn-college/Semianr SN college (4).PNG",
-            "/images/seminar-sn-college/Semianr SN college (5).PNG",
-            "/images/seminar-sn-college/Semianr SN college (6).PNG",
-            "/images/seminar-sn-college/Semianr SN college (7).PNG",
-            "/images/seminar-sn-college/Semianr SN college (8).PNG",
-            "/images/seminar-sn-college/Semianr SN college (9).PNG",
-            "/images/seminar-sn-college/Semianr SN college (10).PNG",
-            "/images/seminar-sn-college/Semianr SN college (11).PNG",
-            "/images/seminar-sn-college/Semianr SN college (12).PNG",
-            "/images/seminar-sn-college/Semianr SN college (13).PNG",
-            "/images/seminar-sn-college/Semianr SN college (14).PNG",
-            "/images/seminar-sn-college/Semianr SN college (15).PNG",
-        ],
-    },
-];
+const entries = await getCollection("seminars", ({ data }) => !data.draft);
+const seminars = entries
+    .map((entry) => ({
+        id: entry.slug,
+        title: entry.data.title,
+        year: entry.data.year,
+        cover: entry.data.cover,
+        gallery: entry.data.gallery,
+        order: entry.data.order,
+    }))
+    .sort((a, b) => a.order - b.order);
 ---
 
 <Layout

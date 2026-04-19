@@ -70,3 +70,164 @@ collections:
       - label: Content
         name: body
         widget: markdown
+
+  - name: celebrations
+    label: "Life @ Gurukul — Celebrations"
+    folder: src/content/celebrations
+    create: true
+    slug: "{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+      - label: Year
+        name: year
+        widget: string
+        required: true
+        hint: "e.g. 2025"
+      - label: Cover Image
+        name: cover
+        widget: image
+        required: true
+      - label: Gallery
+        name: gallery
+        widget: list
+        field: { label: Image, name: image, widget: image }
+        required: false
+        hint: "Upload multiple photos for this event."
+      - label: Display Order
+        name: order
+        widget: number
+        default: 0
+        value_type: int
+        required: false
+        hint: "Lower numbers appear first."
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        required: false
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+        hint: "Optional rich text description."
+
+  - name: seminars
+    label: "Life @ Gurukul — Seminars & Events"
+    folder: src/content/seminars
+    create: true
+    slug: "{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+      - label: Year
+        name: year
+        widget: string
+        required: true
+      - label: Cover Image
+        name: cover
+        widget: image
+        required: true
+      - label: Gallery
+        name: gallery
+        widget: list
+        field: { label: Image, name: image, widget: image }
+        required: false
+      - label: Display Order
+        name: order
+        widget: number
+        default: 0
+        value_type: int
+        required: false
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        required: false
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+
+  - name: infrastructure-features
+    label: "Life @ Gurukul — Infrastructure Features"
+    folder: src/content/infrastructure-features
+    create: true
+    slug: "{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: true
+      - label: Description
+        name: description
+        widget: text
+        required: true
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Image Alignment
+        name: align
+        widget: select
+        options: ["left", "right"]
+        default: "left"
+        hint: "Which side the image appears on."
+      - label: Theme
+        name: theme
+        widget: select
+        options: ["light", "dark"]
+        default: "light"
+      - label: Key Points
+        name: points
+        widget: list
+        field: { label: Point, name: point, widget: string }
+        required: false
+      - label: Display Order
+        name: order
+        widget: number
+        default: 0
+        value_type: int
+        required: false
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        required: false
+      - label: Extended Content
+        name: body
+        widget: markdown
+        required: false
+
+  - name: infrastructure-gallery
+    label: "Life @ Gurukul — Infrastructure Gallery"
+    folder: src/content/infrastructure-gallery
+    create: true
+    slug: "{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    fields:
+      - label: Alt Text
+        name: alt
+        widget: string
+        required: true
+      - label: Image
+        name: image
+        widget: image
+        required: true
+      - label: Display Order
+        name: order
+        widget: number
+        default: 0
+        value_type: int
+        required: false

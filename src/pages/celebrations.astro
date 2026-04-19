@@ -1,25 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
 
-// Component Data
-const celebrations = [
-    {
-        id: "christmas-2025",
-        title: "Christmas Celebration",
-        year: "2025",
-        cover: "/images/christmas-2025/cs (1).jpg",
-        gallery: [
-            "/images/christmas-2025/cs (1).jpg",
-            "/images/christmas-2025/cs (2).jpg",
-            "/images/christmas-2025/cs (1).PNG",
-            "/images/christmas-2025/cs (2).PNG",
-            "/images/christmas-2025/cs (3).PNG",
-        ],
-    },
-];
+const entries = await getCollection("celebrations", ({ data }) => !data.draft);
+const celebrations = entries
+    .map((entry) => ({
+        id: entry.slug,
+        title: entry.data.title,
+        year: entry.data.year,
+        cover: entry.data.cover,
+        gallery: entry.data.gallery,
+        order: entry.data.order,
+    }))
+    .sort((a, b) => a.order - b.order);
 ---
 
 <Layout

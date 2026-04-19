@@ -2,6 +2,7 @@
  * Cloudflare Worker — Password-based Proxy for Decap CMS
  *
  * Environment variables to set in the Cloudflare dashboard:
+ *   ADMIN_USERNAME  — The username editors will use to log in (e.g., "admin")
  *   ADMIN_PASSWORD  — The password editors will use to log in (e.g., "Logistics2026")
  *   GITHUB_PAT      — Your GitHub Personal Access Token (classic or fine-grained)
  */
@@ -26,7 +27,7 @@ export default {
       
       // Serve the Login Page
       if (request.method === 'GET') {
-        const errorMsg = url.searchParams.has('error') ? '<div class="message">Incorrect password. Please try again.</div>' : '';
+        const errorMsg = url.searchParams.has('error') ? '<div class="message">Incorrect username or password. Please try again.</div>' : '';
         const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +39,8 @@ export default {
     .card { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); width: 100%; max-width: 340px; text-align: center; border: 1px solid #e2e8f0; }
     .logo { color: #2563eb; font-weight: 900; font-size: 1.25rem; margin-bottom: 0.5rem; letter-spacing: -0.025em; }
     h2 { margin: 0 0 1.5rem 0; color: #0f172a; font-size: 1.5rem; }
-    input[type="password"] { width: 100%; padding: 0.875rem; margin-top: 0.5rem; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.2s; }
-    input[type="password"]:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 2px #bfdbfe; }
+    input[type="text"], input[type="password"] { width: 100%; padding: 0.875rem; margin-top: 0.5rem; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.2s; }
+    input[type="text"]:focus, input[type="password"]:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 2px #bfdbfe; }
     button { width: 100%; padding: 0.875rem; margin-top: 1.25rem; background-color: #2563eb; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background-color 0.2s; }
     button:hover { background-color: #1d4ed8; }
     .message { color: #dc2626; margin-top: 1rem; font-size: 0.875rem; background: #fef2f2; padding: 0.5rem; border-radius: 4px; }
@@ -50,7 +51,8 @@ export default {
     <div class="logo">Logistics Gurukul</div>
     <h2>CMS Login</h2>
     <form method="POST" action="/auth">
-      <input type="password" name="password" placeholder="Enter password" required autofocus />
+      <input type="text" name="username" placeholder="Username" required autofocus autocomplete="username" />
+      <input type="password" name="password" placeholder="Password" required autocomplete="current-password" />
       <button type="submit">Sign In</button>
     </form>
     ${errorMsg}
@@ -65,10 +67,11 @@ export default {
       // Handle Form Submission
       if (request.method === 'POST') {
         const formData = await request.formData();
+        const username = formData.get('username');
         const password = formData.get('password');
 
-        // Check if the password matches the environment variable
-        if (password !== env.ADMIN_PASSWORD) {
+        // Check if both username and password match the environment variables
+        if (username !== env.ADMIN_USERNAME || password !== env.ADMIN_PASSWORD) {
           // Redirect back to GET /auth with an error
           return Response.redirect(`${url.origin}/auth?error=1`, 302);
         }
@@ -111,6 +114,38 @@ export default {
           headers: { 'Content-Type': 'text/html;charset=utf-8', ...CORS },
         });
       }
+    }
+
+    // ── /auth/verify ─────────────────────────────────────────────────────────
+    // JSON endpoint for the in-page login form on /admin/.
+    // POST { username, password } → { token } on success, 401 on failure.
+    if (url.pathname === '/auth/verify') {
+      if (request.method !== 'POST') {
+        return new Response('Method not allowed', { status: 405, headers: CORS });
+      }
+
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', ...CORS },
+        });
+      }
+
+      const { username, password } = body || {};
+      if (username !== env.ADMIN_USERNAME || password !== env.ADMIN_PASSWORD) {
+        return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json', ...CORS },
+        });
+      }
+
+      return new Response(
+        JSON.stringify({ token: env.GITHUB_PAT, provider: 'github' }),
+        { headers: { 'Content-Type': 'application/json', ...CORS } },
+      );
     }
 
     return new Response('Not found', { status: 404, headers: CORS });
