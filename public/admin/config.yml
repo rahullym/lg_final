@@ -16,11 +16,27 @@ public_folder: /images/uploads
 collections:
   - name: blog
     label: Blog Posts
+    label_singular: Blog Post
     folder: src/content/posts
     create: true
     slug: "{{slug}}"
     format: yaml-frontmatter
     extension: md
+    identifier_field: title
+    summary: "{{title}}  —  {{category}}  ·  {{date}}  ·  {{draft | ternary('DRAFT', 'Published')}}"
+    sortable_fields: [title, date, category, author]
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+      - label: Published
+        field: draft
+        pattern: false
+    view_groups:
+      - label: Category
+        field: category
+      - label: Author
+        field: author
     fields:
       - label: Permalink
         name: permalink
@@ -73,11 +89,20 @@ collections:
 
   - name: celebrations
     label: "Life @ Gurukul — Celebrations"
+    label_singular: Celebration
     folder: src/content/celebrations
     create: true
     slug: "{{slug}}"
     format: yaml-frontmatter
     extension: md
+    identifier_field: title
+    summary: "{{title}}  —  {{year}}  ·  {{draft | ternary('DRAFT', 'Published')}}"
+    sortable_fields: [order, title, year]
+    view_filters:
+      - { label: Drafts, field: draft, pattern: true }
+      - { label: Published, field: draft, pattern: false }
+    view_groups:
+      - { label: Year, field: year }
     fields:
       - label: Title
         name: title
@@ -118,11 +143,20 @@ collections:
 
   - name: seminars
     label: "Life @ Gurukul — Seminars & Events"
+    label_singular: Seminar / Event
     folder: src/content/seminars
     create: true
     slug: "{{slug}}"
     format: yaml-frontmatter
     extension: md
+    identifier_field: title
+    summary: "{{title}}  —  {{year}}  ·  {{draft | ternary('DRAFT', 'Published')}}"
+    sortable_fields: [order, title, year]
+    view_filters:
+      - { label: Drafts, field: draft, pattern: true }
+      - { label: Published, field: draft, pattern: false }
+    view_groups:
+      - { label: Year, field: year }
     fields:
       - label: Title
         name: title
@@ -159,11 +193,22 @@ collections:
 
   - name: infrastructure-features
     label: "Life @ Gurukul — Infrastructure Features"
+    label_singular: Infrastructure Feature
     folder: src/content/infrastructure-features
     create: true
     slug: "{{slug}}"
     format: yaml-frontmatter
     extension: md
+    identifier_field: title
+    summary: "{{title}}  —  {{theme}} / {{align}}  ·  {{draft | ternary('DRAFT', 'Published')}}"
+    sortable_fields: [order, title, theme]
+    view_filters:
+      - { label: Drafts, field: draft, pattern: true }
+      - { label: Published, field: draft, pattern: false }
+      - { label: Dark theme, field: theme, pattern: dark }
+      - { label: Light theme, field: theme, pattern: light }
+    view_groups:
+      - { label: Theme, field: theme }
     fields:
       - label: Title
         name: title
@@ -211,11 +256,15 @@ collections:
 
   - name: infrastructure-gallery
     label: "Life @ Gurukul — Infrastructure Gallery"
+    label_singular: Gallery Image
     folder: src/content/infrastructure-gallery
     create: true
     slug: "{{slug}}"
     format: yaml-frontmatter
     extension: md
+    identifier_field: alt
+    summary: "#{{order}}  ·  {{alt}}"
+    sortable_fields: [order, alt]
     fields:
       - label: Alt Text
         name: alt
