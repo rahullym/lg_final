@@ -47,7 +47,8 @@ export default function Navbar() {
             href: '#',
             children: [
                 { label: 'Diploma', href: '/diploma-international-logistics' },
-                { label: 'Short Term Courses', href: '/short-term-courses' }
+                { label: 'Short Term Courses', href: '/short-term-courses' },
+                { label: 'Internship', href: '/internship' }
             ]
         },
         {
@@ -185,8 +186,8 @@ export default function Navbar() {
                         })}
                     </nav>
 
-                    {/* CTA Button */}
-                    <div className="hidden lg:block">
+                    {/* CTA Button + Accreditation Logos */}
+                    <div className="hidden lg:flex items-center gap-4">
                         <button
                             id="nav-cta-contact"
                             onClick={() => setIsWizardOpen(true)}
@@ -194,6 +195,22 @@ export default function Navbar() {
                         >
                             Contact Us
                         </button>
+                        <div className="flex items-center gap-2 pl-4 border-l border-slate-200">
+                            <img
+                                id="nav-logo-sted"
+                                src="/images/sted-logo.png"
+                                alt="STED Council — Approved Center"
+                                title="STED Council — Approved Center"
+                                className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`}
+                            />
+                            <img
+                                id="nav-logo-fics"
+                                src="/images/fics-logo.png"
+                                alt="FICS — Universal Accomplishment"
+                                title="FICS — Universal Accomplishment"
+                                className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`}
+                            />
+                        </div>
                     </div>
 
                     {/* Mobile/Tablet Toggle */}
@@ -254,6 +271,22 @@ export default function Navbar() {
                         >
                             Contact Us
                         </button>
+
+                        {/* Mobile Accreditation Logos */}
+                        <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-gray-100">
+                            <img
+                                id="mobile-nav-logo-sted"
+                                src="/images/sted-logo.png"
+                                alt="STED Council — Approved Center"
+                                className="h-14 w-auto object-contain"
+                            />
+                            <img
+                                id="mobile-nav-logo-fics"
+                                src="/images/fics-logo.png"
+                                alt="FICS — Universal Accomplishment"
+                                className="h-14 w-auto object-contain"
+                            />
+                        </div>
                     </nav>
 
                     {/* Mobile Contact Info */}
