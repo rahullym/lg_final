@@ -120,14 +120,44 @@ export default function Navbar() {
             <div className={`transition-all duration-300 bg-white border-b border-gray-100 ${scrolled ? 'py-2 shadow-md' : 'py-3'}`}>
                 <div className="container mx-auto px-6 flex justify-between items-center relative z-20">
 
-                    {/* Logo Area */}
-                    <a id="nav-logo" href="/" className="flex items-center gap-2">
-                        <img
-                            src="/logo.png"
-                            alt="Logistics Gurukul"
-                            className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-12' : 'h-16'}`}
-                        />
-                    </a>
+                    {/* Logo Area + Accreditation Logos */}
+                    <div className="flex items-center gap-3 xl:gap-5">
+                        <a id="nav-logo" href="/" className="flex items-center gap-2 group">
+                            <img
+                                src="/logo.png"
+                                alt="Logistics Gurukul"
+                                className={`w-auto object-contain transition-all duration-300 group-hover:scale-105 ${scrolled ? 'h-12' : 'h-16'}`}
+                            />
+                        </a>
+                        <div className="hidden md:flex items-center gap-2 xl:gap-3 pl-3 xl:pl-5 border-l border-slate-200">
+                            <a
+                                id="nav-logo-sted"
+                                href="/certification#sted"
+                                aria-label="View STED Council accreditation"
+                                className="group relative inline-flex items-center justify-center rounded-lg p-1 transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5"
+                            >
+                                <img
+                                    src="/images/sted-logo.png"
+                                    alt="STED Council — Approved Center"
+                                    title="STED Council — Approved Center"
+                                    className={`w-auto object-contain transition-all duration-300 group-hover:scale-110 ${scrolled ? 'h-9' : 'h-11'}`}
+                                />
+                            </a>
+                            <a
+                                id="nav-logo-fics"
+                                href="/certification#fics"
+                                aria-label="View FICS UK accreditation"
+                                className="group relative inline-flex items-center justify-center rounded-lg p-1 transition-all duration-300 hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5"
+                            >
+                                <img
+                                    src="/images/fics-logo.png"
+                                    alt="FICS UK — Universal Accomplishment"
+                                    title="FICS UK"
+                                    className={`w-auto object-contain transition-all duration-300 group-hover:scale-110 ${scrolled ? 'h-9' : 'h-11'}`}
+                                />
+                            </a>
+                        </div>
+                    </div>
 
                     {/* Desktop Links */}
                     <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
@@ -186,31 +216,16 @@ export default function Navbar() {
                         })}
                     </nav>
 
-                    {/* CTA Button + Accreditation Logos */}
-                    <div className="hidden lg:flex items-center gap-4">
+                    {/* CTA Button */}
+                    <div className="hidden lg:block">
                         <button
                             id="nav-cta-contact"
                             onClick={() => setIsWizardOpen(true)}
-                            className="px-6 xl:px-8 py-3 xl:py-3.5 bg-brand-blue hover:opacity-90 text-white text-sm xl:text-base font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center whitespace-nowrap block"
+                            className="group relative overflow-hidden px-6 xl:px-8 py-3 xl:py-3.5 bg-brand-blue hover:opacity-90 text-white text-sm xl:text-base font-bold rounded-full transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/40 hover:-translate-y-0.5 active:translate-y-0 text-center whitespace-nowrap block"
                         >
-                            Contact Us
+                            <span className="relative z-10">Contact Us</span>
+                            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out" aria-hidden="true"></span>
                         </button>
-                        <div className="flex items-center gap-2 pl-4 border-l border-slate-200">
-                            <img
-                                id="nav-logo-sted"
-                                src="/images/sted-logo.png"
-                                alt="STED Council — Approved Center"
-                                title="STED Council — Approved Center"
-                                className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`}
-                            />
-                            <img
-                                id="nav-logo-fics"
-                                src="/images/fics-logo.png"
-                                alt="FICS — Universal Accomplishment"
-                                title="FICS — Universal Accomplishment"
-                                className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10' : 'h-12'}`}
-                            />
-                        </div>
                     </div>
 
                     {/* Mobile/Tablet Toggle */}
@@ -274,18 +289,32 @@ export default function Navbar() {
 
                         {/* Mobile Accreditation Logos */}
                         <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-gray-100">
-                            <img
+                            <a
                                 id="mobile-nav-logo-sted"
-                                src="/images/sted-logo.png"
-                                alt="STED Council — Approved Center"
-                                className="h-14 w-auto object-contain"
-                            />
-                            <img
+                                href="/certification#sted"
+                                onClick={() => setIsOpen(false)}
+                                aria-label="View STED Council accreditation"
+                                className="transition-transform duration-300 hover:scale-105"
+                            >
+                                <img
+                                    src="/images/sted-logo.png"
+                                    alt="STED Council — Approved Center"
+                                    className="h-14 w-auto object-contain"
+                                />
+                            </a>
+                            <a
                                 id="mobile-nav-logo-fics"
-                                src="/images/fics-logo.png"
-                                alt="FICS — Universal Accomplishment"
-                                className="h-14 w-auto object-contain"
-                            />
+                                href="/certification#fics"
+                                onClick={() => setIsOpen(false)}
+                                aria-label="View FICS UK accreditation"
+                                className="transition-transform duration-300 hover:scale-105"
+                            >
+                                <img
+                                    src="/images/fics-logo.png"
+                                    alt="FICS UK — Universal Accomplishment"
+                                    className="h-14 w-auto object-contain"
+                                />
+                            </a>
                         </div>
                     </nav>
 
