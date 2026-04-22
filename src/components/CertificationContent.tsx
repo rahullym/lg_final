@@ -94,10 +94,21 @@ export default function CertificationContent() {
       </div>
 
       {/* Detailed Info Section */}
-      <div className="bg-white py-24 border-y border-slate-100">
+      <div id="sted" className="bg-white py-24 border-y border-slate-100 scroll-mt-24">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-1/2">
+              <div className="inline-flex items-center gap-3 mb-6 p-3 pr-5 bg-slate-50 border border-slate-200 rounded-2xl shadow-sm">
+                <img
+                  src="/images/sted-logo.png"
+                  alt="STED Council — Approved Center"
+                  className="h-14 w-auto object-contain"
+                />
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-widest text-blue-600">Accredited By</div>
+                  <div className="text-sm font-bold text-slate-900">STED Council</div>
+                </div>
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 font-heading">
                 Why choose a{" "}
                 <span className="text-blue-600">STED Certification?</span>
@@ -127,7 +138,7 @@ export default function CertificationContent() {
                 <p className="text-sm font-bold text-slate-500 uppercase mb-2">
                   Verification Links
                 </p>
-                <div className="flex flex-col gap-2 mb-4">
+                <div className="flex flex-col gap-2">
                   <a
                     id="cert-sted-home-link"
                     href="https://www.stedcouncil.com/STED/home.php#hm"
@@ -146,12 +157,6 @@ export default function CertificationContent() {
                   >
                     View Accreditations
                   </a>
-                </div>
-                <div className="pt-4 border-t border-slate-200">
-                  <p className="text-slate-500 text-sm font-semibold italic">
-                    * in association with Alive Academy (official certificate
-                    partner)
-                  </p>
                 </div>
               </div>
             </div>
@@ -188,10 +193,21 @@ export default function CertificationContent() {
       </div>
 
       {/* FICS UK Info Section */}
-      <div className="bg-slate-50 py-24 border-b border-slate-100">
+      <div id="fics" className="bg-slate-50 py-24 border-b border-slate-100 scroll-mt-24">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row-reverse gap-16 items-start">
             <div className="lg:w-1/2">
+              <div className="inline-flex items-center gap-3 mb-6 p-3 pr-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+                <img
+                  src="/images/fics-logo.png"
+                  alt="FICS UK — Forum for International Certified Scholars"
+                  className="h-14 w-auto object-contain"
+                />
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-widest text-blue-600">Accredited By</div>
+                  <div className="text-sm font-bold text-slate-900">FICS UK</div>
+                </div>
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 font-heading">
                 International Certification by{" "}
                 <span className="text-blue-600">FICS UK</span>
