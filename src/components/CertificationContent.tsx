@@ -339,31 +339,32 @@ export default function CertificationContent() {
 
             <div className="lg:w-1/2 relative">
               <div className="absolute inset-0 bg-emerald-600/5 rounded-3xl transform -rotate-3 scale-95" />
-              <div className="relative bg-slate-900 text-white p-10 rounded-3xl shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                  <Globe className="w-32 h-32" />
+              <a
+                id="cert-fics-institute-image"
+                href="/documents/fics-institute-validation.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open FICS UK Institute Validation certificate (PDF)"
+                className="relative block rounded-3xl overflow-hidden shadow-2xl group bg-white"
+              >
+                <img
+                  src="/images/fics-institute-validation.png"
+                  alt="FICS UK — Courseware Partner certificate for Logistics Gurukul, Authorised Testing Centre (FICSCP1168)"
+                  className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <div>
+                    <div className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">FICS UK</div>
+                    <div className="text-white font-bold text-sm">View Official Certificate</div>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">
-                  UK Standard Education
-                </h3>
-                <p className="text-slate-300 leading-relaxed mb-8">
-                  "We believe that academic courses should bear social
-                  relevance. Our internationally recognised programs are
-                  designed to impart in-depth knowledge and give mastery over
-                  relevant subjects."
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    UK Registered
-                  </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    Global Reach
-                  </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    Skill-Oriented
-                  </div>
-                </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
