@@ -76,3 +76,27 @@ export async function listEvents(client: SupabaseClient, table: EventTable) {
 export async function getEvent(client: SupabaseClient, table: EventTable, id: string) {
   return client.from(table).select('*').eq('id', id).single();
 }
+
+// Walk through slug variants until we find one not already taken in `table`.
+// `ignoreId` lets edit flows keep the row's own slug.
+export async function uniqueSlug(
+  client: SupabaseClient,
+  table: EventTable,
+  desired: string,
+  ignoreId?: string,
+): Promise<string> {
+  const base = desired || 'untitled';
+  let candidate = base;
+  let counter = 1;
+  // Bounded loop so a misconfigured policy can't spin forever.
+  while (counter < 200) {
+    let query = client.from(table).select('id').eq('slug', candidate).limit(1);
+    if (ignoreId) query = query.neq('id', ignoreId);
+    const { data, error } = await query;
+    if (error) throw new Error(error.message);
+    if (!data || data.length === 0) return candidate;
+    counter++;
+    candidate = `${base}-${counter}`;
+  }
+  return `${base}-${Date.now()}`;
+}

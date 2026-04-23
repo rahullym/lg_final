@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
-import { readEventForm } from '../../../../lib/eventCollection';
+import { readEventForm, uniqueSlug } from '../../../../lib/eventCollection';
 
 export const prerender = false;
 
@@ -22,13 +22,10 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
   if (!input.year) return back(redirect, 'Year is required');
   if (!input.cover) return back(redirect, 'Cover image is required');
 
+  input.slug = await uniqueSlug(client, 'seminars', input.slug);
+
   const { error } = await client.from('seminars').insert(input);
-  if (error) {
-    const msg = error.code === '23505' || error.message.includes('seminars_slug_key')
-      ? `A seminar with slug "${input.slug}" already exists.`
-      : error.message;
-    return back(redirect, msg);
-  }
+  if (error) return back(redirect, error.message);
   return redirect('/admin/seminars?created=1');
 };
 
