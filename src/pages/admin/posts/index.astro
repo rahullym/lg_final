@@ -20,16 +20,55 @@ const created = new URL(Astro.request.url).searchParams.has('created');
       <h1 class="text-3xl font-bold text-slate-900 mb-1">Blog Posts</h1>
       <p class="text-slate-600 text-sm">Articles shown under Journal → Blogs on the public site.</p>
     </div>
-    <a
-      href="/admin/posts/new"
-      class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors"
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
-      </svg>
-      New Post
-    </a>
+    <div class="flex items-center gap-3">
+      <button
+        id="import-markdown-btn"
+        type="button"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold rounded-lg text-sm transition-colors"
+        title="Migrate any existing markdown posts from src/content/posts into Supabase"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+        </svg>
+        <span id="import-markdown-label">Import from markdown</span>
+      </button>
+      <a
+        href="/admin/posts/new"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+        </svg>
+        New Post
+      </a>
+    </div>
   </div>
+
+  <script>
+    const btn = document.getElementById('import-markdown-btn') as HTMLButtonElement | null;
+    const label = document.getElementById('import-markdown-label');
+    btn?.addEventListener('click', async () => {
+      if (!btn || !label) return;
+      btn.disabled = true;
+      label.textContent = 'Importing…';
+      try {
+        const res = await fetch('/api/admin/migrate-posts', { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok || data.ok === false) {
+          const msg = data.failures?.map((f: { slug: string; message: string }) => `${f.slug}: ${f.message}`).join('\n') || data.error || 'Import failed';
+          alert(`Import finished with issues:\n\n${msg}`);
+        } else {
+          alert(`Imported ${data.migrated} of ${data.total} posts.`);
+        }
+      } catch (err) {
+        alert(`Import failed: ${err instanceof Error ? err.message : 'network error'}`);
+      } finally {
+        label.textContent = 'Import from markdown';
+        btn.disabled = false;
+        window.location.reload();
+      }
+    });
+  </script>
 
   {created && (
     <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
