@@ -186,22 +186,23 @@ create policy "auth delete gallery" on public.infrastructure_gallery
 -- 3. Storage bucket policies
 -- ============================================================
 -- First create the bucket in the Dashboard: Storage → New bucket
---   name:          uploads
+--   name:          lg_backend
 --   public bucket: YES
--- Then run the policies below (same SQL editor).
+-- If you use a different bucket name, update PUBLIC_SUPABASE_BUCKET in
+-- .env to match AND change 'lg_backend' below accordingly.
 
 drop policy if exists "public read uploads" on storage.objects;
 create policy "public read uploads" on storage.objects
-  for select using (bucket_id = 'uploads');
+  for select using (bucket_id = 'lg_backend');
 
 drop policy if exists "authenticated insert uploads" on storage.objects;
 create policy "authenticated insert uploads" on storage.objects
-  for insert to authenticated with check (bucket_id = 'uploads');
+  for insert to authenticated with check (bucket_id = 'lg_backend');
 
 drop policy if exists "authenticated update uploads" on storage.objects;
 create policy "authenticated update uploads" on storage.objects
-  for update to authenticated using (bucket_id = 'uploads');
+  for update to authenticated using (bucket_id = 'lg_backend');
 
 drop policy if exists "authenticated delete uploads" on storage.objects;
 create policy "authenticated delete uploads" on storage.objects
-  for delete to authenticated using (bucket_id = 'uploads');
+  for delete to authenticated using (bucket_id = 'lg_backend');

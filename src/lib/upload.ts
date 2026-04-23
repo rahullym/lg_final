@@ -1,6 +1,6 @@
 import { supabaseForUser } from './supabase';
 
-const BUCKET = 'uploads';
+const BUCKET = (import.meta.env.PUBLIC_SUPABASE_BUCKET ?? 'lg_backend') as string;
 
 // Accepts a File from a multipart/form-data request, uploads it to the
 // `uploads` bucket under a unique path, and returns the public URL so it can
