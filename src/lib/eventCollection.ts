@@ -78,10 +78,11 @@ export async function getEvent(client: SupabaseClient, table: EventTable, id: st
 }
 
 // Walk through slug variants until we find one not already taken in `table`.
-// `ignoreId` lets edit flows keep the row's own slug.
+// `ignoreId` lets edit flows keep the row's own slug. Accepts any table
+// name (string) so the same helper works for posts too.
 export async function uniqueSlug(
   client: SupabaseClient,
-  table: EventTable,
+  table: EventTable | 'posts' | (string & {}),
   desired: string,
   ignoreId?: string,
 ): Promise<string> {

@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
 import { uploadImage } from '../../../../lib/upload';
 import { slugify } from '../../../../lib/slug';
+import { uniqueSlug } from '../../../../lib/eventCollection';
 
 export const prerender = false;
 
@@ -50,27 +51,18 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
     }
   }
 
+  slug = await uniqueSlug(client, 'posts', slug);
+
   const { error } = await client
     .from('posts')
     .insert({ slug, title, excerpt, cover_image, author, publish_date, category, body, draft })
     .select('id')
     .single();
 
-  if (error) {
-    const msg = isUniqueSlugError(error)
-      ? `A post with slug "${slug}" already exists. Edit that post, or choose a different slug.`
-      : error.message;
-    return redirectWithError(redirect, '/admin/posts/new', msg);
-  }
+  if (error) return redirectWithError(redirect, '/admin/posts/new', error.message);
 
   return redirect('/admin/posts?created=1');
 };
-
-function isUniqueSlugError(err: { code?: string; message?: string }): boolean {
-  // Postgres unique_violation is 23505; PostgREST exposes it as `code`.
-  if (err.code === '23505') return true;
-  return typeof err.message === 'string' && err.message.includes('posts_slug_key');
-}
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {

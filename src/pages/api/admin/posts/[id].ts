@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
 import { uploadImage, deleteFromBucket } from '../../../../lib/upload';
 import { slugify } from '../../../../lib/slug';
+import { uniqueSlug } from '../../../../lib/eventCollection';
 
 export const prerender = false;
 
@@ -22,7 +23,8 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
   const title = String(form.get('title') ?? '').trim();
   if (!title) return redirect(`/admin/posts/${id}?error=${encodeURIComponent('Title is required')}`);
 
-  const slug = (String(form.get('slug') ?? '').trim() || slugify(title));
+  let slug = (String(form.get('slug') ?? '').trim() || slugify(title));
+  slug = await uniqueSlug(client, 'posts', slug, id);
   const excerpt = String(form.get('excerpt') ?? '').trim() || null;
   const author = String(form.get('author') ?? 'Admin').trim();
   const publish_date = String(form.get('publish_date') ?? '').trim() || null;
@@ -46,12 +48,7 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
     .update({ slug, title, excerpt, cover_image, author, publish_date, category, body, draft })
     .eq('id', id);
 
-  if (error) {
-    const msg = error.code === '23505' || error.message.includes('posts_slug_key')
-      ? `Another post already uses the slug "${slug}". Pick a different one.`
-      : error.message;
-    return redirect(`/admin/posts/${id}?error=${encodeURIComponent(msg)}`);
-  }
+  if (error) return redirect(`/admin/posts/${id}?error=${encodeURIComponent(error.message)}`);
 
   if (currentPost?.cover_image && currentPost.cover_image !== cover_image) {
     await deleteFromBucket([currentPost.cover_image], token);
