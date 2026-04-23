@@ -86,6 +86,8 @@ collections:
       - label: Content
         name: body
         widget: markdown
+        modes: ["raw"]
+        editor_components: []
 
   - name: celebrations
     label: "Life @ Gurukul — Celebrations"
@@ -138,6 +140,8 @@ collections:
       - label: Description
         name: body
         widget: markdown
+        modes: ["raw"]
+        editor_components: []
         required: false
         hint: "Optional rich text description."
 
@@ -189,6 +193,8 @@ collections:
       - label: Description
         name: body
         widget: markdown
+        modes: ["raw"]
+        editor_components: []
         required: false
 
   - name: infrastructure-features
@@ -252,6 +258,8 @@ collections:
       - label: Extended Content
         name: body
         widget: markdown
+        modes: ["raw"]
+        editor_components: []
         required: false
 
   - name: infrastructure-gallery
