@@ -1,41 +1,46 @@
 ---
-import { getCollection } from 'astro:content';
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import BlogPost from "../../components/BlogPost";
-import type { CollectionEntry } from 'astro:content';
+import { supabase } from "../../lib/supabase";
 
-export const prerender = true;
+const { slug } = Astro.params;
 
-export async function getStaticPaths() {
-    const posts = await getCollection('posts', ({ data }) => !data.draft);
+const { data: post, error } = await supabase
+  .from('posts')
+  .select('slug, title, excerpt, cover_image, author, publish_date, category, body, draft')
+  .eq('slug', slug)
+  .eq('draft', false)
+  .maybeSingle();
 
-    return posts.map((post) => ({
-        params: { slug: post.slug },
-        props: { post },
-    }));
+if (error) {
+  console.error('Failed to load post from Supabase:', error.message);
 }
 
-type Props = { post: CollectionEntry<'posts'> };
+if (!post) {
+  return new Response(null, { status: 404 });
+}
 
-const { post } = Astro.props;
-const { Content } = await post.render();
-
-const { title, excerpt, image, date } = post.data;
-const description = excerpt ?? '';
-const heroImage = image ?? null;
-const formattedDate = date ?? '';
+const displayPost = {
+  title: post.title,
+  image: post.cover_image ?? '',
+  author: post.author ?? 'Admin',
+  date: post.publish_date ?? '',
+  category: post.category ?? '',
+};
 ---
 
 <Layout
-    title={`${title} | Logistics Gurukul Blog`}
-    description={description}
+    title={`${post.title} | Logistics Gurukul Blog`}
+    description={post.excerpt ?? ''}
 >
     <Navbar client:load />
     <main>
-        <BlogPost post={post.data} client:load>
-            <Content />
+        <BlogPost post={displayPost} client:load>
+            <div class="blog-content" set:html={post.body ?? ''} />
         </BlogPost>
     </main>
     <Footer client:visible />
