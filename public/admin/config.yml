@@ -5,9 +5,6 @@ backend:
   base_url: https://decap-oauth-proxy.rahul-06a.workers.dev
   auth_endpoint: /auth
 
-# Enables local testing — only activates on localhost, ignored in production
-local_backend: true
-
 # Where uploaded images are stored on disk (relative to repo root)
 media_folder: public/images/uploads
 # How those images are referenced in content
