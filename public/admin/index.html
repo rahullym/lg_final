@@ -156,40 +156,67 @@
             flex-shrink: 0 !important;
           }
 
-          /* Markdown widget toolbar: force horizontal layout.
-             Scope everything under [class*="MarkdownToolbar"] so nothing
-             leaks onto the page-level editor action bar (Publish / Delete).
-             Decap v3's markdown editor toolbar uses an emotion class with
-             the "MarkdownToolbar" substring. */
-          [class*="MarkdownToolbar"] {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-            align-items: center !important;
-            gap: 2px !important;
-            padding: 6px 8px !important;
-          }
-          [class*="MarkdownToolbar"] > * {
-            display: inline-flex !important;
-            flex: 0 0 auto !important;
-          }
-          [class*="MarkdownToolbar"] button {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 32px !important;
-            height: 32px !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            flex: 0 0 auto !important;
-          }
-          [class*="MarkdownToolbar"] button svg,
-          [class*="MarkdownToolbar"] button img {
-            width: 16px !important;
-            height: 16px !important;
-          }
         `;
         document.head.appendChild(style);
+        fixMarkdownToolbars();
+      }
+
+      // Decap v3's markdown widget toolbar has been observed rendering with
+      // its icon buttons stacked vertically (one per row) instead of a
+      // horizontal strip. Class names are emotion-generated and differ
+      // between builds, so instead of guessing selectors we detect the
+      // toolbar structurally: any element that has 5+ direct <button>
+      // children where each button contains a single <svg> icon is a
+      // toolbar. We then force row layout on the container and clamp the
+      // button size inline so later Decap updates can't overwrite us.
+      function fixMarkdownToolbars() {
+        const TOOLBAR_MIN_BUTTONS = 5;
+
+        const apply = (container) => {
+          if (container.dataset.lguruToolbarFixed === '1') return;
+          const buttons = [...container.children].filter(
+            (el) => el.tagName === 'BUTTON' && el.querySelector('svg'),
+          );
+          if (buttons.length < TOOLBAR_MIN_BUTTONS) return;
+
+          container.style.setProperty('display', 'flex', 'important');
+          container.style.setProperty('flex-direction', 'row', 'important');
+          container.style.setProperty('flex-wrap', 'wrap', 'important');
+          container.style.setProperty('align-items', 'center', 'important');
+          container.style.setProperty('gap', '2px', 'important');
+          container.style.setProperty('padding', '6px 8px', 'important');
+          container.style.setProperty('width', 'auto', 'important');
+
+          buttons.forEach((btn) => {
+            btn.style.setProperty('display', 'inline-flex', 'important');
+            btn.style.setProperty('align-items', 'center', 'important');
+            btn.style.setProperty('justify-content', 'center', 'important');
+            btn.style.setProperty('width', '34px', 'important');
+            btn.style.setProperty('height', '34px', 'important');
+            btn.style.setProperty('padding', '0', 'important');
+            btn.style.setProperty('margin', '0', 'important');
+            btn.style.setProperty('flex', '0 0 auto', 'important');
+            const icon = btn.querySelector('svg');
+            if (icon) {
+              icon.style.setProperty('width', '16px', 'important');
+              icon.style.setProperty('height', '16px', 'important');
+            }
+          });
+
+          container.dataset.lguruToolbarFixed = '1';
+        };
+
+        const scan = () => {
+          document.querySelectorAll('button').forEach((btn) => {
+            if (btn.parentElement) apply(btn.parentElement);
+          });
+        };
+
+        scan();
+        // Re-scan as Decap mounts editors on demand (switching entries,
+        // toggling Rich Text / Markdown modes, etc.).
+        const observer = new MutationObserver(() => scan());
+        observer.observe(document.body, { childList: true, subtree: true });
       }
     </script>
   </body>
