@@ -56,10 +56,21 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
     .select('id')
     .single();
 
-  if (error) return redirectWithError(redirect, '/admin/posts/new', error.message);
+  if (error) {
+    const msg = isUniqueSlugError(error)
+      ? `A post with slug "${slug}" already exists. Edit that post, or choose a different slug.`
+      : error.message;
+    return redirectWithError(redirect, '/admin/posts/new', msg);
+  }
 
   return redirect('/admin/posts?created=1');
 };
+
+function isUniqueSlugError(err: { code?: string; message?: string }): boolean {
+  // Postgres unique_violation is 23505; PostgREST exposes it as `code`.
+  if (err.code === '23505') return true;
+  return typeof err.message === 'string' && err.message.includes('posts_slug_key');
+}
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {

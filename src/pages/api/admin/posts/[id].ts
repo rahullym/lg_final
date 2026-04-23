@@ -40,7 +40,12 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
     .update({ slug, title, excerpt, cover_image, author, publish_date, category, body, draft })
     .eq('id', id);
 
-  if (error) return redirect(`/admin/posts/${id}?error=${encodeURIComponent(error.message)}`);
+  if (error) {
+    const msg = error.code === '23505' || error.message.includes('posts_slug_key')
+      ? `Another post already uses the slug "${slug}". Pick a different one.`
+      : error.message;
+    return redirect(`/admin/posts/${id}?error=${encodeURIComponent(msg)}`);
+  }
 
   return redirect(`/admin/posts/${id}?saved=1`);
 };
