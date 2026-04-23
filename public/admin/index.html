@@ -106,7 +106,11 @@
         };
 
         const s = document.createElement('script');
-        s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        // Pinned to 3.1.3 — later 3.x releases shipped a media-library UI
+        // regression that renders the picker modal with overlapping search
+        // and vertically-stacked action buttons. Bump this only after
+        // verifying the media picker still renders cleanly.
+        s.src = 'https://unpkg.com/decap-cms@3.1.3/dist/decap-cms.js';
         document.body.appendChild(s);
       }
     </script>
