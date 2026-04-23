@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
-import { uploadImage } from '../../../../lib/upload';
+import { uploadImage, deleteFromBucket } from '../../../../lib/upload';
 import { slugify } from '../../../../lib/slug';
 
 export const prerender = false;
@@ -9,6 +9,12 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
   const id = String(params.id);
   const token = locals.accessToken!;
   const client = supabaseForUser(token);
+
+  const { data: currentPost } = await client
+    .from('posts')
+    .select('cover_image')
+    .eq('id', id)
+    .maybeSingle();
 
   const form = await request.formData().catch(() => null);
   if (!form) return redirect(`/admin/posts/${id}?error=${encodeURIComponent('Invalid form data')}`);
@@ -47,6 +53,10 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
     return redirect(`/admin/posts/${id}?error=${encodeURIComponent(msg)}`);
   }
 
+  if (currentPost?.cover_image && currentPost.cover_image !== cover_image) {
+    await deleteFromBucket([currentPost.cover_image], token);
+  }
+
   return redirect(`/admin/posts/${id}?saved=1`);
 };
 
@@ -62,7 +72,17 @@ export const DELETE: APIRoute = async ({ params, locals, redirect }) => {
   const id = String(params.id);
   const token = locals.accessToken!;
   const client = supabaseForUser(token);
+
+  const { data: row } = await client
+    .from('posts')
+    .select('cover_image')
+    .eq('id', id)
+    .maybeSingle();
+
   const { error } = await client.from('posts').delete().eq('id', id);
   if (error) return redirect(`/admin/posts/${id}?error=${encodeURIComponent(error.message)}`);
+
+  if (row?.cover_image) await deleteFromBucket([row.cover_image], token);
+
   return redirect('/admin/posts?deleted=1');
 };

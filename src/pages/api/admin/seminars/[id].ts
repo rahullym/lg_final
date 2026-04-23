@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
 import { readEventForm, getEvent, uniqueSlug } from '../../../../lib/eventCollection';
+import { deleteFromBucket } from '../../../../lib/upload';
 
 export const prerender = false;
 
@@ -34,6 +35,14 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
 
   const { error } = await client.from('seminars').update(input).eq('id', id);
   if (error) return redirect(`/admin/seminars/${id}?error=${encodeURIComponent(error.message)}`);
+
+  const toRemove: string[] = [];
+  if (current.cover && current.cover !== input.cover) toRemove.push(current.cover);
+  const oldGallery: string[] = Array.isArray(current.gallery) ? current.gallery : [];
+  const newGallery = new Set(input.gallery);
+  for (const url of oldGallery) if (!newGallery.has(url)) toRemove.push(url);
+  if (toRemove.length > 0) await deleteFromBucket(toRemove, token);
+
   return redirect(`/admin/seminars/${id}?saved=1`);
 };
 
@@ -46,8 +55,20 @@ export const POST: APIRoute = async (ctx) => {
 
 export const DELETE: APIRoute = async ({ params, locals, redirect }) => {
   const id = String(params.id);
-  const client = supabaseForUser(locals.accessToken!);
+  const token = locals.accessToken!;
+  const client = supabaseForUser(token);
+
+  const { data: row } = await getEvent(client, 'seminars', id);
+
   const { error } = await client.from('seminars').delete().eq('id', id);
   if (error) return redirect(`/admin/seminars/${id}?error=${encodeURIComponent(error.message)}`);
+
+  if (row) {
+    const urls: string[] = [];
+    if (row.cover) urls.push(row.cover);
+    if (Array.isArray(row.gallery)) urls.push(...row.gallery);
+    if (urls.length > 0) await deleteFromBucket(urls, token);
+  }
+
   return redirect('/admin/seminars?deleted=1');
 };

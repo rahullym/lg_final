@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
-import { uploadImage } from '../../../../lib/upload';
+import { uploadImage, deleteFromBucket } from '../../../../lib/upload';
 
 export const prerender = false;
 
@@ -8,6 +8,13 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
   const id = String(params.id);
   const token = locals.accessToken!;
   const client = supabaseForUser(token);
+
+  // Load current row so we can wipe the old file if it's replaced.
+  const { data: current } = await client
+    .from('infrastructure_gallery')
+    .select('image')
+    .eq('id', id)
+    .maybeSingle();
 
   const form = await request.formData().catch(() => null);
   if (!form) return redirect(`/admin/infrastructure-gallery/${id}?error=${encodeURIComponent('Invalid form')}`);
@@ -36,6 +43,10 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
     .eq('id', id);
   if (error) return redirect(`/admin/infrastructure-gallery/${id}?error=${encodeURIComponent(error.message)}`);
 
+  if (current?.image && current.image !== image) {
+    await deleteFromBucket([current.image], token);
+  }
+
   return redirect(`/admin/infrastructure-gallery/${id}?saved=1`);
 };
 
@@ -48,8 +59,19 @@ export const POST: APIRoute = async (ctx) => {
 
 export const DELETE: APIRoute = async ({ params, locals, redirect }) => {
   const id = String(params.id);
-  const client = supabaseForUser(locals.accessToken!);
+  const token = locals.accessToken!;
+  const client = supabaseForUser(token);
+
+  const { data: row } = await client
+    .from('infrastructure_gallery')
+    .select('image')
+    .eq('id', id)
+    .maybeSingle();
+
   const { error } = await client.from('infrastructure_gallery').delete().eq('id', id);
   if (error) return redirect(`/admin/infrastructure-gallery/${id}?error=${encodeURIComponent(error.message)}`);
+
+  if (row?.image) await deleteFromBucket([row.image], token);
+
   return redirect('/admin/infrastructure-gallery?deleted=1');
 };
