@@ -1,6 +1,8 @@
 -- Logistics Gurukul — Supabase schema.
 -- Run this in the Supabase SQL editor: Dashboard → SQL → New query → paste → Run.
--- Safe to re-run: every CREATE uses IF NOT EXISTS.
+-- Safe to re-run: tables use CREATE TABLE IF NOT EXISTS; policies are
+-- dropped before being (re)created because Postgres doesn't support
+-- CREATE POLICY IF NOT EXISTS.
 
 -- ============================================================
 -- 1. Tables
@@ -98,80 +100,108 @@ alter table public.seminars enable row level security;
 alter table public.infrastructure_features enable row level security;
 alter table public.infrastructure_gallery enable row level security;
 
--- Public can read non-draft entries (published content). Admin app reads via
--- service-role key so it sees everything regardless.
-create policy if not exists "public read non-draft posts"
-  on public.posts for select using (draft = false);
-create policy if not exists "public read non-draft celebrations"
-  on public.celebrations for select using (draft = false);
-create policy if not exists "public read non-draft seminars"
-  on public.seminars for select using (draft = false);
-create policy if not exists "public read non-draft features"
-  on public.infrastructure_features for select using (draft = false);
-create policy if not exists "public read gallery"
-  on public.infrastructure_gallery for select using (true);
-
--- Authenticated users can write. (Only admin user exists in auth.users.)
-create policy if not exists "auth insert posts" on public.posts
-  for insert to authenticated with check (true);
-create policy if not exists "auth update posts" on public.posts
-  for update to authenticated using (true) with check (true);
-create policy if not exists "auth delete posts" on public.posts
-  for delete to authenticated using (true);
-create policy if not exists "auth read all posts" on public.posts
+-- posts
+drop policy if exists "public read non-draft posts" on public.posts;
+create policy "public read non-draft posts" on public.posts
+  for select using (draft = false);
+drop policy if exists "auth read all posts" on public.posts;
+create policy "auth read all posts" on public.posts
   for select to authenticated using (true);
-
-create policy if not exists "auth insert celebrations" on public.celebrations
+drop policy if exists "auth insert posts" on public.posts;
+create policy "auth insert posts" on public.posts
   for insert to authenticated with check (true);
-create policy if not exists "auth update celebrations" on public.celebrations
+drop policy if exists "auth update posts" on public.posts;
+create policy "auth update posts" on public.posts
   for update to authenticated using (true) with check (true);
-create policy if not exists "auth delete celebrations" on public.celebrations
+drop policy if exists "auth delete posts" on public.posts;
+create policy "auth delete posts" on public.posts
   for delete to authenticated using (true);
-create policy if not exists "auth read all celebrations" on public.celebrations
-  for select to authenticated using (true);
 
-create policy if not exists "auth insert seminars" on public.seminars
+-- celebrations
+drop policy if exists "public read non-draft celebrations" on public.celebrations;
+create policy "public read non-draft celebrations" on public.celebrations
+  for select using (draft = false);
+drop policy if exists "auth read all celebrations" on public.celebrations;
+create policy "auth read all celebrations" on public.celebrations
+  for select to authenticated using (true);
+drop policy if exists "auth insert celebrations" on public.celebrations;
+create policy "auth insert celebrations" on public.celebrations
   for insert to authenticated with check (true);
-create policy if not exists "auth update seminars" on public.seminars
+drop policy if exists "auth update celebrations" on public.celebrations;
+create policy "auth update celebrations" on public.celebrations
   for update to authenticated using (true) with check (true);
-create policy if not exists "auth delete seminars" on public.seminars
+drop policy if exists "auth delete celebrations" on public.celebrations;
+create policy "auth delete celebrations" on public.celebrations
   for delete to authenticated using (true);
-create policy if not exists "auth read all seminars" on public.seminars
-  for select to authenticated using (true);
 
-create policy if not exists "auth insert features" on public.infrastructure_features
+-- seminars
+drop policy if exists "public read non-draft seminars" on public.seminars;
+create policy "public read non-draft seminars" on public.seminars
+  for select using (draft = false);
+drop policy if exists "auth read all seminars" on public.seminars;
+create policy "auth read all seminars" on public.seminars
+  for select to authenticated using (true);
+drop policy if exists "auth insert seminars" on public.seminars;
+create policy "auth insert seminars" on public.seminars
   for insert to authenticated with check (true);
-create policy if not exists "auth update features" on public.infrastructure_features
+drop policy if exists "auth update seminars" on public.seminars;
+create policy "auth update seminars" on public.seminars
   for update to authenticated using (true) with check (true);
-create policy if not exists "auth delete features" on public.infrastructure_features
+drop policy if exists "auth delete seminars" on public.seminars;
+create policy "auth delete seminars" on public.seminars
   for delete to authenticated using (true);
-create policy if not exists "auth read all features" on public.infrastructure_features
-  for select to authenticated using (true);
 
-create policy if not exists "auth insert gallery" on public.infrastructure_gallery
+-- infrastructure_features
+drop policy if exists "public read non-draft features" on public.infrastructure_features;
+create policy "public read non-draft features" on public.infrastructure_features
+  for select using (draft = false);
+drop policy if exists "auth read all features" on public.infrastructure_features;
+create policy "auth read all features" on public.infrastructure_features
+  for select to authenticated using (true);
+drop policy if exists "auth insert features" on public.infrastructure_features;
+create policy "auth insert features" on public.infrastructure_features
   for insert to authenticated with check (true);
-create policy if not exists "auth update gallery" on public.infrastructure_gallery
+drop policy if exists "auth update features" on public.infrastructure_features;
+create policy "auth update features" on public.infrastructure_features
   for update to authenticated using (true) with check (true);
-create policy if not exists "auth delete gallery" on public.infrastructure_gallery
+drop policy if exists "auth delete features" on public.infrastructure_features;
+create policy "auth delete features" on public.infrastructure_features
+  for delete to authenticated using (true);
+
+-- infrastructure_gallery (no drafts; public reads everything)
+drop policy if exists "public read gallery" on public.infrastructure_gallery;
+create policy "public read gallery" on public.infrastructure_gallery
+  for select using (true);
+drop policy if exists "auth insert gallery" on public.infrastructure_gallery;
+create policy "auth insert gallery" on public.infrastructure_gallery
+  for insert to authenticated with check (true);
+drop policy if exists "auth update gallery" on public.infrastructure_gallery;
+create policy "auth update gallery" on public.infrastructure_gallery
+  for update to authenticated using (true) with check (true);
+drop policy if exists "auth delete gallery" on public.infrastructure_gallery;
+create policy "auth delete gallery" on public.infrastructure_gallery
   for delete to authenticated using (true);
 
 -- ============================================================
--- 3. Storage bucket for uploads
+-- 3. Storage bucket policies
 -- ============================================================
--- Run ONCE via the Dashboard: Storage → New bucket
+-- First create the bucket in the Dashboard: Storage → New bucket
 --   name:          uploads
 --   public bucket: YES
--- Then run the SQL below (in the SQL editor) to allow authenticated
--- users to upload/update/delete objects in that bucket and public read.
+-- Then run the policies below (same SQL editor).
 
-create policy if not exists "public read uploads"
-  on storage.objects for select using (bucket_id = 'uploads');
+drop policy if exists "public read uploads" on storage.objects;
+create policy "public read uploads" on storage.objects
+  for select using (bucket_id = 'uploads');
 
-create policy if not exists "authenticated insert uploads"
-  on storage.objects for insert to authenticated with check (bucket_id = 'uploads');
+drop policy if exists "authenticated insert uploads" on storage.objects;
+create policy "authenticated insert uploads" on storage.objects
+  for insert to authenticated with check (bucket_id = 'uploads');
 
-create policy if not exists "authenticated update uploads"
-  on storage.objects for update to authenticated using (bucket_id = 'uploads');
+drop policy if exists "authenticated update uploads" on storage.objects;
+create policy "authenticated update uploads" on storage.objects
+  for update to authenticated using (bucket_id = 'uploads');
 
-create policy if not exists "authenticated delete uploads"
-  on storage.objects for delete to authenticated using (bucket_id = 'uploads');
+drop policy if exists "authenticated delete uploads" on storage.objects;
+create policy "authenticated delete uploads" on storage.objects
+  for delete to authenticated using (bucket_id = 'uploads');
