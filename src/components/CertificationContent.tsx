@@ -134,28 +134,56 @@ export default function CertificationContent() {
                 ))}
               </ul>
 
-              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                <p className="text-sm font-bold text-slate-500 uppercase mb-2">
-                  Verification Links
-                </p>
-                <div className="flex flex-col gap-2">
+              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-5">
+                <div>
+                  <p className="text-sm font-bold text-slate-500 uppercase mb-2">
+                    Verification Links
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <a
+                      id="cert-sted-home-link"
+                      href="https://www.stedcouncil.com/STED/home.php#hm"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      Official STED Council Home
+                    </a>
+                    <a
+                      id="cert-view-accreditations-link"
+                      href="https://www.stedcouncil.com/STED/accredition.php#acradtn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      View Accreditations
+                    </a>
+                  </div>
+                </div>
+
+                <div className="pt-5 border-t border-slate-200">
+                  <p className="text-sm font-bold text-slate-500 uppercase mb-3">
+                    Official Documents
+                  </p>
                   <a
-                    id="cert-sted-home-link"
-                    href="https://www.stedcouncil.com/STED/home.php#hm"
+                    id="cert-sted-approval-doc"
+                    href="/documents/sted-franchise-approval.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 font-bold hover:underline"
+                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-sm transition-all group"
                   >
-                    Official STED Council Home
-                  </a>
-                  <a
-                    id="cert-view-accreditations-link"
-                    href="https://www.stedcouncil.com/STED/accredition.php#acradtn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 font-bold hover:underline"
-                  >
-                    View Accreditations
+                    <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-slate-900 text-sm group-hover:text-blue-700 transition-colors">ATC Approval Letter</div>
+                      <div className="text-slate-500 text-xs">Authorised Training Centre · 1432/EKM/26</div>
+                    </div>
+                    <svg className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                   </a>
                 </div>
               </div>
@@ -232,60 +260,111 @@ export default function CertificationContent() {
                 ))}
               </ul>
 
-              <div className="p-6 bg-white rounded-2xl border border-slate-200">
-                <p className="text-sm font-bold text-slate-500 uppercase mb-2">
-                  Verification & More info
-                </p>
-                <div className="flex flex-col gap-2">
-                  <a
-                    id="cert-fics-home-link"
-                    href="https://ficsuk.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 font-bold hover:underline"
-                  >
-                    FICS Official Website
-                  </a>
-                  <a
-                    id="cert-fics-verify-link"
-                    href="https://ficsuk.com/verify"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 font-bold hover:underline"
-                  >
-                    Verify FICS Certificate
-                  </a>
+              <div className="p-6 bg-white rounded-2xl border border-slate-200 space-y-5">
+                <div>
+                  <p className="text-sm font-bold text-slate-500 uppercase mb-2">
+                    Verification & More info
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <a
+                      id="cert-fics-home-link"
+                      href="https://ficsuk.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      FICS Official Website
+                    </a>
+                    <a
+                      id="cert-fics-verify-link"
+                      href="https://ficsuk.com/verify"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      Verify FICS Certificate
+                    </a>
+                  </div>
+                </div>
+
+                <div className="pt-5 border-t border-slate-200">
+                  <p className="text-sm font-bold text-slate-500 uppercase mb-3">
+                    Official Documents
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <a
+                      id="cert-fics-institute-doc"
+                      href="/documents/fics-institute-validation.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-sm transition-all group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-slate-900 text-sm group-hover:text-blue-700 transition-colors">FICS UK Institute Validation</div>
+                        <div className="text-slate-500 text-xs">Authorised Testing Centre · FICSCP1168</div>
+                      </div>
+                      <svg className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                    <a
+                      id="cert-fics-sample-doc"
+                      href="/documents/fics-student-certificate-sample.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-sm transition-all group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-slate-900 text-sm group-hover:text-blue-700 transition-colors">Sample Student Certificate</div>
+                        <div className="text-slate-500 text-xs">International Diploma · Logistics & SCM</div>
+                      </div>
+                      <svg className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="lg:w-1/2 relative">
               <div className="absolute inset-0 bg-emerald-600/5 rounded-3xl transform -rotate-3 scale-95" />
-              <div className="relative bg-slate-900 text-white p-10 rounded-3xl shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                  <Globe className="w-32 h-32" />
+              <a
+                id="cert-fics-institute-image"
+                href="/documents/fics-institute-validation.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open FICS UK Institute Validation certificate (PDF)"
+                className="relative block rounded-3xl overflow-hidden shadow-2xl group bg-white"
+              >
+                <img
+                  src="/images/fics-institute-validation.png"
+                  alt="FICS UK — Courseware Partner certificate for Logistics Gurukul, Authorised Testing Centre (FICSCP1168)"
+                  className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <div>
+                    <div className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">FICS UK</div>
+                    <div className="text-white font-bold text-sm">View Official Certificate</div>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">
-                  UK Standard Education
-                </h3>
-                <p className="text-slate-300 leading-relaxed mb-8">
-                  "We believe that academic courses should bear social
-                  relevance. Our internationally recognised programs are
-                  designed to impart in-depth knowledge and give mastery over
-                  relevant subjects."
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    UK Registered
-                  </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    Global Reach
-                  </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    Skill-Oriented
-                  </div>
-                </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
