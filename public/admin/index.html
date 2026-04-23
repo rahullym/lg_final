@@ -157,12 +157,11 @@
           }
 
           /* Markdown widget toolbar: force horizontal layout.
-             Decap v3 uses emotion classes like MarkdownToolbar / Toolbar on
-             the container and ToolbarButton on each button. Targeting by
-             class prefix avoids breakage across releases. */
-          [class*="MarkdownToolbar"],
-          [class*="RichTextEditor"] [class*="Toolbar"],
-          [class*="EditorToolbar"] {
+             Scope everything under [class*="MarkdownToolbar"] so nothing
+             leaks onto the page-level editor action bar (Publish / Delete).
+             Decap v3's markdown editor toolbar uses an emotion class with
+             the "MarkdownToolbar" substring. */
+          [class*="MarkdownToolbar"] {
             display: flex !important;
             flex-direction: row !important;
             flex-wrap: wrap !important;
@@ -170,16 +169,11 @@
             gap: 2px !important;
             padding: 6px 8px !important;
           }
-          [class*="MarkdownToolbar"] > *,
-          [class*="RichTextEditor"] [class*="Toolbar"] > *,
-          [class*="EditorToolbar"] > * {
+          [class*="MarkdownToolbar"] > * {
             display: inline-flex !important;
             flex: 0 0 auto !important;
-            width: auto !important;
-            height: auto !important;
           }
-          [class*="ToolbarButton"],
-          [class*="ToolbarItem"] {
+          [class*="MarkdownToolbar"] button {
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -189,8 +183,8 @@
             margin: 0 !important;
             flex: 0 0 auto !important;
           }
-          [class*="ToolbarButton"] svg,
-          [class*="ToolbarItem"] svg {
+          [class*="MarkdownToolbar"] button svg,
+          [class*="MarkdownToolbar"] button img {
             width: 16px !important;
             height: 16px !important;
           }
