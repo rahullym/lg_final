@@ -1,0 +1,55 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import EventForm from '../../../components/admin/EventForm.astro';
+import { supabaseForUser } from '../../../lib/supabase';
+import { getEvent } from '../../../lib/eventCollection';
+
+const id = Astro.params.id!;
+const client = supabaseForUser(Astro.locals.accessToken!);
+const { data: item, error } = await getEvent(client, 'seminars', id);
+
+if (error || !item) return Astro.redirect('/admin/seminars?missing=1');
+
+const params = new URL(Astro.request.url).searchParams;
+const saved = params.has('saved');
+const err = params.get('error');
+
+const defaults = {
+  title: item.title,
+  slug: item.slug,
+  year: item.year,
+  cover: item.cover,
+  gallery: Array.isArray(item.gallery) ? item.gallery : [],
+  order: item.order ?? 0,
+  body: item.body ?? '',
+  draft: !!item.draft,
+};
+---
+
+<AdminShell title={`Edit: ${item.title}`} breadcrumbs={[{ label: 'Seminars & Events', href: '/admin/seminars' }, { label: 'Edit' }]}>
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-start justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900 mb-1">Edit Seminar</h1>
+        <p class="text-slate-600 text-sm font-mono">/{item.slug}</p>
+      </div>
+      <form method="POST" action={`/api/admin/seminars/${item.id}`} onsubmit="return confirm('Delete this seminar and all its gallery photos?');">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="px-4 py-2 bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold rounded-lg text-sm transition-colors">Delete</button>
+      </form>
+    </div>
+
+    {saved && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Saved.</div>}
+    {err && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{err}</div>}
+
+    <EventForm
+      action={`/api/admin/seminars/${item.id}`}
+      submitLabel="Save Changes"
+      backHref="/admin/seminars"
+      method="edit"
+      defaults={defaults}
+    />
+  </div>
+</AdminShell>

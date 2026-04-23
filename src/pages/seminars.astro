@@ -1,21 +1,27 @@
 ---
-import { getCollection } from "astro:content";
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
+import { supabase } from "../lib/supabase";
 
-const entries = await getCollection("seminars", ({ data }) => !data.draft);
-const seminars = entries
-    .map((entry) => ({
-        id: entry.slug,
-        title: entry.data.title,
-        year: entry.data.year,
-        cover: entry.data.cover,
-        gallery: entry.data.gallery,
-        order: entry.data.order,
-    }))
-    .sort((a, b) => a.order - b.order);
+const { data: rows } = await supabase
+    .from("seminars")
+    .select('id, slug, title, year, cover, gallery, "order"')
+    .eq("draft", false)
+    .order("order", { ascending: true })
+    .order("year", { ascending: false });
+
+const seminars = (rows ?? []).map((r) => ({
+    id: r.slug,
+    title: r.title,
+    year: r.year,
+    cover: r.cover,
+    gallery: Array.isArray(r.gallery) ? r.gallery : [],
+    order: r.order ?? 0,
+}));
 ---
 
 <Layout
