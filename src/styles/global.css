@@ -162,3 +162,25 @@ h6 {
 .blog-content img {
     @apply rounded-3xl my-12 shadow-xl;
 }
+
+/* TipTap admin editor surface — baseline typography inside the
+   contenteditable so editors see approximate rendering while typing. */
+.tiptap-editor h2 { @apply text-2xl font-bold text-slate-900 mt-5 mb-2; }
+.tiptap-editor h3 { @apply text-xl font-bold text-slate-900 mt-4 mb-2; }
+.tiptap-editor h4 { @apply text-lg font-bold text-slate-900 mt-3 mb-2; }
+.tiptap-editor p { @apply text-slate-800 leading-relaxed my-3; }
+.tiptap-editor ul { @apply list-disc pl-6 my-3 space-y-1; }
+.tiptap-editor ol { @apply list-decimal pl-6 my-3 space-y-1; }
+.tiptap-editor li { @apply text-slate-800 leading-relaxed; }
+.tiptap-editor a { @apply text-blue-600 underline; }
+.tiptap-editor blockquote { @apply border-l-4 border-blue-500 pl-4 italic text-slate-700 my-4; }
+.tiptap-editor img { @apply rounded-lg my-4 max-w-full h-auto; }
+.tiptap-editor strong { @apply font-bold; }
+.tiptap-editor em { @apply italic; }
+.tiptap-editor code { @apply px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 text-sm font-mono; }
+
+/* Placeholder when empty */
+.tiptap-editor p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    @apply text-slate-400 float-left h-0 pointer-events-none;
+}
