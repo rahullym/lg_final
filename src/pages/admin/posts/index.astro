@@ -11,7 +11,10 @@ const { data: posts, error } = await client
   .select('id, slug, title, category, publish_date, draft, cover_image, updated_at')
   .order('updated_at', { ascending: false });
 
-const created = new URL(Astro.request.url).searchParams.has('created');
+const params = new URL(Astro.request.url).searchParams;
+const created = params.has('created');
+const deleted = params.has('deleted');
+const missing = params.has('missing');
 ---
 
 <AdminShell title="Blog Posts" breadcrumbs={[{ label: 'Blog Posts' }]}>
@@ -73,6 +76,18 @@ const created = new URL(Astro.request.url).searchParams.has('created');
   {created && (
     <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
       Post created successfully.
+    </div>
+  )}
+
+  {deleted && (
+    <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
+      Post deleted.
+    </div>
+  )}
+
+  {missing && (
+    <div class="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm font-semibold">
+      That post no longer exists.
     </div>
   )}
 
