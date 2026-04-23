@@ -1,11 +1,16 @@
 ---
+export const prerender = false;
+
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
 import ImageGallery from "../components/ImageGallery";
+import { supabase } from "../lib/supabase";
 
+// Features are still read from the markdown content collection until
+// a Supabase editor for them ships.
 const featureEntries = await getCollection(
   "infrastructure-features",
   ({ data }) => !data.draft,
@@ -22,15 +27,19 @@ const features = featureEntries
   }))
   .sort((a, b) => a.order - b.order);
 
-const galleryEntries = await getCollection("infrastructure-gallery");
-const galleryImages = galleryEntries
-  .map((entry) => ({
-    id: entry.slug,
-    src: entry.data.image,
-    alt: entry.data.alt,
-    order: entry.data.order,
-  }))
-  .sort((a, b) => a.order - b.order);
+// Gallery images come from Supabase so admins can upload without a rebuild.
+const { data: galleryRows } = await supabase
+  .from("infrastructure_gallery")
+  .select('id, image, alt, "order"')
+  .order("order", { ascending: true })
+  .order("created_at", { ascending: true });
+
+const galleryImages = (galleryRows ?? []).map((r) => ({
+  id: r.id,
+  src: r.image,
+  alt: r.alt,
+  order: r.order,
+}));
 ---
 
 <Layout
