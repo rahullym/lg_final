@@ -1,0 +1,130 @@
+---
+interface Props {
+  action: string;
+  submitLabel: string;
+  backHref: string;
+  method?: 'create' | 'edit';
+  defaults?: {
+    title?: string;
+    slug?: string;
+    year?: string;
+    cover?: string | null;
+    gallery?: string[];
+    order?: number;
+    body?: string;
+    draft?: boolean;
+  };
+}
+
+const { action, submitLabel, backHref, method = 'create', defaults = {} } = Astro.props;
+const gallery = defaults.gallery ?? [];
+---
+
+<form method="POST" action={action} enctype="multipart/form-data"
+      class="bg-white rounded-2xl border border-slate-200 p-8 space-y-6">
+  {method === 'edit' && <input type="hidden" name="_method" value="PATCH" />}
+  <input type="hidden" name="cover" value={defaults.cover ?? ''} />
+
+  <div class="grid sm:grid-cols-2 gap-6">
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="title">Title *</label>
+      <input id="title" name="title" type="text" required maxlength="200" value={defaults.title ?? ''}
+        class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+    </div>
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="year">Year *</label>
+      <input id="year" name="year" type="text" required value={defaults.year ?? ''}
+        placeholder="e.g. 2025"
+        class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="slug">Slug</label>
+    <input id="slug" name="slug" type="text" pattern="[a-z0-9-]*" value={defaults.slug ?? ''}
+      placeholder="auto-generated from title"
+      class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 font-mono" />
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Cover Image {method === 'create' && <span>*</span>}</label>
+    {defaults.cover && (
+      <div class="mb-3">
+        <img src={defaults.cover} alt="current cover" class="h-32 w-auto rounded-lg border border-slate-200" />
+        <p class="text-xs text-slate-500 mt-1 font-mono break-all">{defaults.cover}</p>
+      </div>
+    )}
+    <input name="cover_file" type="file" accept="image/*" required={method === 'create' && !defaults.cover}
+      class="block w-full text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+    <p class="text-xs text-slate-500 mt-1">
+      {method === 'edit' ? 'Choose a new file to replace the current cover.' : 'The main thumbnail for this event.'}
+    </p>
+  </div>
+
+  {/* Gallery folder */}
+  <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h3 class="text-base font-bold text-slate-900">Gallery</h3>
+        <p class="text-xs text-slate-500">All photos shown inside this event "folder".</p>
+      </div>
+      <span class="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-2.5 py-1 rounded-full">
+        {gallery.length} photo{gallery.length === 1 ? '' : 's'}
+      </span>
+    </div>
+
+    {gallery.length > 0 && (
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 mb-4" id="gallery-grid">
+        {gallery.map((src, idx) => (
+          <div class="gallery-thumb relative group" data-src={src}>
+            <input type="hidden" name="gallery_keep" value={src} />
+            <div class="aspect-square rounded-lg overflow-hidden border border-slate-200 bg-white">
+              <img src={src} alt={`Gallery photo ${idx + 1}`} class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <button type="button"
+              class="gallery-remove absolute top-1 right-1 w-6 h-6 rounded-full bg-red-600 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity shadow"
+              title="Remove from gallery">×</button>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="gallery_files">Add more photos</label>
+    <input id="gallery_files" name="gallery_files" type="file" accept="image/*" multiple
+      class="block w-full text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+    <p class="text-xs text-slate-500 mt-1">Select one or more files — all of them will be uploaded and attached.</p>
+  </div>
+
+  <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+    <a href={backHref} class="text-sm text-slate-600 hover:text-slate-900 font-semibold">Cancel</a>
+    <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">
+      {submitLabel}
+    </button>
+  </div>
+</form>
+
+<script>
+  // Auto-fill slug from title when slug is empty/untouched.
+  const titleEl = document.getElementById('title') as HTMLInputElement | null;
+  const slugEl = document.getElementById('slug') as HTMLInputElement | null;
+  let touched = !!(slugEl?.value);
+  slugEl?.addEventListener('input', () => { touched = true; });
+  titleEl?.addEventListener('input', () => {
+    if (touched || !slugEl) return;
+    slugEl.value = titleEl.value
+      .toLowerCase().trim()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  });
+
+  // Remove-from-gallery: deletes the thumb so its gallery_keep hidden input
+  // is gone from the form submission, which means the backend drops that URL.
+  document.querySelectorAll('.gallery-remove').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      (btn as HTMLElement).closest('.gallery-thumb')?.remove();
+    });
+  });
+</script>

@@ -1,0 +1,140 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import RichTextEditor from '../../../components/admin/RichTextEditor';
+import { supabaseForUser } from '../../../lib/supabase';
+
+const id = Astro.params.id!;
+const token = Astro.locals.accessToken!;
+const client = supabaseForUser(token);
+const { data: post, error } = await client
+  .from('posts')
+  .select('*')
+  .eq('id', id)
+  .single();
+
+if (error || !post) {
+  return Astro.redirect('/admin/posts?missing=1');
+}
+
+const url = new URL(Astro.request.url);
+const saved = url.searchParams.has('saved');
+const pageError = url.searchParams.get('error');
+---
+
+<AdminShell
+  title={`Edit: ${post.title}`}
+  breadcrumbs={[{ label: 'Blog Posts', href: '/admin/posts' }, { label: 'Edit' }]}
+>
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-start justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900 mb-1">Edit Post</h1>
+        <p class="text-slate-600 text-sm font-mono">/{post.slug}</p>
+      </div>
+      <form method="POST" action={`/api/admin/posts/${post.id}`} onsubmit="return confirm('Delete this post? This cannot be undone.');">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button
+          type="submit"
+          class="px-4 py-2 bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold rounded-lg text-sm transition-colors"
+        >
+          Delete
+        </button>
+      </form>
+    </div>
+
+    {saved && (
+      <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
+        Saved.
+      </div>
+    )}
+
+    {pageError && (
+      <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{pageError}</div>
+    )}
+
+    <form
+      method="POST"
+      action={`/api/admin/posts/${post.id}`}
+      enctype="multipart/form-data"
+      class="bg-white rounded-2xl border border-slate-200 p-8 space-y-6"
+    >
+      <input type="hidden" name="_method" value="PATCH" />
+      <input type="hidden" name="cover_image" value={post.cover_image ?? ''} />
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="title">Title *</label>
+        <input id="title" name="title" type="text" required maxlength="200" value={post.title}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="slug">Slug</label>
+        <input id="slug" name="slug" type="text" pattern="[a-z0-9-]*" value={post.slug}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 font-mono" />
+        <p class="text-xs text-slate-500 mt-1">Changing the slug changes the URL the post is published at.</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="excerpt">Excerpt</label>
+        <textarea id="excerpt" name="excerpt" rows="2" maxlength="500"
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">{post.excerpt ?? ''}</textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Cover Image</label>
+        {post.cover_image && (
+          <div class="mb-3">
+            <img src={post.cover_image} alt="current cover" class="h-32 w-auto rounded-lg border border-slate-200" />
+            <p class="text-xs text-slate-500 mt-1 font-mono break-all">{post.cover_image}</p>
+          </div>
+        )}
+        <input
+          name="cover_image_file"
+          type="file"
+          accept="image/*"
+          class="block w-full text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+        />
+        <p class="text-xs text-slate-500 mt-1">Leave empty to keep the current image. Choose a new file to replace it.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="author">Author</label>
+          <input id="author" name="author" type="text" value={post.author ?? 'Admin'}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="publish_date">Publish Date</label>
+          <input id="publish_date" name="publish_date" type="text" value={post.publish_date ?? ''}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="category">Category</label>
+        <input id="category" name="category" type="text" value={post.category ?? ''}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Body</label>
+        <RichTextEditor client:load name="body" initialHtml={post.body ?? ''} placeholder="Write your post…" />
+        <p class="text-xs text-slate-500 mt-1">Use the toolbar to format text, add links, and insert images.</p>
+      </div>
+
+      <div class="flex items-center gap-3 p-4 rounded-lg bg-slate-50 border border-slate-200">
+        <input id="draft" name="draft" type="checkbox" class="w-4 h-4" checked={post.draft} />
+        <label for="draft" class="text-sm font-semibold text-slate-700">Save as draft (not publicly visible)</label>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+        <a href="/admin/posts" class="text-sm text-slate-600 hover:text-slate-900 font-semibold">Back to list</a>
+        <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</AdminShell>

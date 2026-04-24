@@ -1,26 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BlogHero from "../components/BlogHero";
 import BlogGrid from "../components/BlogGrid";
+import { supabase } from "../lib/supabase";
 
-// Fetch posts (which are now directly managed by the CMS) and exclude drafts
-const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const { data: rows, error } = await supabase
+  .from('posts')
+  .select('slug, title, excerpt, cover_image, author, publish_date, category')
+  .eq('draft', false)
+  .order('publish_date', { ascending: false, nullsFirst: false });
 
-const serializedPosts = allPosts.map(post => ({
-  slug: post.slug,
-  title: post.data.title,
-  excerpt: post.data.excerpt ?? '',
-  image: post.data.image ?? '',
-  author: post.data.author,
-  date: post.data.date ?? '',
-  category: post.data.category ?? '',
-  _ts: post.data.date ? new Date(post.data.date).getTime() : 0,
-}))
-.sort((a, b) => b._ts - a._ts)
-.map(({ _ts, ...rest }) => rest);
+if (error) {
+  console.error('Failed to load posts from Supabase:', error.message);
+}
+
+const serializedPosts = (rows ?? [])
+  .map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt ?? '',
+    image: p.cover_image ?? '',
+    author: p.author ?? 'Admin',
+    date: p.publish_date ?? '',
+    category: p.category ?? '',
+    _ts: p.publish_date ? new Date(p.publish_date).getTime() : 0,
+  }))
+  .sort((a, b) => b._ts - a._ts)
+  .map(({ _ts, ...rest }) => rest);
 ---
 
 <Layout

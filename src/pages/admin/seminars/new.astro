@@ -1,0 +1,19 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import EventForm from '../../../components/admin/EventForm.astro';
+
+const err = new URL(Astro.request.url).searchParams.get('error');
+---
+
+<AdminShell title="New Seminar" breadcrumbs={[{ label: 'Seminars & Events', href: '/admin/seminars' }, { label: 'New' }]}>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold text-slate-900 mb-1">New Seminar</h1>
+    <p class="text-slate-600 text-sm mb-8">Add a seminar or event. You can upload multiple gallery photos at once.</p>
+
+    {err && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{err}</div>}
+
+    <EventForm action="/api/admin/seminars" submitLabel="Create Seminar" backHref="/admin/seminars" method="create" />
+  </div>
+</AdminShell>
