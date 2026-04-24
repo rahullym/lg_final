@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 
-import cloudflare from "@astrojs/cloudflare";
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://www.logisticsgurukul.com',
@@ -19,5 +19,5 @@ export default defineConfig({
     sitemap(),
   ],
 
-  adapter: cloudflare()
+  adapter: vercel(),
 });
