@@ -5,14 +5,30 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
+import Pagination from "../components/Pagination.astro";
 import { supabase } from "../lib/supabase";
+
+const PAGE_SIZE = 3;
+const pageParam = parseInt(Astro.url.searchParams.get("page") ?? "1", 10);
+const requestedPage = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
+
+const { count } = await supabase
+    .from("celebrations")
+    .select("id", { count: "exact", head: true })
+    .eq("draft", false);
+
+const totalCount = count ?? 0;
+const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
+const currentPage = Math.min(requestedPage, totalPages);
+const offset = (currentPage - 1) * PAGE_SIZE;
 
 const { data: rows } = await supabase
     .from("celebrations")
-    .select('id, slug, title, year, cover, gallery, "order"')
+    .select('id, slug, title, year, cover, gallery, "order", updated_at')
     .eq("draft", false)
+    .order("updated_at", { ascending: false })
     .order("order", { ascending: true })
-    .order("year", { ascending: false });
+    .range(offset, offset + PAGE_SIZE - 1);
 
 const celebrations = (rows ?? []).map((r) => ({
     id: r.slug,
@@ -77,6 +93,11 @@ const celebrations = (rows ?? []).map((r) => ({
         <!-- Celebrations Gallery -->
         <section class="py-20 lg:pb-24 bg-slate-50 min-h-[60vh]">
             <div class="container mx-auto px-6 space-y-20">
+                {totalCount === 0 && (
+                    <p class="text-center text-slate-500 py-20">
+                        No celebrations to display yet — check back soon.
+                    </p>
+                )}
                 {
                     celebrations.map((event) => (
                         <div
@@ -131,6 +152,12 @@ const celebrations = (rows ?? []).map((r) => ({
                         </div>
                     ))
                 }
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    basePath="/celebrations"
+                />
             </div>
         </section>
 

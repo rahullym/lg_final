@@ -1,0 +1,77 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import { supabaseForUser } from '../../../lib/supabase';
+import { listNewsletters } from '../../../lib/newsletterCollection';
+
+const client = supabaseForUser(Astro.locals.accessToken!);
+const { data: items, error } = await listNewsletters(client);
+
+const params = new URL(Astro.request.url).searchParams;
+const created = params.has('created');
+const deleted = params.has('deleted');
+const missing = params.has('missing');
+
+function formatDate(d: string | null | undefined): string {
+  if (!d) return '';
+  const dt = new Date(d);
+  if (Number.isNaN(dt.getTime())) return d;
+  return dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+}
+---
+
+<AdminShell title="Newsletters" breadcrumbs={[{ label: 'Newsletters' }]}>
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900 mb-1">Newsletters</h1>
+      <p class="text-slate-600 text-sm">Each newsletter is a cover image plus a downloadable PDF.</p>
+    </div>
+    <a href="/admin/newsletters/new" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+      </svg>
+      New Newsletter
+    </a>
+  </div>
+
+  {created && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Newsletter created.</div>}
+  {deleted && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Newsletter deleted.</div>}
+  {missing && <div class="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm font-semibold">That newsletter no longer exists.</div>}
+  {error && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">Failed to load: {error.message}</div>}
+
+  {!error && items && items.length === 0 && (
+    <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center">
+      <p class="text-slate-600 mb-4">No newsletters yet.</p>
+      <a href="/admin/newsletters/new" class="inline-block px-5 py-2.5 bg-blue-600 text-white font-bold rounded-lg text-sm">Add your first newsletter</a>
+    </div>
+  )}
+
+  {!error && items && items.length > 0 && (
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {items.map((it) => (
+        <a
+          href={`/admin/newsletters/${it.id}`}
+          class="group block bg-white rounded-2xl border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all"
+        >
+          <div class="aspect-[3/4] bg-slate-100 overflow-hidden relative">
+            {it.cover ? (
+              <img src={it.cover} alt={it.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center text-slate-400 text-sm">No cover</div>
+            )}
+            {it.draft && (
+              <span class="absolute top-2 left-2 inline-flex px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">Draft</span>
+            )}
+          </div>
+          <div class="p-4">
+            {it.issue_date && (
+              <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">{formatDate(it.issue_date)}</span>
+            )}
+            <h3 class="text-base font-bold text-slate-900 group-hover:text-blue-700 transition-colors line-clamp-2 mt-1">{it.title}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+</AdminShell>
