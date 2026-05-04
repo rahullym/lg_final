@@ -65,7 +65,7 @@ export default function Navbar() {
             href: '#',
             children: [
                 { label: 'Blogs', href: '/blog' },
-                { label: 'Newsletter', href: '#' }
+                { label: 'Newsletter', href: '/newsletters' }
             ]
         }
     ];

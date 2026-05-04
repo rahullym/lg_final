@@ -1,0 +1,162 @@
+---
+export const prerender = false;
+
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ContactCTA from "../components/ContactCTA";
+import Pagination from "../components/Pagination.astro";
+import { supabase } from "../lib/supabase";
+
+const PAGE_SIZE = 8;
+const pageParam = parseInt(Astro.url.searchParams.get("page") ?? "1", 10);
+const requestedPage = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
+
+const { count } = await supabase
+    .from("newsletters")
+    .select("id", { count: "exact", head: true })
+    .eq("draft", false);
+
+const totalCount = count ?? 0;
+const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
+const currentPage = Math.min(requestedPage, totalPages);
+const offset = (currentPage - 1) * PAGE_SIZE;
+
+const { data: rows } = await supabase
+    .from("newsletters")
+    .select("id, slug, title, cover, pdf, issue_date, description, updated_at")
+    .eq("draft", false)
+    .order("issue_date", { ascending: false, nullsFirst: false })
+    .order("updated_at", { ascending: false })
+    .range(offset, offset + PAGE_SIZE - 1);
+
+const newsletters = (rows ?? []).map((r) => ({
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    cover: r.cover,
+    pdf: r.pdf,
+    issueDate: r.issue_date,
+    description: r.description,
+}));
+
+function formatDate(d: string | null): string {
+    if (!d) return "";
+    const dt = new Date(d);
+    if (Number.isNaN(dt.getTime())) return "";
+    return dt.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
+}
+---
+
+<Layout
+    title="Newsletter | Logistics Gurukul"
+    description="Read the latest editions of our newsletter — weekly insights and updates from Logistics Gurukul."
+>
+    <Navbar client:load />
+
+    <main>
+        <!-- Hero -->
+        <section
+            class="relative min-h-[40vh] flex items-center justify-center bg-[#050505] overflow-hidden pt-32"
+        >
+            <div class="absolute inset-0 z-0">
+                <img
+                    src="/hero-bg-premium.png"
+                    alt="Newsletter Background"
+                    class="w-full h-full object-cover opacity-60"
+                />
+                <div class="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#050505]"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-bold tracking-widest mb-6 uppercase backdrop-blur-sm"
+                >
+                    Journal
+                </span>
+                <h1
+                    class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-heading tracking-tight"
+                >
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white"
+                        >Newsletter</span
+                    > Archive
+                </h1>
+                <p
+                    class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+                >
+                    Weekly editions, special issues, and industry insights — all in one place.
+                </p>
+            </div>
+        </section>
+
+        <!-- Grid -->
+        <section class="py-16 lg:py-20 bg-slate-100 min-h-[60vh]">
+            <div class="container mx-auto px-6">
+                {totalCount === 0 && (
+                    <p class="text-center text-slate-500 py-20">
+                        No newsletters published yet — check back soon.
+                    </p>
+                )}
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-7">
+                    {newsletters.map((n) => (
+                        <article class="group relative bg-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
+                            <div class="aspect-[3/4] bg-slate-300 overflow-hidden relative">
+                                {n.cover ? (
+                                    <img
+                                        src={n.cover}
+                                        alt={n.title}
+                                        loading="lazy"
+                                        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                    />
+                                ) : (
+                                    <div class="w-full h-full flex items-center justify-center text-slate-500 text-sm">
+                                        No cover
+                                    </div>
+                                )}
+                                {n.issueDate && (
+                                    <div class="absolute top-0 left-0 bg-red-600 text-white px-3 py-1.5 rounded-br-lg text-xs font-bold tracking-wide">
+                                        {formatDate(n.issueDate)}
+                                    </div>
+                                )}
+                                <a
+                                    href={n.pdf}
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="absolute bottom-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-4 py-2 bg-black/85 hover:bg-black text-white font-semibold text-xs rounded-md transition-colors"
+                                >
+                                    View PDF
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            {(n.title || n.description) && (
+                                <div class="p-3 bg-white">
+                                    {n.title && <h3 class="text-sm font-bold text-slate-900 line-clamp-2">{n.title}</h3>}
+                                    {n.description && <p class="text-xs text-slate-500 mt-1 line-clamp-2">{n.description}</p>}
+                                </div>
+                            )}
+                        </article>
+                    ))}
+                </div>
+
+                <div class="mt-12">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        basePath="/newsletters"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <div class="bg-white border-t border-slate-100">
+            <ContactCTA client:visible />
+        </div>
+    </main>
+
+    <Footer client:visible />
+</Layout>

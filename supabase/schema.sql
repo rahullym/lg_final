@@ -51,6 +51,19 @@ create table if not exists public.seminars (
   updated_at   timestamptz not null default now()
 );
 
+create table if not exists public.newsletters (
+  id           uuid primary key default gen_random_uuid(),
+  slug         text not null unique,
+  title        text not null,
+  cover        text,
+  pdf          text not null,
+  issue_date   date,
+  description  text,
+  draft        boolean not null default false,
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
+);
+
 create table if not exists public.infrastructure_features (
   id           uuid primary key default gen_random_uuid(),
   slug         text not null unique,
@@ -84,7 +97,7 @@ $$;
 do $$
 declare t text;
 begin
-  for t in select unnest(array['posts','celebrations','seminars','infrastructure_features']) loop
+  for t in select unnest(array['posts','celebrations','seminars','newsletters','infrastructure_features']) loop
     execute format('drop trigger if exists %I_set_updated_at on public.%I', t, t);
     execute format('create trigger %I_set_updated_at before update on public.%I for each row execute function public.set_updated_at()', t, t);
   end loop;
@@ -97,6 +110,7 @@ end $$;
 alter table public.posts enable row level security;
 alter table public.celebrations enable row level security;
 alter table public.seminars enable row level security;
+alter table public.newsletters enable row level security;
 alter table public.infrastructure_features enable row level security;
 alter table public.infrastructure_gallery enable row level security;
 
@@ -149,6 +163,23 @@ create policy "auth update seminars" on public.seminars
   for update to authenticated using (true) with check (true);
 drop policy if exists "auth delete seminars" on public.seminars;
 create policy "auth delete seminars" on public.seminars
+  for delete to authenticated using (true);
+
+-- newsletters
+drop policy if exists "public read non-draft newsletters" on public.newsletters;
+create policy "public read non-draft newsletters" on public.newsletters
+  for select using (draft = false);
+drop policy if exists "auth read all newsletters" on public.newsletters;
+create policy "auth read all newsletters" on public.newsletters
+  for select to authenticated using (true);
+drop policy if exists "auth insert newsletters" on public.newsletters;
+create policy "auth insert newsletters" on public.newsletters
+  for insert to authenticated with check (true);
+drop policy if exists "auth update newsletters" on public.newsletters;
+create policy "auth update newsletters" on public.newsletters
+  for update to authenticated using (true) with check (true);
+drop policy if exists "auth delete newsletters" on public.newsletters;
+create policy "auth delete newsletters" on public.newsletters
   for delete to authenticated using (true);
 
 -- infrastructure_features
