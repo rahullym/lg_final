@@ -67,7 +67,8 @@ export default function Navbar() {
                 { label: 'Blogs', href: '/blog' },
                 { label: 'Newsletter', href: '/newsletters' }
             ]
-        }
+        },
+        { label: 'Placements', href: '/placements' }
     ];
 
     return (

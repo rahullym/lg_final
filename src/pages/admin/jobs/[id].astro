@@ -1,0 +1,178 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import RichTextEditor from '../../../components/admin/RichTextEditor';
+import { supabaseForUser } from '../../../lib/supabase';
+
+const id = Astro.params.id!;
+const client = supabaseForUser(Astro.locals.accessToken!);
+const { data: job, error } = await client.from('jobs').select('*').eq('id', id).single();
+
+if (error || !job) return Astro.redirect('/admin/jobs?missing=1');
+
+const url = new URL(Astro.request.url);
+const saved = url.searchParams.has('saved');
+const pageError = url.searchParams.get('error');
+
+function toIsoDate(value: unknown): string {
+  if (!value) return '';
+  const str = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}/.test(str)) return str.slice(0, 10);
+  const parsed = new Date(str);
+  if (Number.isNaN(parsed.getTime())) return '';
+  return parsed.toISOString().slice(0, 10);
+}
+const deadlineValue = toIsoDate(job.apply_deadline);
+
+const linesValue = (arr: unknown): string =>
+  Array.isArray(arr) ? arr.filter((x) => typeof x === 'string' && x.trim()).join('\n') : '';
+
+const locationsValue = linesValue(job.locations);
+const responsibilitiesValue = linesValue(job.responsibilities);
+const requirementsValue = linesValue(job.requirements);
+---
+
+<AdminShell title={`Edit: ${job.title}`} breadcrumbs={[{ label: 'Placements', href: '/admin/jobs' }, { label: job.title, href: `/admin/jobs/${job.id}/view` }, { label: 'Edit' }]}>
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-start justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900 mb-1">Edit Opening</h1>
+        <p class="text-slate-600 text-sm font-mono">/{job.slug}</p>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <a href={`/admin/jobs/${job.id}/preview`} target="_blank" rel="noopener"
+           class="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold rounded-lg text-sm transition-colors">
+          Preview
+        </a>
+        <a href={`/admin/applications?job=${job.slug}`}
+           class="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold rounded-lg text-sm transition-colors">
+          View applications
+        </a>
+        <form method="POST" action={`/api/admin/jobs/${job.id}`} onsubmit="return confirm('Delete this job opening?');">
+          <input type="hidden" name="_method" value="DELETE" />
+          <button type="submit" class="px-4 py-2 bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold rounded-lg text-sm transition-colors">Delete</button>
+        </form>
+      </div>
+    </div>
+
+    {saved && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Saved.</div>}
+    {pageError && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{pageError}</div>}
+
+    <form method="POST" action={`/api/admin/jobs/${job.id}`} enctype="multipart/form-data"
+          class="bg-white rounded-2xl border border-slate-200 p-8 space-y-6">
+      <input type="hidden" name="_method" value="PATCH" />
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="title">Title *</label>
+        <input id="title" name="title" type="text" required maxlength="200" value={job.title}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="slug">Slug</label>
+        <input id="slug" name="slug" type="text" pattern="[a-z0-9-]*" value={job.slug}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 font-mono" />
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="department">Department</label>
+          <input id="department" name="department" type="text" value={job.department ?? ''}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="location">Primary Location</label>
+          <input id="location" name="location" type="text" value={job.location ?? ''}
+            placeholder="e.g. Kochi, or Multiple Cities"
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+          <p class="text-xs text-slate-500 mt-1">Shown in listings and the chip at the top.</p>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="locations">Locations</label>
+        <textarea id="locations" name="locations" rows="4"
+          placeholder={'India - Trivandrum\nIndia - Cochin'}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm font-mono focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">{locationsValue}</textarea>
+        <p class="text-xs text-slate-500 mt-1">One location per line. Shown as the "Locations" block on the public page.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="employment_type">Employment Type</label>
+          <select id="employment_type" name="employment_type"
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+            <option value="">Select…</option>
+            {['Full-time', 'Part-time', 'Internship', 'Contract'].map((opt) => (
+              <option value={opt} selected={job.employment_type === opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="experience">Experience</label>
+          <input id="experience" name="experience" type="text" value={job.experience ?? ''}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="apply_deadline">Apply Deadline</label>
+          <input id="apply_deadline" name="apply_deadline" type="date" value={deadlineValue}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="order">Display Order</label>
+          <input id="order" name="order" type="number" value={job.order ?? 0}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="apply_email">Apply Email</label>
+          <input id="apply_email" name="apply_email" type="email" value={job.apply_email ?? ''}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="apply_url">External Apply URL</label>
+          <input id="apply_url" name="apply_url" type="url" value={job.apply_url ?? ''}
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="responsibilities">Responsibilities</label>
+        <textarea id="responsibilities" name="responsibilities" rows="6"
+          placeholder={'Design, develop, and execute test scripts\nAnalyze system performance under load'}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">{responsibilitiesValue}</textarea>
+        <p class="text-xs text-slate-500 mt-1">One responsibility per line. Rendered as a bulleted list.</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="requirements">Requirements</label>
+        <textarea id="requirements" name="requirements" rows="6"
+          placeholder={'4–8 years of experience\nStrong hands-on experience with X'}
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">{requirementsValue}</textarea>
+        <p class="text-xs text-slate-500 mt-1">One requirement per line. Rendered as a bulleted list.</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Overview / Description</label>
+        <RichTextEditor client:load name="description" initialHtml={job.description ?? ''} placeholder="Optional intro paragraph or extra details shown above the lists." />
+        <p class="text-xs text-slate-500 mt-1">Optional rich-text intro shown above the structured lists.</p>
+      </div>
+
+      <div class="flex items-center gap-3 p-4 rounded-lg bg-slate-50 border border-slate-200">
+        <input id="draft" name="draft" type="checkbox" class="w-4 h-4" checked={job.draft} />
+        <label for="draft" class="text-sm font-semibold text-slate-700">Save as draft (not publicly visible)</label>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+        <a href="/admin/jobs" class="text-sm text-slate-600 hover:text-slate-900 font-semibold">Back to list</a>
+        <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</AdminShell>

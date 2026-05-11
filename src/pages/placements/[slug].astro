@@ -1,0 +1,31 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import JobDetailBody from "../../components/JobDetailBody.astro";
+import { supabase } from "../../lib/supabase";
+
+const { slug } = Astro.params;
+
+const { data: job, error } = await supabase
+  .from("jobs")
+  .select("*")
+  .eq("slug", slug)
+  .eq("draft", false)
+  .maybeSingle();
+
+if (error) console.error("Failed to load job:", error.message);
+if (!job) return new Response(null, { status: 404 });
+
+const params = new URL(Astro.request.url).searchParams;
+const applied = params.has("applied");
+const applyError = params.get("error");
+---
+
+<Layout title={`${job.title} | Placements | Logistics Gurukul`} description={`${job.title}${job.location ? ' — ' + job.location : ''}`}>
+  <Navbar client:load />
+  <JobDetailBody job={job} applied={applied} applyError={applyError} />
+  <Footer client:visible />
+</Layout>

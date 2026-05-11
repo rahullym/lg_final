@@ -1,0 +1,184 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+
+const params = new URL(Astro.request.url).searchParams;
+const applied = params.has("applied");
+const applyError = params.get("error");
+---
+
+<Layout
+  title="Submit Your CV | Placements | Logistics Gurukul"
+  description="Send us your CV and we'll keep you in mind for upcoming roles at Logistics Gurukul."
+>
+  <Navbar client:load />
+
+  <main class="bg-slate-50">
+    {/* Dark hero */}
+    <section class="relative bg-[#050505] text-white pt-32 pb-16 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="/hero-bg-premium.png" alt="" class="w-full h-full object-cover opacity-40" />
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-slate-900/60 to-[#050505]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505]"></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10 max-w-3xl">
+        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-8">
+          <a href="/" class="hover:text-white transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10" />
+            </svg>
+          </a>
+          <span class="text-slate-600">›</span>
+          <a href="/placements" class="hover:text-white transition-colors">Careers</a>
+          <span class="text-slate-600">›</span>
+          <span class="text-slate-300">Submit Your CV</span>
+        </nav>
+
+        <h1 class="text-3xl md:text-5xl font-black font-heading leading-[1.05] tracking-tight mb-4">
+          Don't see a fit?
+        </h1>
+        <p class="text-slate-300 text-base md:text-lg max-w-2xl">
+          Send us your CV and we'll keep you in mind for upcoming roles. We hire across logistics operations, training, sales, and back office — let us know what you're looking for.
+        </p>
+      </div>
+    </section>
+
+    {/* Form */}
+    <section class="container mx-auto px-6 max-w-2xl py-12 lg:py-16">
+      <div class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-slate-800">
+        <h2 class="text-xl font-bold mb-1">Open Application</h2>
+        <p class="text-slate-400 text-sm mb-6">All fields marked * are required.</p>
+
+        {applied && (
+          <div class="mb-5 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-sm font-semibold">
+            Thanks — your CV was received. We'll be in touch when a relevant opening comes up.
+          </div>
+        )}
+        {applyError && (
+          <div class="mb-5 p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-200 text-sm">{applyError}</div>
+        )}
+
+        <form id="apply-form" method="POST" action="/api/placements/apply" enctype="multipart/form-data" class="space-y-4">
+          <input type="hidden" name="job_slug" value="_general" />
+          <div class="hidden" aria-hidden="true">
+            <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5" for="ap-first">First Name *</label>
+              <input id="ap-first" name="first_name" type="text" required maxlength="80"
+                placeholder="Enter your first name"
+                class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5" for="ap-last">Last Name *</label>
+              <input id="ap-last" name="last_name" type="text" required maxlength="80"
+                placeholder="Enter your last name"
+                class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5" for="ap-email">Email *</label>
+            <input id="ap-email" name="email" type="email" required maxlength="200"
+              placeholder="john@abc.com"
+              class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5" for="ap-phone">Contact Number</label>
+            <input id="ap-phone" name="phone" type="tel" maxlength="40"
+              placeholder="+91 00000-00000"
+              class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5" for="ap-loc">Preferred Location</label>
+              <input id="ap-loc" name="preferred_location" type="text" maxlength="80"
+                placeholder="e.g. Kochi"
+                class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Total Experience</label>
+              <div class="grid grid-cols-2 gap-2">
+                <input id="ap-exp-y" name="experience_years" type="number" min="0" max="50" placeholder="Year"
+                  class="w-full px-3 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+                <input id="ap-exp-m" name="experience_months" type="number" min="0" max="11" placeholder="Month"
+                  class="w-full px-3 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Resume * <span class="font-normal text-slate-500">— PDF, max 5 MB</span></label>
+            <label id="ap-cv-drop" for="ap-cv"
+              class="block cursor-pointer rounded-lg border-2 border-dashed border-slate-700 bg-slate-950/30 hover:bg-slate-950/50 hover:border-slate-600 transition-colors p-6 text-center">
+              <svg class="w-8 h-8 mx-auto text-slate-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <p class="text-sm text-slate-300"><span class="font-semibold">Drag &amp; Drop</span> your resume or <span class="text-blue-400 underline">Browse files</span></p>
+              <p id="ap-cv-name" class="text-xs text-slate-400 mt-1.5 truncate"></p>
+            </label>
+            <input id="ap-cv" name="cv" type="file" accept="application/pdf,.pdf" required class="sr-only" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5" for="ap-note">What kind of role are you looking for?</label>
+            <textarea id="ap-note" name="cover_note" rows="3" maxlength="2000"
+              placeholder="Tell us briefly about your background and the roles you're interested in."
+              class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full text-sm transition-colors shadow-lg shadow-blue-600/30 mt-2">
+            Submit CV
+          </button>
+          <p class="text-[11px] text-slate-500 leading-relaxed">By submitting you consent to us storing this CV for recruiting purposes.</p>
+        </form>
+      </div>
+
+      <p class="text-center text-sm text-slate-500 mt-8">
+        Or browse current openings on the
+        <a href="/placements" class="text-blue-600 font-semibold hover:underline">Placements page</a>.
+      </p>
+    </section>
+  </main>
+
+  <Footer client:visible />
+</Layout>
+
+<script>
+  const drop = document.getElementById('ap-cv-drop');
+  const input = document.getElementById('ap-cv') as HTMLInputElement | null;
+  const nameEl = document.getElementById('ap-cv-name');
+  if (drop && input && nameEl) {
+    const update = () => {
+      const f = input.files?.[0];
+      nameEl.textContent = f ? `Selected: ${f.name}` : '';
+    };
+    input.addEventListener('change', update);
+
+    ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => {
+      e.preventDefault();
+      drop.classList.add('border-blue-400', 'bg-slate-950/60');
+    }));
+    ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => {
+      e.preventDefault();
+      drop.classList.remove('border-blue-400', 'bg-slate-950/60');
+    }));
+    drop.addEventListener('drop', (e: DragEvent) => {
+      const f = e.dataTransfer?.files?.[0];
+      if (f) {
+        const dt = new DataTransfer();
+        dt.items.add(f);
+        input.files = dt.files;
+        update();
+      }
+    });
+  }
+</script>

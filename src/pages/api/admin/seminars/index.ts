@@ -24,7 +24,8 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
 
   input.slug = await uniqueSlug(client, 'seminars', input.slug);
 
-  const { error } = await client.from('seminars').insert(input);
+  const video_url = String(form.get('video_url') ?? '').trim() || null;
+  const { error } = await client.from('seminars').insert({ ...input, video_url });
   if (error) return back(redirect, error.message);
   return redirect('/admin/seminars?created=1');
 };

@@ -33,7 +33,8 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
 
   input.slug = await uniqueSlug(client, 'seminars', input.slug, id);
 
-  const { error } = await client.from('seminars').update(input).eq('id', id);
+  const video_url = String(form.get('video_url') ?? '').trim() || null;
+  const { error } = await client.from('seminars').update({ ...input, video_url }).eq('id', id);
   if (error) return redirect(`/admin/seminars/${id}?error=${encodeURIComponent(error.message)}`);
 
   const toRemove: string[] = [];

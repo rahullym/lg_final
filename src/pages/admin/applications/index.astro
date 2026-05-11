@@ -1,0 +1,102 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import { supabaseForUser } from '../../../lib/supabase';
+
+const token = Astro.locals.accessToken!;
+const client = supabaseForUser(token);
+
+const url = new URL(Astro.request.url);
+const jobFilter = url.searchParams.get('job') ?? '';
+const deleted = url.searchParams.has('deleted');
+
+let query = client
+  .from('applications')
+  .select('id, job_id, job_title, job_slug, name, email, phone, cv_filename, created_at')
+  .order('created_at', { ascending: false })
+  .limit(200);
+
+if (jobFilter) query = query.eq('job_slug', jobFilter);
+
+const { data: applications, error } = await query;
+const { data: jobs } = await client.from('jobs').select('slug, title').order('title');
+
+function fmtWhen(iso: string): string {
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return '';
+  return dt.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+---
+
+<AdminShell title="Applications" breadcrumbs={[{ label: 'Placements', href: '/admin/jobs' }, { label: 'Applications' }]}>
+  <div class="flex items-center justify-between mb-8 gap-4 flex-wrap">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900 mb-1">Applications</h1>
+      <p class="text-slate-600 text-sm">Submissions from candidates across all openings.</p>
+    </div>
+    <form method="GET" action="/admin/applications" class="flex items-center gap-2">
+      <label for="job-filter" class="text-xs font-bold text-slate-700 uppercase tracking-wider">Filter:</label>
+      <select id="job-filter" name="job" onchange="this.form.submit()"
+        class="px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
+        <option value="">All openings</option>
+        <option value="_general" selected={jobFilter === '_general'}>General Applications</option>
+        {(jobs ?? []).map((j) => (
+          <option value={j.slug} selected={jobFilter === j.slug}>{j.title}</option>
+        ))}
+      </select>
+      {jobFilter && <a href="/admin/applications" class="text-xs text-slate-600 hover:text-slate-900 font-semibold underline">Clear</a>}
+    </form>
+  </div>
+
+  {deleted && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Application removed.</div>}
+  {error && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">Failed to load: {error.message}</div>}
+
+  {!error && applications && applications.length === 0 && (
+    <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center text-slate-600">
+      No applications {jobFilter ? 'for this opening' : 'yet'}.
+    </div>
+  )}
+
+  {!error && applications && applications.length > 0 && (
+    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 border-b border-slate-200">
+          <tr class="text-left text-slate-600 font-semibold uppercase text-xs tracking-wider">
+            <th class="px-6 py-3">Candidate</th>
+            <th class="px-6 py-3">Opening</th>
+            <th class="px-6 py-3">Submitted</th>
+            <th class="px-6 py-3 text-right">CV</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {applications.map((a) => (
+            <tr class="hover:bg-slate-50 transition-colors">
+              <td class="px-6 py-4">
+                <a href={`/admin/applications/${a.id}`} class="font-semibold text-slate-900 hover:text-blue-600">{a.name}</a>
+                <div class="text-xs text-slate-500 mt-0.5">
+                  <a href={`mailto:${a.email}`} class="hover:text-blue-600">{a.email}</a>
+                  {a.phone && <span class="ml-2">· {a.phone}</span>}
+                </div>
+              </td>
+              <td class="px-6 py-4 text-slate-700">
+                {a.job_slug === '_general' ? (
+                  <span class="inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">General</span>
+                ) : (
+                  a.job_title ?? '—'
+                )}
+              </td>
+              <td class="px-6 py-4 text-slate-500 text-xs">{fmtWhen(a.created_at)}</td>
+              <td class="px-6 py-4 text-right">
+                <a href={`/api/admin/applications/${a.id}/cv`} target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold">
+                  Download
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</AdminShell>

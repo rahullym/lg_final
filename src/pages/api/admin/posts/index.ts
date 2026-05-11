@@ -37,6 +37,7 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
   const publish_date = String(form.get('publish_date') ?? '').trim() || null;
   const category = String(form.get('category') ?? '').trim() || null;
   const body = String(form.get('body') ?? '');
+  const video_url = String(form.get('video_url') ?? '').trim() || null;
   const draft = form.get('draft') === 'on';
 
   // Optional cover image upload.
@@ -55,7 +56,7 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
 
   const { error } = await client
     .from('posts')
-    .insert({ slug, title, excerpt, cover_image, author, publish_date, category, body, draft })
+    .insert({ slug, title, excerpt, cover_image, author, publish_date, category, body, video_url, draft })
     .select('id')
     .single();
 
