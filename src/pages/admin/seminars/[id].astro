@@ -24,6 +24,7 @@ const defaults = {
   gallery: Array.isArray(item.gallery) ? item.gallery : [],
   order: item.order ?? 0,
   body: item.body ?? '',
+  videoUrl: item.video_url ?? '',
   draft: !!item.draft,
 };
 ---
@@ -49,6 +50,7 @@ const defaults = {
       submitLabel="Save Changes"
       backHref="/admin/seminars"
       method="edit"
+      showVideoUrl={true}
       defaults={defaults}
     />
   </div>

@@ -54,9 +54,9 @@ function formatDate(d: string | null | undefined): string {
           href={`/admin/newsletters/${it.id}`}
           class="group block bg-white rounded-2xl border border-slate-200 overflow-hidden hover:border-blue-300 hover:shadow-md transition-all"
         >
-          <div class="aspect-[3/4] bg-slate-100 overflow-hidden relative">
+          <div class="aspect-[9/16] bg-slate-100 overflow-hidden relative">
             {it.cover ? (
-              <img src={it.cover} alt={it.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+              <img src={it.cover} alt={it.title} class="absolute inset-0 w-full h-full object-contain object-center group-hover:scale-105 transition-transform" loading="lazy" />
             ) : (
               <div class="w-full h-full flex items-center justify-center text-slate-400 text-sm">No cover</div>
             )}

@@ -1,0 +1,81 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import { supabaseForUser } from '../../../lib/supabase';
+
+const id = Astro.params.id!;
+const client = supabaseForUser(Astro.locals.accessToken!);
+const { data: app, error } = await client.from('applications').select('*').eq('id', id).single();
+
+if (error || !app) return Astro.redirect('/admin/applications');
+
+function fmtWhen(iso: string): string {
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return '';
+  return dt.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+---
+
+<AdminShell title={`Application: ${app.name}`} breadcrumbs={[{ label: 'Placements', href: '/admin/jobs' }, { label: 'Applications', href: '/admin/applications' }, { label: app.name }]}>
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-start justify-between mb-8 gap-4">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900 mb-1">{app.name}</h1>
+        <p class="text-slate-600 text-sm">
+          Applied for <a href={`/placements/${app.job_slug}`} target="_blank" class="font-semibold text-blue-600 hover:underline">{app.job_title}</a>
+          · {fmtWhen(app.created_at)}
+        </p>
+      </div>
+      <form method="POST" action={`/api/admin/applications/${app.id}`} onsubmit="return confirm('Permanently delete this application and its CV?');">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="px-4 py-2 bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold rounded-lg text-sm transition-colors">Delete</button>
+      </form>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-8 space-y-6">
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email</p>
+          <a href={`mailto:${app.email}`} class="text-slate-900 font-semibold hover:text-blue-600">{app.email}</a>
+        </div>
+        {app.phone && (
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Phone</p>
+            <a href={`tel:${app.phone}`} class="text-slate-900 font-semibold hover:text-blue-600">{app.phone}</a>
+          </div>
+        )}
+        {app.preferred_location && (
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Preferred Location</p>
+            <p class="text-slate-900 font-semibold">{app.preferred_location}</p>
+          </div>
+        )}
+        {app.experience && (
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Total Experience</p>
+            <p class="text-slate-900 font-semibold">{app.experience}</p>
+          </div>
+        )}
+      </div>
+
+      <div>
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">CV</p>
+        <a href={`/api/admin/applications/${app.id}/cv`} target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+          </svg>
+          Download {app.cv_filename ?? 'CV.pdf'}
+        </a>
+      </div>
+
+      {app.cover_note && (
+        <div>
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Cover Note</p>
+          <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 text-sm whitespace-pre-wrap">{app.cover_note}</div>
+        </div>
+      )}
+    </div>
+  </div>
+</AdminShell>

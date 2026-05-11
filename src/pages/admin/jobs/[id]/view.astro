@@ -1,0 +1,288 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../../components/admin/AdminShell.astro';
+import { supabaseForUser } from '../../../../lib/supabase';
+
+const id = Astro.params.id!;
+const client = supabaseForUser(Astro.locals.accessToken!);
+
+const { data: job, error } = await client.from('jobs').select('*').eq('id', id).single();
+if (error || !job) return Astro.redirect('/admin/jobs?missing=1');
+
+// Stats in parallel.
+const now = Date.now();
+const since7d = new Date(now - 7 * 24 * 60 * 60 * 1000).toISOString();
+const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);
+const sinceToday = startOfToday.toISOString();
+
+const [totalRes, weekRes, todayRes, recentRes] = await Promise.all([
+  client.from('applications').select('id', { count: 'exact', head: true }).eq('job_id', id),
+  client.from('applications').select('id', { count: 'exact', head: true }).eq('job_id', id).gte('created_at', since7d),
+  client.from('applications').select('id', { count: 'exact', head: true }).eq('job_id', id).gte('created_at', sinceToday),
+  client.from('applications')
+    .select('id, name, email, phone, created_at, cv_filename, preferred_location, experience')
+    .eq('job_id', id)
+    .order('created_at', { ascending: false })
+    .limit(5),
+]);
+
+const totalApplications = totalRes.count ?? 0;
+const weekApplications = weekRes.count ?? 0;
+const todayApplications = todayRes.count ?? 0;
+const recentApplications = recentRes.data ?? [];
+
+const daysSincePosted = Math.max(
+  0,
+  Math.floor((now - new Date(job.created_at).getTime()) / (1000 * 60 * 60 * 24))
+);
+
+const asList = (arr: unknown): string[] =>
+  Array.isArray(arr) ? arr.filter((x): x is string => typeof x === 'string' && x.trim().length > 0) : [];
+
+const locations = asList(job.locations);
+const responsibilities = asList(job.responsibilities);
+const requirements = asList(job.requirements);
+
+function fmtDate(d: string | null | undefined): string {
+  if (!d) return '—';
+  const dt = new Date(d);
+  if (Number.isNaN(dt.getTime())) return '—';
+  return dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+}
+function fmtDateTime(d: string | null | undefined): string {
+  if (!d) return '—';
+  const dt = new Date(d);
+  if (Number.isNaN(dt.getTime())) return '—';
+  return dt.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+const params = new URL(Astro.request.url).searchParams;
+const saved = params.has('saved');
+---
+
+<AdminShell title={job.title} breadcrumbs={[{ label: 'Placements', href: '/admin/jobs' }, { label: job.title }]}>
+  {saved && (
+    <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
+      Changes saved.
+    </div>
+  )}
+
+  {/* Header */}
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 mb-6">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div class="min-w-0">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <h1 class="text-2xl md:text-3xl font-bold text-slate-900">{job.title}</h1>
+          {job.draft ? (
+            <span class="inline-flex px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">Draft</span>
+          ) : (
+            <span class="inline-flex px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">Open</span>
+          )}
+        </div>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+          {job.department && <span>{job.department}</span>}
+          {job.location && <span>· 📍 {job.location}</span>}
+          {job.employment_type && <span>· 💼 {job.employment_type}</span>}
+          {job.experience && <span>· ⏱ {job.experience}</span>}
+        </div>
+        <p class="text-xs text-slate-500 font-mono mt-2">/{job.slug}</p>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap shrink-0">
+        <a href={`/admin/jobs/${job.id}`}
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-colors shadow">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
+          Edit
+        </a>
+        <a href={`/admin/jobs/${job.id}/preview`} target="_blank" rel="noopener"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold text-sm transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          Preview
+        </a>
+        {!job.draft && (
+          <a href={`/placements/${job.slug}`} target="_blank" rel="noopener"
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold text-sm transition-colors">
+            Open public ↗
+          </a>
+        )}
+        <form method="POST" action={`/api/admin/jobs/${job.id}`} onsubmit="return confirm('Delete this job opening? Applications already received will keep their data but lose the link to this opening.');">
+          <input type="hidden" name="_method" value="DELETE" />
+          <button type="submit" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold text-sm transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3" />
+            </svg>
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {/* Stats */}
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <a href={`/admin/applications?job=${job.slug}`}
+      class="block p-5 bg-white rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all">
+      <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Total Applications</p>
+      <p class="text-3xl font-bold text-slate-900">{totalApplications}</p>
+      <p class="text-xs text-blue-600 font-semibold mt-2">View all →</p>
+    </a>
+    <div class="p-5 bg-white rounded-2xl border border-slate-200">
+      <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Last 7 days</p>
+      <p class="text-3xl font-bold text-slate-900">{weekApplications}</p>
+      <p class="text-xs text-slate-500 mt-2">New submissions</p>
+    </div>
+    <div class="p-5 bg-white rounded-2xl border border-slate-200">
+      <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Today</p>
+      <p class="text-3xl font-bold text-slate-900">{todayApplications}</p>
+      <p class="text-xs text-slate-500 mt-2">Submissions today</p>
+    </div>
+    <div class="p-5 bg-white rounded-2xl border border-slate-200">
+      <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Days Posted</p>
+      <p class="text-3xl font-bold text-slate-900">{daysSincePosted}</p>
+      <p class="text-xs text-slate-500 mt-2">Since {fmtDate(job.created_at)}</p>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-[1fr_360px] gap-6">
+    {/* Details + content */}
+    <div class="space-y-6">
+      {/* Job details table */}
+      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-200">
+          <h2 class="text-lg font-bold text-slate-900">Details</h2>
+        </div>
+        <dl class="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+          <div class="px-6 py-4">
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Apply Deadline</dt>
+            <dd class="text-slate-900">{fmtDate(job.apply_deadline)}</dd>
+          </div>
+          <div class="px-6 py-4">
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Display Order</dt>
+            <dd class="text-slate-900">{job.order ?? 0}</dd>
+          </div>
+        </dl>
+        <dl class="grid sm:grid-cols-2 border-t border-slate-100 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+          <div class="px-6 py-4">
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Apply Email</dt>
+            <dd class="text-slate-900 truncate">
+              {job.apply_email ? (
+                <a href={`mailto:${job.apply_email}`} class="hover:text-blue-600">{job.apply_email}</a>
+              ) : <span class="text-slate-400">—</span>}
+            </dd>
+          </div>
+          <div class="px-6 py-4">
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">External Apply URL</dt>
+            <dd class="text-slate-900 truncate">
+              {job.apply_url ? (
+                <a href={job.apply_url} target="_blank" rel="noopener" class="hover:text-blue-600">{job.apply_url}</a>
+              ) : <span class="text-slate-400">—</span>}
+            </dd>
+          </div>
+        </dl>
+        <dl class="grid sm:grid-cols-2 border-t border-slate-100 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+          <div class="px-6 py-4">
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Created</dt>
+            <dd class="text-slate-900 text-sm">{fmtDateTime(job.created_at)}</dd>
+          </div>
+          <div class="px-6 py-4">
+            <dt class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Last Updated</dt>
+            <dd class="text-slate-900 text-sm">{fmtDateTime(job.updated_at)}</dd>
+          </div>
+        </dl>
+      </div>
+
+      {/* Locations */}
+      {locations.length > 0 && (
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <h2 class="text-lg font-bold text-slate-900 mb-3">Locations</h2>
+          <div class="flex flex-wrap gap-2">
+            {locations.map((loc) => (
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">
+                📍 {loc}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Responsibilities */}
+      {responsibilities.length > 0 && (
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <h2 class="text-lg font-bold text-slate-900 mb-3">Responsibilities <span class="text-slate-400 font-normal text-sm">({responsibilities.length})</span></h2>
+          <ul class="list-disc pl-6 space-y-1.5 text-slate-700">
+            {responsibilities.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {/* Requirements */}
+      {requirements.length > 0 && (
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <h2 class="text-lg font-bold text-slate-900 mb-3">Requirements <span class="text-slate-400 font-normal text-sm">({requirements.length})</span></h2>
+          <ul class="list-disc pl-6 space-y-1.5 text-slate-700">
+            {requirements.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {/* Overview HTML */}
+      {job.description && (
+        <div class="bg-white rounded-2xl border border-slate-200 p-6">
+          <h2 class="text-lg font-bold text-slate-900 mb-3">Overview</h2>
+          <div
+            class="text-slate-700 leading-relaxed
+                   [&>p]:mb-3
+                   [&>h2]:text-xl [&>h2]:font-bold [&>h2]:text-slate-900 [&>h2]:mb-2 [&>h2]:mt-5
+                   [&>h3]:text-lg [&>h3]:font-bold [&>h3]:text-slate-900 [&>h3]:mb-2 [&>h3]:mt-4
+                   [&>h4]:text-base [&>h4]:font-bold [&>h4]:text-slate-900 [&>h4]:mb-1.5 [&>h4]:mt-3
+                   [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-3
+                   [&_a]:text-blue-600 [&_a]:underline"
+            set:html={job.description}
+          />
+        </div>
+      )}
+    </div>
+
+    {/* Recent applications sidebar */}
+    <aside class="space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+        <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+          <h2 class="text-base font-bold text-slate-900">Recent Applications</h2>
+          {totalApplications > 0 && (
+            <a href={`/admin/applications?job=${job.slug}`} class="text-xs font-semibold text-blue-600 hover:underline">View all</a>
+          )}
+        </div>
+        {recentApplications.length === 0 ? (
+          <div class="px-5 py-8 text-center text-sm text-slate-500">
+            No applications yet.
+          </div>
+        ) : (
+          <ul class="divide-y divide-slate-100">
+            {recentApplications.map((app) => (
+              <li>
+                <a href={`/admin/applications/${app.id}`} class="block px-5 py-3 hover:bg-slate-50 transition-colors">
+                  <div class="flex items-center justify-between gap-2 mb-0.5">
+                    <p class="font-semibold text-slate-900 text-sm truncate">{app.name}</p>
+                    <span class="text-[11px] text-slate-500 shrink-0">{fmtDate(app.created_at)}</span>
+                  </div>
+                  <p class="text-xs text-slate-500 truncate">{app.email}</p>
+                  {(app.preferred_location || app.experience) && (
+                    <p class="text-xs text-slate-500 mt-0.5 truncate">
+                      {app.experience && <span>{app.experience}</span>}
+                      {app.experience && app.preferred_location && <span> · </span>}
+                      {app.preferred_location && <span>📍 {app.preferred_location}</span>}
+                    </p>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </aside>
+  </div>
+</AdminShell>

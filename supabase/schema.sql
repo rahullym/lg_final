@@ -18,10 +18,12 @@ create table if not exists public.posts (
   publish_date  text,
   category      text,
   body          text,
+  video_url     text,
   draft         boolean not null default false,
   created_at    timestamptz not null default now(),
   updated_at    timestamptz not null default now()
 );
+alter table public.posts add column if not exists video_url text;
 
 create table if not exists public.celebrations (
   id           uuid primary key default gen_random_uuid(),
@@ -46,10 +48,12 @@ create table if not exists public.seminars (
   gallery      jsonb not null default '[]'::jsonb,
   "order"      int not null default 0,
   body         text,
+  video_url    text,
   draft        boolean not null default false,
   created_at   timestamptz not null default now(),
   updated_at   timestamptz not null default now()
 );
+alter table public.seminars add column if not exists video_url text;
 
 create table if not exists public.newsletters (
   id           uuid primary key default gen_random_uuid(),
@@ -80,6 +84,70 @@ create table if not exists public.infrastructure_features (
   updated_at   timestamptz not null default now()
 );
 
+create table if not exists public.jobs (
+  id               uuid primary key default gen_random_uuid(),
+  slug             text not null unique,
+  title            text not null,
+  department       text,
+  location         text,
+  locations        text[] not null default '{}'::text[],
+  employment_type  text,
+  experience       text,
+  description      text,
+  responsibilities text[] not null default '{}'::text[],
+  requirements     text[] not null default '{}'::text[],
+  apply_email      text,
+  apply_url        text,
+  apply_deadline   date,
+  "order"          int not null default 0,
+  draft            boolean not null default false,
+  created_at       timestamptz not null default now(),
+  updated_at       timestamptz not null default now()
+);
+alter table public.jobs add column if not exists locations text[] not null default '{}'::text[];
+alter table public.jobs add column if not exists responsibilities text[] not null default '{}'::text[];
+alter table public.jobs add column if not exists requirements text[] not null default '{}'::text[];
+
+create table if not exists public.comments (
+  id          uuid primary key default gen_random_uuid(),
+  post_id     uuid references public.posts(id) on delete cascade,
+  post_slug   text not null,
+  name        text not null,
+  email       text not null,
+  website     text,
+  body        text not null,
+  approved    boolean not null default false,
+  ip_hash     text,
+  created_at  timestamptz not null default now()
+);
+create index if not exists comments_post_approved_idx
+  on public.comments (post_id, approved, created_at desc);
+create index if not exists comments_created_idx
+  on public.comments (created_at desc);
+
+create table if not exists public.applications (
+  id                  uuid primary key default gen_random_uuid(),
+  job_id              uuid references public.jobs(id) on delete set null,
+  job_title           text,
+  job_slug            text,
+  name                text not null,
+  email               text not null,
+  phone               text,
+  preferred_location  text,
+  experience          text,
+  cover_note          text,
+  cv_path             text not null,
+  cv_filename         text,
+  ip_hash             text,
+  created_at          timestamptz not null default now()
+);
+alter table public.applications add column if not exists preferred_location text;
+alter table public.applications add column if not exists experience text;
+create index if not exists applications_job_id_created_idx
+  on public.applications (job_id, created_at desc);
+create index if not exists applications_created_idx
+  on public.applications (created_at desc);
+
 create table if not exists public.infrastructure_gallery (
   id           uuid primary key default gen_random_uuid(),
   alt          text not null,
@@ -97,7 +165,7 @@ $$;
 do $$
 declare t text;
 begin
-  for t in select unnest(array['posts','celebrations','seminars','newsletters','infrastructure_features']) loop
+  for t in select unnest(array['posts','celebrations','seminars','newsletters','infrastructure_features','jobs']) loop
     execute format('drop trigger if exists %I_set_updated_at on public.%I', t, t);
     execute format('create trigger %I_set_updated_at before update on public.%I for each row execute function public.set_updated_at()', t, t);
   end loop;
@@ -113,6 +181,9 @@ alter table public.seminars enable row level security;
 alter table public.newsletters enable row level security;
 alter table public.infrastructure_features enable row level security;
 alter table public.infrastructure_gallery enable row level security;
+alter table public.jobs enable row level security;
+alter table public.applications enable row level security;
+alter table public.comments enable row level security;
 
 -- posts
 drop policy if exists "public read non-draft posts" on public.posts;
@@ -199,6 +270,55 @@ drop policy if exists "auth delete features" on public.infrastructure_features;
 create policy "auth delete features" on public.infrastructure_features
   for delete to authenticated using (true);
 
+-- jobs
+drop policy if exists "public read non-draft jobs" on public.jobs;
+create policy "public read non-draft jobs" on public.jobs
+  for select using (draft = false);
+drop policy if exists "auth read all jobs" on public.jobs;
+create policy "auth read all jobs" on public.jobs
+  for select to authenticated using (true);
+drop policy if exists "auth insert jobs" on public.jobs;
+create policy "auth insert jobs" on public.jobs
+  for insert to authenticated with check (true);
+drop policy if exists "auth update jobs" on public.jobs;
+create policy "auth update jobs" on public.jobs
+  for update to authenticated using (true) with check (true);
+drop policy if exists "auth delete jobs" on public.jobs;
+create policy "auth delete jobs" on public.jobs
+  for delete to authenticated using (true);
+
+-- comments: anyone can submit (but only as `approved = false`); public reads
+-- only approved comments; admins read & moderate everything.
+drop policy if exists "public read approved comments" on public.comments;
+create policy "public read approved comments" on public.comments
+  for select using (approved = true);
+drop policy if exists "anon insert pending comments" on public.comments;
+create policy "anon insert pending comments" on public.comments
+  for insert to anon with check (approved = false);
+drop policy if exists "auth read all comments" on public.comments;
+create policy "auth read all comments" on public.comments
+  for select to authenticated using (true);
+drop policy if exists "auth update comments" on public.comments;
+create policy "auth update comments" on public.comments
+  for update to authenticated using (true) with check (true);
+drop policy if exists "auth delete comments" on public.comments;
+create policy "auth delete comments" on public.comments
+  for delete to authenticated using (true);
+
+-- applications: candidates (anon) can submit; only admins can read/manage
+drop policy if exists "anon insert applications" on public.applications;
+create policy "anon insert applications" on public.applications
+  for insert to anon with check (true);
+drop policy if exists "auth read applications" on public.applications;
+create policy "auth read applications" on public.applications
+  for select to authenticated using (true);
+drop policy if exists "auth update applications" on public.applications;
+create policy "auth update applications" on public.applications
+  for update to authenticated using (true) with check (true);
+drop policy if exists "auth delete applications" on public.applications;
+create policy "auth delete applications" on public.applications
+  for delete to authenticated using (true);
+
 -- infrastructure_gallery (no drafts; public reads everything)
 drop policy if exists "public read gallery" on public.infrastructure_gallery;
 create policy "public read gallery" on public.infrastructure_gallery
@@ -214,14 +334,22 @@ create policy "auth delete gallery" on public.infrastructure_gallery
   for delete to authenticated using (true);
 
 -- ============================================================
--- 3. Storage bucket policies
+-- 3. Storage buckets + policies
 -- ============================================================
--- First create the bucket in the Dashboard: Storage → New bucket
---   name:          lg_backend
---   public bucket: YES
--- If you use a different bucket name, update PUBLIC_SUPABASE_BUCKET in
--- .env to match AND change 'lg_backend' below accordingly.
+-- These INSERTs create the buckets if they don't exist; safe to re-run.
+-- lg_backend → public (covers, gallery, post images).
+-- lg_cvs     → PRIVATE (candidate CV uploads — PII; reads are admin-only
+--              via short-lived signed URLs).
 
+insert into storage.buckets (id, name, public)
+values ('lg_backend', 'lg_backend', true)
+on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+values ('lg_cvs', 'lg_cvs', false)
+on conflict (id) do nothing;
+
+-- lg_backend (public reads, authenticated writes)
 drop policy if exists "public read uploads" on storage.objects;
 create policy "public read uploads" on storage.objects
   for select using (bucket_id = 'lg_backend');
@@ -237,3 +365,17 @@ create policy "authenticated update uploads" on storage.objects
 drop policy if exists "authenticated delete uploads" on storage.objects;
 create policy "authenticated delete uploads" on storage.objects
   for delete to authenticated using (bucket_id = 'lg_backend');
+
+-- lg_cvs (PII): anyone can write (candidates submit), only admins can read/delete.
+-- Public reads are NOT granted — admins fetch via short-lived signed URLs.
+drop policy if exists "anon insert cvs" on storage.objects;
+create policy "anon insert cvs" on storage.objects
+  for insert to anon with check (bucket_id = 'lg_cvs');
+
+drop policy if exists "authenticated read cvs" on storage.objects;
+create policy "authenticated read cvs" on storage.objects
+  for select to authenticated using (bucket_id = 'lg_cvs');
+
+drop policy if exists "authenticated delete cvs" on storage.objects;
+create policy "authenticated delete cvs" on storage.objects
+  for delete to authenticated using (bucket_id = 'lg_cvs');

@@ -1,0 +1,103 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import { supabaseForUser } from '../../../lib/supabase';
+
+const token = Astro.locals.accessToken!;
+const client = supabaseForUser(token);
+const { data: jobs, error } = await client
+  .from('jobs')
+  .select('id, slug, title, department, location, employment_type, draft, apply_deadline, updated_at')
+  .order('order', { ascending: true })
+  .order('updated_at', { ascending: false });
+
+const params = new URL(Astro.request.url).searchParams;
+const created = params.has('created');
+const deleted = params.has('deleted');
+const missing = params.has('missing');
+---
+
+<AdminShell title="Placements" breadcrumbs={[{ label: 'Placements' }]}>
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900 mb-1">Placements</h1>
+      <p class="text-slate-600 text-sm">Job openings shown on the public Placements page.</p>
+    </div>
+    <a
+      href="/admin/jobs/new"
+      class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-sm transition-colors"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+      </svg>
+      New Opening
+    </a>
+  </div>
+
+  {created && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Job created.</div>}
+  {deleted && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Job deleted.</div>}
+  {missing && <div class="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm font-semibold">That job no longer exists.</div>}
+  {error && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">Failed to load: {error.message}</div>}
+
+  {!error && jobs && jobs.length === 0 && (
+    <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center">
+      <p class="text-slate-600 mb-4">No openings yet.</p>
+      <a href="/admin/jobs/new" class="inline-block px-5 py-2.5 bg-blue-600 text-white font-bold rounded-lg text-sm">Post your first opening</a>
+    </div>
+  )}
+
+  {!error && jobs && jobs.length > 0 && (
+    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 border-b border-slate-200">
+          <tr class="text-left text-slate-600 font-semibold uppercase text-xs tracking-wider">
+            <th class="px-6 py-3">Title</th>
+            <th class="px-6 py-3">Department</th>
+            <th class="px-6 py-3">Location</th>
+            <th class="px-6 py-3">Type</th>
+            <th class="px-6 py-3">Deadline</th>
+            <th class="px-6 py-3">Status</th>
+            <th class="px-6 py-3">Updated</th>
+            <th class="px-6 py-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {jobs.map((j) => (
+            <tr class="hover:bg-slate-50 transition-colors">
+              <td class="px-6 py-4">
+                <a href={`/admin/jobs/${j.id}/view`} class="font-semibold text-slate-900 hover:text-blue-600">{j.title}</a>
+                <div class="text-xs text-slate-500 mt-0.5">/{j.slug}</div>
+              </td>
+              <td class="px-6 py-4 text-slate-700">{j.department ?? '—'}</td>
+              <td class="px-6 py-4 text-slate-700">{j.location ?? '—'}</td>
+              <td class="px-6 py-4 text-slate-700">{j.employment_type ?? '—'}</td>
+              <td class="px-6 py-4 text-slate-700">{j.apply_deadline ?? '—'}</td>
+              <td class="px-6 py-4">
+                {j.draft ? (
+                  <span class="inline-flex px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">Draft</span>
+                ) : (
+                  <span class="inline-flex px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">Open</span>
+                )}
+              </td>
+              <td class="px-6 py-4 text-slate-500 text-xs">{new Date(j.updated_at).toLocaleDateString()}</td>
+              <td class="px-6 py-4 text-right">
+                <div class="inline-flex items-center gap-2">
+                  <a href={`/admin/jobs/${j.id}/view`}
+                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold"
+                    title="View details & applications">
+                    View
+                  </a>
+                  <a href={`/admin/jobs/${j.id}`}
+                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold">
+                    Edit
+                  </a>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</AdminShell>

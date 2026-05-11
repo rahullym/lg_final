@@ -103,13 +103,13 @@ function formatDate(d: string | null): string {
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-7">
                     {newsletters.map((n) => (
                         <article class="group relative bg-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
-                            <div class="aspect-[3/4] bg-slate-300 overflow-hidden relative">
+                            <div class="aspect-[9/16] bg-slate-300 overflow-hidden relative">
                                 {n.cover ? (
                                     <img
                                         src={n.cover}
                                         alt={n.title}
                                         loading="lazy"
-                                        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                        class="absolute inset-0 w-full h-full object-contain object-center group-hover:scale-[1.02] transition-transform duration-500"
                                     />
                                 ) : (
                                     <div class="w-full h-full flex items-center justify-center text-slate-500 text-sm">

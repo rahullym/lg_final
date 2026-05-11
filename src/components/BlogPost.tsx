@@ -8,6 +8,7 @@ interface Post {
     author?: string;
     date?: string;
     category?: string;
+    videoEmbed?: string | null;
 }
 
 export default function BlogPost({ post, children }: { post: Post, children: React.ReactNode }) {
@@ -76,6 +77,25 @@ export default function BlogPost({ post, children }: { post: Post, children: Rea
                         />
                         <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />
                     </motion.div>
+
+                    {/* Video */}
+                    {post.videoEmbed && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.25 }}
+                            className="relative aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 bg-black"
+                        >
+                            <iframe
+                                src={post.videoEmbed}
+                                title={`${post.title} – video`}
+                                className="absolute inset-0 w-full h-full"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                loading="lazy"
+                            />
+                        </motion.div>
+                    )}
 
                     {/* Content */}
                     <motion.div
