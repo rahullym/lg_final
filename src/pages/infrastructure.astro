@@ -21,6 +21,39 @@ const galleryImages = (galleryRows ?? []).map((r) => ({
   alt: r.alt,
   order: r.order,
 }));
+
+// Feature blocks shown as zig-zag sections between the hero and the gallery.
+// Hard-coded — admins manage gallery photos, not these copy blocks.
+const features = [
+  {
+    title: "Classrooms Built for Focused, Professional Learning",
+    description:
+      "Our classrooms are designed to deliver structured, distraction-free training that reflects real corporate learning environments. Each space is optimized for clear visibility, comfortable seating, and effective trainer-student interaction, enabling better concentration and deeper understanding of logistics concepts.",
+    image: "/images/smart-classroom.jpeg",
+    align: "left" as const,
+    theme: "light" as const,
+    points: [
+      "Ergonomic seating with individual desks",
+      "Digital display screens & whiteboards",
+      "Bright, well-ventilated classrooms",
+      "Lecture & discussion-friendly layout",
+    ],
+  },
+  {
+    title: "IT Lab for Simulation-Based Logistics Training",
+    description:
+      "Our IT Lab is built to provide hands-on, simulation-based training that mirrors real logistics office environments. Students practice documentation, software usage, and operational workflows in a controlled setting before entering the workplace.",
+    image: "/images/it-lab-simulation.png",
+    align: "right" as const,
+    theme: "dark" as const,
+    points: [
+      "Individual computer workstation for each student",
+      "High-speed internet & power backup",
+      "Industry-relevant software tools",
+      "Guided practice with real documentation formats",
+    ],
+  },
+];
 ---
 
 <Layout
@@ -62,6 +95,72 @@ const galleryImages = (galleryRows ?? []).map((r) => ({
         </p>
       </div>
     </section>
+
+    <!-- Feature Sections (Zig-Zag) -->
+    {features.map((feature, index) => (
+      <section class={`py-20 md:py-24 ${feature.theme === 'dark' ? 'bg-[#0f0f14] text-white' : 'bg-slate-50 text-slate-900'}`}>
+        <div class="container mx-auto px-6">
+          <div class={`flex flex-col gap-12 lg:gap-20 items-center ${feature.align === 'left' ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+
+            <!-- Image Content -->
+            <div class="w-full lg:w-1/2 order-first">
+              <div class="relative group rounded-3xl overflow-hidden shadow-2xl border border-white/5">
+                <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent transition-colors duration-500 z-10 w-full h-full"></div>
+
+                <div class="aspect-[4/3] bg-slate-800 relative flex items-center justify-center overflow-hidden w-full">
+                   <img
+                      src={feature.image}
+                      alt={feature.title}
+                      class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    />
+                </div>
+
+                {feature.theme === 'dark' && (
+                    <div class="absolute bottom-6 left-6 right-6 bg-slate-900/90 backdrop-blur-xl p-4 rounded-xl border border-slate-700 shadow-lg translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="flex items-center gap-3">
+                            <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span class="text-sm font-mono text-slate-300">Active Facility Status: <span class="text-green-400 font-bold">Operational</span></span>
+                        </div>
+                    </div>
+                )}
+              </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="w-full lg:w-1/2">
+              <div class="flex items-center gap-2 mb-6">
+                <span class={`h-px w-10 ${feature.theme === 'dark' ? 'bg-blue-500' : 'bg-blue-600'}`}></span>
+                <span class={`text-sm font-bold uppercase tracking-widest ${feature.theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  0{index + 1}
+                </span>
+              </div>
+
+              <h2 class="text-3xl md:text-5xl font-bold font-heading mb-6 leading-tight">
+                {feature.title}
+              </h2>
+
+              <p class={`text-lg mb-8 leading-relaxed ${feature.theme === 'dark' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {feature.description}
+              </p>
+
+              <ul class="space-y-4">
+                {feature.points.map((point) => (
+                  <li class="flex items-center gap-3">
+                    <span class={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${feature.theme === 'dark' ? 'bg-blue-500/20 text-blue-400 ring-1 ring-blue-500/30' : 'bg-blue-100 text-blue-600'}`}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class={`font-medium text-lg ${feature.theme === 'dark' ? 'text-slate-300' : 'text-slate-700'}`}>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    ))}
 
     <!-- Gallery Section -->
     <section class="py-24 bg-slate-50 border-t border-slate-200">

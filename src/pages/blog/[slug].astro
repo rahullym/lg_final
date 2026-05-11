@@ -6,12 +6,13 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import BlogPost from "../../components/BlogPost";
 import { supabase } from "../../lib/supabase";
+import { toEmbedUrl } from "../../lib/videoEmbed";
 
 const { slug } = Astro.params;
 
 const { data: post, error } = await supabase
   .from('posts')
-  .select('slug, title, excerpt, cover_image, author, publish_date, category, body, draft')
+  .select('slug, title, excerpt, cover_image, author, publish_date, category, body, video_url, draft')
   .eq('slug', slug)
   .eq('draft', false)
   .maybeSingle();
@@ -30,6 +31,7 @@ const displayPost = {
   author: post.author ?? 'Admin',
   date: post.publish_date ?? '',
   category: post.category ?? '',
+  videoEmbed: toEmbedUrl(post.video_url),
 };
 ---
 

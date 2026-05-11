@@ -1,0 +1,54 @@
+---
+export const prerender = false;
+
+import Layout from '../../../../layouts/Layout.astro';
+import Navbar from '../../../../components/Navbar';
+import Footer from '../../../../components/Footer';
+import JobDetailBody from '../../../../components/JobDetailBody.astro';
+import { supabaseForUser } from '../../../../lib/supabase';
+
+const id = Astro.params.id!;
+const client = supabaseForUser(Astro.locals.accessToken!);
+const { data: job, error } = await client.from('jobs').select('*').eq('id', id).single();
+
+if (error || !job) return Astro.redirect('/admin/jobs?missing=1');
+---
+
+<Layout title={`Preview: ${job.title} | Admin`} description={`Preview of ${job.title}`}>
+  {/* Sticky admin preview banner */}
+  <div class="sticky top-0 z-50 bg-amber-500 text-amber-950 border-b border-amber-600 shadow">
+    <div class="container mx-auto px-6 py-3 flex items-center justify-between gap-4 flex-wrap">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-950 text-amber-300">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        </span>
+        <div>
+          <p class="font-bold text-sm leading-tight">Admin preview</p>
+          <p class="text-xs leading-tight">
+            {job.draft
+              ? 'This opening is a DRAFT — not visible on the public site yet.'
+              : 'This opening is PUBLISHED — visible to candidates.'}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href={`/admin/jobs/${job.id}`}
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950 text-amber-100 hover:bg-amber-900 font-semibold text-xs">
+          Back to edit
+        </a>
+        {!job.draft && (
+          <a href={`/placements/${job.slug}`} target="_blank" rel="noopener"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-amber-900 hover:bg-amber-50 font-semibold text-xs border border-amber-700/20">
+            Open public page ↗
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <Navbar client:load />
+  <JobDetailBody job={job} previewMode={true} />
+  <Footer client:visible />
+</Layout>

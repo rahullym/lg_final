@@ -30,6 +30,7 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
   const publish_date = String(form.get('publish_date') ?? '').trim() || null;
   const category = String(form.get('category') ?? '').trim() || null;
   const body = String(form.get('body') ?? '');
+  const video_url = String(form.get('video_url') ?? '').trim() || null;
   const draft = form.get('draft') === 'on';
   let cover_image: string | null = String(form.get('cover_image') ?? '').trim() || null;
 
@@ -45,7 +46,7 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
 
   const { error } = await client
     .from('posts')
-    .update({ slug, title, excerpt, cover_image, author, publish_date, category, body, draft })
+    .update({ slug, title, excerpt, cover_image, author, publish_date, category, body, video_url, draft })
     .eq('id', id);
 
   if (error) return redirect(`/admin/posts/${id}?error=${encodeURIComponent(error.message)}`);

@@ -5,14 +5,31 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContactCTA from "../components/ContactCTA";
+import Pagination from "../components/Pagination.astro";
 import { supabase } from "../lib/supabase";
+import { toEmbedUrl } from "../lib/videoEmbed";
+
+const PAGE_SIZE = 3;
+const pageParam = parseInt(Astro.url.searchParams.get("page") ?? "1", 10);
+const requestedPage = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
+
+const { count } = await supabase
+    .from("seminars")
+    .select("id", { count: "exact", head: true })
+    .eq("draft", false);
+
+const totalCount = count ?? 0;
+const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
+const currentPage = Math.min(requestedPage, totalPages);
+const offset = (currentPage - 1) * PAGE_SIZE;
 
 const { data: rows } = await supabase
     .from("seminars")
-    .select('id, slug, title, year, cover, gallery, "order"')
+    .select('id, slug, title, year, cover, gallery, "order", video_url, updated_at')
     .eq("draft", false)
+    .order("updated_at", { ascending: false })
     .order("order", { ascending: true })
-    .order("year", { ascending: false });
+    .range(offset, offset + PAGE_SIZE - 1);
 
 const seminars = (rows ?? []).map((r) => ({
     id: r.slug,
@@ -21,6 +38,7 @@ const seminars = (rows ?? []).map((r) => ({
     cover: r.cover,
     gallery: Array.isArray(r.gallery) ? r.gallery : [],
     order: r.order ?? 0,
+    videoEmbed: toEmbedUrl(r.video_url),
 }));
 ---
 
@@ -77,6 +95,11 @@ const seminars = (rows ?? []).map((r) => ({
         <!-- Seminars Gallery -->
         <section class="py-20 lg:pb-24 bg-slate-50 min-h-[60vh]">
             <div class="container mx-auto px-6 space-y-20">
+                {totalCount === 0 && (
+                    <p class="text-center text-slate-500 py-20">
+                        No seminars to display yet — check back soon.
+                    </p>
+                )}
                 {
                     seminars.map((event) => (
                         <div
@@ -97,8 +120,21 @@ const seminars = (rows ?? []).map((r) => ({
                                 </p>
                             </div>
 
-                            {/* Right: Photo Grid */}
-                            <div class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-3">
+                            {/* Right: Video + Photo Grid */}
+                            <div class="flex-1 space-y-4">
+                                {event.videoEmbed && (
+                                    <div class="relative aspect-video rounded-xl overflow-hidden shadow-md bg-black">
+                                        <iframe
+                                            src={event.videoEmbed}
+                                            title={`${event.title} – video`}
+                                            class="absolute inset-0 w-full h-full"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                                 {event.gallery.map((photo, index) => (
                                     <div
                                         class="photo-thumb group relative aspect-square overflow-hidden rounded-xl cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
@@ -127,10 +163,17 @@ const seminars = (rows ?? []).map((r) => ({
                                         </div>
                                     </div>
                                 ))}
+                                </div>
                             </div>
                         </div>
                     ))
                 }
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    basePath="/seminars"
+                />
             </div>
         </section>
 
