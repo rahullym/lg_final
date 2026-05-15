@@ -8,15 +8,42 @@ import {
   CheckCircle,
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
   Quote,
 } from "lucide-react";
 
+const stedSlides = [
+  {
+    image: "/images/sted-atc-certificate.jpg",
+    pdf: "/documents/sted-atc-course-approval.pdf",
+    title: "Authorised Training Partner",
+    caption: "ATC Code 1432/EKM/26 · valid until April 30, 2027",
+  },
+  {
+    image: "/images/sted-course-approval.jpg",
+    pdf: "/documents/sted-atc-course-approval.pdf",
+    title: "Course Approval Certificate",
+    caption: "Six approved courses · REGULAR/OFFLINE mode",
+  },
+  {
+    image: "/images/sted-certificate-specimen.jpg",
+    pdf: "/documents/sted-certificate-specimen.pdf",
+    title: "Sample Student Certificate",
+    caption: "IQA AAA accredited · issued by the STED Council Board of Examinations",
+  },
+];
+
 export default function CertificationContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [stedSlide, setStedSlide] = useState(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
+
+  const nextStedSlide = () => setStedSlide((i) => (i + 1) % stedSlides.length);
+  const prevStedSlide = () => setStedSlide((i) => (i - 1 + stedSlides.length) % stedSlides.length);
 
   const benefits = [
     {
@@ -235,29 +262,114 @@ export default function CertificationContent() {
               </div>
             </div>
 
-            <div className="lg:w-1/2 relative">
-              <div className="absolute inset-0 bg-blue-600/5 rounded-3xl transform rotate-3 scale-95" />
-              <div className="relative bg-slate-900 text-white p-10 rounded-3xl shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                  <Award className="w-32 h-32" />
+            <div className="lg:w-1/2 space-y-8">
+              {/* Global Passport */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-blue-600/5 rounded-3xl transform rotate-3 scale-95" />
+                <div className="relative bg-slate-900 text-white p-10 rounded-3xl shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-10">
+                    <Award className="w-32 h-32" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">
+                    A Global Passport for Your Career
+                  </h3>
+                  <p className="text-slate-300 leading-relaxed mb-8">
+                    "Thanks to the IAF Multilateral Recognition Arrangement, your
+                    credentials are recognized as equivalent across diverse
+                    international regulatory environments."
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
+                      ISO 9001:2015
+                    </div>
+                    <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
+                      IAF Member
+                    </div>
+                    <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
+                      EIAC Accredited
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">
-                  A Global Passport for Your Career
-                </h3>
-                <p className="text-slate-300 leading-relaxed mb-8">
-                  "Thanks to the IAF Multilateral Recognition Arrangement, your
-                  credentials are recognized as equivalent across diverse
-                  international regulatory environments."
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    ISO 9001:2015
+              </div>
+
+              {/* Certificate Slider */}
+              <div className="relative bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+                <div className="relative aspect-[3/4] bg-slate-50">
+                  <AnimatePresence mode="wait">
+                    <motion.a
+                      key={stedSlide}
+                      href={stedSlides[stedSlide].pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${stedSlides[stedSlide].title} (PDF)`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="absolute inset-0 block group"
+                    >
+                      <img
+                        src={stedSlides[stedSlide].image}
+                        alt={stedSlides[stedSlide].title}
+                        className="w-full h-full object-contain bg-white p-4"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-200" />
+                    </motion.a>
+                  </AnimatePresence>
+
+                  {/* Prev / Next */}
+                  <button
+                    type="button"
+                    onClick={prevStedSlide}
+                    aria-label="Previous certificate"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center text-slate-700 hover:text-blue-600 transition-colors backdrop-blur-sm"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextStedSlide}
+                    aria-label="Next certificate"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center text-slate-700 hover:text-blue-600 transition-colors backdrop-blur-sm"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Caption + dots */}
+                <div className="p-5 bg-white border-t border-slate-100">
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-blue-600 mb-0.5">
+                        {`Slide ${stedSlide + 1} of ${stedSlides.length}`}
+                      </p>
+                      <p className="text-sm font-bold text-slate-900 leading-tight">{stedSlides[stedSlide].title}</p>
+                      <p className="text-xs text-slate-500 mt-1">{stedSlides[stedSlide].caption}</p>
+                    </div>
+                    <a
+                      href={stedSlides[stedSlide].pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-bold text-blue-600 hover:underline whitespace-nowrap mt-1"
+                    >
+                      Open PDF →
+                    </a>
                   </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    IAF Member
-                  </div>
-                  <div className="bg-white/10 px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm">
-                    EIAC Accredited
+                  <div className="flex items-center justify-center gap-2">
+                    {stedSlides.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setStedSlide(i)}
+                        aria-label={`Go to slide ${i + 1}`}
+                        className={
+                          i === stedSlide
+                            ? "h-2 w-6 rounded-full bg-blue-600 transition-all"
+                            : "h-2 w-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"
+                        }
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
