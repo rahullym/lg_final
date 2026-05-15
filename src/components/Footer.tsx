@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer className="bg-slate-950 text-white py-16 border-t border-white/5 font-sans">
             <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 items-start">
 
                     {/* Logo & Brief */}
                     <div className="space-y-6">
@@ -69,29 +69,6 @@ export default function Footer() {
                             <div className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-blue-500 shrink-0" />
                                 <a id="footer-lg-email" href="mailto:enquiry@logisticsgurukul.com" className="hover:text-white transition-colors">enquiry@logisticsgurukul.com</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Alive Academy Address */}
-                    <div className="space-y-6">
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-blue-500">Alive Academy</h3>
-                        <div className="space-y-4 text-slate-300 text-sm">
-                            <div className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                                <p className="leading-relaxed">
-                                    1st Floor, EVU Complex,<br />
-                                    Near Govt. Hospital, Peechi Road (Jn),<br />
-                                    Pattikkad (P.O), Thrissur, 680652
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Phone className="w-5 h-5 text-blue-500 shrink-0" />
-                                <a id="footer-alive-phone" href="tel:+919400828186" className="hover:text-white transition-colors">+91 94008 28186</a>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                                <a id="footer-alive-email" href="mailto:info@aliveacademy.co.in" className="hover:text-white transition-colors">info@aliveacademy.co.in</a>
                             </div>
                         </div>
                     </div>
