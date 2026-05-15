@@ -122,6 +122,7 @@ export default function CertificationContent() {
 
               <ul className="space-y-4 mb-8">
                 {[
+                  "Authorised Training Partner — ATC 1432/EKM/26 (valid until April 30, 2027).",
                   "Recognized by Ministry of MSME & Labour.",
                   "Accredited by IAF, IAS, & USAS (USA).",
                   "Tamper-proof with Dynamic QR Code Security.",
@@ -133,6 +134,29 @@ export default function CertificationContent() {
                   </li>
                 ))}
               </ul>
+
+              {/* Approved Courses */}
+              <div className="mb-8 p-6 bg-white rounded-2xl border border-slate-200">
+                <p className="text-sm font-bold text-slate-500 uppercase mb-3">
+                  STED-Approved Courses at Logistics Gurukul
+                </p>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  {[
+                    { name: "Prof. Dip. in International Logistics & Freight Mgmt.", meta: "+2 · 1 Year" },
+                    { name: "Certificate in Hazardous Goods Logistics", meta: "+2 · 3 Months" },
+                    { name: "Certificate in Air Cargo Management", meta: "+2 · 3 Months" },
+                    { name: "Certificate in Shipping Documentation", meta: "+2 · 3 Months" },
+                    { name: "Certificate in Export & Import Management", meta: "+2 · 3 Months" },
+                    { name: "Certificate in Procurement & Inventory Management", meta: "+2 · 3 Months" },
+                  ].map((course, i) => (
+                    <li key={i} className="flex items-start justify-between gap-3 py-1.5 border-b border-slate-100 last:border-0">
+                      <span className="font-medium">{course.name}</span>
+                      <span className="text-slate-500 text-xs whitespace-nowrap pt-0.5">{course.meta}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-slate-500 mt-3 italic">Conducted in REGULAR/OFFLINE MODE with the approved syllabus, duration, and eligibility.</p>
+              </div>
 
               <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-5">
                 <div>
@@ -165,26 +189,48 @@ export default function CertificationContent() {
                   <p className="text-sm font-bold text-slate-500 uppercase mb-3">
                     Official Documents
                   </p>
-                  <a
-                    id="cert-sted-approval-doc"
-                    href="/documents/sted-franchise-approval.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-sm transition-all group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                  <div className="flex flex-col gap-3">
+                    <a
+                      id="cert-sted-atc-approval-doc"
+                      href="/documents/sted-atc-course-approval.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-sm transition-all group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-slate-900 text-sm group-hover:text-blue-700 transition-colors">ATC & Course Approval Certificate</div>
+                        <div className="text-slate-500 text-xs">Authorised Training Centre · 1432/EKM/26 · valid till 30 Apr 2027</div>
+                      </div>
+                      <svg className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-bold text-slate-900 text-sm group-hover:text-blue-700 transition-colors">ATC Approval Letter</div>
-                      <div className="text-slate-500 text-xs">Authorised Training Centre · 1432/EKM/26</div>
-                    </div>
-                    <svg className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
+                    </a>
+                    <a
+                      id="cert-sted-specimen-doc"
+                      href="/documents/sted-certificate-specimen.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-sm transition-all group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-slate-900 text-sm group-hover:text-blue-700 transition-colors">Sample Student Certificate</div>
+                        <div className="text-slate-500 text-xs">IQA AAA Accredited · Issued by STED Council Board of Examinations</div>
+                      </div>
+                      <svg className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
