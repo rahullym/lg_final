@@ -67,8 +67,7 @@ export default function Navbar() {
                 { label: 'Blogs', href: '/blog' },
                 { label: 'Newsletter', href: '/newsletters' }
             ]
-        },
-        { label: 'Placements', href: '/placements' }
+        }
     ];
 
     return (
@@ -217,8 +216,15 @@ export default function Navbar() {
                         })}
                     </nav>
 
-                    {/* CTA Button */}
-                    <div className="hidden lg:block">
+                    {/* CTA Buttons */}
+                    <div className="hidden lg:flex items-center gap-3">
+                        <a
+                            id="nav-cta-jobs"
+                            href="/placements"
+                            className="px-5 xl:px-6 py-3 xl:py-3.5 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white text-sm xl:text-base font-bold rounded-full transition-colors whitespace-nowrap"
+                        >
+                            Jobs
+                        </a>
                         <button
                             id="nav-cta-contact"
                             onClick={() => setIsWizardOpen(true)}
@@ -277,13 +283,22 @@ export default function Navbar() {
                             );
                         })}
 
+                        <a
+                            id="mobile-nav-cta-jobs"
+                            href="/placements"
+                            onClick={() => setIsOpen(false)}
+                            className="mt-4 w-full px-6 py-3 border-2 border-brand-blue text-center text-brand-blue font-bold rounded-lg"
+                        >
+                            Jobs
+                        </a>
+
                         <button
                             id="mobile-nav-cta-contact"
                             onClick={() => {
                                 setIsOpen(false);
                                 setIsWizardOpen(true);
                             }}
-                            className="mt-4 w-full px-6 py-3 bg-brand-blue text-center text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity"
+                            className="mt-2 w-full px-6 py-3 bg-brand-blue text-center text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-opacity"
                         >
                             Contact Us
                         </button>

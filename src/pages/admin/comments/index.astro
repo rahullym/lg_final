@@ -1,0 +1,145 @@
+---
+export const prerender = false;
+
+import AdminShell from '../../../components/admin/AdminShell.astro';
+import { supabaseForUser } from '../../../lib/supabase';
+
+const token = Astro.locals.accessToken!;
+const client = supabaseForUser(token);
+
+const url = new URL(Astro.request.url);
+const status = (url.searchParams.get('status') ?? 'pending').toLowerCase();
+const approvedFlag = status === 'approved' ? true : status === 'pending' ? false : null;
+const updated = url.searchParams.has('updated');
+const deleted = url.searchParams.has('deleted');
+
+let query = client
+  .from('comments')
+  .select('id, post_slug, name, email, website, body, approved, created_at')
+  .order('created_at', { ascending: false })
+  .limit(300);
+
+if (approvedFlag !== null) query = query.eq('approved', approvedFlag);
+
+const { data: comments, error } = await query;
+
+const [{ count: pendingCount }, { count: approvedCount }] = await Promise.all([
+  client.from('comments').select('id', { count: 'exact', head: true }).eq('approved', false),
+  client.from('comments').select('id', { count: 'exact', head: true }).eq('approved', true),
+]);
+
+function fmtWhen(iso: string): string {
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return '';
+  return dt.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+---
+
+<AdminShell title="Comments" breadcrumbs={[{ label: 'Comments' }]}>
+  <div class="flex items-center justify-between mb-8 gap-4 flex-wrap">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900 mb-1">Comments</h1>
+      <p class="text-slate-600 text-sm">Approve, reject, or delete comments submitted on blog posts.</p>
+    </div>
+  </div>
+
+  {updated && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Updated.</div>}
+  {deleted && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Deleted.</div>}
+  {error && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">Failed to load: {error.message}</div>}
+
+  {/* Tabs */}
+  <div class="flex items-center gap-1 mb-6 border-b border-slate-200">
+    <a href="/admin/comments?status=pending"
+      class:list={[
+        "inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold border-b-2 -mb-px",
+        status === 'pending' ? "border-blue-600 text-blue-600" : "border-transparent text-slate-600 hover:text-slate-900"
+      ]}>
+      Pending
+      <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">{pendingCount ?? 0}</span>
+    </a>
+    <a href="/admin/comments?status=approved"
+      class:list={[
+        "inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold border-b-2 -mb-px",
+        status === 'approved' ? "border-blue-600 text-blue-600" : "border-transparent text-slate-600 hover:text-slate-900"
+      ]}>
+      Approved
+      <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">{approvedCount ?? 0}</span>
+    </a>
+    <a href="/admin/comments?status=all"
+      class:list={[
+        "inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold border-b-2 -mb-px",
+        status === 'all' ? "border-blue-600 text-blue-600" : "border-transparent text-slate-600 hover:text-slate-900"
+      ]}>
+      All
+    </a>
+  </div>
+
+  {!error && comments && comments.length === 0 && (
+    <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center text-slate-600">
+      {status === 'pending' ? 'Nothing to moderate. 🎉' : 'No comments to show.'}
+    </div>
+  )}
+
+  {!error && comments && comments.length > 0 && (
+    <ul class="space-y-3">
+      {comments.map((c) => (
+        <li class="bg-white rounded-2xl border border-slate-200 p-5">
+          <div class="flex items-start justify-between gap-4 mb-3 flex-wrap">
+            <div class="min-w-0">
+              <p class="font-bold text-slate-900">
+                {c.name}
+                <span class="ml-2 text-xs text-slate-500 font-normal">{c.email}</span>
+                {c.website && (
+                  <a href={c.website} target="_blank" rel="noopener nofollow" class="ml-2 text-xs text-blue-600 hover:underline">{c.website}</a>
+                )}
+              </p>
+              <p class="text-xs text-slate-500 mt-0.5">
+                On <a href={`/blog/${c.post_slug}#comments`} target="_blank" rel="noopener" class="text-blue-600 hover:underline">{c.post_slug}</a>
+                · {fmtWhen(c.created_at)}
+              </p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              {c.approved ? (
+                <span class="inline-flex px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">Approved</span>
+              ) : (
+                <span class="inline-flex px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">Pending</span>
+              )}
+            </div>
+          </div>
+
+          <p class="text-slate-700 leading-relaxed whitespace-pre-wrap mb-4">{c.body}</p>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            {!c.approved && (
+              <form method="POST" action={`/api/admin/comments/${c.id}`}>
+                <input type="hidden" name="_method" value="PATCH" />
+                <input type="hidden" name="approved" value="true" />
+                <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs">
+                  Approve
+                </button>
+              </form>
+            )}
+            {c.approved && (
+              <form method="POST" action={`/api/admin/comments/${c.id}`}>
+                <input type="hidden" name="_method" value="PATCH" />
+                <input type="hidden" name="approved" value="false" />
+                <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold text-xs">
+                  Unapprove
+                </button>
+              </form>
+            )}
+            <form method="POST" action={`/api/admin/comments/${c.id}`} onsubmit="return confirm('Delete this comment permanently?');">
+              <input type="hidden" name="_method" value="DELETE" />
+              <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-red-50 text-red-600 border border-red-200 font-semibold text-xs">
+                Delete
+              </button>
+            </form>
+            <a href={`mailto:${c.email}`} class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold text-xs">
+              Email
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</AdminShell>

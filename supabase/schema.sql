@@ -108,6 +108,23 @@ alter table public.jobs add column if not exists locations text[] not null defau
 alter table public.jobs add column if not exists responsibilities text[] not null default '{}'::text[];
 alter table public.jobs add column if not exists requirements text[] not null default '{}'::text[];
 
+create table if not exists public.comments (
+  id          uuid primary key default gen_random_uuid(),
+  post_id     uuid references public.posts(id) on delete cascade,
+  post_slug   text not null,
+  name        text not null,
+  email       text not null,
+  website     text,
+  body        text not null,
+  approved    boolean not null default false,
+  ip_hash     text,
+  created_at  timestamptz not null default now()
+);
+create index if not exists comments_post_approved_idx
+  on public.comments (post_id, approved, created_at desc);
+create index if not exists comments_created_idx
+  on public.comments (created_at desc);
+
 create table if not exists public.applications (
   id                  uuid primary key default gen_random_uuid(),
   job_id              uuid references public.jobs(id) on delete set null,
@@ -166,6 +183,7 @@ alter table public.infrastructure_features enable row level security;
 alter table public.infrastructure_gallery enable row level security;
 alter table public.jobs enable row level security;
 alter table public.applications enable row level security;
+alter table public.comments enable row level security;
 
 -- posts
 drop policy if exists "public read non-draft posts" on public.posts;
@@ -267,6 +285,24 @@ create policy "auth update jobs" on public.jobs
   for update to authenticated using (true) with check (true);
 drop policy if exists "auth delete jobs" on public.jobs;
 create policy "auth delete jobs" on public.jobs
+  for delete to authenticated using (true);
+
+-- comments: anyone can submit (but only as `approved = false`); public reads
+-- only approved comments; admins read & moderate everything.
+drop policy if exists "public read approved comments" on public.comments;
+create policy "public read approved comments" on public.comments
+  for select using (approved = true);
+drop policy if exists "anon insert pending comments" on public.comments;
+create policy "anon insert pending comments" on public.comments
+  for insert to anon with check (approved = false);
+drop policy if exists "auth read all comments" on public.comments;
+create policy "auth read all comments" on public.comments
+  for select to authenticated using (true);
+drop policy if exists "auth update comments" on public.comments;
+create policy "auth update comments" on public.comments
+  for update to authenticated using (true) with check (true);
+drop policy if exists "auth delete comments" on public.comments;
+create policy "auth delete comments" on public.comments
   for delete to authenticated using (true);
 
 -- applications: candidates (anon) can submit; only admins can read/manage

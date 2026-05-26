@@ -12,7 +12,7 @@ const { slug } = Astro.params;
 
 const { data: post, error } = await supabase
   .from('posts')
-  .select('slug, title, excerpt, cover_image, author, publish_date, category, body, video_url, draft')
+  .select('id, slug, title, excerpt, cover_image, author, publish_date, category, body, video_url, draft')
   .eq('slug', slug)
   .eq('draft', false)
   .maybeSingle();
@@ -33,6 +33,28 @@ const displayPost = {
   category: post.category ?? '',
   videoEmbed: toEmbedUrl(post.video_url),
 };
+
+const { data: commentRows } = await supabase
+  .from('comments')
+  .select('id, name, website, body, created_at')
+  .eq('post_id', post.id)
+  .eq('approved', true)
+  .order('created_at', { ascending: true });
+
+const comments = commentRows ?? [];
+
+const params = new URL(Astro.request.url).searchParams;
+const commented = params.has('commented');
+const commentError = params.get('comment_error');
+
+function fmtComment(iso: string): string {
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return '';
+  return dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+function initial(name: string): string {
+  return (name?.trim()[0] ?? '?').toUpperCase();
+}
 ---
 
 <Layout
@@ -44,6 +66,146 @@ const displayPost = {
         <BlogPost post={displayPost} client:load>
             <div class="blog-content" set:html={post.body ?? ''} />
         </BlogPost>
+
+        {/* Comments section */}
+        <section id="comments" class="bg-white border-t border-slate-100">
+            <div class="container mx-auto px-6 py-16 lg:py-20">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 font-heading mb-2">
+                        {comments.length === 0
+                            ? 'Comments'
+                            : `${comments.length} Comment${comments.length === 1 ? '' : 's'}`}
+                    </h2>
+                    <p class="text-sm text-slate-500 mb-10">
+                        Comments are moderated and will appear once approved.
+                    </p>
+
+                    {/* List */}
+                    {comments.length > 0 && (
+                        <ul class="space-y-8 mb-14">
+                            {comments.map((c) => (
+                                <li class="flex gap-4">
+                                    <div class="shrink-0 w-11 h-11 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center">
+                                        {initial(c.name)}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-baseline gap-3 flex-wrap mb-1">
+                                            {c.website ? (
+                                                <a href={c.website} target="_blank" rel="noopener nofollow ugc"
+                                                    class="font-bold text-slate-900 hover:text-blue-600">{c.name}</a>
+                                            ) : (
+                                                <span class="font-bold text-slate-900">{c.name}</span>
+                                            )}
+                                            <span class="text-xs text-slate-500">{fmtComment(c.created_at)}</span>
+                                        </div>
+                                        <p class="text-slate-700 leading-relaxed whitespace-pre-wrap">{c.body}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    {/* Form */}
+                    <div id="reply" class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Leave a Reply</h3>
+                        <p class="text-sm text-slate-500 mb-6">
+                            Your email address will not be published. Required fields are marked <span class="text-red-600">*</span>
+                        </p>
+
+                        {commented && (
+                            <div class="mb-5 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
+                                Thanks — your comment is awaiting moderation.
+                            </div>
+                        )}
+                        {commentError && (
+                            <div class="mb-5 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{commentError}</div>
+                        )}
+
+                        <form method="POST" action="/api/blog/comments" class="space-y-4">
+                            <input type="hidden" name="post_slug" value={post.slug} />
+                            <div class="hidden" aria-hidden="true">
+                                <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="c-body">
+                                    Comment <span class="text-red-600">*</span>
+                                </label>
+                                <textarea id="c-body" name="body" rows="5" required maxlength="5000"
+                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"></textarea>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="c-name">
+                                        Name <span class="text-red-600">*</span>
+                                    </label>
+                                    <input id="c-name" name="name" type="text" required maxlength="120"
+                                        class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="c-email">
+                                        Email <span class="text-red-600">*</span>
+                                    </label>
+                                    <input id="c-email" name="email" type="email" required maxlength="200"
+                                        class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1.5" for="c-website">Website</label>
+                                <input id="c-website" name="website" type="url" maxlength="300"
+                                    placeholder="https://"
+                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <input id="c-save" type="checkbox" class="w-4 h-4 rounded border-slate-300" />
+                                <label for="c-save" class="text-sm text-slate-600">Save my name, email, and website in this browser for the next time I comment.</label>
+                            </div>
+
+                            <button type="submit"
+                                class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-md text-sm transition-colors">
+                                Post Comment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <Footer client:visible />
 </Layout>
+
+<script>
+  // Save / restore Name, Email, Website to localStorage for convenience.
+  const KEY = 'lg.comment.identity';
+  const form = document.querySelector<HTMLFormElement>('form[action="/api/blog/comments"]');
+  const nameEl = document.getElementById('c-name') as HTMLInputElement | null;
+  const emailEl = document.getElementById('c-email') as HTMLInputElement | null;
+  const webEl = document.getElementById('c-website') as HTMLInputElement | null;
+  const saveEl = document.getElementById('c-save') as HTMLInputElement | null;
+  if (form && nameEl && emailEl && webEl && saveEl) {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const v = JSON.parse(raw);
+        if (v.name) nameEl.value = v.name;
+        if (v.email) emailEl.value = v.email;
+        if (v.website) webEl.value = v.website;
+        saveEl.checked = true;
+      }
+    } catch {}
+    form.addEventListener('submit', () => {
+      try {
+        if (saveEl.checked) {
+          localStorage.setItem(KEY, JSON.stringify({
+            name: nameEl.value, email: emailEl.value, website: webEl.value,
+          }));
+        } else {
+          localStorage.removeItem(KEY);
+        }
+      } catch {}
+    });
+  }
+</script>

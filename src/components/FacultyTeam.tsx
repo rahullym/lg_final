@@ -6,24 +6,27 @@ const tutors = [
     {
         name: "Sreeji Pillai",
         role: "Lead Mentor & Industry Specialist",
-        subRole: "Former CEO of Aiyer Logistics Pvt LTD",
+        subRole: "CEO & Director – Berrio Lines Pvt Ltd",
         image: "/faculty-images/Sreeji.jpeg", // Updated image
         bio: [
-            "Sreeji Pillai is a seasoned logistics industry leader and mentor with over a decade of extensive experience across freight forwarding, shipping, and end-to-end supply chain operations. As the Industry Specialist and Lead Mentor, he brings invaluable real-world expertise and strategic insight to logistics education.",
+            "Sreeji Pillai is a seasoned logistics industry leader and mentor with over a decade of extensive experience across freight forwarding, shipping, and end-to-end supply chain operations. As the Industry Specialist and Lead Mentor at Logistics Gurukul, he brings invaluable real-world expertise and strategic insight to logistics education.",
             "He is widely recognized for his leadership capabilities and deep understanding of logistics business operations, having held senior management and executive roles across reputed logistics organizations in India."
         ],
         journey: (
             <>
                 <p className="mb-4">
-                    Mr. Pillai is a seasoned logistics professional with over a decade of progressive leadership roles across prominent logistics organizations. He most recently served as Chief Executive Officer at Aiyer Logistics Pvt Ltd — where he oversaw strategic operations, business development, and integrated logistics service delivery.
+                    Mr. Pillai is a seasoned logistics professional with over a decade of progressive leadership roles across prominent logistics organizations. He currently serves as Chief Executive Officer & Director at Berrio Lines Pvt Ltd, leading strategic operations and business development in the logistics sector.
                 </p>
-                <p className="mb-2 font-medium">Before taking on the CEO position, he held senior leadership roles including:</p>
+                <p className="mb-4">
+                    Before this, he served as Chief Executive Officer at Aiyer Logistics Pvt Ltd, overseeing strategic operations, business development, and integrated logistics service delivery.
+                </p>
+                <p className="mb-2 font-medium">His earlier leadership roles include:</p>
                 <ul className="list-disc pl-5 mt-2 space-y-1">
                     <li>Vice President – Navio Shipping</li>
                     <li>Vice President – Shiftco Shipping & Logistics India Pvt Ltd</li>
                     <li>General Manager – Global Logistics Solutions</li>
                     <li>Deputy General Manager – Global Logistics Solutions</li>
-                    <li>Assistant General Manager at LavinStar Logistics Pvt Ltd</li>
+                    <li>Assistant General Manager – LavinStar Logistics Pvt Ltd</li>
                 </ul>
             </>
         ),
