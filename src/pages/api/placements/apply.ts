@@ -4,7 +4,7 @@ import { supabase } from '../../../lib/supabase';
 export const prerender = false;
 
 const CV_BUCKET = 'lg_cvs';
-const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+const MAX_BYTES = 4 * 1024 * 1024; // 4 MB (Vercel serverless body limit is 4.5 MB)
 const ALLOWED_TYPES = new Set(['application/pdf']);
 const ALLOWED_EXTS = new Set(['pdf']);
 
@@ -47,7 +47,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
     return back(redirect, backPath, 'Please attach your CV (PDF)');
   }
   if (file.size > MAX_BYTES) {
-    return back(redirect, backPath, 'CV is too large (max 5 MB)');
+    return back(redirect, backPath, 'CV is too large (max 4 MB)');
   }
   const ext = (file.name.split('.').pop() ?? '').toLowerCase();
   if (!ALLOWED_TYPES.has(file.type) && !ALLOWED_EXTS.has(ext)) {
