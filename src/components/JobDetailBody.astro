@@ -250,8 +250,8 @@ function fmtDate(d: string | null): string {
                   class="w-full px-3.5 py-2.5 bg-slate-950/50 border border-slate-700 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:opacity-60"></textarea>
               </div>
 
-              <button type="submit" disabled={previewMode}
-                class:list={["w-full py-3 text-white font-bold rounded-full text-sm transition-colors shadow-lg shadow-blue-600/30 mt-2", previewMode ? "bg-blue-600/40 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"]}>
+              <button id="ap-submit" type="submit" disabled={previewMode}
+                class:list={["w-full py-3 text-white font-bold rounded-full text-sm transition-colors shadow-lg shadow-blue-600/30 mt-2 disabled:opacity-60 disabled:cursor-not-allowed", previewMode ? "bg-blue-600/40 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"]}>
                 {previewMode ? 'Submission disabled in preview' : 'Submit Application'}
               </button>
               <p class="text-[11px] text-slate-500 leading-relaxed">By submitting you consent to us storing this CV for recruiting purposes.</p>
@@ -310,12 +310,21 @@ function fmtDate(d: string | null): string {
 
   const MAX_BYTES = 4 * 1024 * 1024;
   const applyForm = document.getElementById('apply-form') as HTMLFormElement | null;
+  const applySubmit = document.getElementById('ap-submit') as HTMLButtonElement | null;
+  let applySubmitting = false;
   applyForm?.addEventListener('submit', (e) => {
+    if (applySubmitting) { e.preventDefault(); return; }
     const f = (applyForm.querySelector('input[name="cv"]') as HTMLInputElement | null)?.files?.[0];
     if (f && f.size > MAX_BYTES) {
       e.preventDefault();
       const mb = (f.size / 1024 / 1024).toFixed(2);
       alert(`Your CV is ${mb} MB. Please upload a PDF under 4 MB.`);
+      return;
+    }
+    applySubmitting = true;
+    if (applySubmit) {
+      applySubmit.disabled = true;
+      applySubmit.textContent = 'Submitting…';
     }
   });
 </script>
