@@ -38,7 +38,7 @@ export default function Navbar() {
             href: '/about',
             children: [
                 { label: 'Our Story', href: '/about' },
-                { label: 'Faculty Team', href: '/tutors' },
+                { label: 'Our Team', href: '/tutors' },
                 { label: 'Certification', href: '/certification' }
             ]
         },
@@ -48,7 +48,8 @@ export default function Navbar() {
             children: [
                 { label: 'Diploma', href: '/diploma-international-logistics' },
                 { label: 'Short Term Courses', href: '/short-term-courses' },
-                { label: 'Internship', href: '/internship' }
+                { label: 'Internship', href: '/internship' },
+                { label: 'HireEzee', href: '/hireezee' }
             ]
         },
         {

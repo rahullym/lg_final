@@ -36,7 +36,7 @@ const organizationSchema = {
 };
 
 const structuredData = schema
-    ? [organizationSchema, schema]
+    ? [organizationSchema].concat(schema)
     : organizationSchema;
 ---
 

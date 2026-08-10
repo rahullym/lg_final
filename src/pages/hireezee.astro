@@ -1,0 +1,514 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ContactCTA from "../components/ContactCTA";
+
+const heroStats = [
+    { value: "20", label: "Days Duration" },
+    { value: "50", label: "Training Hours" },
+    { value: "3 Hrs", label: "Daily Training" },
+    { value: "Offline", label: "Mode" },
+];
+
+const whatMakesItWork = [
+    {
+        title: "Practical, not theoretical",
+        desc: "Live documentation, tools, and case simulations replace passive classroom listening.",
+    },
+    {
+        title: "Industry-connected",
+        desc: "Direct sessions with working professionals from freight forwarding, shipping, and cargo.",
+    },
+    {
+        title: "Interview-first design",
+        desc: "Grooming, resume, and mock interviews are core hours — not an afterthought.",
+    },
+];
+
+const audience = [
+    { title: "Fresh Graduates", desc: "Step into your first job with confidence, not just a certificate." },
+    { title: "Final Year Students", desc: "Get placement-ready before your final semester ends." },
+    { title: "Job Seekers", desc: "Sharpen your edge for a competitive logistics job market." },
+    { title: "Career Switchers", desc: "Move into logistics with the right vocabulary, tools, and confidence." },
+    { title: "Diploma / UG / PG Students", desc: "Add the one thing your syllabus doesn't teach: how to get hired." },
+];
+
+const programComponents = [
+    {
+        step: "01",
+        title: "Industry Expert Sessions",
+        desc: "Direct interaction with working professionals from freight forwarding, shipping, and cargo operations.",
+    },
+    {
+        step: "02",
+        title: "Logistics Theory",
+        desc: "The core supply chain concepts and vocabulary that interviews actually test you on.",
+    },
+    {
+        step: "03",
+        title: "Practical Training",
+        desc: "Live documentation practice and real case simulations, worked the way the industry works them.",
+    },
+    {
+        step: "04",
+        title: "AI & IT Tools",
+        desc: "Hands-on with the AI and digital tools modern logistics teams run their operations on.",
+    },
+    {
+        step: "05",
+        title: "Interview Skills & Grooming",
+        desc: "Resume building, communication coaching, and professional presentation.",
+    },
+    {
+        step: "06",
+        title: "Mock Interviews",
+        desc: "Realistic interview panels with direct, actionable feedback before the real thing.",
+    },
+];
+
+const journey = [
+    { tag: "Days 1–7", title: "Foundation", desc: "Logistics theory and industry expert sessions build the base." },
+    { tag: "Days 8–14", title: "Skill-Building", desc: "Practical training and AI/IT tools turn theory into working skill." },
+    { tag: "Days 15–18", title: "Interview Prep", desc: "Grooming, resume building, and communication coaching." },
+    { tag: "Days 19–20", title: "Mock Interviews", desc: "Face realistic panels, get direct feedback, walk in ready." },
+    { tag: "Outcome", title: "Get Hired", desc: "Step into interviews with the confidence and documentation skills employers are actually looking for." },
+];
+
+const careers = [
+    { role: "Operations Executive", desc: "Manage daily logistics processes, supply chains, and inventory tracking.", image: "/career_logistics_ops.png" },
+    { role: "Customer Care Executive", desc: "Handle customer queries, track orders, and ensure smooth delivery experiences.", image: "/career_customer_service.png" },
+    { role: "Documentation Executive", desc: "Oversee shipping documents, customs paperwork, and compliance records.", image: "/career_export_specialist.png" },
+    { role: "Business Development Executive", desc: "Assist sales teams, generate leads, and engage prospective logistics clients.", image: "/career_business_meeting.png" },
+    { role: "Key Account Executive", desc: "Maintain relationships with key business accounts and support client retention.", image: "/career_bg_junior.png" },
+    { role: "Logistics Coordinator", desc: "Coordinate warehouse operations, transportation, and delivery schedules.", image: "/career_supply_chain.png" },
+    { role: "Warehouse Operations Associate", desc: "Manage inventory receiving, storage, order picking, and facility dispatch.", image: "/career_smart_warehouse.png" },
+    { role: "Customer Success Representative", desc: "Drive client satisfaction, track shipment updates, and resolve service queries.", image: "/career_air_cargo.png" },
+];
+
+const faqs = [
+    {
+        q: "Do I need a logistics background to join HireEzee?",
+        a: "No. HireEzee is designed for graduates and job seekers from any academic background who want to enter the logistics and supply chain industry.",
+    },
+    {
+        q: "Is HireEzee a certification course or a placement program?",
+        a: "HireEzee is a placement-readiness program. It's built to prepare you for interviews and real job performance, with placement support layered in — not a standalone academic certification.",
+    },
+    {
+        q: "What's the difference between HireEzee and the Diploma program?",
+        a: "The Diploma is a 1-year, in-depth program with 6 months of paid on-job training. HireEzee is a fast, focused 20-day / 50-hour program built specifically around interview and placement readiness for those who want to get job-ready quickly.",
+    },
+    {
+        q: "How many hours is the HireEzee program and how is it structured?",
+        a: "HireEzee is a 50-hour program delivered over 20 days at 3 hours of daily training, in offline mode. It covers industry expert sessions, logistics theory, practical training, AI & IT tools, interview skills and grooming, and mock interviews.",
+    },
+    {
+        q: "Is HireEzee available online?",
+        a: "HireEzee runs in offline mode to keep the practical, hands-on sessions and mock interviews as close to real interview conditions as possible.",
+    },
+];
+
+const site = "https://www.logisticsgurukul.com";
+
+const schema = [
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        name: "HireEzee — Placement Readiness Program in Logistics & Supply Chain Management",
+        description:
+            "A 20-day, 50-hour industry-focused placement training program covering industry expert sessions, logistics theory, practical training, AI & IT tools, interview skills, grooming, and mock interviews. Designed for fresh graduates, final year students, job seekers, career switchers, and diploma/UG/PG students.",
+        provider: {
+            "@type": "EducationalOrganization",
+            name: "Logistics Gurukul",
+            sameAs: `${site}/`,
+            url: `${site}/`,
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: "1st Floor, Profnet Plaza, Edappally, Mamangalam",
+                addressLocality: "Ernakulam",
+                addressRegion: "Kerala",
+                postalCode: "682025",
+                addressCountry: "IN",
+            },
+            telephone: "+91-79944-46019",
+        },
+        hasCourseInstance: {
+            "@type": "CourseInstance",
+            courseMode: "Offline",
+            courseWorkload: "PT50H",
+            duration: "P20D",
+        },
+        educationalCredentialAwarded: "HireEzee Placement Readiness Certificate",
+        audience: {
+            "@type": "Audience",
+            audienceType:
+                "Fresh Graduates, Final Year Students, Job Seekers, Career Switchers, Diploma/UG/PG Students",
+        },
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
+            { "@type": "ListItem", position: 2, name: "Courses", item: `${site}/courses` },
+            { "@type": "ListItem", position: 3, name: "HireEzee", item: `${site}/hireezee` },
+        ],
+    },
+];
+---
+
+<Layout
+    title="HireEzee — 50-Hour Placement Training Program in Logistics | Kochi"
+    description="HireEzee is a 20-day, 50-hour placement readiness program in logistics & supply chain management. Industry mentors, AI tools, mock interviews. Enroll in Kochi."
+    schema={schema}
+>
+    <Navbar client:load />
+
+    <main>
+        <!-- Hero -->
+        <section
+            class="relative min-h-[70vh] flex items-center bg-[#050505] overflow-hidden pt-28 pb-20 lg:pt-40 lg:pb-24"
+        >
+            <div class="absolute inset-0 z-0">
+                <img
+                    src="/port-img-scaled.jpg"
+                    alt="HireEzee Placement Readiness Program"
+                    class="w-full h-full object-cover opacity-50"
+                />
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/30"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-3xl">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-bold tracking-widest uppercase mb-6">
+                        Placement Readiness Program
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight font-heading">
+                        HireEzee — <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Learn. Practice. Get Hired.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed mb-4">
+                        The 50-hour placement training program that turns fresh graduates and job seekers into interview-ready logistics professionals — in just 20 days.
+                    </p>
+                    <p class="text-base text-slate-400 max-w-xl leading-relaxed mb-10">
+                        Built for the gap degrees don't cover: real documentation, real tools, real interview pressure.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button
+                            id="hireezee-hero-cta-counseling"
+                            data-open-wizard
+                            class="px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30"
+                        >
+                            Book Free Counseling
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                        </button>
+                        <a
+                            id="hireezee-hero-cta-program"
+                            href="#program"
+                            class="px-8 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-colors border border-white/20 flex items-center justify-center gap-2"
+                        >
+                            View Program
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Program Snapshot -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+                    {heroStats.map((s) => (
+                        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+                            <div class="text-3xl md:text-4xl font-black text-white mb-1">{s.value}</div>
+                            <div class="text-slate-400 text-xs font-medium uppercase tracking-widest">{s.label}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Why HireEzee Exists -->
+        <section class="py-20 lg:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    <div>
+                        <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-4 uppercase">
+                            About HireEzee
+                        </span>
+                        <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-heading leading-tight">
+                            Why HireEzee <span class="text-blue-600">Exists</span>
+                        </h2>
+                        <p class="text-slate-600 text-lg leading-relaxed mb-5">
+                            Logistics is one of the fastest-growing employment sectors in India, adding thousands of jobs every month. Yet most graduates are turned away at the interview stage — not because they lack a degree, but because they lack practical exposure, documentation skills, and interview confidence.
+                        </p>
+                        <p class="text-slate-600 text-lg leading-relaxed">
+                            HireEzee closes that exact gap. It's a 50-hour, intensive placement-readiness program built around learning by doing — live documentation practice, hands-on AI and IT tools, structured interview coaching, direct industry interaction, and mock interviews that mirror the real thing.
+                        </p>
+
+                        <div class="mt-8 border-l-4 border-blue-600 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-r-2xl px-7 py-6">
+                            <p class="text-xl md:text-2xl font-bold text-slate-900 font-heading">
+                                "Train Today. Get Placed Tomorrow."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        {whatMakesItWork.map((point, i) => (
+                            <div class="flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-black shrink-0">
+                                    {String(i + 1).padStart(2, "0")}
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-lg mb-2">{point.title}</h3>
+                                    <p class="text-slate-600 leading-relaxed">{point.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who It's For -->
+        <section class="py-20 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-4 uppercase">
+                        Who It's For
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4 font-heading">
+                        Built For Every <span class="text-blue-600">Job Seeker</span> In Logistics
+                    </h2>
+                    <p class="text-slate-600 text-lg">
+                        Whatever stage you're at, HireEzee meets you there and gets you interview-ready.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                    {audience.map((a, i) => (
+                        <div class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition-all duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-black text-lg mb-5">
+                                {String(i + 1).padStart(2, "0")}
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{a.title}</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">{a.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- What The 50 Hours Cover -->
+        <section id="program" class="py-20 lg:py-24 bg-slate-900 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-bold tracking-widest uppercase mb-4">
+                        The Program
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 font-heading">
+                        What The 50 Hours Cover
+                    </h2>
+                    <p class="text-slate-400 text-lg">
+                        50 Hours Total · 20 Days · 3 Hours Daily · Offline Mode
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    {programComponents.map((m) => (
+                        <div class="group bg-slate-800/60 backdrop-blur-sm border border-slate-700 rounded-2xl p-7 hover:border-blue-500/60 hover:bg-slate-800 transition-all">
+                            <div class="text-blue-400 font-black text-sm tracking-widest mb-4">{m.step}</div>
+                            <h3 class="text-white font-bold text-lg mb-3 group-hover:text-blue-300 transition-colors">{m.title}</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">{m.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="max-w-6xl mx-auto mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl px-8 py-6">
+                    <p class="text-white font-semibold text-lg text-center sm:text-left">
+                        Total Program Duration
+                    </p>
+                    <p class="text-white font-black text-2xl font-heading">50 Hours · 20 Days</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Journey -->
+        <section class="py-20 lg:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-4 uppercase">
+                        The Journey
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4 font-heading leading-tight">
+                        Your 20-Day Path To <span class="text-blue-600">Placement-Ready</span>
+                    </h2>
+                </div>
+
+                <div class="max-w-3xl mx-auto relative pl-10">
+                    <div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-slate-200"></div>
+                    {journey.map((step) => (
+                        <div class="relative pb-10 last:pb-0">
+                            <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 ring-4 ring-white shadow-md"></div>
+                            <span class="block text-blue-600 font-bold text-xs uppercase tracking-widest mb-2">{step.tag}</span>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 font-heading">{step.title}</h3>
+                            <p class="text-slate-600 leading-relaxed">{step.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Outcomes -->
+        <section class="py-20 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-4 uppercase">
+                        Where HireEzee Takes You
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4 font-heading">
+                        Entry-Level Roles You're <span class="text-blue-600">Trained For</span>
+                    </h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {careers.map((c) => (
+                        <div class="group relative h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all">
+                            <img
+                                src={c.image}
+                                alt={c.role}
+                                loading="lazy"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-5">
+                                <h3 class="text-white font-bold text-base mb-1.5 leading-snug">{c.role}</h3>
+                                <p class="text-slate-300 text-xs leading-relaxed">{c.desc}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-20 lg:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto">
+                    <div class="mb-12">
+                        <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-4 uppercase">
+                            FAQ
+                        </span>
+                        <h2 class="text-3xl md:text-5xl font-bold text-slate-900 font-heading leading-tight">
+                            Frequently Asked <span class="text-blue-600">Questions</span>
+                        </h2>
+                    </div>
+
+                    <div class="divide-y divide-slate-200 border-y border-slate-200">
+                        {faqs.map((f) => (
+                            <details class="group py-6">
+                                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+                                    <span class="font-bold text-slate-900 text-lg font-heading">{f.q}</span>
+                                    <span class="shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center transition-transform duration-200 group-open:rotate-45">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14" />
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-slate-600 leading-relaxed pt-4 pr-12">{f.a}</p>
+                            </details>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section id="counseling" class="py-20 lg:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-1/4 right-1/3 w-96 h-96 bg-cyan-500 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-bold tracking-widest uppercase mb-6">
+                        Get Started
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 font-heading leading-tight">
+                        Ready To Get <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Placement-Ready?</span>
+                    </h2>
+                    <p class="text-slate-300 text-lg md:text-xl mb-10">
+                        Seats for the next HireEzee batch are limited to keep mock interviews and mentoring sessions personal. Book a free counseling session to check your eligibility and batch dates.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                        <button
+                            id="hireezee-final-cta-counseling"
+                            data-open-wizard
+                            class="px-10 py-3.5 bg-brand-blue text-white font-bold rounded-full hover:opacity-90 transition-opacity shadow-lg shadow-blue-500/30"
+                        >
+                            Book Free Counseling
+                        </button>
+                        <a
+                            id="hireezee-final-cta-whatsapp"
+                            href="https://wa.me/917994446019"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-10 py-3.5 bg-white/10 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/20 transition-colors border border-white/20 text-center"
+                        >
+                            Chat on WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-slate-400 text-sm">
+                        <a href="tel:+917994446019" class="flex items-center gap-2 hover:text-white transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            +91 79944 46019
+                        </a>
+                        <a href="mailto:enquiry@logisticsgurukul.com" class="flex items-center gap-2 hover:text-white transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            enquiry@logisticsgurukul.com
+                        </a>
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Kochi, Kerala
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ContactCTA client:visible />
+    </main>
+
+    <Footer client:visible />
+
+    <script>
+        document.querySelectorAll("[data-open-wizard]").forEach((el) => {
+            el.addEventListener("click", () => {
+                window.dispatchEvent(new CustomEvent("open-counselling-wizard"));
+            });
+        });
+    </script>
+</Layout>

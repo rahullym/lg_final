@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import CenterHeadMessage from './CenterHeadMessage';
+import AdvisoryBoard from './AdvisoryBoard';
 import FacultyTeam from './FacultyTeam';
 
 export default function TutorsPage() {
     return (
         <section className="bg-slate-50 min-h-screen">
-            {/* Hero Section for Faculty */}
+            {/* Hero */}
             <div className="pt-32 pb-20 lg:pt-56 lg:pb-40 bg-slate-900 border-b border-slate-800">
                 <div className="container mx-auto px-6 text-center">
                     <motion.div
@@ -18,19 +18,19 @@ export default function TutorsPage() {
                             Logistics Gurukul
                         </span>
                         <h1 className="text-4xl md:text-6xl font-black text-white mb-6 font-heading">
-                            Our <span className="text-blue-500">Mentors</span>
+                            Our <span className="text-blue-500">Team</span>
                         </h1>
                         <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                            Learn from industry veterans who have shaped logistics operations globally.
+                            The leadership and faculty behind Logistics Gurukul — industry veterans who have shaped logistics operations globally, and the trainers who bring that experience into the classroom.
                         </p>
                     </motion.div>
                 </div>
             </div>
 
-            {/* Render Vineetha (Center Head) first */}
-            <CenterHeadMessage />
+            {/* Section 1 — Advisory Board Members */}
+            <AdvisoryBoard />
 
-            {/* Render the rest of the faculty */}
+            {/* Section 2 — Faculty Team */}
             <FacultyTeam />
         </section>
     );

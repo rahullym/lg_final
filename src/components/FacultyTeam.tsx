@@ -1,195 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Quote, Briefcase, GraduationCap, Target } from 'lucide-react';
 
-const tutors = [
+type Faculty = {
+    name: string;
+    role: string;
+    specialization: string;
+    image: string;
+    description: string;
+};
+
+const faculty: Faculty[] = [
     {
-        name: "Sreeji Pillai",
-        role: "Lead Mentor & Industry Specialist",
-        subRole: "CEO & Director – Berrio Lines Pvt Ltd",
-        image: "/faculty-images/Sreeji.jpeg", // Updated image
-        bio: [
-            "Sreeji Pillai is a seasoned logistics industry leader and mentor with over a decade of extensive experience across freight forwarding, shipping, and end-to-end supply chain operations. As the Industry Specialist and Lead Mentor at Logistics Gurukul, he brings invaluable real-world expertise and strategic insight to logistics education.",
-            "He is widely recognized for his leadership capabilities and deep understanding of logistics business operations, having held senior management and executive roles across reputed logistics organizations in India."
-        ],
-        journey: (
-            <>
-                <p className="mb-4">
-                    Mr. Pillai is a seasoned logistics professional with over a decade of progressive leadership roles across prominent logistics organizations. He currently serves as Chief Executive Officer & Director at Berrio Lines Pvt Ltd, leading strategic operations and business development in the logistics sector.
-                </p>
-                <p className="mb-4">
-                    Before this, he served as Chief Executive Officer at Aiyer Logistics Pvt Ltd, overseeing strategic operations, business development, and integrated logistics service delivery.
-                </p>
-                <p className="mb-2 font-medium">His earlier leadership roles include:</p>
-                <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Vice President – Navio Shipping</li>
-                    <li>Vice President – Shiftco Shipping & Logistics India Pvt Ltd</li>
-                    <li>General Manager – Global Logistics Solutions</li>
-                    <li>Deputy General Manager – Global Logistics Solutions</li>
-                    <li>Assistant General Manager – LavinStar Logistics Pvt Ltd</li>
-                </ul>
-            </>
-        ),
-        expertise: [
-            "Executive leadership in logistics",
-            "Strategic planning & business development",
-            "End-to-end supply chain management",
-            "Freight forwarding & customs coordination",
-            "Mentoring teams for performance excellence"
-        ],
-        philosophy: "Logistics education must be grounded in real industry practice. I focus on bridging the gap between classroom learning and industry expectations by developing a leadership mindset and professional ethics.",
-        instituteRole: [
-            "Lead Industry Mentor for students & faculty",
-            "Guiding curriculum alignment with trends",
-            "Sharing executive-level insights",
-            "Preparing students for long-term career growth"
-        ]
+        name: "Vineetha Kadangot",
+        role: "Center Head",
+        specialization: "Leading Academic Excellence & Institutional Growth",
+        image: "/faculty-images/vineetha-maam.png",
+        description:
+            "Steering academic strategy as our Center Head, Vineetha Kadangot brings over a decade of expertise in education, training, and curriculum design. A Certified TEFL Trainer and Cambridge Accredited IELTS Trainer, she has evolved from a Communicative English Trainer into a strategic academic leader shaping high-impact, outcome-driven programs. At Logistics Gurukul, she personally leads Language Training and Grooming, equipping students with the communication skills and professional polish demanded by global careers, while ensuring the broader curriculum stays industry-aligned and internationally relevant.",
     },
     {
         name: "Isabella Davis",
         role: "Logistics Faculty & Trainer",
-        subRole: "Operations and Supply Chain Management",
-        image: "/faculty-images/isabella-maam.png", // Updated image
-        bio: [
-            "Isabella Davis is a committed logistics professional and faculty member with strong expertise in logistics operations, coordination, and administrative support functions. As a logistics trainer, she brings practical clarity and structured learning approaches to students preparing to enter the supply chain industry.",
-            "Her focus is on delivering concept-driven, industry-relevant knowledge that equips learners with the confidence and competence required in modern logistics environments."
-        ],
-        expertise: [
-            "Academic Training & Structured Learning Delivery",
-            "Logistics Operations & Coordination",
-            "Operational accuracy & process efficiency",
-            "Guiding students for entry-level roles"
-        ],
-        philosophy: "Strong fundamentals are the backbone of a successful logistics career. My teaching emphasizes concept clarity, real-world applicability, and building professional discipline for long-term skill retention.",
-        instituteRole: [
-            "Delivering core logistics modules",
-            "Assisting learners with industry practices",
-            "Preparing students for operational roles",
-            "Building confidence & competence"
-        ]
-    }
+        specialization: "Operations and Supply Chain Management",
+        image: "/faculty-images/isabella-maam.png",
+        description:
+            "Bringing structured clarity to the classroom, Isabella Davis is a dedicated Logistics Faculty member specializing in logistics operations, coordination, and administrative support functions. She delivers concept-driven, industry-relevant training that builds operational accuracy and process efficiency in her students. At Logistics Gurukul, Isabella guides learners through core logistics modules and real-world industry practices, preparing them with the confidence and competence needed for entry-level roles in the supply chain sector.",
+    },
+    {
+        name: "Karthik Nair",
+        role: "AI & Software Trainer",
+        specialization: "AI Applications for Logistics & Supply Chain",
+        image: "/faculty-images/karthik-nair.jpg",
+        description:
+            "Bridging the gap between technology and trade, Karthik Nair holds a Master's in Computer Science with specialization in Deep Learning and Artificial Intelligence, along with strong hands-on experience in software development. He brings this technical depth into the logistics classroom, showing students how AI tools, automation, and data-driven systems are transforming shipment tracking, supply chain visibility, and freight documentation. At Logistics Gurukul, Karthik trains students to apply AI and software skills to real-world logistics operations, preparing them for a shipping industry that increasingly runs on smart, tech-enabled systems.",
+    },
 ];
+
+function initials(name: string) {
+    return name
+        .split(' ')
+        .map((part) => part[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase();
+}
+
+function FacultyCard({ member, index }: { member: Faculty; index: number }) {
+    // Falls back to an initials avatar until the photograph is supplied.
+    const [hasImage, setHasImage] = useState(true);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300"
+        >
+            <div className="aspect-[4/5] overflow-hidden bg-slate-100 flex items-center justify-center">
+                {hasImage ? (
+                    <img
+                        src={member.image}
+                        alt={member.name}
+                        loading="lazy"
+                        onError={() => setHasImage(false)}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-slate-100 to-blue-50">
+                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white text-3xl font-black font-heading">
+                            {initials(member.name)}
+                        </div>
+                        <span className="text-slate-400 text-xs font-medium">Photograph coming soon</span>
+                    </div>
+                )}
+            </div>
+
+            <div className="p-6">
+                <h3 className="font-bold text-slate-900 text-xl font-heading">{member.name}</h3>
+                <p className="text-blue-600 text-sm font-semibold mt-1">{member.role}</p>
+                <p className="text-slate-500 text-xs mt-1.5 italic">{member.specialization}</p>
+                <p className="text-slate-600 text-sm leading-relaxed mt-4">{member.description}</p>
+            </div>
+        </motion.div>
+    );
+}
 
 export default function FacultyTeam() {
     return (
-        <section id="faculty" className="py-16 md:py-24 bg-slate-50 border-t border-slate-200 scroll-mt-32">
+        <section id="faculty" className="py-16 md:py-24 bg-white border-t border-slate-200 scroll-mt-32">
             <div className="container mx-auto px-6">
-
-                <div className="text-center mb-20">
+                <div className="text-center max-w-3xl mx-auto mb-14">
                     <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-widest mb-4 uppercase">
                         Our Expert Mentors
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading">
-                        Meet the <span className="text-blue-600">Faculty Team</span>
+                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 font-heading mb-4">
+                        Faculty <span className="text-blue-600">Team</span>
                     </h2>
+                    <p className="text-slate-600 text-lg">
+                        The trainers who guide our students through every module, from core logistics to AI-enabled operations.
+                    </p>
                 </div>
 
-                <div className="flex flex-col gap-32">
-                    {tutors.map((tutor, idx) => (
-                        <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 items-start`}>
-
-                            {/* Image Column */}
-                            <div className="w-full lg:w-1/3 flex-shrink-0 lg:sticky lg:top-40">
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.8 }}
-                                    className="relative"
-                                >
-                                    <div className="aspect-square md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100 max-h-[350px] md:max-h-none mx-auto">
-                                        {/* Placeholder for images if file not found, creating a fallback visual */}
-                                        <div className="w-full h-full bg-slate-50 flex items-center justify-center text-slate-400">
-                                            <img
-                                                src={tutor.image}
-                                                alt={tutor.name}
-                                                className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
-                                                onError={(e) => {
-                                                    e.currentTarget.style.display = 'none';
-                                                    if (e.currentTarget.parentElement) {
-                                                        e.currentTarget.parentElement.innerHTML = `<span class="text-6xl font-black opacity-20">${tutor.name.charAt(0)}</span>`;
-                                                    }
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                    {/* Decorative elements */}
-                                    <div className={`absolute -bottom-6 ${idx % 2 === 0 ? '-right-6' : '-left-6'} w-24 h-24 bg-blue-100 rounded-full -z-10`} />
-                                    <div className={`absolute -top-6 ${idx % 2 === 0 ? '-left-6' : '-right-6'} w-32 h-32 bg-slate-200 rounded-full -z-10`} />
-                                </motion.div>
-                            </div>
-
-                            {/* Content Column */}
-                            <div className="w-full lg:w-2/3">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.8 }}
-                                >
-                                    <h4 className="text-blue-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-3">{tutor.role}</h4>
-                                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 font-heading leading-tight">{tutor.name}</h2>
-                                    <p className="text-lg text-slate-500 mb-8 font-medium leading-relaxed">{tutor.subRole}</p>
-
-                                    <div className="prose prose-lg text-slate-600 mb-10 max-w-none">
-                                        {tutor.bio.map((paragraph, pIdx) => (
-                                            <p key={pIdx} className="mb-4">{paragraph}</p>
-                                        ))}
-                                        {tutor.journey && (
-                                            <div className="mt-6 p-6 bg-white rounded-xl border border-slate-100 shadow-sm">
-                                                <h5 className="flex items-center gap-2 font-bold text-slate-900 mb-3">
-                                                    <Briefcase className="w-5 h-5 text-blue-500" /> Professional Journey
-                                                </h5>
-                                                <div className="text-sm md:text-base text-slate-600 space-y-2">{tutor.journey}</div>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Expertise & Academy Role Grid */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                                            <h3 className="flex items-center gap-2 text-lg font-bold text-slate-900 mb-4">
-                                                <Target className="w-5 h-5 text-indigo-500" /> Expertise
-                                            </h3>
-                                            <ul className="space-y-3">
-                                                {tutor.expertise.map((item, i) => (
-                                                    <li key={i} className="flex items-start gap-3">
-                                                        <div className="w-1.5 h-1.5 mt-2 bg-indigo-500 rounded-full flex-shrink-0" />
-                                                        <span className="text-slate-700 text-sm font-medium">{item}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-
-                                        {tutor.instituteRole && (
-                                            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                                                <h3 className="flex items-center gap-2 text-lg font-bold text-slate-900 mb-4">
-                                                    <GraduationCap className="w-5 h-5 text-blue-600" /> At Logistics Gurukul
-                                                </h3>
-                                                <ul className="space-y-3">
-                                                    {tutor.instituteRole.map((item, i) => (
-                                                        <li key={i} className="flex items-start gap-3">
-                                                            <div className="w-1.5 h-1.5 mt-2 bg-blue-600 rounded-full flex-shrink-0" />
-                                                            <span className="text-slate-700 text-sm font-medium">{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Philosophy Quote */}
-                                    <div className="relative pl-8 border-l-4 border-blue-600 bg-blue-50/50 p-6 rounded-r-xl">
-                                        <Quote className="absolute top-6 left-8 -translate-x-full -ml-4 w-8 h-8 text-blue-200 -z-10" />
-                                        <p className="text-lg font-medium text-slate-800 italic mb-2">
-                                            "{tutor.philosophy}"
-                                        </p>
-                                    </div>
-
-                                </motion.div>
-                            </div>
-
-                        </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    {faculty.map((member, idx) => (
+                        <FacultyCard key={member.name} member={member} index={idx} />
                     ))}
                 </div>
             </div>
