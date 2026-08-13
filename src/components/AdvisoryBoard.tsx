@@ -31,15 +31,6 @@ const board: BoardMember[] = [
             "Mr. Aji Chacko is a visionary corporate leader who pilots Linear Global Logistics Pvt. Ltd. as its Managing Director. His extensive footprint in the industry covers international air freight ecosystems, airline agency management, and advanced multi-modal supply chains. Mr. Aji infuses the Logistics Gurukul curriculum with elite, top-tier corporate perspective, actively equipping students with the complex skills needed to handle global airport hub routing, premium air cargo operations, and international transit compliance.",
     },
     {
-        name: "Jeffrin Rodrigues",
-        designation: "Vice President – Berrio Lines Pvt. Ltd.",
-        highlight: "Dangerous Goods Cargo Handling Expert",
-        image: "/faculty-images/jeffrin-rodrigues.jpg",
-        expertise: ["Dangerous Goods & IMDG", "Freight Forwarding", "NVOCC & Liner Agency", "Multimodal Risk Mitigation"],
-        description:
-            "With a comprehensive career arc running through CHA, Freight Forwarding, NVOCC, and Liner Agency sectors, Mr. Jeffrin Rodrigues currently drives strategic operations as the Vice President of Berrio Lines Pvt. Ltd. His impressive professional journey includes key milestones with COSCO Shipping Lines and a pivotal tenure at NYK Line, where he was instrumental in establishing their specialized Dangerous Goods Desk. At Logistics Gurukul, Jeffrin delivers rare, highly technical training in the safe transit of hazardous cargo, international IMDG regulations, and multimodal risk mitigation.",
-    },
-    {
         name: "Deljo C Poulose",
         designation: "Ex-General Manager – Alligator Shipping CO LLC",
         highlight: "Business Development Expert (GCC)",
