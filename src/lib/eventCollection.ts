@@ -65,6 +65,18 @@ export async function readEventForm(
   };
 }
 
+// `instagram_url` is added to seminars by the migration in supabase/schema.sql.
+// Until that SQL is applied to the live project PostgREST rejects the column
+// with 42703 — callers use this to retry the write without the field rather
+// than failing the whole save.
+export function isUnknownColumnError(
+  error: { code?: string; message?: string } | null,
+  column: string,
+): boolean {
+  if (!error) return false;
+  return error.code === '42703' && (error.message ?? '').includes(column);
+}
+
 export async function listEvents(client: SupabaseClient, table: EventTable) {
   return client
     .from(table)

@@ -14,7 +14,7 @@ const faculty: Faculty[] = [
         name: "Vineetha Kadangot",
         role: "Center Head",
         specialization: "Leading Academic Excellence & Institutional Growth",
-        image: "/faculty-images/vineetha-maam.png",
+        image: "/faculty-images/vineetha-maam.jpg",
         description:
             "Steering academic strategy as our Center Head, Vineetha Kadangot brings over a decade of expertise in education, training, and curriculum design. A Certified TEFL Trainer and Cambridge Accredited IELTS Trainer, she has evolved from a Communicative English Trainer into a strategic academic leader shaping high-impact, outcome-driven programs. At Logistics Gurukul, she personally leads Language Training and Grooming, equipping students with the communication skills and professional polish demanded by global careers, while ensuring the broader curriculum stays industry-aligned and internationally relevant.",
     },
@@ -22,7 +22,7 @@ const faculty: Faculty[] = [
         name: "Isabella Davis",
         role: "Logistics Faculty & Trainer",
         specialization: "Operations and Supply Chain Management",
-        image: "/faculty-images/isabella-maam.png",
+        image: "/faculty-images/isabella-maam.jpg",
         description:
             "Bringing structured clarity to the classroom, Isabella Davis is a dedicated Logistics Faculty member specializing in logistics operations, coordination, and administrative support functions. She delivers concept-driven, industry-relevant training that builds operational accuracy and process efficiency in her students. At Logistics Gurukul, Isabella guides learners through core logistics modules and real-world industry practices, preparing them with the confidence and competence needed for entry-level roles in the supply chain sector.",
     },

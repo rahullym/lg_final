@@ -26,8 +26,8 @@ const { data: rows } = await supabase
     .from("celebrations")
     .select('id, slug, title, year, cover, gallery, "order", updated_at')
     .eq("draft", false)
-    .order("updated_at", { ascending: false })
     .order("order", { ascending: true })
+    .order("created_at", { ascending: false })
     .range(offset, offset + PAGE_SIZE - 1);
 
 const celebrations = (rows ?? []).map((r) => ({

@@ -12,6 +12,7 @@ const params = new URL(Astro.request.url).searchParams;
 const created = params.has('created');
 const deleted = params.has('deleted');
 const missing = params.has('missing');
+const nomigration = params.has('nomigration');
 ---
 
 <AdminShell title="Seminars & Events" breadcrumbs={[{ label: 'Seminars & Events' }]}>
@@ -40,6 +41,7 @@ const missing = params.has('missing');
   {created && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Seminar created.</div>}
   {deleted && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Seminar deleted.</div>}
   {missing && <div class="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm font-semibold">That seminar no longer exists.</div>}
+  {nomigration && <div class="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm">Saved, but the Instagram link was not stored — the <code class="font-mono">instagram_url</code> column is missing. Run the migration in <code class="font-mono">supabase/schema.sql</code> from the Supabase SQL editor.</div>}
   {error && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">Failed to load: {error.message}</div>}
 
   {!error && items && items.length === 0 && (

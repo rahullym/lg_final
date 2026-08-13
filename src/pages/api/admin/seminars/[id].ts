@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { supabaseForUser } from '../../../../lib/supabase';
-import { readEventForm, getEvent, uniqueSlug } from '../../../../lib/eventCollection';
+import { readEventForm, getEvent, uniqueSlug, isUnknownColumnError } from '../../../../lib/eventCollection';
 import { deleteFromBucket } from '../../../../lib/upload';
 
 export const prerender = false;
@@ -34,7 +34,14 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
   input.slug = await uniqueSlug(client, 'seminars', input.slug, id);
 
   const video_url = String(form.get('video_url') ?? '').trim() || null;
-  const { error } = await client.from('seminars').update({ ...input, video_url }).eq('id', id);
+  const instagram_url = String(form.get('instagram_url') ?? '').trim() || null;
+
+  let migrationMissing = false;
+  let { error } = await client.from('seminars').update({ ...input, video_url, instagram_url }).eq('id', id);
+  if (isUnknownColumnError(error, 'instagram_url')) {
+    migrationMissing = true;
+    ({ error } = await client.from('seminars').update({ ...input, video_url }).eq('id', id));
+  }
   if (error) return redirect(`/admin/seminars/${id}?error=${encodeURIComponent(error.message)}`);
 
   const toRemove: string[] = [];
@@ -44,7 +51,7 @@ export const PATCH: APIRoute = async ({ request, params, locals, redirect }) => 
   for (const url of oldGallery) if (!newGallery.has(url)) toRemove.push(url);
   if (toRemove.length > 0) await deleteFromBucket(toRemove, token);
 
-  return redirect(`/admin/seminars/${id}?saved=1`);
+  return redirect(`/admin/seminars/${id}?saved=1${migrationMissing ? '&nomigration=1' : ''}`);
 };
 
 export const POST: APIRoute = async (ctx) => {

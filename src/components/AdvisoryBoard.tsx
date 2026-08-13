@@ -7,7 +7,6 @@ type BoardMember = {
     designation: string;
     highlight: string;
     image: string;
-    experience?: string;
     expertise: string[];
     description: string;
 };
@@ -18,7 +17,6 @@ const board: BoardMember[] = [
         designation: "Director – Berrio Logistics Pvt. Ltd. & Dehasu Logistics India Pvt. Ltd",
         highlight: "Marketing & Overseas Business Development Expert",
         image: "/faculty-images/hari-nair.jpg",
-        experience: "20+ years",
         expertise: ["Business Development", "B2B Corporate Sales", "Maritime Trade Strategy", "Market Expansion"],
         description:
             "Bringing a powerhouse of commercial acumen to the institute, Mr. Hari Nair serves as a Director at Berrio Logistics Pvt. Ltd. and Dehasu Logistics India Pvt. Ltd. Over a distinguished career spanning more than twenty years, he has mastered the art of high-growth business development, B2B corporate sales, and large-scale maritime trade strategies. At Logistics Gurukul, Hari bridges the gap between classroom concepts and boardroom realities, mentoring students on how to scale logistics brands, penetrate new markets, and win major enterprise accounts.",
@@ -43,13 +41,12 @@ const board: BoardMember[] = [
     },
     {
         name: "Deljo C Poulose",
-        designation: "Ex-General Manager – Alligator Shipping Pvt. Ltd.",
+        designation: "Ex-General Manager – Alligator Shipping CO LLC",
         highlight: "Business Development Expert (GCC)",
         image: "/faculty-images/deljo-poulose.jpg",
-        experience: "20 years",
         expertise: ["GCC Markets", "Cross-Border Trade", "Enterprise Business Development", "Freight Corridors"],
         description:
-            "Mr. Deljo C Poulose is a prominent cross-border trade architect with 20 years of corporate experience managing multi-million-dollar freight corridors, highlighted by leadership roles as General Manager at Alligator Shipping and Liner Head at Inchcape Shipping in Dubai. Specializing in high-stakes international commerce, his expertise centers squarely on advanced business development strategies and the booming GCC markets. At Logistics Gurukul, Deljo leverages his powerful Middle Eastern network to train students in enterprise business development, delivering the critical commercial intelligence needed to secure lucrative careers across global logistics networks.",
+            "Mr. Deljo C Poulose is a prominent cross-border trade architect with 20 years of corporate experience managing multi-million-dollar freight corridors, highlighted by leadership roles as General Manager at Alligator Shipping CO LLC and Liner Head at Inchcape Shipping in Dubai. Specializing in high-stakes international commerce, his expertise centers squarely on advanced business development strategies and the booming GCC markets. At Logistics Gurukul, Deljo leverages his powerful Middle Eastern network to train students in enterprise business development, delivering the critical commercial intelligence needed to secure lucrative careers across global logistics networks.",
     },
     {
         name: "Ashok P Das",
@@ -74,7 +71,6 @@ const board: BoardMember[] = [
         designation: "Director – Global Logistics Solutions India Pvt. Ltd.",
         highlight: "International Trade & EXIM Policy Expert",
         image: "/faculty-images/jiss-mathew.jpg",
-        experience: "27+ years",
         expertise: ["EXIM Policy", "International Trade Compliance", "Customs Procedures", "Global Supply Chain"],
         description:
             "With over 27 years of leadership in international logistics and trade, Mr. Jiss Mathew serves as the Director of Global Logistics Solutions India Pvt. Ltd. His expertise spans EXIM policy, international trade compliance, customs procedures, and global supply chain management. At Logistics Gurukul, he empowers students with practical knowledge of export-import operations, international trade regulations, and industry best practices, enabling them to build successful careers in the global logistics sector.",
@@ -149,24 +145,7 @@ function BoardCard({ member, index }: { member: BoardMember; index: number }) {
                     <h3 className="text-white font-bold text-lg font-heading leading-snug">{member.name}</h3>
                     <p className="text-blue-400 text-xs font-semibold mt-1">{member.highlight}</p>
 
-                    {member.experience && (
-                        <p className="text-slate-400 text-[11px] mt-2 uppercase tracking-widest font-bold">
-                            {member.experience} experience
-                        </p>
-                    )}
-
                     <p className="text-slate-300 text-[13px] leading-relaxed mt-3">{member.description}</p>
-
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                        {member.expertise.map((tag) => (
-                            <span
-                                key={tag}
-                                className="inline-block px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-slate-200 text-[11px] font-medium"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
                 </div>
             </div>
         </motion.div>

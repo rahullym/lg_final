@@ -19,7 +19,7 @@ export default function CenterHeadMessage() {
                         >
                             <div className="aspect-square md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-white border border-slate-100 max-h-[400px] md:max-h-none mx-auto">
                                 <img
-                                    src="/faculty-images/vineetha-maam.png"
+                                    src="/faculty-images/vineetha-maam.jpg"
                                     alt="Vineetha Kadangot"
                                     className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                                 />

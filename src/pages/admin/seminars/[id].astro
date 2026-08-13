@@ -14,6 +14,7 @@ if (error || !item) return Astro.redirect('/admin/seminars?missing=1');
 
 const params = new URL(Astro.request.url).searchParams;
 const saved = params.has('saved');
+const nomigration = params.has('nomigration');
 const err = params.get('error');
 
 const defaults = {
@@ -25,6 +26,7 @@ const defaults = {
   order: item.order ?? 0,
   body: item.body ?? '',
   videoUrl: item.video_url ?? '',
+  instagramUrl: item.instagram_url ?? '',
   draft: !!item.draft,
 };
 ---
@@ -44,6 +46,7 @@ const defaults = {
 
     {saved && <div class="mb-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">Saved.</div>}
     {err && <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">{err}</div>}
+    {nomigration && <div class="mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm">Saved, but the Instagram link was not stored — the <code class="font-mono">instagram_url</code> column is missing. Run the migration in <code class="font-mono">supabase/schema.sql</code> from the Supabase SQL editor.</div>}
 
     <EventForm
       action={`/api/admin/seminars/${item.id}`}
@@ -51,6 +54,7 @@ const defaults = {
       backHref="/admin/seminars"
       method="edit"
       showVideoUrl={true}
+      showInstagramUrl={true}
       defaults={defaults}
     />
   </div>

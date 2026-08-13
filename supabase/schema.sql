@@ -54,6 +54,7 @@ create table if not exists public.seminars (
   updated_at   timestamptz not null default now()
 );
 alter table public.seminars add column if not exists video_url text;
+alter table public.seminars add column if not exists instagram_url text;
 
 create table if not exists public.newsletters (
   id           uuid primary key default gen_random_uuid(),

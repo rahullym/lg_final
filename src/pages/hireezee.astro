@@ -27,11 +27,10 @@ const whatMakesItWork = [
 ];
 
 const audience = [
-    { title: "Fresh Graduates", desc: "Step into your first job with confidence, not just a certificate." },
-    { title: "Final Year Students", desc: "Get placement-ready before your final semester ends." },
-    { title: "Job Seekers", desc: "Sharpen your edge for a competitive logistics job market." },
-    { title: "Career Switchers", desc: "Move into logistics with the right vocabulary, tools, and confidence." },
-    { title: "Diploma / UG / PG Students", desc: "Add the one thing your syllabus doesn't teach: how to get hired." },
+    {
+        title: "Students & Graduates in Logistics",
+        desc: "Whether you've specialized in Logistics, Supply Chain, Shipping — get the practical exposure needed to secure your first job.",
+    },
 ];
 
 const programComponents = [
@@ -76,21 +75,17 @@ const journey = [
 ];
 
 const careers = [
-    { role: "Operations Executive", desc: "Manage daily logistics processes, supply chains, and inventory tracking.", image: "/career_logistics_ops.png" },
-    { role: "Customer Care Executive", desc: "Handle customer queries, track orders, and ensure smooth delivery experiences.", image: "/career_customer_service.png" },
-    { role: "Documentation Executive", desc: "Oversee shipping documents, customs paperwork, and compliance records.", image: "/career_export_specialist.png" },
-    { role: "Business Development Executive", desc: "Assist sales teams, generate leads, and engage prospective logistics clients.", image: "/career_business_meeting.png" },
-    { role: "Key Account Executive", desc: "Maintain relationships with key business accounts and support client retention.", image: "/career_bg_junior.png" },
-    { role: "Logistics Coordinator", desc: "Coordinate warehouse operations, transportation, and delivery schedules.", image: "/career_supply_chain.png" },
-    { role: "Warehouse Operations Associate", desc: "Manage inventory receiving, storage, order picking, and facility dispatch.", image: "/career_smart_warehouse.png" },
-    { role: "Customer Success Representative", desc: "Drive client satisfaction, track shipment updates, and resolve service queries.", image: "/career_air_cargo.png" },
+    { role: "Operation Executive", desc: "Coordinate smooth daily logistics workflows.", image: "/career_logistics_ops.png" },
+    { role: "Customer Service Executive", desc: "Resolve client queries with efficiency.", image: "/career_customer_service.png" },
+    { role: "Documentation Executive", desc: "Handle shipping and trade documentation accurately.", image: "/career_export_specialist.png" },
+    { role: "Business Development Executive", desc: "Support client partnerships and growth from day one.", image: "/career_business_meeting.png" },
+    { role: "Key Account Executive", desc: "Manage strategic customer relationships and service delivery.", image: "/career_bg_junior.png" },
+    { role: "Operations Manager", desc: "Manage complex shipments and oversee daily operations.", image: "/career_supply_chain.png" },
+    { role: "Business Development Manager", desc: "Drive sales strategy, customer acquisition, and revenue growth.", image: "/career_shipping_port.png" },
+    { role: "Customer Service Team Lead", desc: "Lead customer service operations and mentor junior executives.", image: "/career_air_cargo.png" },
 ];
 
 const faqs = [
-    {
-        q: "Do I need a logistics background to join HireEzee?",
-        a: "No. HireEzee is designed for graduates and job seekers from any academic background who want to enter the logistics and supply chain industry.",
-    },
     {
         q: "Is HireEzee a certification course or a placement program?",
         a: "HireEzee is a placement-readiness program. It's built to prepare you for interviews and real job performance, with placement support layered in — not a standalone academic certification.",
@@ -143,7 +138,7 @@ const schema = [
         audience: {
             "@type": "Audience",
             audienceType:
-                "Fresh Graduates, Final Year Students, Job Seekers, Career Switchers, Diploma/UG/PG Students",
+                "Students and Graduates in Logistics, Supply Chain, and Shipping",
         },
     },
     {
@@ -194,7 +189,10 @@ const schema = [
                         Placement Readiness Program
                     </span>
                     <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight font-heading">
-                        HireEzee — <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">Learn. Practice. Get Hired.</span>
+                        HireEzee
+                        <span class="block mt-3 text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-white">
+                            Learn. Practice. Get Hired.
+                        </span>
                     </h1>
                     <p class="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed mb-4">
                         The 50-hour placement training program that turns fresh graduates and job seekers into interview-ready logistics professionals — in just 20 days.
@@ -293,13 +291,14 @@ const schema = [
                     </p>
                 </div>
 
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                    {audience.map((a, i) => (
-                        <div class="group bg-white rounded-2xl p-7 border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition-all duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-black text-lg mb-5">
-                                {String(i + 1).padStart(2, "0")}
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{a.title}</h3>
+                <div class="max-w-md mx-auto">
+                    {audience.map((a) => (
+                        <div class="group bg-white rounded-2xl p-8 text-center border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:-translate-y-1 transition-all duration-300">
+                            <svg class="w-12 h-12 mx-auto mb-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.42a12.08 12.08 0 01.66 6.81A11.95 11.95 0 0012 20.06a11.95 11.95 0 00-6.82-2.67 12.08 12.08 0 01.66-6.81L12 14z" />
+                            </svg>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{a.title}</h3>
                             <p class="text-slate-600 text-sm leading-relaxed">{a.desc}</p>
                         </div>
                     ))}
