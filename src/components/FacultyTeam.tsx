@@ -11,14 +11,6 @@ type Faculty = {
 
 const faculty: Faculty[] = [
     {
-        name: "Vineetha Kadangot",
-        role: "Center Head",
-        specialization: "Leading Academic Excellence & Institutional Growth",
-        image: "/faculty-images/vineetha-maam.jpg",
-        description:
-            "Steering academic strategy as our Center Head, Vineetha Kadangot brings over a decade of expertise in education, training, and curriculum design. A Certified TEFL Trainer and Cambridge Accredited IELTS Trainer, she has evolved from a Communicative English Trainer into a strategic academic leader shaping high-impact, outcome-driven programs. At Logistics Gurukul, she personally leads Language Training and Grooming, equipping students with the communication skills and professional polish demanded by global careers, while ensuring the broader curriculum stays industry-aligned and internationally relevant.",
-    },
-    {
         name: "Isabella Davis",
         role: "Logistics Faculty & Trainer",
         specialization: "Operations and Supply Chain Management",
@@ -102,7 +94,7 @@ export default function FacultyTeam() {
                     </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     {faculty.map((member, idx) => (
                         <FacultyCard key={member.name} member={member} index={idx} />
                     ))}
