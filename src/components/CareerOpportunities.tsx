@@ -112,7 +112,7 @@ export default function CareerOpportunities() {
     return (
         <section className="py-24 bg-slate-950 relative overflow-hidden min-h-screen flex flex-col justify-center">
             {/* Ambient Background */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none"></div>
             <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
 
             <div className="container mx-auto px-6 relative z-10 h-full flex flex-col">
